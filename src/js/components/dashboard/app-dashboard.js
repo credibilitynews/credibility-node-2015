@@ -53,7 +53,6 @@ var Dashboard = React.createClass({
 				</div>
 				<div className="col-sm-3">
 					<Explain />
-					<h3>Categories</h3>
 					<CategoryList categories={this.state.categories}/>
 				</div>
 			</div>

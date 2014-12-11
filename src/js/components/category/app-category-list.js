@@ -10,9 +10,10 @@ var CategoryList = React.createClass({
     },
     render: function() {
         return (
-            <div className="categories">
+            <div className="category-list">
+                <h4>Categories</h4>
                 <ul>
-                {this._wrap(this.props.categories)}
+                    {this._wrap(this.props.categories)}
                 </ul>
             </div>
         );

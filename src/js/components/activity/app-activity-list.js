@@ -13,8 +13,7 @@ var ActivityList = React.createClass({
             <div className="activity-list">
                 <h2>Updates</h2>
                 <div>
-                    <div className="col-xs-1 date">Aug</div>
-                    <div className="col-xs-11 dated-activities">
+                    <div className="col-xs-12 dated-activities">
                         {this._wrap(this.props.articles)}
                     </div>
                 </div>
@@ -26,11 +25,13 @@ var ActivityList = React.createClass({
             console.log("item", item)
             return (
                 <div key={item.id}>
-                    <Activity actor={item.user.name} action="added" model="story" story={this._storify(item)}/>
+                    <Activity actor={item.user.name}
+                        action="added" model="article" views={item.views} created_at={item.created_at}
+                        article={this._wrapOne(item)}/>
                 </div>)
         }.bind(this))
     },
-    _storify: function(item){
+    _wrapOne: function(item){
         return {
             title: item.title,
             views: item.views,

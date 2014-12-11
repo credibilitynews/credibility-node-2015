@@ -30,7 +30,7 @@ var TopMenu = React.createClass({
 				</li>);
 		});
 		return (
-			<ul className="nav nav-pills navbar-right">{items}</ul>
+			<ul className="nav navbar-nav navbar-right">{items}</ul>
 		)
 	}
 })

@@ -24,10 +24,11 @@ var Activity = React.createClass({
         return (
             <div className="activity">
                 <div>
-                    <i>{this.props.actor}</i> just <b>{this.props.action} a {this.props.model}</b> in <a href={this.props.story.topic.link}>{this.props[this.props.model].topic.title}</a>
-                    &nbsp;<ViewsNum views={this.props.story.views}/>
+                    <i>{this.props.actor}</i> just <b>{this.props.action} an {this.props.model}</b> in <a href={this.props[this.props.model].topic.link}>{this.props[this.props.model].topic.title}</a>
+                    <div style={{float: "right"}}><ViewsNum views={this.props.views}/></div>
+
                 </div>
-                <blockquote>{this.props.story.title}</blockquote>
+                <blockquote>{this.props[this.props.model].title}<small>{this.props.created_at}</small></blockquote>
             </div>
         );
     }
