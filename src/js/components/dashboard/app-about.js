@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 var React = require('react');
 
-var Explain = React.createClass({
+var About = React.createClass({
     getDefaultProps: function() {
         return {
             text: (
@@ -15,11 +15,13 @@ var Explain = React.createClass({
     },
     render: function() {
         return (
-            <div className="explain">
+            <div className="about panel panel-default">
+                <div className="panel-body">
                 {this.props.text}
+                </div>
             </div>
         );
     }
 })
 
-module.exports = Explain;
+module.exports = About;

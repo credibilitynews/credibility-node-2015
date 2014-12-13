@@ -9,11 +9,11 @@ var CHANGE_EVENT = "categories-change";
 
 var _categories = Immutable.List();
 
-function _addTopic(category){
+function _addCategory(category){
     _categories.push(category);
 }
 
-function _addTopics(categories){
+function _addCategories(categories){
     _categories = _categories.concat(categories);
 }
 
@@ -44,11 +44,11 @@ var CategoryStore = merge(EventEmitter.prototype, {
         var action = payload.action;
         switch(action.actionType){
             case ActionTypes.RECEIVE_LAYOUT:
-                console.log("store/category-store", payload.action.layout.categories);
-                _addTopics(payload.action.layout.categories);
+                //console.log("store/category-store", payload.action.layout.categories);
+                _addCategories(payload.action.layout.categories);
                 break;
             case ActionTypes.ADD_TOPIC:
-                _addTopic(payload.action.topic)
+                _addCategories(payload.action.topic)
                 break;
         }
         CategoryStore.emitChange();

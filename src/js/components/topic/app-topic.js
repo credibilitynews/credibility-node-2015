@@ -2,7 +2,7 @@
 var React = require('react');
 var Hashtag = require('../tag/app-hashtag');
 var StoryList = require('../story/app-story-list');
-var Score = require('../score/app-score');
+var Score = require('../stats/app-score');
 var TopicStats = require('../stats/app-topic-stats');
 
 var Topic = React.createClass({

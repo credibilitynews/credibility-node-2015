@@ -2,6 +2,11 @@
 var React = require('react');
 
 var Hashtag = React.createClass({
+	getDefaultProps: function() {
+		return {
+			tag: ""
+		};
+	},
 	_link: function(hashtag){
 		return "https://twitter.com/hashtag/"+hashtag.slice(1);
 	},
@@ -9,14 +14,14 @@ var Hashtag = React.createClass({
 		return hashtags
 			.split(' ')
 			.map(function(tag){
-				return (<span key={tag.id}><a href={this._link(tag)}>{tag}</a>&nbsp;</span>)
+				return (<span key={tag}><a href={this._link(tag)}>{tag}</a>&nbsp;</span>)
 			}.bind(this))
 	},
 	render: function(){
 		return (
-			<span className="tag" href="#">
+			<div className="tag" href="#">
 				{this._split(this.props.tag)}
-			</span>
+			</div>
 		)
 	}
 });

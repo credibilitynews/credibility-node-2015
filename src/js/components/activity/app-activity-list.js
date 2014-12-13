@@ -10,24 +10,26 @@ var ActivityList = React.createClass({
     },
     render: function() {
         return (
-            <div className="activity-list">
-                <h2>Updates</h2>
-                <div>
-                    <div className="col-xs-12 dated-activities">
-                        {this._wrap(this.props.articles)}
-                    </div>
+            <div className="activity-list row">
+                <div className="col-xs-12">
+                    <h3>Latest Updates</h3>
                 </div>
+                <div className="col-xs-12">
+                    {this._wrap(this.props.articles)}
+                </div>
+
             </div>);
     },
 
     _wrap: function(items){
         return items.map(function(item){
-            console.log("item", item)
             return (
-                <div key={item.id}>
+                <div key={item.id} className="panel">
+                    <div className="panel-body">
                     <Activity actor={item.user.name}
                         action="added" model="article" views={item.views} created_at={item.created_at}
                         article={this._wrapOne(item)}/>
+                    </div>
                 </div>)
         }.bind(this))
     },
@@ -35,6 +37,8 @@ var ActivityList = React.createClass({
         return {
             title: item.title,
             views: item.views,
+            id: item.id,
+            url: (new URL(item.url).hostname),
             topic: {
                 title: item.topic_title,
                 link: "/#/topic/"+ item.topic_id

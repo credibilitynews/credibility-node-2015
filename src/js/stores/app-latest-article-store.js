@@ -35,7 +35,7 @@ var ArticleStore = merge(EventEmitter.prototype, {
             action = payload.action;
         switch(action.actionType){
             case ActionTypes.RECEIVE_LAYOUT:
-                console.log("store/latest-article-store", layout.latest_articles);
+                //console.log("store/latest-article-store", layout.latest_articles);
                 _addArticles(layout.latest_articles);
                 break;
         }

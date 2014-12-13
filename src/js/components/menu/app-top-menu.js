@@ -11,7 +11,6 @@ var TopMenu = React.createClass({
 	getDefaultProps: function() {
 		return {
 			items: [
-				{path: '/', label: 'Home'},
 				{path: '#/topic', label: 'USA'},
 				{path: '#/topic', label: 'Ukraine'},
 				{path: '#/topic', label: 'Hong Kong'},
@@ -23,15 +22,21 @@ var TopMenu = React.createClass({
 		items: React.PropTypes.array.isRequired
 	},
 	render: function(){
-		var items = this.props.items.map(function(item){
+		return (
+			<div className="top-menu row">
+				<ul className="nav nav-pills">
+					<li style={{padding: "10px 0px 10px 15px"}}>Trending now: </li>
+					{this._wrap(this.props.items)}
+				</ul>
+			</div>)
+	},
+	_wrap: function(items){
+		return items.map(function(item){
 			return (
-				<li>
+				<li key={item.label}>
 					<a href={item.path}>{item.label}</a>
 				</li>);
-		});
-		return (
-			<ul className="nav navbar-nav navbar-right">{items}</ul>
-		)
+		})
 	}
 })
 

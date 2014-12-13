@@ -1,24 +1,28 @@
 /** @jsx React.DOM */
 var React = require('react');
 
-var Explain = require('./app-explain.js'),
+var About = require('./app-about.js'),
 	LatestTopics = require('./app-latest-topics'),
 	Updates = require('../activity/app-activity-list'),
+	Debates = require('./app-debates'),
 	Stats = require('./app-stats'),
 	SearchBar = require('../search/app-search-bar'),
-	CategoryList = require('../category/app-category-list');
+	CategoryList = require('../category/app-category-list'),
+	TopMenu = require('../menu/app-top-menu');
 
 var ServerActions = require('../../actions/app-server-actions'),
 	TopicStore = require('../../stores/app-topic-store'),
 	CategoryStore = require('../../stores/app-category-store'),
-	LatestArticleStore = require('../../stores/app-latest-article-store');
+	LatestArticleStore = require('../../stores/app-latest-article-store'),
+	TopicStatsStore = require('../../stores/app-topic-stats-store');
 
 function getStatesFromServer(){
 	ServerActions.fetchLayout();
 	return {
 		topics: [],
 		categories: [],
-		latest_articles: []
+		latest_articles: [],
+		topic_stats: []
 	}
 }
 
@@ -26,7 +30,9 @@ function getStatesFromStore(){
 	return {
 		topics: TopicStore.getAllTopics(),
 		categories: CategoryStore.getAllCategories(),
-		latest_articles: LatestArticleStore.getAllArticles()
+		latest_articles: LatestArticleStore.getAllArticles(),
+		topic_stats: TopicStatsStore.getAllTopicStats()
+
 	}
 }
 
@@ -43,17 +49,24 @@ var Dashboard = React.createClass({
  	render: function(){
 		return (
 			<div className="row">
-				<div className="col-sm-9">
+				<div className="col-sm-9 col-xs-12">
+					<TopMenu />
 					<SearchBar />
 					<div className="row">
-						<div className="col-md-7"><Updates articles={this.state.latest_articles}/></div>
-						<div className="col-md-5"><LatestTopics topics={this.state.topics}/></div>
+						<div className="col-md-8">
+							<Debates topics={this.state.topic_stats}/>
+						</div>
+						<div className="col-md-4">
+							<Updates articles={this.state.latest_articles}/>
+						</div>
+
 					</div>
-					<Stats />
+
 				</div>
-				<div className="col-sm-3">
-					<Explain />
+				<div className="col-sm-3 hidden-xs right-sidebar">
+					<About />
 					<CategoryList categories={this.state.categories}/>
+					<Stats />
 				</div>
 			</div>
 		)

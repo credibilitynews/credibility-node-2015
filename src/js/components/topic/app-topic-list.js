@@ -9,7 +9,7 @@ var TopicList = React.createClass({
 		});
 
 		return (
-			<div className="col-md-12">
+			<div className="col-xs-12">
 				<ol>
 					{topics}
 				</ol>

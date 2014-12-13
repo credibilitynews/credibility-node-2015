@@ -10,22 +10,24 @@ var CategoryList = React.createClass({
     },
     render: function() {
         return (
-            <div className="category-list">
-                <h4>Categories</h4>
-                <ul>
-                    {this._wrap(this.props.categories)}
-                </ul>
+            <div className="category-list panel panel-default">
+                <div className="panel-body">
+                    <h4>Categories</h4>
+                    <div>
+                        {this._wrap(this.props.categories, 'group')}
+                    </div>
+                </div>
             </div>
         );
     },
-    _wrap: function(categories){
+    _wrap: function(categories, className){
         return categories
         .map(function(item){
             return (
-                <li key={item.id}>
+                <span key={item.id} className={className}>
                     <CategoryLink category={item}/>
-                    { (item.children ? <ul>{this._wrap(item.children)}</ul> : "") }
-                </li>)
+                    { (item.children ? <span>{this._wrap(item.children, "child")}</span> : "") }
+                </span>)
         }.bind(this));
     }
 

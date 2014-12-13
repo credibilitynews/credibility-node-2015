@@ -24,11 +24,20 @@ var Activity = React.createClass({
         return (
             <div className="activity">
                 <div>
-                    <i>{this.props.actor}</i> just <b>{this.props.action} an {this.props.model}</b> in <a href={this.props[this.props.model].topic.link}>{this.props[this.props.model].topic.title}</a>
-                    <div style={{float: "right"}}><ViewsNum views={this.props.views}/></div>
-
+                    On <a href={this.props[this.props.model].topic.link}>
+                        <b>{this.props[this.props.model].topic.title}</b>
+                        </a>,
+                    <span className="label label-primary model">{this.props.model}</span>
                 </div>
-                <blockquote>{this.props[this.props.model].title}<small>{this.props.created_at}</small></blockquote>
+                <blockquote>
+                    <a href={"/#/link/"+this.props[this.props.model].id}>
+                        {this.props[this.props.model].title}
+                    </a>
+                    <small>author, {this.props[this.props.model].url}</small>
+                </blockquote>
+                <small className="meta">
+                    {this.props.action} by <i>{this.props.actor}</i>
+                </small>
             </div>
         );
     }

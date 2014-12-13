@@ -8,14 +8,22 @@ var Header = React.createClass({
 		return (
 			<nav className="header navbar navbar-default navbar-fixed-top" role="navigation">
 				<div className="brand container">
-					<a href="/">
-						<div className="navbar-brand">
+					<div className="navbar-header">
+						<button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+							<span className="sr-only">Toggle navigation</span>
+							<span className="icon-bar"></span>
+							<span className="icon-bar"></span>
+							<span className="icon-bar"></span>
+						</button>
+						<a className="navbar-brand" href="#/">
 							Credibility.io&nbsp;
 							<small>Read both sides of the story</small>
-						</div>
-					</a>
-					<UserMenu />
-					<TopMenu />
+						</a>
+					</div>
+
+					<div className="collapse navbar-collapse" id="navbar-collapse">
+						<UserMenu />
+					</div>
 				</div>
 			</nav>
 		)

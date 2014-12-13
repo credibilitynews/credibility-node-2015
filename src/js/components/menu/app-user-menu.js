@@ -16,7 +16,7 @@ var UserMenu = React.createClass({
 	},
 	render: function(){
 		var items = this.props.items.map(function(item){
-			return <li className="text-right"><a href={item.path}>{item.label}</a></li>
+			return <li key={item.label} className="text-right"><a href={item.path}>{item.label}</a></li>
 		});
 		return (
 			<ul className="nav navbar-nav navbar-right">{items}</ul>

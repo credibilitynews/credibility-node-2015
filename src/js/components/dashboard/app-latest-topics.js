@@ -14,7 +14,7 @@ var LatestTopics = React.createClass({
         });
         return (
             <div className="latest">
-                <h2>Latest Topics</h2>
+                <h3>Latest Topics</h3>
                 <ul>{topics}</ul>
             </div>
         );

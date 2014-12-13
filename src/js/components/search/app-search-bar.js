@@ -4,8 +4,11 @@ var React = require('react');
 var SearchBar = React.createClass({
 	render: function(){
 		return (
-			<input type="text" className="form-control col-md-12" placeholder="Search"/>
-		)
+			<div className="row">
+				<div className="col-xs-12">
+				<input type="text" className="form-control col-xs-12" placeholder="Search a topic/article"/>
+				</div>
+			</div>)
 	}
 });
 

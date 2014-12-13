@@ -1,5 +1,7 @@
 /** @jsx React.DOM */
-var React = require('react');
+var React = require('react'),
+    ArticlesNum = require('../stats/app-articles-num'),
+    ViewsNum = require('../stats/app-views-num');
 
 var TopicColStats = React.createClass({
     getDefaultProps: function() {
@@ -11,12 +13,16 @@ var TopicColStats = React.createClass({
         }
     },
     render: function() {
+        console.log("props", this.props.stats);
         return (
-            <div>
-            <div className="col-xs-6">
-                {this.props.title}</div>
-            <div className="col-xs-6 text-right">
-                {this.props.stats.articles}</div>
+            <div className="topic-col-stats">
+                <div>
+                    {this.props.title}
+                </div>
+                <div>
+                    <div className="number">{this.props.stats.articles}</div>
+                    <div><ViewsNum views={this.props.stats.views}/></div>
+                </div>
             </div>
         );
     }

@@ -9,11 +9,9 @@ var CategoryLink = React.createClass({
     },
     render: function() {
         return (
-            <div>
-                <a href={this._link(this.props.category)}>
-                    {this.props.category.name}
-                </a>
-            </div>
+            <a className="category-link" href={this._link(this.props.category)}>
+                {this.props.category.name}
+            </a>
         );
     },
     _link: function(category){
