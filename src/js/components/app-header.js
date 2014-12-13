@@ -15,9 +15,14 @@ var Header = React.createClass({
 							<span className="icon-bar"></span>
 							<span className="icon-bar"></span>
 						</button>
+						<a className="navbar-logo">
+						<span className="col-logo"><span className="logo">C</span></span>
+						</a>
 						<a className="navbar-brand" href="#/">
+							<span className="col-brand">
 							Credibility.io&nbsp;
 							<small>Read both sides of the story</small>
+							</span>
 						</a>
 					</div>
 

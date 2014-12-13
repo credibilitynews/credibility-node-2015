@@ -25,7 +25,7 @@ var Activity = React.createClass({
             <div className="activity">
                 <div>
                     On <a href={this.props[this.props.model].topic.link}>
-                        <b>{this.props[this.props.model].topic.title}</b>
+                        <strong>{this.props[this.props.model].topic.title}</strong>
                         </a>,
                     <span className="label label-primary model">{this.props.model}</span>
                 </div>
