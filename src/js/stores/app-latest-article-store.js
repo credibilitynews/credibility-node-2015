@@ -1,7 +1,7 @@
 var AppDispatcher = require('../dispatchers/app-dispatcher'),
     ActionTypes = require('../constants/app-constants').ActionTypes;
 
-var merge = require('object-assign'),
+var merge = require('Object.assign'),
     EventEmitter = require('events').EventEmitter,
     Immutable = require('immutable');
 
@@ -17,7 +17,8 @@ function _addArticles(articles){
     _articles = _articles.concat(articles);
 }
 
-var ArticleStore = merge(EventEmitter.prototype, {
+var emitter = Object.create(EventEmitter.prototype);
+var ArticleStore = merge(emitter, {
     emitChange: function(){
         this.emit(CHANGE_EVENT);
     },

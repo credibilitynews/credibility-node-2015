@@ -3,27 +3,40 @@ var React = require('react');
 var Hashtag = require('../tag/app-hashtag');
 var StoryList = require('../story/app-story-list');
 var Score = require('../stats/app-score');
-var TopicStats = require('../stats/app-topic-stats');
 
 var Router = require('react-router');
 var TopicStore = require('../../stores/app-topic-store');
+var ServerActions = require('../../actions/app-server-actions');
 
 var Topic = React.createClass({
 	mixins: [Router.State],
-	getDefaultProps: defaultProps,
-
-	componentWillMount: function() {
-		var topicId = parseInt(this.getParams().topicId);
-		this.props.topic = TopicStore.getTopic(topicId);
+	getInitialState: defaultProps,
+	topicId: null,
+	topic: null,
+	componentWillMount: function(){
+		this.topicId = parseInt(this.getParams().topicId);
+		this.topic = TopicStore.getTopic(this.topicId);
+		if(this.topic){
+			this.setState({topic:this.topic});
+		}
 	},
 	componentDidMount: function() {
-		if(this.topic){
-			this.props.topic = topic;
+		if(!this.topic){
+			TopicStore.addChangeListener(this._onTopicChange);
+			ServerActions.fetchTopic(this.topicId);
+		}
+	},
+	_onTopicChange: function(_topicId){
+		console.log('on', _topicId);
+		if(_topicId && this.topicId && _topicId == this.topicId){
+			console.log('onChange', _topicId);
+			var topic = TopicStore.getTopic(this.topicId);
+			this.setState({topic: topic});
 		}
 	},
 	render: function(){
-		console.log('topic', this.props)
-		var topic = this.props.topic;
+		console.log('topic', this.state);
+		var topic = this.state.topic;
 		return (
 			<div className="topic">
 				<div className="details">

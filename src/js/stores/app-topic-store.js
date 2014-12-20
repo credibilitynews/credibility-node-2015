@@ -1,7 +1,7 @@
 var AppDispatcher = require('../dispatchers/app-dispatcher'),
     ActionTypes = require('../constants/app-constants').ActionTypes;
 
-var merge = require('object-assign'),
+var merge = require('Object.assign'),
     EventEmitter = require('events').EventEmitter,
     Immutable = require('immutable');
 
@@ -9,12 +9,14 @@ var CHANGE_EVENT = "topics-change";
 
 var _topics = Immutable.Map();
 
-var TopicStore = merge(EventEmitter.prototype, {
+var emitter = Object.create(EventEmitter.prototype);
+
+var TopicStore = merge(emitter, {
     parseTopic: parseTopic,
     parseTopics: parseTopics,
 
-    emitChange: function(){
-        this.emit(CHANGE_EVENT);
+    emitChanges: function(topicId){
+        this.emit(CHANGE_EVENT, topicId);
     },
     addChangeListener: function(callback){
         this.on(CHANGE_EVENT, callback);
@@ -30,16 +32,24 @@ var TopicStore = merge(EventEmitter.prototype, {
     },
     dispatcherIndex: AppDispatcher.register(function(payload){
         var action = payload.action;
+        var topicId = null;
         switch(action.actionType){
             case ActionTypes.RECEIVE_LAYOUT:
-                console.log("store/topic-store", payload.action.layout.latest_topics);
+                console.log("store/topic-store/layout", payload.action.layout.latest_topics);
                 _addTopics(parseTopics(payload.action.layout.latest_topics));
+                break;
+            case ActionTypes.RECEIVE_TOPIC:
+                console.log("store/topic-store/topic", payload.action.topic);
+                topicId = payload.action.topic.id;
+                _addTopic(parseTopic(payload.action.topic));
                 break;
             case ActionTypes.ADD_TOPIC:
                 _addTopic(parseTopic(payload.action.topic))
                 break;
         }
-        TopicStore.emitChange();
+        console.log('1', topicId);
+        TopicStore.emitChanges(topicId);
+        console.log('2', topicId);
         return true;
     })
 })

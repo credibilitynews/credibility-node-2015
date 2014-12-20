@@ -25,7 +25,7 @@ var Activity = React.createClass({
         return (
             <div className="activity">
                 <div>
-                    On <a href={this.props[this.props.model].topic.link}>
+                    On <a href={"#/topic/"+this.props[this.props.model].topic.id}>
                         <strong>{this.props[this.props.model].topic.title}</strong>
                         </a>,
                     <span className="label label-primary model">{this.props.model}</span>
@@ -34,7 +34,7 @@ var Activity = React.createClass({
                     <a href={"/#/link/"+this.props[this.props.model].id}>
                         {this.props[this.props.model].title}
                     </a>
-                    <small>author, {this.props[this.props.model].url}</small>
+                    <small>author, {this.props[this.props.model].domain_name}</small>
                 </blockquote>
                 <small className="meta">
                     {this.props.action} by <i>{this.props.actor}</i>

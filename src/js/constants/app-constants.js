@@ -7,6 +7,7 @@ module.exports = {
     }),
     ActionTypes: keyMirror({
         RECEIVE_LAYOUT: null,
+        RECEIVE_TOPIC: null,
         ADD_TOPIC: null
     })
 }

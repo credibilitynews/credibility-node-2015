@@ -13,25 +13,24 @@ var ServerActions = require('../../actions/app-server-actions');
 
 var	TopicStore = require('../../stores/app-topic-store'),
 	CategoryStore = require('../../stores/app-category-store'),
-	LatestArticleStore = require('../../stores/app-latest-article-store'),
-	TopicStatsStore = require('../../stores/app-topic-stats-store');
+	LatestArticleStore = require('../../stores/app-latest-article-store');
 
 function getStatesFromServer(){
 	return {
 		topics: [],
 		categories: [],
-		latest_articles: [],
-		topic_stats: []
+		latest_articles: []
 	}
 }
 
 function getStatesFromStore(){
-	return {
+	var state = {
 		topics: TopicStore.getAllTopics(),
 		categories: CategoryStore.getAllCategories(),
-		latest_articles: LatestArticleStore.getAllArticles(),
-		topic_stats: TopicStatsStore.getAllTopicStats()
+		latest_articles: LatestArticleStore.getAllArticles()
 	}
+	console.log(state);
+	return state;
 }
 
 var Dashboard = React.createClass({
@@ -54,7 +53,7 @@ var Dashboard = React.createClass({
 					<SearchBar />
 					<div className="row">
 						<div className="col-md-8">
-							<Debates topics={this.state.topic_stats}/>
+							<Debates topics={this.state.topics}/>
 						</div>
 						<div className="col-md-4">
 							<Updates articles={this.state.latest_articles}/>

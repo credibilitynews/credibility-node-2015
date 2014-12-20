@@ -4,7 +4,7 @@ var ActionTypes = require('../constants/app-constants').ActionTypes,
 var http = require('http');
 
 var ServerActions = {
-    fetchLayout: function(layout){
+    fetchLayout: function(){
         http.get('http://localhost:8080/v1/home', function(res){
             var body = "";
             res.on('data', function(chunk) {
@@ -13,10 +13,28 @@ var ServerActions = {
 
             res.on('end', function() {
                 var data = JSON.parse(body).data;
-                console.log("actions/server-actions", data);
+                console.log("server-actions/fetch-layout", data);
                 AppDispatcher.handleServerAction({
                     actionType: ActionTypes.RECEIVE_LAYOUT,
                     layout: data
+                });
+            });
+
+        });
+    },
+    fetchTopic: function(topicId){
+        http.get('http://localhost:8080/v1/topic/'+topicId, function(res){
+            var body = "";
+            res.on('data', function(chunk) {
+                body += chunk;
+            });
+
+            res.on('end', function() {
+                var data = JSON.parse(body).data;
+                console.log("server-actions/fetch-topic", data);
+                AppDispatcher.handleServerAction({
+                    actionType: ActionTypes.RECEIVE_TOPIC,
+                    topic: data
                 });
             });
 
