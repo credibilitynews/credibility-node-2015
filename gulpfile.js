@@ -1,8 +1,10 @@
 var gulp = require('gulp');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
 var concat = require('gulp-concat');
 var reactify = require('reactify');
+var uglify = require('gulp-uglify');
 var less = require('gulp-less');
 
 gulp.task('browserify', function(){
@@ -11,6 +13,8 @@ gulp.task('browserify', function(){
   b.add('./src/js/main.js');
   return b.bundle()
     .pipe(source('main.js'))
+    .pipe(buffer())
+    .pipe(uglify())
     .pipe(gulp.dest('dist/js'));
 });
 
