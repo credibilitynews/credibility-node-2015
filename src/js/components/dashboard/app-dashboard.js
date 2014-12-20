@@ -2,7 +2,6 @@
 var React = require('react');
 
 var About = require('./app-about.js'),
-	LatestTopics = require('./app-latest-topics'),
 	Updates = require('../activity/app-activity-list'),
 	Debates = require('./app-debates'),
 	Stats = require('./app-stats'),
@@ -10,14 +9,14 @@ var About = require('./app-about.js'),
 	CategoryList = require('../category/app-category-list'),
 	TopMenu = require('../menu/app-top-menu');
 
-var ServerActions = require('../../actions/app-server-actions'),
-	TopicStore = require('../../stores/app-topic-store'),
+var ServerActions = require('../../actions/app-server-actions');
+
+var	TopicStore = require('../../stores/app-topic-store'),
 	CategoryStore = require('../../stores/app-category-store'),
 	LatestArticleStore = require('../../stores/app-latest-article-store'),
 	TopicStatsStore = require('../../stores/app-topic-stats-store');
 
 function getStatesFromServer(){
-	ServerActions.fetchLayout();
 	return {
 		topics: [],
 		categories: [],
@@ -32,10 +31,8 @@ function getStatesFromStore(){
 		categories: CategoryStore.getAllCategories(),
 		latest_articles: LatestArticleStore.getAllArticles(),
 		topic_stats: TopicStatsStore.getAllTopicStats()
-
 	}
 }
-
 
 var Dashboard = React.createClass({
 	getInitialState: function() {
@@ -45,6 +42,9 @@ var Dashboard = React.createClass({
 		//TopicStore.addChangeListener(this._onChange);
 		//CategoryStore.addChangeListener(this._onChange);
 		LatestArticleStore.addChangeListener(this._onChange);
+	},
+	componentDidMount: function() {
+		ServerActions.fetchLayout();
 	},
  	render: function(){
 		return (

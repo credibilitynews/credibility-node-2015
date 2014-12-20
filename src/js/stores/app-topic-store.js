@@ -7,17 +7,12 @@ var merge = require('object-assign'),
 
 var CHANGE_EVENT = "topics-change";
 
-var _topics = Immutable.List();
-
-function _addTopic(topic){
-    _topics = _topics.push(topic);
-}
-
-function _addTopics(topics){
-    _topics = _topics.concat(topics);
-}
+var _topics = Immutable.Map();
 
 var TopicStore = merge(EventEmitter.prototype, {
+    parseTopic: parseTopic,
+    parseTopics: parseTopics,
+
     emitChange: function(){
         this.emit(CHANGE_EVENT);
     },
@@ -28,27 +23,20 @@ var TopicStore = merge(EventEmitter.prototype, {
         this.removeListener(CHANGE_EVENT, callback);
     },
     getTopic: function(topicId){
-        return _topics
-        .reduce(function(selected, topic){
-            if(topicId == topic.id){
-                return topic;
-            }else{
-                return selected;
-            }
-        }, null);
+        return _topics.get(topicId);
     },
     getAllTopics: function(){
-        return _topics;
+        return _topics.toList();
     },
     dispatcherIndex: AppDispatcher.register(function(payload){
         var action = payload.action;
         switch(action.actionType){
             case ActionTypes.RECEIVE_LAYOUT:
-                //console.log("store/topic-store", payload.action.layout.latest_topics);
-                _addTopics(payload.action.layout.latest_topics);
+                console.log("store/topic-store", payload.action.layout.latest_topics);
+                _addTopics(parseTopics(payload.action.layout.latest_topics));
                 break;
             case ActionTypes.ADD_TOPIC:
-                _addTopic(payload.action.topic)
+                _addTopic(parseTopic(payload.action.topic))
                 break;
         }
         TopicStore.emitChange();
@@ -57,3 +45,23 @@ var TopicStore = merge(EventEmitter.prototype, {
 })
 
 module.exports = TopicStore;
+
+function _addTopic(topic){
+    _topics = _topics.set(topic.id ,topic);
+}
+
+function _addTopics(topics){
+    topics.forEach(function(topic){
+        _addTopic(topic);
+    });
+}
+
+function parseTopic(topic){
+    return topic;
+}
+
+function parseTopics(topics){
+    return topics.map(function(topic){
+        return parseTopic(topic);
+    });
+}

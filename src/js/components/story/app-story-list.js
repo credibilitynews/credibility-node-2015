@@ -5,22 +5,30 @@ var StoryLink = require('../story/app-story-link');
 var StoryList = React.createClass({
 	getDefaultProps: function() {
 		return {
+			stories: {
+				title: "",
+				meta: {articles: 0},
+				stories: []
+			}
 		};
 	},
 	render: function(){
-		var stories = this.props.list.map(function(i){
-			return (<li><StoryLink meta={i.meta} title={i.title} /></li>)
-		});
-
+		console.log('story-list', this.props);
+		var stories = this.props.stories;
 		return (
 			<div className="story-list">
-				<h4>{this.props.title}</h4>
-				<div>{stories.length} story links</div>
+				<h4>{stories.title}</h4>
+				<div>{stories.meta.articles} story links</div>
 				<ul>
-					{stories}
+					{this._wrap(stories.stories)}
 				</ul>
 			</div>
 		)
+	},
+	_wrap: function(items){
+		return items.map(function(item){
+			return (<li key={item.id}><StoryLink meta={item.meta} title={item.title} /></li>)
+		});
 	}
 });
 

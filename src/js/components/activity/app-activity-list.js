@@ -9,6 +9,7 @@ var ActivityList = React.createClass({
         };
     },
     render: function() {
+        console.log('activity-list', this.props);
         return (
             <div className="activity-list row">
                 <div className="col-xs-12">
@@ -26,27 +27,13 @@ var ActivityList = React.createClass({
             return (
                 <div key={item.id} className="panel">
                     <div className="panel-body">
-                    <Activity actor={item.user.name}
-                        action="added" model="article" views={item.views} created_at={item.created_at}
-                        article={this._wrapOne(item)}/>
+                    <Activity actor={item.meta.user.name}
+                        action="added" model="article" views={item.meta.views} created_at={item.meta.created_at}
+                        article={item)}/>
                     </div>
                 </div>)
         }.bind(this))
-    },
-    _wrapOne: function(item){
-        return {
-            title: item.title,
-            views: item.views,
-            id: item.id,
-            url: (new URL(item.url).hostname),
-            topic: {
-                title: item.topic_title,
-                link: "/#/topic/"+ item.topic_id
-            }
-        };
-    },
-
-
+    }
 });
 
 module.exports = ActivityList;

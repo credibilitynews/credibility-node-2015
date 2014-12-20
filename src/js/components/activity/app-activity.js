@@ -11,7 +11,7 @@ var Activity = React.createClass({
             story: {
                 title: "[Story title]",
                 hashtag: "[#hashtag]",
-                views: 0,
+                meta: {views: 0},
                 topic: {
                     title: "[Topic title]",
                     link: "/#story"
@@ -21,6 +21,7 @@ var Activity = React.createClass({
     },
 
     render: function(){
+        console.log('activity',this.props);
         return (
             <div className="activity">
                 <div>

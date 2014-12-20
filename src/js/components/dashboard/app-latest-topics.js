@@ -9,15 +9,20 @@ var LatestTopics = React.createClass({
         };
     },
     render: function() {
-        topics = this.props.topics.map(function(item){
-            return (<li key={item.id}><TopicLink title={item.title} hashtag={item.hashtag} score={item.views}/></li>)
-        });
         return (
-            <div className="latest">
+            <div className="latest-topics">
                 <h3>Latest Topics</h3>
-                <ul>{topics}</ul>
+                <ul>{this._wrapItems(this.props.topics)}</ul>
             </div>
         );
+    },
+    _wrapItems: function(items) {
+        return items.map(function(item){
+            return (
+                <li key={item.id}>
+                    <TopicLink title={item.title} hashtag={item.hashtag} score={item.meta.views}/>
+                </li>)
+        });
     }
 
 });

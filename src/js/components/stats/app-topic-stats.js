@@ -6,63 +6,29 @@ var React = require('react'),
     HashTag = require('../tag/app-hashtag');
 
 var TopicStats = React.createClass({
-    getDefaultProps: function() {
-        return {
-            title: "[Title]",
-            stats: {
-                views: 0,
-                articles: 0
-            },
-            sides: {
-                left: {
-                    title: "left",
-                    stats:{
-                        articles: 0,
-                        comments: 0
-                    }
-                },
-                right: {
-                    title: "right",
-                    stats: {
-                        articles: 0,
-                        comments: 0
-                    }
-                }
-            }
-        };
-    },
-    _totalViews: function() {
-        return this.props.sides.left.stats.views
-            + this.props.sides.right.stats.views
-            + this.props.sides.fact.stats.views;
-    },
-    _totalArticles: function() {
-        return this.props.sides.left.stats.articles
-        + this.props.sides.right.stats.articles
-        + this.props.sides.fact.stats.articles;
-    },
+    getDefaultProps: defaultProps,
     render: function() {
-        console.log("-", this.props.sides);
-
+        console.log("topic-stats", this.props);
+        topic = this.props.topic;
         return (
             <div className="topic-stats panel panel-default">
                 <div className="panel-body">
                     <div className="col-xs-6">
-                        <h4><a>{this.props.title}</a></h4>
-                        <HashTag tag={this.props.hashtag}/>
+                        <h4><a href={"#/topic/"+topic.id}>{topic.title}</a></h4>
+                        <HashTag tag={topic.hashtag}/>
                         <div>
-                            <span><ViewsNum views={this._totalViews()}/></span>
-                            <span><ArticlesNum articles={this._totalArticles()}/></span>
+                            <span><ViewsNum views={topic.meta.views}/></span>
+                            <span><ArticlesNum articles={topic.meta.articles}/></span>
                         </div>
                     </div>
                     <div className="left col-xs-2">
-                        <TopicColStats title={this.props.sides.left.title} stats={this.props.sides.left.stats}/>
+                        <TopicColStats title={topic.stories.left.title} meta={topic.stories.left.meta}/>
                     </div>
                     <div className="fact col-xs-2">
-                        <TopicColStats title={this.props.sides.fact.title} stats={this.props.sides.fact.stats}/>
+                        <TopicColStats title={topic.stories.fact.title} meta={topic.stories.fact.meta}/>
                     </div>
                     <div className="right col-xs-2">
-                        <TopicColStats title={this.props.sides.right.title} stats={this.props.sides.right.stats}/>
+                        <TopicColStats title={topic.stories.right.title} meta={topic.stories.right.meta}/>
                     </div>
                 </div>
             </div>
@@ -72,3 +38,31 @@ var TopicStats = React.createClass({
 });
 
 module.exports = TopicStats;
+
+function defaultProps() {
+    return {
+        topic: {
+            title: "[Title]",
+            meta: {
+                views: 0,
+                articles: 0
+            },
+            stories: {
+                left: {
+                    title: "left",
+                    meta:{
+                        articles: 0,
+                        comments: 0
+                    }
+                },
+                right: {
+                    title: "right",
+                    meta: {
+                        articles: 0,
+                        comments: 0
+                    }
+                }
+            }
+        }
+    };
+}

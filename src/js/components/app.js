@@ -11,9 +11,9 @@ var Dashboard = require('./dashboard/app-dashboard'),
     Template =require('./app-template');
 
 var routes = (
-    <Route handler={Template}>
+    <Route name="app" path="/" handler={Template}>
         <DefaultRoute handler={Dashboard} />
-        <Route name="topic" handler={Topic} />
+        <Route path="/topic/:topicId" handler={Topic} />
         <Route name="story" handler={Story} />
     </Route>
 );

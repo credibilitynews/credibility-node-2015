@@ -4,13 +4,14 @@ var React = require('react'),
     TopicStats = require('../stats/app-topic-stats'),
     merge = require('object-assign');
 
-var Stats = React.createClass({
+var Debates = React.createClass({
     getDefaultProps: function() {
         return {
             topics: []
         };
     },
     render: function() {
+        console.log("debates", this.props);
         return (
             <div>
                 <h3>Ongoing Debates</h3>
@@ -18,24 +19,15 @@ var Stats = React.createClass({
             </div>
         );
     },
-    _wrap: function(stats){
-        return stats.map(function(stat){
-            var meta = {
-                views: stat.views,
-                articles: 0
-            };
-            var sides = {
-                left: {title: "left", stats: {articles: stat.left.length, views: stat.views}},
-                right: {title: "right", stats: {articles: stat.right.length, views: stat.views}},
-                fact: {title: "fact", stats: {articles: stat.fact.length, views: stat.views}}
-            };
+    _wrap: function(items){
+        return items.map(function(item){
             return(
-                <div key={stat.id}>
-                    <TopicStats title={stat.title} stats={meta} sides={sides} hashtag={stat.hashtag} />
+                <div key={item.id}>
+                    <TopicStats topic={item}/>
                 </div>);
-        })
+        });
     }
 
 });
 
-module.exports = Stats;
+module.exports = Debates;

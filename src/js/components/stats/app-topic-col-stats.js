@@ -7,21 +7,21 @@ var TopicColStats = React.createClass({
     getDefaultProps: function() {
         return {
             title: "[Title]",
-            stats:{
+            meta:{
                 articles: 0
             }
         }
     },
     render: function() {
-        console.log("props", this.props.stats);
+        console.log("topic-col-stats", this.props.stats);
         return (
             <div className="topic-col-stats">
                 <div>
                     {this.props.title}
                 </div>
                 <div>
-                    <div className="number">{this.props.stats.articles}</div>
-                    <div><ViewsNum views={this.props.stats.views}/></div>
+                    <div className="number">{this.props.meta.articles}</div>
+                    <div><ViewsNum views={this.props.meta.views}/></div>
                 </div>
             </div>
         );
