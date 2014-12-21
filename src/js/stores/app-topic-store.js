@@ -47,9 +47,7 @@ var TopicStore = merge(emitter, {
                 _addTopic(parseTopic(payload.action.topic))
                 break;
         }
-        console.log('1', topicId);
         TopicStore.emitChanges(topicId);
-        console.log('2', topicId);
         return true;
     })
 })
