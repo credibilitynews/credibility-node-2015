@@ -1,7 +1,33 @@
+
+@import "bootstrap/bootstrap";
+
+@import "lumen/variables";
+@import "lumen/bootswatch";
+
+@icon-font-path: "/bower_components/bootstrap/dist/fonts/";
+
+@import "mixins";
+@import "story";
+@import "topic";
+@import "category";
+
 body { padding-top: 70px; color: #666; }
 footer{
     background-color: #eee;
     padding: 10px;
+}
+
+.logo{
+    width: 35px;
+    height: 35px;
+    display: table-cell;
+    background-color: #888;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 50%;
+    text-align: center;
+    color: white;
+    font-size: 20px;
 }
 
 .header{
@@ -11,6 +37,21 @@ footer{
             color: #ccc;
         }
     }
+    .navbar-logo{
+        display: inline-block;
+        padding: 8px 5px 0px 0px;
+        height: 40px;
+        float: left;
+
+    }
+    @media (max-width: 768px){
+        .navbar-logo{
+            padding: 8px 0px 0px 15px;
+        }
+    }
+    .navbar-brand{
+        display: inline-block;
+    }
 }
 
 .copyright{
@@ -18,132 +59,21 @@ footer{
     font-weight: strong;
 }
 
-.latest{
-    ul{
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        li{
-            margin-bottom: 10px;
-        }
+.views-num, .articles-num{
+    background-color: rgba(255,255,255,0.6);
+    color: gray;
+    font-size: 12px;
+    .glyphicon{
+        margin-right: 5px;
     }
 }
 
-.topic-link{
-    .title a{
-        font-size: 18px;
-    }
-    .stats{
-        text-align: right;
-        padding-right:15px;
-    }
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-    padding:10px;
+.articles-num{
+    background-color: rgba(44, 184, 40, 1);
+    color: white;
 }
 
-.topic-stats{
-    background-color: rgba(234, 238, 239, 1.00);
-    padding: 0px;
-    h4{
-        margin-bottom: 5px;
-    }
-    a, a:link, a:visited{
-        color: #666;
-    }
-
-    .articles-num{
-        margin-left: 5px;
-    }
-
-    .tag {
-        a, a:link, a:visited{
-            color: #aaa;
-            margin-bottom: 10px;
-        }
-        margin-bottom: 12px;
-    }
-
-    .topic-col-stats{
-        line-height: 25px;
-        text-align: center;
-        .number{
-            font-size: larger;
-            font-weight: bolder;
-        }
-    }
-    .left{
-        background-color: rgba(93, 156, 236, 0.4);
-        border: 1px solid rgba(93, 156, 236, 0.6);
-        border-width: 0 1px 4px 1px;
-        border-radius: 4px;
-
-        padding: 10px;
-    }
-    .fact{
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-width: 0 1px 4px 1px;
-        border-radius: 4px;
-
-        padding: 10px;
-    }
-    .right{
-        background-color: #ddd;
-        border: 1px solid #ccc;
-        border-width: 0 1px 4px 1px;
-        border-radius: 4px;
-
-        padding: 10px;
-    }
-}
-
-.topic{
-    .details{
-        margin-bottom: 20px;
-    }
-    .left .story-list{
-        /* background-color: #ccc; */
-    }
-    .fact .story-list{
-        background-color: #eee;
-    }
-    .right .story-list{
-        /* background-color: #ddd; */
-    }
-}
-
-.story-list{
-    ul{
-        list-style: none;
-        padding-left: 0px;
-    }
-}
-
-.story-link{
-}
-
-.category-list{
-    margin-top: 20px;
-    background-color: #eaeeef;
-    .group{
-        width: 90%;
-        display:block;
-        >a:first-child{
-            display:block;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-    }
-    .category-link{
-        margin-right: 10px;
-
-    }
-    a, a:link, a:visited{
-        color: #666;
-    }
-}
-
-.right-sidebar{
+.right-sidebar {
     *>h4:first-child{
         margin-top: 5px;
     }
@@ -181,6 +111,17 @@ footer{
     margin-top:10px
 }
 
+.latest{
+    ul{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        li{
+            margin-bottom: 10px;
+        }
+    }
+}
+
 .activity-list{
     .activity{
         font-size: 14px;
@@ -196,45 +137,4 @@ footer{
             float: right;
         }
     }
-}
-
-.views-num, .articles-num{
-    background-color: rgba(255,255,255,0.6);
-    color: gray;
-    font-size: 12px;
-    .glyphicon{
-        margin-right: 5px;
-    }
-}
-
-.articles-num{
-    background-color: rgba(44, 184, 40, 1);
-    color: white;
-}
-.navbar-logo{
-    display: inline-block;
-    padding: 8px 5px 0px 0px;
-    height: 40px;
-    float: left;
-
-}
-@media (max-width: 768px){
-    .navbar-logo{
-        padding: 8px 0px 0px 15px;
-    }
-}
-.navbar-brand{
-    display: inline-block;
-}
-.logo{
-    width: 35px;
-    height: 35px;
-    display: table-cell;
-    background-color: #888;
-    text-align: center;
-    vertical-align: middle;
-    border-radius: 50%;
-    text-align: center;
-    color: white;
-    font-size: 20px;
 }

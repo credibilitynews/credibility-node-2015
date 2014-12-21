@@ -1,0 +1,40 @@
+.story-list{
+    ul{
+        list-style: none;
+        padding-left: 0px;
+    }
+}
+
+.story-link{
+    >div{
+        border: 1px solid #eee;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+        .domain_name{
+        }
+        .author{
+        }
+        .created_at{
+        }
+    }
+}
+
+.story-group {
+    &.left{
+        background-color: @left-color-background;
+        padding: 15px;
+    }
+    &.fact{
+        .panel;
+        .fact-colored-panel;
+        div{
+            .panel-body;
+        }
+    }
+    &.right{
+        .panel;
+        .right-colored-panel;
+        div{
+            .panel-body;
+        }
+    }
+}
