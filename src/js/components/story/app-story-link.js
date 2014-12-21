@@ -4,22 +4,21 @@ var React = require('react'),
 
 var StoryLink = React.createClass({
 	render: function(){
-		path = "/story"
+		console.log("story-link", this.props);
+		var story = this.props.story;
+
 		return (
-			<div className="story-link">
-				<div>
-					<Link to={path}>
-						{this.props.title}
+			<div className={"story-link type-"+story.type}>
+				<div className="info">
+					<Link to={"/#/story/"+story.id}>
+						{story.title}
 					</Link>
 					<div>
-						<span className="domain_name">
-							{this.props.meta.domain_name}
-						</span>
-						<span className="author">
-							{this.props.meta.author}
-						</span>
+						<div className="domain_name">
+							{story.domain_name}
+						</div>
 						<span className="created_at">
-							{this.props.meta.created_at}
+							{story.meta.created_time_ago}
 						</span>
 					</div>
 				</div>

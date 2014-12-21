@@ -28,7 +28,7 @@ var ActivityList = React.createClass({
                 <div key={item.id} className="panel">
                     <div className="panel-body">
                     <Activity actor={item.meta.user.name}
-                        action="added" model="article" views={item.meta.views} created_at={item.meta.created_at}
+                        action="added" model="article" views={item.meta.views} created_at={item.meta.created_time_ago}
                         article={item}/>
                     </div>
                 </div>)

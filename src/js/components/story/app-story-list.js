@@ -27,7 +27,7 @@ var StoryList = React.createClass({
 	},
 	_wrap: function(items){
 		return items.map(function(item){
-			return (<li key={item.id}><StoryLink meta={item.meta} title={item.title} /></li>)
+			return (<li key={item.id}><StoryLink story={item} /></li>)
 		});
 	}
 });

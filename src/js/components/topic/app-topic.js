@@ -2,6 +2,8 @@
 var React = require('react');
 var Hashtag = require('../tag/app-hashtag');
 var StoryList = require('../story/app-story-list');
+var StoryTimeline = require('../story/app-story-timeline');
+
 var Score = require('../stats/app-score');
 var ViewsNum =  require('../stats/app-views-num');
 var ArticlesNum =  require('../stats/app-articles-num');
@@ -49,29 +51,17 @@ var Topic = React.createClass({
 
 		return (
 			<div className="topic">
-				<div className="details">
+				<div className="details panel panel-info">
+					<div className="panel-body">
 					<h2>{topic.title}</h2>
 					<Hashtag tag={topic.hashtag} />
 					<Score score={topic.meta.score} />
 					<ViewsNum views={topic.meta.views} />
 					<ArticlesNum articles={topic.meta.articles} />
+					</div>
 				</div>
-				<div className="stories row">
-					<div className="col-sm-4">
-						<div className="story-group left">
-							<StoryList stories={topic.stories.left} />
-						</div>
-					</div>
-					<div className="col-sm-4">
-						<div className="story-group fact">
-							<StoryList stories={topic.stories.fact} />
-						</div>
-					</div>
-					<div className="col-sm-4">
-						<div className="story-group right">
-							<StoryList stories={topic.stories.right} />
-						</div>
-					</div>
+				<div className="timeline">
+					<StoryTimeline stories={topic.stories.all} />
 				</div>
 			</div>
 		)
