@@ -6,21 +6,43 @@ var concat = require('gulp-concat');
 var reactify = require('reactify');
 var uglify = require('gulp-uglify');
 var less = require('gulp-less');
+var es6ify = require('es6ify');
+var sourcemaps = require('gulp-sourcemaps');
+var watchify = require('watchify');
 
-gulp.task('browserify', function(){
-  var b = browserify({debug: true});
-  b.transform(reactify); // use the reactify transform
-  b.add('./src/js/main.js');
+function bundleShare(b){ 
   return b.bundle()
     .pipe(source('main.js'))
-    .pipe(buffer())
-    .pipe(uglify())
+//    .pipe(buffer())
+//    .pipe(uglify())
     .pipe(gulp.dest('dist/js'));
+ 
+}
+
+gulp.task('browserify', function(){
+  var b = browserify({
+      debug: true,
+      cache: {},
+      packageCache: {},
+      fullPaths: true
+    })
+    .add(es6ify.runtime)
+    .transform(reactify); // use the reactify transform
+
+    b.add('./src/js/main.js');
+    b = watchify(b);
+    b.on('update', function(){
+        return bundleShare(b);
+    });
+
+    return bundleShare(b);
 });
 
 gulp.task('less', function(){
     return gulp.src('src/less/main.less')
+            .pipe(sourcemaps.init())
             .pipe(less())
+            .pipe(sourcemaps.write())
             .pipe(concat('main.css'))
             .pipe(gulp.dest('dist/css'));
 });
