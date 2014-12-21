@@ -7,11 +7,22 @@ var StoryLink = React.createClass({
 		path = "/story"
 		return (
 			<div className="story-link">
-				<Link className="btn" to={path}>{this.props.title}</Link>
 				<div>
-					{this.props.meta.domain_name} {this.props.meta.author} {this.props.meta.created_at}
+					<Link to={path}>
+						{this.props.title}
+					</Link>
+					<div>
+						<span className="domain_name">
+							{this.props.meta.domain_name}
+						</span>
+						<span className="author">
+							{this.props.meta.author}
+						</span>
+						<span className="created_at">
+							{this.props.meta.created_at}
+						</span>
+					</div>
 				</div>
-				<div></div>
 			</div>
 		)
 	}

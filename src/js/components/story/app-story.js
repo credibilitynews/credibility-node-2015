@@ -14,11 +14,12 @@ var Story = React.createClass({
 	},
 	render: function(){
 		return (
-			<div>
-				<div>{this.props.meta.domain_name}</div>
-				<div>{this.props.meta.author}</div>
-				<div>{this.props.meta.created_at}</div>
-				<div></div>
+			<div className="panel">
+				<div className="panel-body">
+					<div>{this.props.meta.domain_name}</div>
+					<div>{this.props.meta.author}</div>
+					<div>{this.props.meta.created_at}</div>
+				</div>
 			</div>
 		)
 	}

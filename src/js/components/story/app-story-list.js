@@ -17,8 +17,8 @@ var StoryList = React.createClass({
 		var stories = this.props.stories;
 		return (
 			<div className="story-list">
-				<h4>{stories.title}</h4>
-				<div>{stories.meta.articles} story links</div>
+				<h4 className="title">{stories.title}</h4>
+				<div className="info">{stories.meta.articles} story links</div>
 				<ul>
 					{this._wrap(stories.stories)}
 				</ul>
