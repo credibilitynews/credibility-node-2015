@@ -1,13 +1,9 @@
 /** @jsx React.DOM */
 var React = require('react');
 var Link = require('react-router').Link;
-var ReactIntlMixin = require("react-intl").ReactIntlMixin;
-
-var mui = require('material-ui'),
-FlatButton = mui.FlatButton;
+// var ReactIntlMixin = require("react-intl").ReactIntlMixin;
 
 var TopMenu = React.createClass({
-	mixins: [ReactIntlMixin],
 	getDefaultProps: function() {
 		return {
 			items: [
@@ -17,9 +13,6 @@ var TopMenu = React.createClass({
 				{path: '#/topic', label: 'Thailand'},
 				]
 		};
-	},
-	propTypes: {
-		items: React.PropTypes.array.isRequired
 	},
 	render: function(){
 		return (
