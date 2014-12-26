@@ -9,33 +9,44 @@ var less = require('gulp-less');
 var es6ify = require('es6ify');
 var sourcemaps = require('gulp-sourcemaps');
 var watchify = require('watchify');
+var gutil = require('gulp-util');
 
-function bundleShare(b){ 
-  return b.bundle()
-    .pipe(source('main.js'))
-//    .pipe(buffer())
-//    .pipe(uglify())
-    .pipe(gulp.dest('dist/js'));
- 
+function build(watch, watchCallback){
+    var b = browserify({
+        debug: true,
+        cache: {},
+        packageCache: {},
+        fullPaths: true
+    });
+
+    b.transform(reactify);
+    //b.transform(es6ify).configure(/^(?!.*node_modules)+.+\.js$/));
+
+    b = watch ? watchify(b) : b;
+    b.add('./src/js/main.js');
+
+    function rebundle(){
+        return b.bundle()
+            .pipe(source('main.js'))
+            .pipe(gulp.dest('dist/js'));
+    }
+
+    b.on('update', function(path){
+        return rebundle();
+    });
+    b.on('time', function(time){
+        gutil.log("Finished rebundle() after "+time+" ms");
+        if(watchCallback) watchCallback();
+    });
+    return rebundle();
 }
 
 gulp.task('browserify', function(){
-  var b = browserify({
-      debug: true,
-      cache: {},
-      packageCache: {},
-      fullPaths: true
-    })
-    .add(es6ify.runtime)
-    .transform(reactify); // use the reactify transform
+    return build(false);
+});
 
-    b.add('./src/js/main.js');
-    b = watchify(b);
-    b.on('update', function(){
-        return bundleShare(b);
-    });
-
-    return bundleShare(b);
+gulp.task('watch-js', ['browserify'], function(){
+    return build(true);
 });
 
 gulp.task('less', function(){
@@ -55,9 +66,5 @@ gulp.task('copy', function() {
 gulp.task('default',['browserify', 'copy']);
 
 gulp.task('watch', function() {
-    gulp.watch(['src/**/*.js', 'src/**/*.html'], ['browserify']);
-});
-
-gulp.task('watch-css', function() {
     gulp.watch('src/**/*.less', ['less']);
 });
