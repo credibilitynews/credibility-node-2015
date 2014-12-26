@@ -34,13 +34,43 @@ var StoryTimeline = React.createClass({
 	},
 	_wrap: function(items){
 		var times = {};
-		return items.map(function(item){
-			var time = times[item.meta.created_at+":"+item.type] ?
-				null : (times[item.meta.created_at+":"+item.type] = item.meta.created_at);
+		return items
+		.reduce(function(sets, item){
+			var index = sets['keys'][item.meta.created_key];
+			if(!index){
+				// record index
+				index = sets['groups'].length;
+				sets['keys'][item.meta.created_key] = index;
+
+				// create new group with 3 arrays, because 3 types
+				sets['groups'].push([[],[],[]]);
+			}
+			sets['groups'][index][item.type].push(item);
+			return sets;
+		}, {keys: {}, groups: []})
+		.groups
+		.map(function(group){
+			var time = null;
+			for(var type=0; type<3; type++){
+				group[type] = group[type].map(function(link){
+					time = link.meta.created_at;
+					return <StoryLink story={link} />;
+				});
+			}
 			return (
-				<div key={item.id}>
-					{time ? <div className="time">{time}</div> : ""}
-					<div className="row"><StoryLink story={item} /></div>
+				<div>
+					<div className="time">{time}</div>
+					<div className="row">
+						<div className="type-1">
+							{group[1]}
+						</div>
+						<div className="type-0">
+							{group[0]}
+						</div>
+						<div className="type-2">
+							{group[2]}
+						</div>
+					</div>
 				</div>)
 		});
 	}

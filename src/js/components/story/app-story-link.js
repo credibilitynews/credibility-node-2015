@@ -8,7 +8,7 @@ var StoryLink = React.createClass({
 		var story = this.props.story;
 
 		return (
-			<div className={"story-link type-"+story.type}>
+			<div className="story-link">
 				<div className="info">
 					<Link to={"/#/story/"+story.id}>
 						{story.title}
