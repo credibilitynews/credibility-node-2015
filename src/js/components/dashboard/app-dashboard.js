@@ -15,27 +15,19 @@ var	TopicStore = require('../../stores/app-topic-store'),
 	CategoryStore = require('../../stores/app-category-store'),
 	LatestArticleStore = require('../../stores/app-latest-article-store');
 
-function getStatesFromServer(){
-	return {
-		topics: [],
-		categories: [],
-		latest_articles: []
-	}
-}
-
 function getStatesFromStore(){
 	var state = {
 		topics: TopicStore.getAllTopics(),
 		categories: CategoryStore.getAllCategories(),
 		latest_articles: LatestArticleStore.getAllArticles()
 	}
-	console.log(state);
+	console.log('dashboard', state);
 	return state;
 }
 
 var Dashboard = React.createClass({
 	getInitialState: function() {
-		return getStatesFromServer();
+		return getStatesFromStore();
 	},
 	componentWillMount: function() {
 		//TopicStore.addChangeListener(this._onChange);
