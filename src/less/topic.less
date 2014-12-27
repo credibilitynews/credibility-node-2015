@@ -1,6 +1,37 @@
 .topic{
     .details{
         margin-bottom: 20px;
+        @media (max-width: 768px){
+            margin-bottom: 0px;
+        }
+        .title{
+            .make-sm-column(8);
+        }
+        .meta{
+            .make-sm-column(4);
+            .text-right;
+        }
+    }
+    .articles-num, .views-num{
+        .colored-panel(#eee, #bbb);
+        margin-left: 10px;
+        color: #666;
+        display: inline-block;
+        font-size: 24px;
+        vertical-align: middle;
+        .text{
+            display: block;
+            font-size: 14px;
+        }
+        @media (max-width: 768px){
+            font-size: 18px;
+            .text{
+                font-size: 12px;
+            }
+        }
+    }
+    .views-num{
+        .colored-panel(#7dffe5, #33b8cc);
     }
 }
 

@@ -20,7 +20,7 @@ var StoryTimeline = React.createClass({
 				<div className="hidden-xs">
 					<div className="col-sm-1">
 					</div>
-					<div className="col-sm-11">
+					<div className="col-sm-11 visible-md visible-lg">
 						<div className="col-sm-4">Left</div>
 						<div className="col-sm-4">Fact</div>
 						<div className="col-sm-4">Right</div>
@@ -59,7 +59,7 @@ var StoryTimeline = React.createClass({
 			}
 			return (
 				<div>
-					<div className="time">{time}</div>
+					<div className="time">{time}&nbsp;&nbsp;<i className="fa fa-chevron-down"></i></div>
 					<div className="row">
 						<div className="type-1">
 							{group[1]}

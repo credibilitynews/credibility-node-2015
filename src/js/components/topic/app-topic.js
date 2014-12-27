@@ -51,13 +51,14 @@ var Topic = React.createClass({
 
 		return (
 			<div className="topic">
-				<div className="details panel panel-info">
-					<div className="panel-body">
-					<h2>{topic.title}</h2>
-					<Hashtag tag={topic.hashtag} />
-					<Score score={topic.meta.score} />
-					<ViewsNum views={topic.meta.views} />
-					<ArticlesNum articles={topic.meta.articles} />
+				<div className="details row">
+					<div className="title">
+						<h2>{topic.title}</h2>
+						<Hashtag tag={topic.hashtag} />
+					</div>
+					<div className="meta">
+						<ViewsNum views={topic.meta.views} text/>
+						<ArticlesNum articles={topic.meta.articles} text/>
 					</div>
 				</div>
 				<div className="timeline">
