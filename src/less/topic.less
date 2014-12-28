@@ -1,15 +1,17 @@
 .topic{
     .details{
         margin-bottom: 20px;
+        display: table;
         @media (max-width: 768px){
             margin-bottom: 0px;
         }
         .title{
-            .make-sm-column(8);
+            display: table-cell;
+            padding-right: 100px;
         }
         .meta{
-            .make-sm-column(4);
-            .text-right;
+            display: table-cell;
+
         }
     }
     .articles-num, .views-num{
@@ -29,9 +31,13 @@
                 font-size: 12px;
             }
         }
+        @media (max-width: 614px){
+            width: 100%;
+            margin-bottom: 5px;
+        }
     }
     .views-num{
-        .colored-panel(#7dffe5, #33b8cc);
+        .colored-panel(#dcff7f, #e4e05f);
     }
 }
 

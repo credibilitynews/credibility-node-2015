@@ -51,7 +51,7 @@ var Topic = React.createClass({
 
 		return (
 			<div className="topic">
-				<div className="details row">
+				<div className="details">
 					<div className="title">
 						<h2>{topic.title}</h2>
 						<Hashtag tag={topic.hashtag} />
