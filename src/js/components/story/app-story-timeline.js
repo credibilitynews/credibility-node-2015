@@ -37,7 +37,7 @@ var StoryTimeline = React.createClass({
 		return items
 		.reduce(function(sets, item){
 			var index = sets['keys'][item.meta.created_key];
-			if(!index){
+			if(index != 0 && !index){
 				// record index
 				index = sets['groups'].length;
 				sets['keys'][item.meta.created_key] = index;
