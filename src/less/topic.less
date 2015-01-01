@@ -1,19 +1,53 @@
 .topic{
     .details{
+        .row;
         margin-bottom: 20px;
         display: table;
         @media (max-width: 768px){
             margin-bottom: 0px;
         }
         .title{
+            .make-md-column(8);
             display: table-cell;
-            padding-right: 100px;
+            padding-right: 10px;
+            
+            blockquote{
+              font-size: 14px;
+              margin-top: 15px;
+              margin-bottom: 0px;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              transition: max-height 0.8s;
+              height: 100%;
+
+              &.short{ 
+                color: #ccc;
+                max-height: 50px;
+              }
+              &.long{
+                color: #666;
+                max-height: 500px;
+              }
+            }
+            .more-link{
+              &:hover{
+                text-decoration: underline; 
+              }
+              text-align: right;
+              cursor: pointer;
+            }
         }
         .meta{
+            .make-md-column(4);
+            
+            background-color: aquamarine;
             display: table-cell;
+            text-align: right;
+            padding:10px;
 
         }
     }
+
     .articles-num, .views-num{
         .colored-panel(#eee, #bbb);
         margin-left: 10px;

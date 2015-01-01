@@ -21,9 +21,9 @@ var StoryTimeline = React.createClass({
 					<div className="col-md-1 hidden-xs">
 					</div>
 					<div className="col-sm-12 col-md-11 visible-md visible-lg">
-						<div className="col-sm-4">Left</div>
-						<div className="col-sm-4">Fact</div>
-						<div className="col-sm-4">Right</div>
+						<div className="col-sm-4">Left <a href="#">[+]</a></div>
+						<div className="col-sm-4">Fact <a href="#">[+]</a></div>
+						<div className="col-sm-4">Right <a href="#">[+]</a></div>
 					</div>
 				</div>
                 <div className="line">
@@ -54,11 +54,11 @@ var StoryTimeline = React.createClass({
 			for(var type=0; type<3; type++){
 				group[type] = group[type].map(function(link){
 					time = link.meta.created_at;
-					return <StoryLink story={link} />;
+					return <StoryLink key={link.id} story={link} />;
 				});
 			}
 			return (
-				<div>
+				<div key={time}>
 					<div className="time">{time}&nbsp;&nbsp;<i className="fa fa-calendar-o"></i></div>
 					<div className="row">
 						<div className="type-1">

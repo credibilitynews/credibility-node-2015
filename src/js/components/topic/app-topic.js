@@ -1,5 +1,5 @@
 /** @jsx React.DOM */
-var React = require('react');
+var React = require('react/addons');
 var Hashtag = require('../tag/app-hashtag');
 var StoryList = require('../story/app-story-list');
 var StoryTimeline = require('../story/app-story-timeline');
@@ -17,7 +17,8 @@ var Topic = React.createClass({
 	mixins: [Router.State],
 	getInitialState: function() {
 		return {
-			topic: null
+			topic: null,
+            summaryShown: false
 		};
 	},
 	topicId: null,
@@ -49,12 +50,24 @@ var Topic = React.createClass({
 		}
 		var topic = this.state.topic;
 
+        var cx = React.addons.classSet;
+        var toggled = cx({
+            'short': !this.state.summaryShown,
+            'long': this.state.summaryShown
+        });
+
 		return (
 			<div className="topic">
 				<div className="details">
 					<div className="title">
 						<h2>{topic.title}</h2>
 						<Hashtag tag={topic.hashtag} />
+                        <blockquote className={toggled}>
+                            The 2013 Lahad Datu standoff was a military conflict standoff that started on 11 February 2013 and ended on 24 March 2013,[5] it arose after 235 militants, some of whom were armed,[17] arrived by boats in Lahad Datu, Sabah, Malaysia from Simunul island, Tawi-Tawi in the southern Philippines on 11 February 2013.[12][18][19] The group, calling themselves the "Royal Security Forces of the Sultanate of Sulu and North Borneo",[12] was sent by Jamalul Kiram III, one of the claimants to the throne of the Sultanate of Sulu. Kiram stated that their objective was to assert the unresolved territorial claim of the Philippines to eastern Sabah (the former North Borneo).[20] Malaysian security forces surrounded the village of Tanduo in Lahad Datu where the group had gathered and after several weeks of negotiations and broken deadlines for the intruders to withdraw, security forces moved in and routed the Sulu militants.
+                        </blockquote>
+                        <a className="more-link" onClick={this._handleToggle}>
+                            <div>{this.state.summaryShown ? "hide" : "read more"}</div>
+                        </a>
 					</div>
 					<div className="meta">
 						<ViewsNum views={topic.meta.views} text/>
@@ -66,7 +79,10 @@ var Topic = React.createClass({
 				</div>
 			</div>
 		)
-	}
+	},
+    _handleToggle: function(){
+        this.setState({summaryShown: !this.state.summaryShown});
+    }
 });
 
 module.exports = Topic;
