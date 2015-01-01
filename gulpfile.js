@@ -20,7 +20,6 @@ function build(watch, watchCallback){
     });
 
     b.transform(reactify);
-    //b.transform(es6ify).configure(/^(?!.*node_modules)+.+\.js$/));
 
     b = watch ? watchify(b) : b;
     b.add('./src/js/main.js');
@@ -32,6 +31,7 @@ function build(watch, watchCallback){
     }
 
     b.on('update', function(path){
+        gutil.log("Starting rebundle() on changes: "+path);
         return rebundle();
     });
     b.on('time', function(time){
@@ -45,7 +45,7 @@ gulp.task('browserify', function(){
     return build(false);
 });
 
-gulp.task('watch-js', ['browserify'], function(){
+gulp.task('watch', ['browserify'], function(){
     return build(true);
 });
 
@@ -65,6 +65,6 @@ gulp.task('copy', function() {
 
 gulp.task('default',['browserify', 'copy']);
 
-gulp.task('watch', function() {
+gulp.task('watch-less', function() {
     gulp.watch('src/**/*.less', ['less']);
 });
