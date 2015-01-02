@@ -11,10 +11,29 @@
 @import "topic";
 @import "category";
 
-body { padding-top: 70px; color: #666; }
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  padding-top: 70px; 
+  color: #666; 
+  margin-bottom: 60px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  
+  height: 60px;
+  background-color: #eee;
+  padding: 10px;
+}
+
 footer{
-    background-color: #eee;
-    padding: 10px;
 }
 
 h1, h2, h3{
@@ -147,3 +166,4 @@ h1, h2, h3{
         }
     }
 }
+
