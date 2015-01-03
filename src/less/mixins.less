@@ -1,9 +1,9 @@
-@left-color-background: rgba(93, 156, 236, 0.4);
-@left-color-border: rgba(93, 156, 236, 0.6);
-@fact-color-background: #fff;
-@fact-color-border: #ddd;
-@right-color-background: #ddd;
-@right-color-border: #ccc;
+@left-color-background: rgba(45, 234, 190, 0.65);
+@left-color-border: darken(@left-color-background, 20%);
+@fact-color-background: lighten(powderblue, 15%);
+@fact-color-border: darken(@fact-color-background, 20%);
+@right-color-background: darken(aliceblue, 8%);
+@right-color-border: darken(@right-color-background, 20%);
 
 .colored-panel(@bg-color, @border-color){
     background-color: @bg-color;

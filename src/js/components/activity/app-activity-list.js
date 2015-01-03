@@ -25,8 +25,8 @@ var ActivityList = React.createClass({
     _wrap: function(items){
         return items.map(function(item){
             return (
-                <div key={item.id} className="panel">
-                    <div className="panel-body">
+                <div key={item.id} className="activity-list-item">
+                    <div className="content">
                     <Activity actor={item.meta.user.name}
                         action="added" model="article" views={item.meta.views} created_at={item.meta.created_time_ago}
                         article={item}/>

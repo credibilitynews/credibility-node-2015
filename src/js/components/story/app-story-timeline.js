@@ -20,10 +20,10 @@ var StoryTimeline = React.createClass({
 				<div className="hidden-xs row">
 					<div className="col-md-1 hidden-xs">
 					</div>
-					<div className="col-sm-12 col-md-11 visible-md visible-lg">
-						<div className="col-sm-4">Left <a href="#">[+]</a></div>
-						<div className="col-sm-4">Fact <a href="#">[+]</a></div>
-						<div className="col-sm-4">Right <a href="#">[+]</a></div>
+					<div className="col-sm-12 visible-md visible-lg">
+						<div className="col-sm-4 text-center">Left <a href="#">[+]</a></div>
+						<div className="col-sm-4 text-center">Fact <a href="#">[+]</a></div>
+						<div className="col-sm-4 text-center">Right <a href="#">[+]</a></div>
 					</div>
 				</div>
                 <div className="line">

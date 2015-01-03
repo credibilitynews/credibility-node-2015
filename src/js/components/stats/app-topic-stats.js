@@ -11,14 +11,14 @@ var TopicStats = React.createClass({
         console.log("topic-stats", this.props);
         topic = this.props.topic;
         return (
-            <div className="topic-stats panel panel-default">
-                <div className="panel-body">
+            <div className="topic-stats">
+                <div className="content">
                     <div className="col-xs-6">
                         <h4><a href={"#/topic/"+topic.id}>{topic.title}</a></h4>
                         <HashTag tag={topic.hashtag}/>
                         <div>
-                            <span><ViewsNum views={topic.meta.views}/></span>
                             <span><ArticlesNum articles={topic.meta.articles}/></span>
+                            <span><ViewsNum views={topic.meta.views}/></span>
                         </div>
                     </div>
                     <div className="left col-xs-2">

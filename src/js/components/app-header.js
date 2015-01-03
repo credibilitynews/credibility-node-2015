@@ -7,7 +7,7 @@ var Header = React.createClass({
 	render: function(){
 		return (
 			<nav className="header navbar navbar-default navbar-fixed-top" role="navigation">
-				<div className="brand container">
+				<div className="brand container-fluid">
 					<div className="navbar-header">
 						<button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
 							<span className="sr-only">Toggle navigation</span>

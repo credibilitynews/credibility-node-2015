@@ -5,7 +5,7 @@ var Footer = React.createClass({
 	render: function(){
 		return (
 			<footer className="footer">
-				<div className="text-right container">
+				<div className="text-right container-fluid">
 					<div className="copyright">some rights reserved</div>
 				</div>
 			</footer>
