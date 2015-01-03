@@ -1,0 +1,175 @@
+
+@import "bootstrap/bootstrap";
+
+@import "lumen/variables";
+@import "lumen/bootswatch";
+
+@icon-font-path: "/bower_components/bootstrap/dist/fonts/";
+
+@import "mixins";
+@import "story";
+@import "topic";
+@import "category";
+
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  padding-top: 50px;
+  color: #666;
+  margin-bottom: 60px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+
+  height: 60px;
+  background-color: #f8f8f8;
+  padding: 10px;
+}
+
+footer{
+}
+
+h1, h2, h3{
+    margin-top: 5px;
+}
+.logo{
+    width: 35px;
+    height: 35px;
+    display: table-cell;
+    background-color: #888;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 50%;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+}
+    nav.navbar{
+        margin-bottom: 0px;
+    }
+
+.header{
+    .brand{
+        small{
+            font-size: 70%;
+            color: #ccc;
+        }
+    }
+
+    .navbar-logo{
+        display: inline-block;
+        padding: 8px 5px 0px 0px;
+        height: 40px;
+        float: left;
+
+    }
+    @media (max-width: 768px){
+        .navbar-logo{
+            padding: 8px 0px 0px 15px;
+        }
+    }
+    .navbar-brand{
+        display: inline-block;
+        padding-right: 0px;
+        padding-top: 15px;
+        padding-left: 5px;
+        @media (min-width: 768px){
+            padding-left: 15px;
+        }
+    }
+}
+.footer{margin-top:30px;}
+.copyright{
+    padding-top: 10px;
+    font-weight: strong;
+}
+
+.views-num, .articles-num{
+    background-color: rgba(255,255,255,0.6);
+    color: gray;
+    font-size: 12px;
+    .glyphicon, .fa{
+        margin-right: 5px;
+    }
+}
+
+.articles-num{
+    background-color: rgba(44, 184, 40, 1);
+    color: white;
+}
+
+.right-sidebar {
+    *>h4:first-child{
+        margin-top: 5px;
+    }
+    .stats{
+        margin-top:10px;
+        background-color: rgba(53, 229, 173, 0.74);
+        border: 1px solid rgb(44, 213, 153);
+        border-width: 0 1px 4px 1px;
+
+        h4{
+            margin-top: 20px;
+        }
+        .text{
+            >h4:first-child{
+                margin-top: 0px;
+            }
+        }
+
+        h5{
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 0px;
+        }
+        a, a:link, a:visited{
+            color: #000;
+            font-size: 14px;
+        }
+    }
+}
+
+.about{
+    background-color: rgba(122, 191, 252, 0.69);
+    border: 1px solid rgba(74, 166, 242, 0.6);
+    border-width: 0 1px 4px 1px;
+    margin-top:10px
+}
+
+.latest{
+    ul{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        li{
+            margin-bottom: 10px;
+        }
+    }
+}
+
+.activity-list{
+    .activity-list-item{
+        margin-bottom: 50px
+    }
+    .activity{
+        font-size: 14px;
+        blockquote{
+            font-size: 110%;
+            margin-bottom: 0px;
+        }
+        .label{
+            float: right;
+        }
+        small.meta{
+            color: #ccc;
+            float: right;
+        }
+    }
+}
