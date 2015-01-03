@@ -1,6 +1,5 @@
 /** @jsx React.DOM */
-var React = require('react'),
-	Link = require('react-router').Link;
+var React = require('react');
 
 var Story = React.createClass({
 	getDefaultProps: function() {

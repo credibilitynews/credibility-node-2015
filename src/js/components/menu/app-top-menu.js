@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
 var React = require('react');
-var Link = require('react-router').Link;
+var Link = require('react-router-component').Link;
 // var ReactIntlMixin = require("react-intl").ReactIntlMixin;
 
 var TopMenu = React.createClass({
@@ -27,7 +27,7 @@ var TopMenu = React.createClass({
 		return items.map(function(item){
 			return (
 				<li key={item.label}>
-					<a href={item.path}>{item.label}</a>
+					<Link href={item.path}>{item.label}</Link>
 				</li>);
 		})
 	}

@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
 var React = require('react'),
-	Link = require('react-router').Link;
+	Link = require('react-router-component').Link;
 
 var StoryLink = React.createClass({
 	render: function(){
@@ -10,7 +10,7 @@ var StoryLink = React.createClass({
 		return (
 			<div className="story-link" data-created={story.meta.created_key}>
 				<div className="info">
-					<Link to={"/#/story/"+story.id}>
+					<Link href={"/#/story/"+story.id} to={"/#/story/"+story.id}>
 						{story.title}
 					</Link>
 					<div>
