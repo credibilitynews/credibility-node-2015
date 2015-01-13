@@ -85,20 +85,21 @@
 			font-size: 14px;
 
 			&>div.content{
-				border: 4px solid @topic-theme-border;
-				padding: 10px;
+				background-color: darken(@topic-theme, 7%);
+				/*border: 4px solid @topic-theme-border;*/
+				padding: 20px;
 				&>div{
 					.row;
 					width: 100%;
 					&>span:first-child{
 						.make-xs-column(4);
-						font-weight: bold;
+						font-weight: normal;
 					}
 					.tag{
 						.make-xs-column(8);
 						padding-left: 0px;
 					}
-					margin-bottom: 15px;
+					margin-bottom: 10px;
 				}
 				&>div:last-child{
 					margin-bottom: 0px;
