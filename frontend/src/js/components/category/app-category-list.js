@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 var React = require('react'),
-    CategoryLink = require('./app-category-link');
+    CategoryLink = require('./app-category-link'),
+    TagActions = require('../../actions/tag-actions');
 
 var CategoryList = React.createClass({
     getDefaultProps: function() {

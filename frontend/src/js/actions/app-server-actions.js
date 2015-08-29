@@ -61,5 +61,5 @@ var ServerActions = {
 
     }
 }
-
+if(typeof window !== "undefined") window.ServerActions = ServerActions;
 module.exports = ServerActions;

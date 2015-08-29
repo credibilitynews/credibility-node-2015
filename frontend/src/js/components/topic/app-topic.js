@@ -10,7 +10,8 @@ var ArticlesNum =  require('../stats/app-articles-num');
 var TopicStats = require('../stats/app-topic-stats');
 
 var TopicStore = require('../../stores/app-topic-store');
-var ServerActions = require('../../actions/app-server-actions');
+var ServerActions = require('../../actions/app-server-actions'),
+	TopicActions = require('../../actions/topic-actions');
 
 var Topic = React.createClass({
 	getInitialState: function() {
