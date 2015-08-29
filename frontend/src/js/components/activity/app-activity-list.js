@@ -23,7 +23,7 @@ var ActivityList = React.createClass({
     },
 
     _wrap: function(items){
-        return items.map(function(item){
+        return items.slice(0,5).map(function(item){
             return (
                 <div key={item.id} className="activity-list-item">
                     <div className="content">

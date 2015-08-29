@@ -20,7 +20,7 @@ var Debates = React.createClass({
         );
     },
     _wrap: function(items){
-        return items.map(function(item){
+        return items.slice(0,5).map(function(item){
             return(
                 <div key={item.id}>
                     <TopicStats topic={item}/>

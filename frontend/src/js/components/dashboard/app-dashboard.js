@@ -1,5 +1,9 @@
 /** @jsx React.DOM */
-var React = require('react');
+var React = require('react'),
+	Router = require('react-router-component'),
+	Locations = Router.Locations;
+	Location = Router.Location,
+	NotFound = Router.NotFound;
 
 var About = require('./app-about.js'),
 	Updates = require('../activity/app-activity-list'),
@@ -7,7 +11,8 @@ var About = require('./app-about.js'),
 	Stats = require('./app-stats'),
 	SearchBar = require('../search/app-search-bar'),
 	CategoryList = require('../category/app-category-list'),
-	TopMenu = require('../menu/app-top-menu');
+	TopMenu = require('../menu/app-top-menu'),
+	UserLogin = require('../user/app-user-login');
 
 var ServerActions = require('../../actions/app-server-actions');
 
@@ -34,6 +39,9 @@ var Dashboard = React.createClass({
 		//CategoryStore.addChangeListener(this._onChange);
 		LatestArticleStore.addChangeListener(this._onChange);
 	},
+	componentWillUnMount: function() {
+		LatestArticleStore.removeChangeListener(this._onChange);
+	},
 	componentDidMount: function() {
 		ServerActions.fetchLayout();
 	},
@@ -45,16 +53,16 @@ var Dashboard = React.createClass({
 					<SearchBar />
 					<div className="row">
 						<div className="col-md-8">
-							<Debates topics={this.state.topics}/>
-						</div>
-						<div className="col-md-4">
 							<Updates articles={this.state.latest_articles}/>
 						</div>
-
+						<div className="col-md-4">
+							<Debates topics={this.state.topics}/>
+						</div>
 					</div>
 
 				</div>
 				<div className="col-sm-3 hidden-xs right-sidebar">
+					<UserLogin/>
 					<About />
 					<CategoryList categories={this.state.categories}/>
 					<Stats />

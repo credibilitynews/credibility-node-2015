@@ -17,11 +17,8 @@ var TopicColStats = React.createClass({
         return (
             <div className="topic-col-stats">
                 <div>
-                    {this.props.title}
-                </div>
-                <div>
                     <div className="number">{this.props.meta.articles}</div>
-                    <div><ViewsNum views={this.props.meta.views}/></div>
+                    {/*<div><ViewsNum views={this.props.meta.views}/></div>*/}
                 </div>
             </div>
         );

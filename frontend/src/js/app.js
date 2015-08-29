@@ -2,8 +2,8 @@
 var React = require('react');
 
 var Router = require('react-router-component'),
-    Locations = React.createFactory(Router.Locations),
-    Location = React.createFactory(Router.Location);
+    Locations = Router.Locations,
+    Location = Router.Location;
 
 var Dashboard = require('./components/dashboard/app-dashboard'),
     Topic = require('./components/topic/app-topic'),
@@ -14,15 +14,14 @@ var APP = React.createClass({
     render: function() {
         return (
             <Template>
-                <Locations hash>
-                    <Location path="/" handler={Dashboard} />
+                <Locations hash path={this.props.url}>
                     <Location path="/topic/:topicId" handler={Topic} />
                     <Location path="/story" handler={Story} />
+                    <Location path="/(*)" handler={Dashboard} />
                 </Locations>
-            </Template>
-        );
+            </Template>);
     }
 
 });
 
-React.render(<APP />, document.body);
+module.exports = APP;

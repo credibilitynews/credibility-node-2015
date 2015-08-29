@@ -13,23 +13,24 @@ var TopicStats = React.createClass({
         return (
             <div className="topic-stats">
                 <div className="content">
-                    <div className="col-xs-6">
+                    <div className="col-xs-12">
                         <h4><a href={"#/topic/"+topic.id}>{topic.title}</a></h4>
                         <HashTag tag={topic.hashtag}/>
-                        <div>
-                            <span><ArticlesNum articles={topic.meta.articles}/></span>
-                            <span><ViewsNum views={topic.meta.views}/></span>
+                        <div className="row">
+                            <div className="col-xs-2"><ArticlesNum articles={topic.meta.articles}/></div>
+                            <div className="col-xs-2 "><ViewsNum views={topic.meta.views}/></div>
+                            <div className="left col-xs-2 col-xs-offset-2">
+                                <TopicColStats title={topic.stories.left.title} meta={topic.stories.left.meta}/>
+                            </div>
+                            <div className="fact col-xs-2">
+                                <TopicColStats title={topic.stories.fact.title} meta={topic.stories.fact.meta}/>
+                            </div>
+                            <div className="right col-xs-2">
+                                <TopicColStats title={topic.stories.right.title} meta={topic.stories.right.meta}/>
+                            </div>
                         </div>
                     </div>
-                    <div className="left col-xs-2">
-                        <TopicColStats title={topic.stories.left.title} meta={topic.stories.left.meta}/>
-                    </div>
-                    <div className="fact col-xs-2">
-                        <TopicColStats title={topic.stories.fact.title} meta={topic.stories.fact.meta}/>
-                    </div>
-                    <div className="right col-xs-2">
-                        <TopicColStats title={topic.stories.right.title} meta={topic.stories.right.meta}/>
-                    </div>
+
                 </div>
             </div>
         );

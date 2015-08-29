@@ -27,7 +27,7 @@ function build(watch, watchCallback){
     function rebundle(){
         return b.bundle()
             .pipe(source('main.js'))
-            .pipe(gulp.dest('dist/js'));
+            .pipe(gulp.dest('../backend/public/js'));
     }
 
     b.on('update', function(path){
@@ -55,12 +55,12 @@ gulp.task('less', function(){
             .pipe(less())
             .pipe(sourcemaps.write())
             .pipe(concat('main.css'))
-            .pipe(gulp.dest('dist/css'));
+            .pipe(gulp.dest('../backend/public/css'));
 });
 
 gulp.task('copy', function() {
     gulp.src('src/index.html')
-      .pipe(gulp.dest('dist'));
+      .pipe(gulp.dest('../backend/public'));
 });
 
 gulp.task('default',['browserify', 'copy']);
