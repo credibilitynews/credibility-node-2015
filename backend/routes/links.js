@@ -38,32 +38,30 @@ module.exports = [
         }
     },
     {
-        route: "latestLinks['title', 'url','created_at','views','user_id','topic_id','type']",
-        call: function(callPath, args) {
+        route: "latestLinks[{integers:n}]['id']",
+        get: function(pathSet, args) {
+            console.log(pathSet.n.slice(-1)[0], pathSet.n[0]);
             var userId = this.userId;
-            var limit = args[1];
-            var offset = args[0];
+            console.log(pathSet.n)
+            var limit = pathSet.n.slice(-1)[0] - pathSet.n[0] + 1;
+            var offset = pathSet.n[0];
 
             return linkService
                 .getLatestLinks(offset, limit)
                 .then(function(links) {
-                    var results = [];
-                    Object.keys(links).forEach(function(linkId) {
-                        var linkRecord = links[linkId];
-                        callPath[1].forEach(function(key) {
-                            var value = linkRecord[key];
-                            switch(key){
-                                case "type": value = $ref(['typesById', value]); break;
-                                case "user_id": value = $ref(['usersById', value]); break;
-                                case "topic_id": value = $ref(['topicsById', value]); break;
-                                default: value = linkRecord[key]; break;
-                            }
-                            results.push({
-                                path: ['latestLinks', linkId, key],
-                                value: value
-                            });
-                        });
 
+                    var results = [];
+                    var linkIds = Object.keys(links);
+                    pathSet.n.forEach(function(n, index) {
+
+                        var id = linkIds[index];
+                        var linkRecord = links[id];
+                        var value = !linkRecord ? null : $ref(['linksById', linkRecord.id]);
+
+                        results.push({
+                            path: ['latestLinks', n, 'id'],
+                            value: value
+                        });
                     });
                     return results;
                 }).catch(function(why){console.log(why)});

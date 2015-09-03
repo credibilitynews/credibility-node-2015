@@ -11,7 +11,7 @@ var request = function(){
 var LinkActions = {
     fetchLinks: function(){
         model
-        .get("linksById[1,2,3]['title', 'url', 'created_at', 'views', 'user_id', 'topic_id', 'type']")
+        .get(["linksById",[1,2,3], ['title', 'url', 'created_at', 'views', 'user_id', 'topic_id', 'type']])
         .then(function(response) {
             console.log(response.json);
             document.write('response: '+response.json);
@@ -19,7 +19,7 @@ var LinkActions = {
     },
     fetchLatestLinks: function(){
         model
-        .call("latestLinks['title', 'url', 'created_at', 'views', 'user_id', 'topic_id', 'type']", [0, 5])
+        .get(["latestLinks", {from: 0, to: 10}, ['id']])
         .then(function(response) {
             console.log(response.json);
             document.write('response: '+response.json);
