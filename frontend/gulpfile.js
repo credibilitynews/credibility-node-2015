@@ -6,7 +6,6 @@ var concat = require('gulp-concat');
 var babelify = require('babelify');
 var uglify = require('gulp-uglify');
 var less = require('gulp-less');
-var es6ify = require('es6ify');
 var sourcemaps = require('gulp-sourcemaps');
 var watchify = require('watchify');
 var gutil = require('gulp-util');
