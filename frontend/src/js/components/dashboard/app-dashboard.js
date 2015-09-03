@@ -1,7 +1,7 @@
 
 var React = require('react'),
 	Router = require('react-router-component'),
-	Locations = Router.Locations;
+	Locations = Router.Locations,
 	Location = Router.Location,
 	NotFound = Router.NotFound;
 
