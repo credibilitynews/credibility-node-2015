@@ -25,10 +25,10 @@ app.get('/*', function(req, res){
 
 app.set('views', __dirname + '/views');
 
-var server = app.listen(8000, function(err){
+var server = app.listen(process.env.PORT || 5000, function(err){
     if(err){
         console.error(err);
         return;
     }
-    console.log("navigate to http://localhost:8000");
+    console.log("navigate to http://localhost:"+(process.env.PORT || 5000));
 });
