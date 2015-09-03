@@ -10,6 +10,7 @@ var es6ify = require('es6ify');
 var sourcemaps = require('gulp-sourcemaps');
 var watchify = require('watchify');
 var gutil = require('gulp-util');
+var bower = require('gulp-bower');
 
 function build(watch, watchCallback){
     var b = browserify({
@@ -58,13 +59,13 @@ gulp.task('less', function(){
             .pipe(gulp.dest('../backend/public/css'));
 });
 
-gulp.task('copy', function() {
-    gulp.src('src/index.html')
-      .pipe(gulp.dest('../backend/public'));
-});
-
-gulp.task('default',['browserify', 'copy']);
-
 gulp.task('watch-less', function() {
     gulp.watch('src/**/*.less', ['less']);
 });
+
+gulp.task('bower', function() {
+  return bower()
+    .pipe(gulp.dest('../backend/public/bower_components'))
+});
+
+gulp.task('default',['browserify', 'less', 'bower']);
