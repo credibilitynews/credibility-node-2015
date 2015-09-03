@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 var React = require('react');
 var TopicLink = require('./app-topic-link');
 

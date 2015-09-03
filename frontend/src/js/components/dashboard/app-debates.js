@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 var React = require('react'),
     TopicLink = require('../topic/app-topic-link'),
     TopicStats = require('../stats/app-topic-stats'),

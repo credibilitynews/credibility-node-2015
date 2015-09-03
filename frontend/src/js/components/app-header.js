@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 var React = require('react');
 var TopMenu = require('./menu/app-top-menu');
 var UserMenu = require('./menu/app-user-menu');

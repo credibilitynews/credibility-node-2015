@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 var React = require('react'),
 	Link = require('react-router-component').Link,
 	LinkActions = require('../../actions/link-actions');

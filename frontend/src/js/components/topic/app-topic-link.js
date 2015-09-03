@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 var React = require('react'),
 	Tag = require('../tag/app-hashtag'),
 	Score = require('../stats/app-score'),

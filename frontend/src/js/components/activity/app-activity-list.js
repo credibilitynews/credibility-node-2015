@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 var React = require('react'),
     Activity = require('./app-activity');
 

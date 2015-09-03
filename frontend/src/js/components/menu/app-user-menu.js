@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 var React = require('react');
 
 var UserMenu = React.createClass({

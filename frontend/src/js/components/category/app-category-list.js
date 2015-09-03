@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 var React = require('react'),
     CategoryLink = require('./app-category-link'),
     TagActions = require('../../actions/tag-actions');

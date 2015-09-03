@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 var React = require('react'),
     TopicColStats = require('./app-topic-col-stats'),
     ArticlesNum = require('../stats/app-articles-num'),

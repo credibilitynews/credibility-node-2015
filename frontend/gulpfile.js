@@ -3,7 +3,7 @@ var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var concat = require('gulp-concat');
-var reactify = require('reactify');
+var babelify = require('babelify');
 var uglify = require('gulp-uglify');
 var less = require('gulp-less');
 var es6ify = require('es6ify');
@@ -20,7 +20,7 @@ function build(watch, watchCallback){
         fullPaths: true
     });
 
-    b.transform(reactify);
+    b.transform(babelify);
 
     b = watch ? watchify(b) : b;
     b.add('./src/js/main.js');

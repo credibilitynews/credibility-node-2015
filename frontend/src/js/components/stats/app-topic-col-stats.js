@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 var React = require('react'),
     ArticlesNum = require('../stats/app-articles-num'),
     ViewsNum = require('../stats/app-views-num');

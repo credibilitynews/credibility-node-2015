@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 var React = require('react');
 var ViewsNum = require('../stats/app-views-num');
 

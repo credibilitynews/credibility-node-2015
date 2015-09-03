@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+
 var React = require('react/addons');
 var Hashtag = require('../tag/app-hashtag');
 var StoryList = require('../story/app-story-list');
