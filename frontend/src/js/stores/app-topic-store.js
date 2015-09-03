@@ -1,7 +1,7 @@
 var AppDispatcher = require('../dispatchers/app-dispatcher'),
     ActionTypes = require('../constants/app-constants').ActionTypes;
 
-var merge = require('Object.assign'),
+var merge = require('object.assign'),
     EventEmitter = require('events').EventEmitter,
     Immutable = require('immutable');
 

@@ -2,7 +2,7 @@
 var React = require('react'),
     TopicLink = require('../topic/app-topic-link'),
     TopicStats = require('../stats/app-topic-stats'),
-    merge = require('Object.assign');
+    merge = require('object.assign');
 
 var Debates = React.createClass({
     getDefaultProps: function() {

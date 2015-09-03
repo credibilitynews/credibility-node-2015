@@ -1,5 +1,5 @@
 var Dispatcher = require("./dispatcher"),
-    merge = require("Object.assign");
+    merge = require("object.assign");
 
 var PayloadSources = require('../constants/app-constants').PayloadSources;
 

@@ -1,5 +1,5 @@
 var Promise = require('es6-promise').Promise;
-var merge = require('Object.assign');
+var merge = require('object.assign');
 
 var _callbacks = [];
 var _promises = [];
