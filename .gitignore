@@ -19,3 +19,5 @@ test/the-files-to-test.generated.js
 *.log*
 chrome-user-data
 public
+frontend/vendor/bower_components
+frontend/.sass-cache

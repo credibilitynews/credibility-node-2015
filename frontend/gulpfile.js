@@ -1,70 +1,28 @@
-var gulp = require('gulp');
-var browserify = require('browserify');
-var source = require('vinyl-source-stream');
-var buffer = require('vinyl-buffer');
-var concat = require('gulp-concat');
-var babelify = require('babelify');
-var uglify = require('gulp-uglify');
-var less = require('gulp-less');
-var sourcemaps = require('gulp-sourcemaps');
-var watchify = require('watchify');
-var gutil = require('gulp-util');
-var bower = require('gulp-bower');
+var args = require('yargs').argv,
+    gulp = require('gulp'),
+    $ = require('gulp-load-plugins')(),
+    opts = {args: args},
+    config = {
+        host: 'localhost:3000',
+        rootDir: __dirname,
 
-function build(watch, watchCallback){
-    var b = browserify({
-        debug: true,
-        cache: {},
-        packageCache: {},
-        fullPaths: true
-    });
+        jsDir: './src/js',
+        sassDir: './src/sass',
 
-    b.transform(babelify);
+        vendorDir: './vendor',
+        distDir: '../backend/public',
 
-    b = watch ? watchify(b) : b;
-    b.add('./src/js/main.js');
+        noStackTrace: true
+    };
 
-    function rebundle(){
-        return b.bundle()
-            .pipe(source('main.js'))
-            .pipe(gulp.dest('../backend/public/js'));
-    }
+opts['config'] = config;
 
-    b.on('update', function(path){
-        gutil.log("Starting rebundle() on changes: "+path);
-        return rebundle();
-    });
-    b.on('time', function(time){
-        gutil.log("Finished rebundle() after "+time+" ms");
-        if(watchCallback) watchCallback();
-    });
-    return rebundle();
-}
+require('./gulp/browserify')(gulp, opts, $);
+require('./gulp/bower-copy')(gulp, opts, $);
+require('./gulp/sass')(gulp, opts, $);
+require('./gulp/jest')(gulp, opts, $);
 
-gulp.task('browserify', function(){
-    return build(false);
-});
-
-gulp.task('watch', ['browserify'], function(){
-    return build(true);
-});
-
-gulp.task('less', function(){
-    return gulp.src('src/less/main.less')
-            .pipe(sourcemaps.init())
-            .pipe(less())
-            .pipe(sourcemaps.write())
-            .pipe(concat('main.css'))
-            .pipe(gulp.dest('../backend/public/css'));
-});
-
-gulp.task('watch-less', function() {
-    gulp.watch('src/**/*.less', ['less']);
-});
-
-gulp.task('bower', function() {
-  return bower()
-    .pipe(gulp.dest('../backend/public/bower_components'))
-});
-
-gulp.task('default',['browserify', 'less', 'bower']);
+gulp.task('default',['sass', 'browserify']);
+gulp.task('watch', ['watch-browserify', 'watch-sass']);
+gulp.task('test', ['jest']);
+gulp.task('test-one', ['watch-jest']);

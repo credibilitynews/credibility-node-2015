@@ -14,8 +14,7 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "~3.3.5",
-    "jquery": "~2.1.4",
+    "bootstrap": "twbs/bootstrap#v4-dev",
     "font-awesome": "~4.4.0"
   }
 }
