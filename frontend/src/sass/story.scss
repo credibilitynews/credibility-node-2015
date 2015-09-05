@@ -1,8 +1,10 @@
 
-@mixin panel{
+.panel{
     padding: 10px;
 }
-@mixin panel-body{
+
+.panel-body{
+    margin: 10px;
 }
 
 .story-list{
@@ -27,17 +29,17 @@
         padding: 15px;
     }
     &.fact{
-        @include panel;
+        @extend .panel;
         //@include fact-colored-panel;
         div{
-            @include panel-body;
+            @extend .panel-body;
         }
     }
     &.right{
-        @include panel;
+        @extend .panel;
         //@include right-colored-panel;
         div{
-            @include panel-body;
+            @extend .panel-body;
         }
     }
 }

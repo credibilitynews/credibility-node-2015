@@ -18,7 +18,7 @@ var TopMenu = React.createClass({
 		return (
 			<div className="top-menu row">
 				<ul className="nav nav-pills">
-					<li style={{padding: "10px 0px 10px 15px"}}>Trending now: </li>
+					<li className="nav-item">Trending now: </li>
 					{this._wrap(this.props.items)}
 				</ul>
 			</div>)
@@ -26,7 +26,7 @@ var TopMenu = React.createClass({
 	_wrap: function(items){
 		return items.map(function(item){
 			return (
-				<li key={item.label}>
+				<li key={item.label} className="nav-item">
 					<Link href={item.path}>{item.label}</Link>
 				</li>);
 		})

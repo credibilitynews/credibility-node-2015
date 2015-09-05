@@ -8,7 +8,7 @@ var Template = React.createClass({
 		return (
 			<div >
 			    <Header />
-				<div className="container-fluid">
+				<div className="container">
 					{this.props.children}
 				</div>
 			    <Footer />
