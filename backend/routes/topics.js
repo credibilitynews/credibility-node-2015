@@ -36,30 +36,28 @@ module.exports = [
         }
     },
     {
-        route: "latestTopics['title', 'hashtag', 'created_at', 'views', 'user_id']",
-        call: function(callPath, args) {
+        route: "latestTopics[{integers:n}]['id']",
+        get: function(pathSet, args) {
             var userId = this.userId;
-            var limit = args[1];
-            var offset = args[0];
+            var limit = pathSet.n.slice(-1)[0] - pathSet.n[0] + 1;
+            var offset = pathSet.n[0];
 
             return topicService
                 .getLatestTopics(offset, limit)
                 .then(function(topics) {
-                    var results = [];
-                    Object.keys(topics).forEach(function(topicId) {
-                        var topicRecord = topics[topicId];
-                        callPath[1].forEach(function(key) {
-                            var value = topicRecord[key];
-                            switch(key){
-                                case "user_id": value = $ref(['usersById', value]); break;
-                                default: value = topicRecord[key]; break;
-                            }
-                            results.push({
-                                path: ['latestTopics', topicId, key],
-                                value: value
-                            });
-                        });
 
+                    var results = [];
+                    var topicIds = Object.keys(topics);
+                    pathSet.n.forEach(function(n, index) {
+
+                        var id = topicIds[index];
+                        var topicRecord = topics[id];
+                        var value = !topicRecord ? null : $ref(['topicsById', topicRecord.id]);
+
+                        results.push({
+                            path: ['latestTopics', n, 'id'],
+                            value: value
+                        });
                     });
                     return results;
                 }).catch(function(why){console.log(why)});

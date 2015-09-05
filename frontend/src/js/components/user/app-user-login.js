@@ -5,6 +5,7 @@ var React = require('react'),
 	Location = Router.Location,
 	NotFound = Router.NotFound,
     UserStore = require('../../stores/app-user-store'),
+	UserActions = require('../../actions/user-actions'),
     AppServerAction = require('../../actions/app-server-actions');
 
 var LoginForm = React.createClass({

@@ -8,18 +8,18 @@ var ActionTypes = require('../constants/app-constants').ActionTypes,
 var request = function(){
     return require('superagent');
 };
-var TopicActions = {
-    fetchTopics: function(){
+var UserActions = {
+    fetchUsers: function(){
         model
-        .get(['topicsById', {from: 1, to: 3}, ['title', 'hashtag', 'created_at', 'views', 'user_id']])
+        .get(['usersById', {from: 1, to: 3}, ['name', 'email', 'active']])
         .then(function(response) {
             console.log(response.json);
             document.write('response: '+response.json);
         }).catch(function(why){console.log(why)});
     },
-    fetchLatestTopics: function(){
+    fetchLatestUsers: function(){
         model
-        .get(["latestTopics", {from:0, to:10}, ['id']])
+        .get(["latestUsers", {from:0, to:10}, ['id']])
         .then(function(response) {
             console.log(response.json);
             document.write('response: '+response.json);
@@ -27,5 +27,5 @@ var TopicActions = {
     }
 };
 
-if(typeof window !== "undefined") window.TopicActions = TopicActions;
-module.exports = TopicActions;
+if(typeof window !== "undefined") window.UserActions = UserActions;
+module.exports = UserActions;

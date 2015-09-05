@@ -2,32 +2,30 @@ var jsonGraph = require('falcor-json-graph');
 var $ref = jsonGraph.ref;
 var $error = jsonGraph.error;
 
-var linkService = require('../services/link-service');
+var userService = require('../services/user-service');
 
 module.exports = [
     {
-        route: "linksById[{integers:linkIds}]['title', 'url', 'created_at', 'views', 'user_id', 'topic_id', 'type']",
+        route: "usersById[{integers:userIds}]['title', 'hashtag', 'created_at', 'views', 'user_id']",
         get: function(pathSet) {
             var userId = this.userId;
 
-            return linkService
-                .getLinks(pathSet.linkIds)
-                .then(function(links) {
+            return userService
+                .getUsers(pathSet.userIds)
+                .then(function(users) {
                     var results = [];
                     //console.log('pathSet', pathSet);
-                    pathSet.linkIds.forEach(function(linkId) {
-                        var linkRecord = links[linkId];
+                    pathSet.userIds.forEach(function(userId) {
+                        var userRecord = users[userId];
                         pathSet[2].forEach(function(key) {
-                            var value = linkRecord ? linkRecord[key] : undefined;
+                            var value = userRecord ? userRecord[key] : undefined;
 
                             switch(key){
-                                case "type": value = value ? $ref(['typesById', value]) : value; break;
                                 case "user_id": value = value ? $ref(['usersById', value]) : value; break;
-                                case "topic_id": value = value ? $ref(['topicsById', value]) : value; break;
                                 default: value = value; break;
                             }
                             results.push({
-                                path: ['linksById', linkId, key],
+                                path: ['usersById', userId, key],
                                 value: value
                             });
                         });
@@ -38,26 +36,26 @@ module.exports = [
         }
     },
     {
-        route: "latestLinks[{integers:n}]['id']",
+        route: "latestUsers[{integers:n}]['id']",
         get: function(pathSet, args) {
             var userId = this.userId;
             var limit = pathSet.n.slice(-1)[0] - pathSet.n[0] + 1;
             var offset = pathSet.n[0];
 
-            return linkService
-                .getLatestLinks(offset, limit)
-                .then(function(links) {
+            return userService
+                .getLatestUsers(offset, limit)
+                .then(function(users) {
 
                     var results = [];
-                    var linkIds = Object.keys(links);
+                    var userIds = Object.keys(users);
                     pathSet.n.forEach(function(n, index) {
 
-                        var id = linkIds[index];
-                        var linkRecord = links[id];
-                        var value = !linkRecord ? null : $ref(['linksById', linkRecord.id]);
+                        var id = userIds[index];
+                        var userRecord = users[id];
+                        var value = !userRecord ? null : $ref(['usersById', userRecord.id]);
 
                         results.push({
-                            path: ['latestLinks', n, 'id'],
+                            path: ['latestUsers', n, 'id'],
                             value: value
                         });
                     });
@@ -65,4 +63,4 @@ module.exports = [
                 }).catch(function(why){console.log(why)});
         }
     }
-]
+];
