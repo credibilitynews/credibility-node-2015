@@ -1,6 +1,10 @@
-$enable-flex: true;
-$icon-font-path: "/bootstrap/fonts/";
-@import "bootstrap";
+
+@import "bootstrap/bootstrap";
+
+// @import "lumen/variables";
+// @import "lumen/bootswatch";
+
+$icon-font-path: "/bower_components/bootstrap/dist/fonts/";
 
 @import "mixins";
 @import "story";
