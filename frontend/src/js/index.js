@@ -1,6 +1,4 @@
-
 var React = require('react'),
-    APP = require('./app');
+    APP = require('./components/app');
 
-React.render(<APP />, document.body);
-
+React.render(<APP />, document.querySelector('#credibility'));

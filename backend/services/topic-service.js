@@ -16,7 +16,6 @@ TopicService.prototype = {
                 console.log(q);
                 client.query(q, function(err, result) {
                     if(err) return reject(err);
-                    //console.log(err, result)
                     var topics = result.rows.reduce(function(reduced, item){
                         reduced[item.id] = item;
                         return reduced;

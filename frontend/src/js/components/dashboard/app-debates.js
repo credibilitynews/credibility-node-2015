@@ -11,7 +11,7 @@ var Debates = React.createClass({
         };
     },
     render: function() {
-        console.log("debates", this.props);
+        //console.log("debates", this.props);
         return (
             <div>
                 <h3>Ongoing Debates</h3>

@@ -6,24 +6,26 @@ var topicService = require('../services/topic-service');
 
 module.exports = [
     {
-        route: "topicsById[{integers:topicIds}]['title', 'hashtag', 'created_at', 'views', 'user_id']",
+        route: "topicsById[{integers:topicIds}]['id','title','hashtag','created_at','views','user_id']",
         get: function(pathSet) {
             var userId = this.userId;
+            console.log('topicsById/pathSet', pathSet);
 
             return topicService
                 .getTopics(pathSet.topicIds)
                 .then(function(topics) {
                     var results = [];
-                    //console.log('pathSet', pathSet);
+                    //console.log('topicsById/then', topics);
                     pathSet.topicIds.forEach(function(topicId) {
-                        var topicRecord = topics[topicId];
+                        var topicRecord = topics[topicId] || {};
+                        //console.log('topicsById/pathSet[2]', pathSet[2]);
                         pathSet[2].forEach(function(key) {
-                            var value = topicRecord ? topicRecord[key] : undefined;
-
-                            switch(key){
-                                case "user_id": value = value ? $ref(['usersById', value]) : value; break;
-                                default: value = value; break;
-                            }
+                            var value = topicRecord[key];
+                            if(value === null) value = undefined;
+                            if(typeof value === "object"){
+                                value = value.toString();
+                                //throw new Error('Invalid value of '+key)
+                            };
                             results.push({
                                 path: ['topicsById', topicId, key],
                                 value: value
@@ -31,6 +33,7 @@ module.exports = [
                         });
 
                     });
+                    //console.log('results', results);
                     return results;
                 }).catch(function(why){console.log(why)});
         }

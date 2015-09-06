@@ -10,21 +10,10 @@ var request = function(){
 };
 var TagActions = {
     fetchAllTags: function(){
-        var fetchAll = function(max){
-            model
-            .get("tags[0.."+max+"]['id']")
-            .then(function(response) {
-                console.log(response.json);
-                document.write('response: '+response.json);
-            }).catch(function(why){console.log(why)});
-        };
         model
         .get("tags.length")
         .then(function(response) {
             console.log(response.json);
-            document.write('response: '+response.json);
-            var max = parseInt(response.json.tags.length) -1;
-            fetchAll(max);
         }).catch(function(why){console.log(why)});
     },
     fetchTagsById: function(tagIds){
@@ -32,7 +21,7 @@ var TagActions = {
         .get(["tagsById", tagIds, ["name", "code", "parent_id"]])
         .then(function(response) {
             console.log(response.json);
-            document.write('response: '+response.json);
+
         }).catch(function(why){console.log(why)});
     }
 };

@@ -14,6 +14,7 @@ var CredRouterBase = Router.createClass(
     .concat(require('./routes/links'))
     .concat(require('./routes/topics'))
     .concat(require('./routes/tags'))
+    .concat(require('./routes/users'))
 );
 
 var CredRouter = function(userId) {

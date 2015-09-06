@@ -1,46 +1,67 @@
 
 var React = require('react');
 var ViewsNum = require('../stats/app-views-num');
+var TopicActions = require('actions/topic-actions'),
+    UserActions = require('actions/user-actions');
+var TopicStore = require('stores/app-topic-store'),
+    UserStore = require('stores/app-user-store');
 
 var Activity = React.createClass({
-    getDefaultProps: function(){
+    getInitialState: function(){
         return {
-            actor: "[Subject]",
-            action: "[verb]",
-            model: "story",
-            story: {
-                title: "[Story title]",
-                hashtag: "[#hashtag]",
-                meta: {views: 0},
-                topic: {
-                    title: "[Topic title]",
-                    link: "/#story"
-                },
-            }
+            topic: {},
+            author: {},
+            user: {},
         }
     },
+    componentWillMount: function(){
+        UserStore.addChangeListener(this._handleUserStoreChange);
+        TopicStore.addChangeListener(this._handleTopicStoreChange);
+    },
+    componentWillUnmount: function(){
+        UserStore.removeChangeListener(this._handleUserStoreChange);
+        TopicStore.removeChangeListener(this._handleTopicStoreChange);
+    },
+    componentDidMount: function(){
+        if(this.props.article.topic_id)
+            TopicActions.fetchTopicsById(this.props.article.topic_id);
 
+        if(this.props.article.user_id)
+            UserActions.fetchUsersById(this.props.article.user_id);
+
+    },
     render: function(){
-        console.log('activity',this.props);
+
         return (
             <div className="activity">
                 <div>
-                    On <a href={"#/topic/"+this.props[this.props.model].topic.id}>
-                        <strong>{this.props[this.props.model].topic.title}</strong>
+                    On <a href={"/topic/"+this.props.article.topic_id}>
+                        <strong>{this.state.topic.title}</strong>
                         </a>,
-                    <span className="label label-primary model">{this.props.model}</span>
+                    <span className="label label-primary model">Article</span>
                 </div>
                 <blockquote>
-                    <a href={"/#/link/"+this.props[this.props.model].id}>
-                        {this.props[this.props.model].title}
-                    </a>
-                    <small>author, {this.props[this.props.model].domain_name}</small>
+                    <div>
+                        <a href={"/link/"+this.props.article.id}>
+                            {this.props.article.title}
+                        </a>
+                    </div>
+                    <small>- {this.state.author.name}, {this.props.article.domain_name}</small>
                 </blockquote>
                 <small className="meta">
-                    {this.props.action} by <i>{this.props.actor}</i>
+                    added by <i>{this.state.user.name}</i>
                 </small>
             </div>
         );
+    },
+    _handleUserStoreChange: function(){
+        var user = UserStore.getUser(this.props.article.user_id);
+        if(user) this.setState({user: user});
+    },
+    _handleTopicStoreChange: function(){
+        var topic = TopicStore.getTopic(this.props.article.topic_id);
+        //console.log(topic);
+        if(topic) this.setState({topic: topic})
     }
 });
 

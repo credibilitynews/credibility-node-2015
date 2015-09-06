@@ -1,38 +1,50 @@
 
 var React = require('react'),
-    Activity = require('./app-activity');
+    Activity = require('components/activity/app-activity'),
+
+    LinkActions = require('actions/link-actions'),
+    LatestActicleStore = require('stores/app-latest-article-store');
 
 var ActivityList = React.createClass({
-    getDefaultProps: function() {
+    getInitialState: function() {
         return {
-            articles: []
+            articles: LatestActicleStore.getAllArticles()
         };
     },
+    componentWillMount: function(){
+        LatestActicleStore.addChangeListener(this._handleStoreChange);
+    },
+    componentWillUnMount: function(){
+        LatestActicleStore.removeChangeListener(this._handleStoreChange);
+    },
+    componentDidMount: function(){
+        LinkActions.fetchLatestLinks();
+    },
     render: function() {
-        console.log('activity-list', this.props);
+        //console.log('activity-list', this.state);
         return (
             <div className="activity-list row">
                 <div className="col-xs-12">
                     <h3>Latest Updates</h3>
                 </div>
                 <div className="col-xs-12">
-                    {this._wrap(this.props.articles)}
+                    {this._wrap(this.state.articles)}
                 </div>
-
             </div>);
     },
 
     _wrap: function(items){
-        return items.slice(0,5).map(function(item){
+        return items.map(function(item, index){
             return (
-                <div key={item.id} className="activity-list-item">
+                <div key={index} className="activity-list-item">
                     <div className="content">
-                    <Activity actor={item.meta.user.name}
-                        action="added" model="article" views={item.meta.views} created_at={item.meta.created_time_ago}
-                        article={item}/>
+                        <Activity key={item.id} article={item}/>
                     </div>
                 </div>)
-        }.bind(this))
+        });
+    },
+    _handleStoreChange: function(){
+        this.setState(this.getInitialState());
     }
 });
 

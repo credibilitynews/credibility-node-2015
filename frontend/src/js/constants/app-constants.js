@@ -6,9 +6,10 @@ module.exports = {
         VIEW_ACTION: null
     }),
     ActionTypes: keyMirror({
-        RECEIVE_LAYOUT: null,
-        RECEIVE_TOPIC: null,
-        ADD_TOPIC: null,
-        LOGIN: null
+        FETCH_LATEST_LINKS: null,
+
+        FETCH_TOPICS_BY_ID: null,
+
+        FETCH_USERS_BY_ID: null 
     })
 }

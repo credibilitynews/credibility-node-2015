@@ -5,20 +5,17 @@ var React = require('react'),
 	Location = Router.Location,
 	NotFound = Router.NotFound;
 
-var About = require('./app-about.js'),
-	Updates = require('../activity/app-activity-list'),
-	Debates = require('./app-debates'),
-	Stats = require('./app-stats'),
-	SearchBar = require('../search/app-search-bar'),
-	CategoryList = require('../category/app-category-list'),
-	TopMenu = require('../menu/app-top-menu'),
-	UserLogin = require('../user/app-user-login');
+var About = require('components/dashboard/app-about.js'),
+	ActivityList = require('components/activity/app-activity-list'),
+	Debates = require('components/dashboard/app-debates'),
+	Stats = require('components/dashboard/app-stats'),
+	SearchBar = require('components/search/app-search-bar'),
+	CategoryList = require('components/category/app-category-list'),
+	TopMenu = require('components/menu/app-top-menu');
 
-var ServerActions = require('../../actions/app-server-actions');
-
-var	TopicStore = require('../../stores/app-topic-store'),
-	CategoryStore = require('../../stores/app-category-store'),
-	LatestArticleStore = require('../../stores/app-latest-article-store');
+var	TopicStore = require('stores/app-topic-store'),
+	CategoryStore = require('stores/app-category-store'),
+	LatestArticleStore = require('stores/app-latest-article-store');
 
 function getStatesFromStore(){
 	var state = {
@@ -26,7 +23,6 @@ function getStatesFromStore(){
 		categories: CategoryStore.getAllCategories(),
 		latest_articles: LatestArticleStore.getAllArticles()
 	}
-	console.log('dashboard', state);
 	return state;
 }
 
@@ -34,37 +30,24 @@ var Dashboard = React.createClass({
 	getInitialState: function() {
 		return getStatesFromStore();
 	},
-	componentWillMount: function() {
-		//TopicStore.addChangeListener(this._onChange);
-		//CategoryStore.addChangeListener(this._onChange);
-		LatestArticleStore.addChangeListener(this._onChange);
-	},
-	componentWillUnMount: function() {
-		LatestArticleStore.removeChangeListener(this._onChange);
-	},
-	componentDidMount: function() {
-		ServerActions.fetchLayout();
-	},
  	render: function(){
 		return (
 			<div className="row">
-				<div className="col-sm-9 col-xs-12">
+				<div className="col-sm-12 col-md-9">
 					<TopMenu />
 					<SearchBar />
 					<div className="row">
-						<div className="col-md-8">
-							<Updates articles={this.state.latest_articles}/>
+						<div className="col-sm-8">
+							<ActivityList />
 						</div>
-						<div className="col-md-4">
-							<Debates topics={this.state.topics}/>
+						<div className="col-sm-4">
+							<Debates />
 						</div>
 					</div>
-
 				</div>
-				<div className="col-sm-3 hidden-xs right-sidebar">
-					<UserLogin/>
+				<div className="col-sm-12 hidden-sm-up right-sidebar">
 					<About />
-					<CategoryList categories={this.state.categories}/>
+					<CategoryList />
 					<Stats />
 				</div>
 			</div>

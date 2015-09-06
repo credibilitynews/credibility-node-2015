@@ -7,10 +7,10 @@ var Header = React.createClass({
 	render: function(){
 		return (
 			<nav className="header navbar navbar-light navbar-fixed-top bg-faded" role="navigation">
-				<div class="collapse navbar-toggleable-xs" id="CollapsingNavbar">
-					<a className="navbar-logo">
+				<div className="collapse navbar-toggleable-xs" id="CollapsingNavbar">
+					{/*<a className="navbar-logo">
 					<span className="col-logo"><span className="logo">C</span></span>
-					</a>
+					</a>*/}
 					<a className="navbar-brand" href="#/">
 						<span className="col-brand">
 						Credibility.io&nbsp;
@@ -18,9 +18,9 @@ var Header = React.createClass({
 						</span>
 					</a>
 
-					<div className="collapse navbar-collapse" id="navbar-collapse">
+					{/*<div className="collapse navbar-collapse" id="navbar-collapse">
 						<UserMenu />
-					</div>
+					</div>*/}
 				</div>
 			</nav>
 		)

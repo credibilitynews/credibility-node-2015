@@ -21,9 +21,9 @@ module.exports = [
                             var value = linkRecord ? linkRecord[key] : undefined;
 
                             switch(key){
-                                case "type": value = value ? $ref(['typesById', value]) : value; break;
-                                case "user_id": value = value ? $ref(['usersById', value]) : value; break;
-                                case "topic_id": value = value ? $ref(['topicsById', value]) : value; break;
+                                // case "type": value = value ? $ref(['typesById', value]) : value; break;
+                                // case "user_id": value = value ? $ref(['usersById', value]) : value; break;
+                                // case "topic_id": value = value ? $ref(['topicsById', value]) : value; break;
                                 default: value = value; break;
                             }
                             results.push({
@@ -38,8 +38,8 @@ module.exports = [
         }
     },
     {
-        route: "latestLinks[{integers:n}]['id']",
-        get: function(pathSet, args) {
+        route: "latestLinks[{integers:n}]['id', 'title', 'url', 'created_at', 'views', 'user_id', 'topic_id', 'type']",
+        get: function(pathSet) {
             var userId = this.userId;
             var limit = pathSet.n.slice(-1)[0] - pathSet.n[0] + 1;
             var offset = pathSet.n[0];
@@ -51,15 +51,18 @@ module.exports = [
                     var results = [];
                     var linkIds = Object.keys(links);
                     pathSet.n.forEach(function(n, index) {
-
                         var id = linkIds[index];
                         var linkRecord = links[id];
-                        var value = !linkRecord ? null : $ref(['linksById', linkRecord.id]);
 
-                        results.push({
-                            path: ['latestLinks', n, 'id'],
-                            value: value
+                        var fields = pathSet[2];
+                        fields.forEach(function(field){
+                            var value = linkRecord && linkRecord[field] ? linkRecord[field] : undefined;
+                            results.push({
+                                path: ['latestLinks', n, field],
+                                value: value
+                            });
                         });
+
                     });
                     return results;
                 }).catch(function(why){console.log(why)});

@@ -6,7 +6,7 @@ var React = require('react'),
 var CategoryList = React.createClass({
     getDefaultProps: function() {
         return {
-            categories: [1, 2, 3, 4, 5]
+            categories: []
         };
     },
     render: function() {
@@ -23,9 +23,9 @@ var CategoryList = React.createClass({
     },
     _wrap: function(categories, className){
         return categories
-        .map(function(item){
+        .map(function(item, index){
             return (
-                <span key={item.id} className={className}>
+                <span key={index} className={className}>
                     <CategoryLink category={item}/>
                     { (item.children ? <span>{this._wrap(item.children, "child")}</span> : "") }
                 </span>)

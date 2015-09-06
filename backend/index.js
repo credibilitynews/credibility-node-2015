@@ -5,12 +5,13 @@ var app = express();
 var FalcorServer = require('falcor-express');
 var RouterFactory = require('./router-factory');
 var React = require('react/addons');
-var APP = require('../frontend/src/js/app.js');
+var APP = require('../frontend/src/js/components/app.js');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('.', express.static('public'));
 
 app.use('/model.json', FalcorServer.dataSourceRoute(function(req, res){
+    //console.log('/model.json', req.query);
     return RouterFactory("1");
 }));
 

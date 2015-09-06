@@ -32,7 +32,7 @@ var Topic = React.createClass({
 	},
 	componentDidMount: function() {
 		if(!this.topic){
-			TopicStore.addChangeListener(this._onTopicChange);
+			//TopicStore.addChangeListener(this._onTopicChange);
 			ServerActions.fetchTopic(this.topicId);
 		}
 	},

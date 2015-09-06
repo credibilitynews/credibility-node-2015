@@ -32,7 +32,7 @@ LinkService.prototype = {
             var query = function(err, client, done) {
                 if(err) reject(err);
 
-                var q = 'SELECT id FROM links ORDER BY created_at DESC LIMIT '+limit+ ' OFFSET '+offset;
+                var q = 'SELECT * FROM links ORDER BY created_at DESC LIMIT '+limit+ ' OFFSET '+offset;
                 console.log(q);
                 client.query(q, function(err, result) {
                     if(err) return reject(err);

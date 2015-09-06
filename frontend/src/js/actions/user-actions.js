@@ -1,25 +1,32 @@
 var falcor = require('falcor'),
     HttpDataSource = require('falcor-http-datasource');
+
 var model = new falcor.Model({source: new HttpDataSource('/model.json') });
 
-var ActionTypes = require('../constants/app-constants').ActionTypes,
-    AppDispatcher = require('../dispatchers/app-dispatcher');
+var ActionTypes = require('constants/app-constants').ActionTypes,
+    AppDispatcher = require('dispatchers/app-dispatcher');
 
 var request = function(){
     return require('superagent');
 };
 var UserActions = {
-    fetchUsers: function(){
+    fetchUsersById: function(ids){
+        console.log('fetchUsersById', ids);
         model
-        .get(['usersById', {from: 1, to: 3}, ['name', 'email', 'active']])
+        .get(['usersById', ids, ['id', 'name', 'email', 'active', 'created_at']])
         .then(function(response) {
-            console.log(response.json);
-            document.write('response: '+response.json);
+
+            console.log('fetchUsersById/result', ids, response.json);
+
+            AppDispatcher.handleServerAction({
+                actionType: ActionTypes.FETCH_USERS_BY_ID,
+                users: response.json['usersById']
+            });
         }).catch(function(why){console.log(why)});
     },
     fetchLatestUsers: function(){
         model
-        .get(["latestUsers", {from:0, to:10}, ['id']])
+        .get(["latestUsers", {from:0, to:4}, ['id']])
         .then(function(response) {
             console.log(response.json);
             document.write('response: '+response.json);
