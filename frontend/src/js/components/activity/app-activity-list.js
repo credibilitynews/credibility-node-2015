@@ -13,12 +13,13 @@ var ActivityList = React.createClass({
     },
     componentWillMount: function(){
         LatestActicleStore.addChangeListener(this._handleStoreChange);
+        LinkActions.fetchLatestLinks();
     },
     componentWillUnMount: function(){
         LatestActicleStore.removeChangeListener(this._handleStoreChange);
     },
     componentDidMount: function(){
-        LinkActions.fetchLatestLinks();
+
     },
     render: function() {
         //console.log('activity-list', this.state);

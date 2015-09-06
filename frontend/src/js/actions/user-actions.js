@@ -1,7 +1,4 @@
-var falcor = require('falcor'),
-    HttpDataSource = require('falcor-http-datasource');
-
-var model = new falcor.Model({source: new HttpDataSource('/model.json') });
+var model = require('falcor-model');
 
 var ActionTypes = require('constants/app-constants').ActionTypes,
     AppDispatcher = require('dispatchers/app-dispatcher');

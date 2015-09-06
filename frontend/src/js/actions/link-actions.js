@@ -1,6 +1,4 @@
-var falcor = require('falcor'),
-    HttpDataSource = require('falcor-http-datasource');
-var model = new falcor.Model({source: new HttpDataSource('/model.json') });
+var model = require('falcor-model');
 
 var ActionTypes = require('../constants/app-constants').ActionTypes,
     AppDispatcher = require('../dispatchers/app-dispatcher');
@@ -22,8 +20,7 @@ var LinkActions = {
                 actionType: ActionTypes.FETCH_LATEST_LINKS,
                 links: links
             })
-        }
-
+        };
         model
         .get(["latestLinks", {from: 0, to: 4}, ['id', 'title', 'url', 'user_id', 'topic_id']])
         .then(function(response) {
