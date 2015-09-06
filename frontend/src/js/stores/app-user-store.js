@@ -1,6 +1,6 @@
 var Store = require('./app-store'),
     assign = require('object-assign'),
-    Immutable = require('Immutable'),
+    Immutable = require('immutable'),
 
     ActionTypes = require('constants/app-constants').ActionTypes,
     AppDispatcher = require('dispatchers/app-dispatcher');
