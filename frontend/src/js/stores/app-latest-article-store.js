@@ -1,46 +1,39 @@
 var AppDispatcher = require('../dispatchers/app-dispatcher'),
     ActionTypes = require('../constants/app-constants').ActionTypes;
 
-var merge = require('object.assign'),
-    EventEmitter = require('events').EventEmitter,
+var assign = require('object-assign'),
+    Store = require('stores/app-store'),
     Immutable = require('immutable');
 
 var CHANGE_EVENT = "articles-change";
 
-var _articles = Immutable.List();
+var _articles = Immutable.OrderedMap();
 
 function _addArticle(article){
-    _articles = _articles.push(article);
+    _articles = _articles.set(article.id, article);
 }
 
-function _addArticles(articles){
-    _articles = _articles.concat(articles);
-}
-
-var emitter = Object.create(EventEmitter.prototype);
-var ArticleStore = merge(emitter, {
-    emitChange: function(){
-        this.emit(CHANGE_EVENT);
-    },
-    addChangeListener: function(callback){
-        this.on(CHANGE_EVENT, callback);
-    },
-    removeChangeListener: function(callback){
-        this.removeListener(CHANGE_EVENT, callback);
+var ArticleStore = assign({}, Store, {
+    events: {
+        CHANGE_EVENT: "app-latest-article-store"
     },
     getAllArticles: function(){
-        return _articles;
+        return _articles.toArray();
     },
     dispatcherIndex: AppDispatcher.register(function(payload){
-        var layout = payload.action.layout,
-            action = payload.action;
+        var action = payload.action;
+
         switch(action.actionType){
-            case ActionTypes.RECEIVE_LAYOUT:
-                //console.log("store/latest-article-store", layout.latest_articles);
-                _addArticles(layout.latest_articles);
+            case ActionTypes.FETCH_LATEST_LINKS:
+                //console.log("store/latest-article-store", action);
+                Object.keys(action.links).forEach(function(n){
+                    var link = action.links[n];
+
+                    _addArticle(link);
+                });
+                ArticleStore.emitChange();
                 break;
         }
-        ArticleStore.emitChange();
         return true;
     })
 })

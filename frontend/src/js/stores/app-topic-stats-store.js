@@ -1,8 +1,8 @@
 var AppDispatcher = require('../dispatchers/app-dispatcher'),
     ActionTypes = require('../constants/app-constants').ActionTypes;
 
-var merge = require('object.assign'),
-    EventEmitter = require('events').EventEmitter,
+var assign = require('object-assign'),
+    Store = require('stores/app-store'),
     Immutable = require('immutable');
 
 var CHANGE_EVENT = "topicStats-change";
@@ -17,16 +17,9 @@ function _addTopicStats(topicStats){
     _topicStats = _topicStats.concat(topicStats);
 }
 
-var emitter = Object.create(EventEmitter.prototype);
-var TopicStatsStore = merge(emitter, {
-    emitChange: function(){
-        this.emit(CHANGE_EVENT);
-    },
-    addChangeListener: function(callback){
-        this.on(CHANGE_EVENT, callback);
-    },
-    removeChangeListener: function(callback){
-        this.removeListener(CHANGE_EVENT, callback);
+var TopicStatsStore = assign({}, Store, {
+    events: {
+        CHANGE_EVENT: "app-topic-stats-store"
     },
     getTopicStat: function(categoryId){
         return _topicStats
@@ -43,16 +36,16 @@ var TopicStatsStore = merge(emitter, {
     },
     dispatcherIndex: AppDispatcher.register(function(payload){
         var action = payload.action;
-        switch(action.actionType){
-            case ActionTypes.RECEIVE_LAYOUT:
-                console.log("store/topic-stats-store", payload.action.layout.latest_topics);
-                _addTopicStats(payload.action.layout.latest_topics);
-                break;
-            case ActionTypes.ADD_TOPIC:
-                _addTopicStat(payload.action.topic)
-                break;
-        }
-        TopicStatsStore.emitChange();
+        // switch(action.actionType){
+        //     case ActionTypes.RECEIVE_LAYOUT:
+        //         console.log("store/topic-stats-store", payload.action.layout.latest_topics);
+        //         _addTopicStats(payload.action.layout.latest_topics);
+        //         break;
+        //     case ActionTypes.ADD_TOPIC:
+        //         _addTopicStat(payload.action.topic)
+        //         break;
+        // }
+        // TopicStatsStore.emitChange();
         return true;
     })
 })

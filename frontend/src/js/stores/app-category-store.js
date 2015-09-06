@@ -1,8 +1,9 @@
 var AppDispatcher = require('../dispatchers/app-dispatcher'),
     ActionTypes = require('../constants/app-constants').ActionTypes;
 
-var merge = require('object.assign'),
-    EventEmitter = require('events').EventEmitter,
+var assign = require('object-assign'),
+    Store = require('stores/app-store'),
+
     Immutable = require('immutable');
 
 var CHANGE_EVENT = "categories-change";
@@ -17,16 +18,9 @@ function _addCategories(categories){
     _categories = _categories.concat(categories);
 }
 
-var emitter = Object.create(EventEmitter.prototype);
-var CategoryStore = merge(emitter, {
-    emitChange: function(){
-        this.emit(CHANGE_EVENT);
-    },
-    addChangeListener: function(callback){
-        this.on(CHANGE_EVENT, callback);
-    },
-    removeChangeListener: function(callback){
-        this.removeListener(CHANGE_EVENT, callback);
+var CategoryStore = assign({}, Store, {
+    events: {
+        CHANGE_EVENT: "app-category-store"
     },
     getCategory: function(categoryId){
         return _categories
@@ -43,16 +37,16 @@ var CategoryStore = merge(emitter, {
     },
     dispatcherIndex: AppDispatcher.register(function(payload){
         var action = payload.action;
-        switch(action.actionType){
-            case ActionTypes.RECEIVE_LAYOUT:
-                //console.log("store/category-store", payload.action.layout.categories);
-                _addCategories(payload.action.layout.categories);
-                break;
-            case ActionTypes.ADD_TOPIC:
-                _addCategories(payload.action.topic)
-                break;
-        }
-        CategoryStore.emitChange();
+        // switch(action.actionType){
+        //     case ActionTypes.RECEIVE_LAYOUT:
+        //         //console.log("store/category-store", payload.action.layout.categories);
+        //         _addCategories(payload.action.layout.categories);
+        //         break;
+        //     case ActionTypes.ADD_TOPIC:
+        //         _addCategories(payload.action.topic)
+        //         break;
+        // }
+        // CategoryStore.emitChange();
         return true;
     })
 })

@@ -1,53 +1,35 @@
-var AppDispatcher = require('../dispatchers/app-dispatcher'),
-    ActionTypes = require('../constants/app-constants').ActionTypes;
+var AppDispatcher = require('dispatchers/app-dispatcher'),
+    ActionTypes = require('constants/app-constants').ActionTypes;
 
-var merge = require('object.assign'),
-    EventEmitter = require('events').EventEmitter,
+var assign = require('object-assign'),
+    Store = require('stores/app-store'),
     Immutable = require('immutable');
 
 var CHANGE_EVENT = "topics-change";
 
-var _topics = Immutable.Map();
+var _topics = Immutable.OrderedMap();
 
-var emitter = Object.create(EventEmitter.prototype);
-
-var TopicStore = merge(emitter, {
-    parseTopic: parseTopic,
-    parseTopics: parseTopics,
-
-    emitChanges: function(topicId){
-        this.emit(CHANGE_EVENT, topicId);
-    },
-    addChangeListener: function(callback){
-        this.on(CHANGE_EVENT, callback);
-    },
-    removeChangeListener: function(callback){
-        this.removeListener(CHANGE_EVENT, callback);
+var TopicStore = assign({}, Store, {
+    events: {
+        CHANGE_EVENT: "app-topic-store"
     },
     getTopic: function(topicId){
-        return _topics.get(topicId);
+        return _topics.get(topicId.toString());
     },
     getAllTopics: function(){
         return _topics.toList();
     },
     dispatcherIndex: AppDispatcher.register(function(payload){
         var action = payload.action;
-        var topicId = null;
+
         switch(action.actionType){
-            case ActionTypes.RECEIVE_LAYOUT:
-                console.log("store/topic-store/layout", payload.action.layout.latest_topics);
-                _addTopics(parseTopics(payload.action.layout.latest_topics));
+            case ActionTypes.FETCH_TOPICS_BY_ID:
+                _addTopics(parseTopics(action.topics));
+                //console.log(_topics.toArray())
+                TopicStore.emitChange();
                 break;
-            case ActionTypes.RECEIVE_TOPIC:
-                console.log("store/topic-store/topic", payload.action.topic);
-                topicId = payload.action.topic.id;
-                _addTopic(parseTopic(payload.action.topic));
-                break;
-            case ActionTypes.ADD_TOPIC:
-                _addTopic(parseTopic(payload.action.topic))
-                break;
+            default: break;
         }
-        TopicStore.emitChanges(topicId);
         return true;
     })
 })
@@ -55,7 +37,7 @@ var TopicStore = merge(emitter, {
 module.exports = TopicStore;
 
 function _addTopic(topic){
-    _topics = _topics.set(topic.id ,topic);
+    _topics = _topics.set(topic.id.toString() ,topic);
 }
 
 function _addTopics(topics){
@@ -64,12 +46,8 @@ function _addTopics(topics){
     });
 }
 
-function parseTopic(topic){
-    return topic;
-}
-
 function parseTopics(topics){
-    return topics.map(function(topic){
-        return parseTopic(topic);
+    return Object.keys(topics).map(function(topic){
+        return topics[topic];
     });
 }

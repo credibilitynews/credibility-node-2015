@@ -1,16 +1,19 @@
+var assign = require('object-assign');
 var EventEmitter = require('events').EventEmitter;
-var assign = require('object.assign');
 
-var Store =  assign({}, EventEmitter.prototype, {
-    addChangeListener: function(listener){
-        this.addListener(this.events.CHANGE_EVENT, listener);
+var AppStore = assign({}, EventEmitter.prototype, {
+    emitChange: function(data){
+        if(!this.events.CHANGE_EVENT) throw new Error('CHANGE_EVENT not defined');
+        this.emit(this.events.CHANGE_EVENT, data);
     },
-    removeChangeListener: function(listener){
-        this.removeListener(this.events.CHANGE_EVENT, listener);
+    addChangeListener: function(handler){
+        if(!this.events.CHANGE_EVENT) throw new Error('CHANGE_EVENT not defined');
+        this.addListener(this.events.CHANGE_EVENT, handler)
     },
-    emitChange: function(){
-        this.emit(this.events.CHANGE_EVENT);
+    removeChangeListener: function(handler){
+        if(!this.events.CHANGE_EVENT) throw new Error('CHANGE_EVENT not defined');
+        this.removeListener(this.events.CHANGE_EVENT, handler)
     }
 });
 
-module.exports = Store;
+module.exports = AppStore;
