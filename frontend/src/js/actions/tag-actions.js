@@ -8,14 +8,14 @@ var request = function(){
 };
 var TagActions = {
     fetchAllTags: function(){
-        model
+        model()
         .get("tags.length")
         .then(function(response) {
             console.log(response.json);
         }).catch(function(why){console.log(why)});
     },
     fetchTagsById: function(tagIds){
-        model
+        model()
         .get(["tagsById", tagIds, ["name", "code", "parent_id"]])
         .then(function(response) {
             console.log(response.json);

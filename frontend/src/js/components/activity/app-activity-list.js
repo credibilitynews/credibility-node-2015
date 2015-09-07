@@ -1,4 +1,3 @@
-
 var React = require('react'),
     Activity = require('components/activity/app-activity'),
 
@@ -13,20 +12,19 @@ var ActivityList = React.createClass({
     },
     componentWillMount: function(){
         LatestActicleStore.addChangeListener(this._handleStoreChange);
-        LinkActions.fetchLatestLinks();
     },
     componentWillUnMount: function(){
         LatestActicleStore.removeChangeListener(this._handleStoreChange);
     },
     componentDidMount: function(){
-
+        LinkActions.fetchLatestLinks();
     },
     render: function() {
         //console.log('activity-list', this.state);
         return (
             <div className="activity-list row">
                 <div className="col-xs-12">
-                    <h3>Latest Updates</h3>
+                    <h3>News Updates</h3>
                 </div>
                 <div className="col-xs-12">
                     {this._wrap(this.state.articles)}

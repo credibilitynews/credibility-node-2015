@@ -16,7 +16,7 @@ var TopMenu = React.createClass({
 	},
 	render: function(){
 		return (
-			<div className="top-menu row">
+			<div className="top-menu">
 				<ul className="nav nav-pills">
 					<li className="nav-item">Trending now: </li>
 					{this._wrap(this.props.items)}

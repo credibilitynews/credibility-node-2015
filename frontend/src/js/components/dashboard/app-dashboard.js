@@ -7,7 +7,7 @@ var React = require('react'),
 
 var About = require('components/dashboard/app-about.js'),
 	ActivityList = require('components/activity/app-activity-list'),
-	Debates = require('components/dashboard/app-debates'),
+	RecentTopics = require('components/dashboard/app-recent-topics'),
 	Stats = require('components/dashboard/app-stats'),
 	SearchBar = require('components/search/app-search-bar'),
 	CategoryList = require('components/category/app-category-list'),
@@ -33,19 +33,24 @@ var Dashboard = React.createClass({
  	render: function(){
 		return (
 			<div className="row">
-				<div className="col-sm-12 col-md-9">
+				<div className="col-xs-12 col-md-8">
 					<TopMenu />
+				</div>
+				<div className="col-xs-12 col-md-4">
 					<SearchBar />
+				</div>
+				<div className="col-sm-12 col-md-8">
+
 					<div className="row">
-						<div className="col-sm-8">
+						<div className="col-sm-12">
 							<ActivityList />
 						</div>
-						<div className="col-sm-4">
-							<Debates />
+						<div className="col-sm-12">
+							<RecentTopics />
 						</div>
 					</div>
 				</div>
-				<div className="col-sm-12 hidden-sm-up right-sidebar">
+				<div className="col-md-4 hidden-sm-down right-sidebar">
 					<About />
 					<CategoryList />
 					<Stats />

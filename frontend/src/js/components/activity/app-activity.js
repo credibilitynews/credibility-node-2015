@@ -28,7 +28,6 @@ var Activity = React.createClass({
 
         if(this.props.article.user_id)
             UserActions.fetchUsersById(this.props.article.user_id);
-
     },
     render: function(){
 

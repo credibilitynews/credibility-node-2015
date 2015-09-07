@@ -7,6 +7,7 @@ $icon-font-path: "/bootstrap/fonts/";
 @import "topic";
 @import "category";
 
+@import "react-select";
 
 html {
   position: relative;
@@ -33,7 +34,15 @@ footer{
 }
 
 h1, h2, h3{
-    margin-top: 5px;
+    margin-top: 1em;
+}
+
+.content{
+    padding-top: 1em;
+}
+
+.top-menu{
+    height: 2.5em;
 }
 // .logo{
 //     width: 35px;
@@ -152,7 +161,7 @@ h1, h2, h3{
 
 .activity-list{
     .activity-list-item{
-        margin-bottom: 50px
+        margin-bottom: 1em;
     }
     .activity{
         font-size: 14px;

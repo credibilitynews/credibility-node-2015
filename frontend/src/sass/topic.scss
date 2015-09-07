@@ -149,10 +149,9 @@ $topic-theme-text-hl: white;
 
 .topic-stats{
 	@extend .row;
-	&:last-child{ padding-bottom: 30px; }
-	&>.content{ @extend .col-xs-12; }
+	//&>.content{ @extend .col-xs-12; }
 	background-color: #f8f8f8;
-	padding-top: 30px;
+	//padding-top: 30px;
 	h4{
 		margin-bottom: 5px;
 	}

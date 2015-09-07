@@ -6,9 +6,9 @@ var Footer = require('./app-footer.js');
 var Template = React.createClass({
 	render: function(){
 		return (
-			<div >
+			<div>
 			    <Header />
-				<div className="container-fluid">
+				<div className="container-fluid content">
 					{this.props.children}
 				</div>
 			    <Footer />

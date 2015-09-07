@@ -39,8 +39,8 @@ module.exports = [
         }
     },
     {
-        route: "latestTopics[{integers:n}]['id']",
-        get: function(pathSet, args) {
+        route: "latestTopics[{integers:n}]['id','title','hashtag','created_at','views','user_id']",
+        get: function(pathSet) {
             var userId = this.userId;
             var limit = pathSet.n.slice(-1)[0] - pathSet.n[0] + 1;
             var offset = pathSet.n[0];
@@ -48,20 +48,25 @@ module.exports = [
             return topicService
                 .getLatestTopics(offset, limit)
                 .then(function(topics) {
-
+                    console.log(topics);
                     var results = [];
+
                     var topicIds = Object.keys(topics);
                     pathSet.n.forEach(function(n, index) {
-
                         var id = topicIds[index];
-                        var topicRecord = topics[id];
-                        var value = !topicRecord ? null : $ref(['topicsById', topicRecord.id]);
+                        var topicRecord = topics[id] || {};
 
-                        results.push({
-                            path: ['latestTopics', n, 'id'],
-                            value: value
-                        });
+                        pathSet[2].forEach(function(key){
+                            var value = topicRecord[key];
+                            if(value === null) value = undefined;
+                            if(typeof value === "object") value = value.toString();
+                            results.push({
+                                path: ['latestTopics', n, key],
+                                value: value
+                            });
+                        })
                     });
+                    console.log(results);
                     return results;
                 }).catch(function(why){console.log(why)});
         }

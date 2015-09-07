@@ -1,11 +1,14 @@
-var falcor = require('falcor'),
-    HttpDataSource = require('falcor-http-datasource');
-var model = new falcor.Model({source: new HttpDataSource('/model.json') });
+var falcor = require('falcor');
 
-if(typeof window === 'undefined') {
-    model = new falcor.Model({
+
+module.exports = function(){
+    if(typeof window === 'undefined') {
+        return new falcor.Model({
             source: require('../../../backend/router-factory')("1")
-    });
+        });
+    }else{
+        var HttpDataSource = require('falcor-http-datasource');
+        return new falcor.Model({source: new HttpDataSource('/model.json') });
+    }
+    return model;
 }
-
-module.exports = model;

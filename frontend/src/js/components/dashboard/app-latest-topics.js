@@ -11,7 +11,7 @@ var LatestTopics = React.createClass({
     render: function() {
         return (
             <div className="latest-topics">
-                <h3>Latest Topics</h3>
+                <h3>News Update</h3>
                 <ul>{this._wrapItems(this.props.topics)}</ul>
             </div>
         );

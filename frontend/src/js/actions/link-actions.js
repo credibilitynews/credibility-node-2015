@@ -8,7 +8,7 @@ var request = function(){
 };
 var LinkActions = {
     fetchLinks: function(ids){
-        model
+        model()
         .get(["linksById", ids, ['title', 'url', 'created_at', 'views', 'user_id', 'topic_id', 'type']])
         .then(function(response) {
             console.log('linksById', response.json);
@@ -21,7 +21,7 @@ var LinkActions = {
                 links: links
             })
         };
-        model
+        model()
         .get(["latestLinks", {from: 0, to: 4}, ['id', 'title', 'url', 'user_id', 'topic_id']])
         .then(function(response) {
             console.log('latestLinks/result', response.json);
