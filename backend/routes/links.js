@@ -16,16 +16,13 @@ module.exports = [
                     var results = [];
                     //console.log('pathSet', pathSet);
                     pathSet.linkIds.forEach(function(linkId) {
-                        var linkRecord = links[linkId];
+                        var linkRecord = links[linkId] || {};
                         pathSet[2].forEach(function(key) {
-                            var value = linkRecord ? linkRecord[key] : undefined;
+                            var value = linkRecord[key];
 
-                            switch(key){
-                                // case "type": value = value ? $ref(['typesById', value]) : value; break;
-                                // case "user_id": value = value ? $ref(['usersById', value]) : value; break;
-                                // case "topic_id": value = value ? $ref(['topicsById', value]) : value; break;
-                                default: value = value; break;
-                            }
+                            if(value === null) value = undefined;
+                            if(typeof value === 'object') value = value.toString()
+
                             results.push({
                                 path: ['linksById', linkId, key],
                                 value: value

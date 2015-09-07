@@ -6,7 +6,7 @@ var tagService = require('../services/tag-service');
 
 module.exports = [
     {
-        route: "tagsById[{integers:tagIds}]['name', 'code', 'parent_id']",
+        route: "tagsById[{integers:tagIds}]['id', 'name', 'code', 'parent_id']",
         get: function(pathSet) {
             var userId = this.userId;
 
@@ -36,7 +36,7 @@ module.exports = [
         }
     },
     {
-        route: "tags[{integers:n}]['id']",
+        route: "tags[{integers:n}]['id', 'name', 'code', 'parent_id']",
         get: function(pathSet) {
             var userId = this.userId;
 

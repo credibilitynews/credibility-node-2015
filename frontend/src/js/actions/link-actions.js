@@ -9,7 +9,7 @@ var request = function(){
 var LinkActions = {
     fetchLinks: function(ids){
         model
-        .get(["linksById", {from: 0, to: 1}, ['title', 'url', 'created_at', 'views', 'user_id', 'topic_id', 'type']])
+        .get(["linksById", ids, ['title', 'url', 'created_at', 'views', 'user_id', 'topic_id', 'type']])
         .then(function(response) {
             console.log('linksById', response.json);
         }).catch(function(why){console.log(why)});

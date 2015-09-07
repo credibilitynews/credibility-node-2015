@@ -1,4 +1,13 @@
-var pg = require('pg');
+var Sequelize = require('sequelize');
+var sequelize = new Sequelize(process.env.DATABASE_URL);
+var Tags = sequelize.define('tags', {
+    "name": Sequelize.STRING,
+    "code": Sequelize.STRING,
+    "parent_id": Sequelize.INTEGER
+}, {
+    timestamps: false
+});
+
 var batch = require('./batch');
 var path = require('path');
 var Promise = require('promise');
@@ -9,58 +18,59 @@ function TagService() {}
 TagService.prototype = {
     getTags: function(tagIds){
         return new Promise(function (resolve, reject) {
-            var query = function(err, client, done) {
-                if(err) return reject(err);
-
-                var q = 'SELECT * FROM tags WHERE id in ('+tagIds.join(',')+')';
-                console.log(q);
-                client.query(q, function(err, result) {
-                    if(err) return reject(err);
-                    //console.log(err, result)
-                    var tags = result.rows.reduce(function(reduced, item){
-                        reduced[item.id] = item;
-                        return reduced;
-                    }, {});
-                    resolve(tags);
-                });
-            };
-            pg.connect(conString, query);
+            Tags
+            .findAll({
+                where: {
+                    id: {
+                        $in: tagIds
+                    }
+                }
+            })
+            .then(function(result){
+                var values = result.reduce(function(reduced, row){
+                     row = row.dataValues;
+                     reduced[row.id] = row;
+                     return reduced;
+                }, {})
+                resolve(values);
+            })
+            .catch(function(why){
+                console.log('caught:', why);
+                reject(why);
+            });
         });
     },
     getAllTags: function(){
         return new Promise(function (resolve, reject) {
-            var query = function(err, client, done) {
-                if(err) return reject(err);
-
-                var q = 'SELECT * FROM tags';
-                console.log(q);
-                client.query(q, function(err, result) {
-                    if(err) return reject(err);
-                    console.log(err, result)
-                    var tags = result.rows.reduce(function(reduced, item){
-                        reduced[item.id] = item;
-                        return reduced;
-                    }, {});
-                    resolve(tags);
-                });
-            };
-            pg.connect(conString, query);
+            Tags
+            .findAll({
+                order: [["name", 'asc']]
+            })
+            .then(function(result){
+                var values = result.reduce(function(reduced, row){
+                     row = row.dataValues;
+                     reduced[row.id] = row;
+                     return reduced;
+                }, {})
+                resolve(values);
+            })
+            .catch(function(why){
+                console.log('caught:', why);
+                reject(why);
+            });
         });
     },
     getTagsCount: function(){
         return new Promise(function (resolve, reject) {
-            var query = function(err, client, done) {
-                if(err) return reject(err);
-
-                var q = 'SELECT COUNT(*) FROM tags';
-                console.log(q);
-                client.query(q, function(err, result) {
-                    if(err) return reject(err);
-                    var length = result.rows[0].count;
-                    resolve(length);
-                });
-            };
-            pg.connect(conString, query);
+            Tags
+            .findAll({})
+            .then(function(result){
+                resolve(result.length);
+            })
+            .catch(function(why){
+                console.log('caught:', why);
+                reject(why);
+            });
         });
     }
 };
