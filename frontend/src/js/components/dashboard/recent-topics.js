@@ -41,7 +41,7 @@ var RecentTopics = React.createClass({
         });
     },
     _handleStoreChange: function(){
-        console.log('changed');
+        //console.log('changed');
         this.setState(this.getInitialState());
     }
 });

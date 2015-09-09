@@ -6,11 +6,9 @@ var About = React.createClass({
         return {
             text: (
                 <div>
-                    <h4>About Credibility.io</h4>
-                    <p>Read both sides of the story.</p>
-                    <p>Stories from just one source might not give the whole picture. Stay exact and don't worship opinions </p>
+                    <h4>Credibility.io</h4>
+                    <blockquote>Read from different sides of the story.</blockquote>
                     <p><a>Submit</a> articles you read from different sources/perspectives and share your analysis.</p>
-
                 </div>)
         };
     },

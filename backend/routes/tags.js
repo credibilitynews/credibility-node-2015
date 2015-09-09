@@ -46,12 +46,18 @@ module.exports = [
                     var results = [];
                     console.log('tags', tags);
                     Object.keys(tags).forEach(function(tagId, index) {
-                        var tagRecord = tags[tagId];
+                        var tagRecord = tags[tagId] || {};
+                        pathSet[2].forEach(function(key){
+                            var value = tagRecord[key];
+                            if(value === null) value = undefined;
+                            if(typeof value === "object") value = value.toString();
 
-                        results.push({
-                            path: ['tags', index, 'id'],
-                            value: $ref(["tagsById", tagId])
-                        });
+                            results.push({
+                                path: ['tags', index, key],
+                                value: value
+                            });
+                        })
+
                     });
                     console.log('results', results);
                     return results;

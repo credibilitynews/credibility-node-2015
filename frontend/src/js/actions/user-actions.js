@@ -8,12 +8,11 @@ var request = function(){
 };
 var UserActions = {
     fetchUsersById: function(ids){
-        console.log('fetchUsersById', ids);
+        //console.log('fetchUsersById', ids);
         model()
         .get(['usersById', ids, ['id', 'name', 'email', 'active', 'created_at']])
         .then(function(response) {
-
-            console.log('fetchUsersById/result', ids, response.json);
+            //console.log('fetchUsersById/result', ids, response.json);
             AppDispatcher.handleServerAction({
                 actionType: ActionTypes.FETCH_USERS_BY_ID,
                 users: response.json['usersById']
@@ -24,7 +23,7 @@ var UserActions = {
         model()
         .get(["latestUsers", {from:0, to:4}, ['id']])
         .then(function(response) {
-            console.log(response.json);
+            //console.log(response.json);
             //document.write('response: '+response.json);
         }).catch(function(why){console.log(why)});
     }

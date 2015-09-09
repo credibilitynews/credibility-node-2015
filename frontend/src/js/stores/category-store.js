@@ -8,14 +8,17 @@ var assign = require('object-assign'),
 
 var CHANGE_EVENT = "categories-change";
 
-var _categories = Immutable.List();
+var _categories = Immutable.OrderedMap();
 
 function _addCategory(category){
-    _categories.push(category);
+    _categories = _categories.set(category.id.toString(), category);
 }
 
 function _addCategories(categories){
-    _categories = _categories.concat(categories);
+    Object.keys(categories).forEach(function(key){
+        var category = categories[key];
+        _addCategory(category);
+    });
 }
 
 var CategoryStore = assign({}, Store, {
@@ -23,30 +26,21 @@ var CategoryStore = assign({}, Store, {
         CHANGE_EVENT: "category-store"
     },
     getCategory: function(categoryId){
-        return _categories
-        .reduce(function(selected, item){
-            if(categoryId == item.id){
-                return item;
-            }else{
-                return selected;
-            }
-        }, null);
+        return _categories.get(categoryId.toString())
     },
     getAllCategories: function(){
-        return _categories;
+        return _categories.toArray();
     },
     dispatcherIndex: AppDispatcher.register(function(payload){
         var action = payload.action;
-        // switch(action.actionType){
-        //     case ActionTypes.RECEIVE_LAYOUT:
-        //         //console.log("store/category-store", payload.action.layout.categories);
-        //         _addCategories(payload.action.layout.categories);
-        //         break;
-        //     case ActionTypes.ADD_TOPIC:
-        //         _addCategories(payload.action.topic)
-        //         break;
-        // }
-        // CategoryStore.emitChange();
+        switch(action.actionType){
+            case ActionTypes.FETCH_ALL_TAGS:
+                console.log("store/category-store", payload.action.tags);
+                _addCategories(payload.action.tags);
+                console.log(_categories);
+                CategoryStore.emitChange();
+                break;
+        }
         return true;
     })
 })

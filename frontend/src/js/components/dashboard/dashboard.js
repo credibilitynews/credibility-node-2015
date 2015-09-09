@@ -1,4 +1,3 @@
-
 var React = require('react'),
 	Router = require('react-router-component'),
 	Locations = Router.Locations,
@@ -46,14 +45,14 @@ var Dashboard = React.createClass({
 							<ActivityList />
 						</div>
 						<div className="col-sm-12">
-							<RecentTopics />
+
 						</div>
 					</div>
 				</div>
-				<div className="col-md-4 hidden-sm-down right-sidebar">
-					<About />
+				<div className="col-md-4 col-xs-12 right-sidebar">
+					<RecentTopics />
 					<CategoryList />
-					<Stats />
+					<About />
 				</div>
 			</div>
 		)

@@ -7,7 +7,7 @@ var React = require('react');
 
 var TopicStats = React.createClass({
     render: function() {
-        console.log("topic-stats", this.props);
+        //console.log("topic-stats", this.props);
         var topic = this.props.topic;
         return (
             <div className="topic-stats">

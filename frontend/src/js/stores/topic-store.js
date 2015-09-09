@@ -35,10 +35,10 @@ var TopicStore = assign({}, Store, {
 
             case ActionTypes.FETCH_RECENT_TOPICS:
                 _recentTopics = _addTopics(_recentTopics, parseTopics(action.topics));
-                console.log(_recentTopics.toArray());
+                //console.log(_recentTopics.toArray());
                 TopicStore.emitChange();
                 break;
-                
+
             default: break;
         }
         return true;
