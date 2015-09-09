@@ -1,6 +1,6 @@
 
 var React = require('react');
-var TopicLink = require('../topic/app-topic-link');
+var TopicLink = require('../topic/topic-link');
 
 var LatestTopics = React.createClass({
     getDefaultProps: function() {

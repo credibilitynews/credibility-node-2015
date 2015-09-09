@@ -4,9 +4,9 @@ var Router = require('react-router-component'),
     Locations = Router.Locations,
     Location = Router.Location;
 
-var Dashboard = require('components/dashboard/app-dashboard'),
-    Topic = require('components/topic/app-topic'),
-    Story = require('components/story/app-story'),
+var Dashboard = require('components/dashboard/dashboard'),
+    Topic = require('components/topic/topic'),
+    Story = require('components/story/story'),
     Template =require('components/app-template');
 
 var APP = React.createClass({

@@ -1,9 +1,9 @@
 var React = require('react'),
-    TopicLink = require('../topic/app-topic-link'),
-    TopicStats = require('../stats/app-topic-stats'),
+    TopicLink = require('../topic/topic-link'),
+    TopicStats = require('../stats/topic-stats'),
     merge = require('object.assign'),
 
-    TopicStore = require('stores/app-topic-store');
+    TopicStore = require('stores/topic-store');
 
 var RecentTopics = React.createClass({
     getInitialState: function() {

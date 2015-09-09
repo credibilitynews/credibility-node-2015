@@ -1,6 +1,6 @@
 
 var React = require('react');
-var StoryLink = require('../story/app-story-link');
+var StoryLink = require('../story/story-link');
 
 var StoryList = React.createClass({
 	getDefaultProps: function() {

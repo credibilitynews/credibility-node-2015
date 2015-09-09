@@ -12,7 +12,7 @@ var _topics = Immutable.OrderedMap(),
 
 var TopicStore = assign({}, Store, {
     events: {
-        CHANGE_EVENT: "app-topic-store"
+        CHANGE_EVENT: "topic-store"
     },
     getTopic: function(topicId){
         return _topics.get(topicId.toString());

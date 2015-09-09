@@ -19,7 +19,7 @@ function _addTopicStats(topicStats){
 
 var TopicStatsStore = assign({}, Store, {
     events: {
-        CHANGE_EVENT: "app-topic-stats-store"
+        CHANGE_EVENT: "topic-stats-store"
     },
     getTopicStat: function(categoryId){
         return _topicStats

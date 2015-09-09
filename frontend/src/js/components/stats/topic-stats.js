@@ -1,9 +1,9 @@
 
 var React = require('react');
-    //TopicColStats = require('./app-topic-col-stats'),
-    //ArticlesNum = require('../stats/app-articles-num'),
-    //ViewsNum = require('../stats/app-views-num'),
-    //HashTag = require('../tag/app-hashtag');
+    //TopicColStats = require('./topic-col-stats'),
+    //ArticlesNum = require('../stats/articles-num'),
+    //ViewsNum = require('../stats/views-num'),
+    //HashTag = require('../tag/hashtag');
 
 var TopicStats = React.createClass({
     render: function() {

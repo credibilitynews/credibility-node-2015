@@ -1,8 +1,8 @@
 var React = require('react'),
-    Activity = require('components/activity/app-activity'),
+    Activity = require('components/activity/activity'),
 
     LinkActions = require('actions/link-actions'),
-    LatestActicleStore = require('stores/app-latest-article-store');
+    LatestActicleStore = require('stores/latest-article-store');
 
 var ActivityList = React.createClass({
     getInitialState: function() {

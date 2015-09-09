@@ -1,16 +1,16 @@
 
 var React = require('react/addons');
-var Hashtag = require('../tag/app-hashtag');
-var StoryList = require('../story/app-story-list');
-var StoryTimeline = require('../story/app-story-timeline');
+var Hashtag = require('../tag/hashtag');
+var StoryList = require('../story/story-list');
+var StoryTimeline = require('../story/story-timeline');
 
-var Score = require('../stats/app-score');
-var ViewsNum =  require('../stats/app-views-num');
-var ArticlesNum =  require('../stats/app-articles-num');
-var TopicStats = require('../stats/app-topic-stats');
+var Score = require('../stats/score');
+var ViewsNum =  require('../stats/views-num');
+var ArticlesNum =  require('../stats/articles-num');
+var TopicStats = require('../stats/topic-stats');
 
-var TopicStore = require('../../stores/app-topic-store');
-var ServerActions = require('../../actions/app-server-actions'),
+var TopicStore = require('../../stores/topic-store');
+var ServerActions = require('../../actions/server-actions'),
 	TopicActions = require('../../actions/topic-actions');
 
 var Topic = React.createClass({

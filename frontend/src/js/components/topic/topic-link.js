@@ -1,8 +1,8 @@
 
 var React = require('react'),
-	Tag = require('../tag/app-hashtag'),
-	Score = require('../stats/app-score'),
-	ViewsNum = require('../stats/app-views-num');
+	Tag = require('../tag/hashtag'),
+	Score = require('../stats/score'),
+	ViewsNum = require('../stats/views-num');
 
 var TopicLink = React.createClass({
 	getDefaultProps: function() {

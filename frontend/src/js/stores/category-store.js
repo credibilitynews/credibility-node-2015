@@ -20,7 +20,7 @@ function _addCategories(categories){
 
 var CategoryStore = assign({}, Store, {
     events: {
-        CHANGE_EVENT: "app-category-store"
+        CHANGE_EVENT: "category-store"
     },
     getCategory: function(categoryId){
         return _categories

@@ -1,7 +1,7 @@
 
 var React = require('react'),
-    ArticlesNum = require('../stats/app-articles-num'),
-    ViewsNum = require('../stats/app-views-num');
+    ArticlesNum = require('../stats/articles-num'),
+    ViewsNum = require('../stats/views-num');
 
 var TopicColStats = React.createClass({
     getDefaultProps: function() {

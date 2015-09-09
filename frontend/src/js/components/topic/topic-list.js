@@ -1,6 +1,6 @@
 
 var React = require('react');
-var TopicLink = require('./app-topic-link');
+var TopicLink = require('./topic-link');
 
 var TopicList = React.createClass({
 	render: function(){

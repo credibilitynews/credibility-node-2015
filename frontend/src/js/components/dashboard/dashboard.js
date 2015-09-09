@@ -5,17 +5,17 @@ var React = require('react'),
 	Location = Router.Location,
 	NotFound = Router.NotFound;
 
-var About = require('components/dashboard/app-about.js'),
-	ActivityList = require('components/activity/app-activity-list'),
-	RecentTopics = require('components/dashboard/app-recent-topics'),
-	Stats = require('components/dashboard/app-stats'),
-	SearchBar = require('components/search/app-search-bar'),
-	CategoryList = require('components/category/app-category-list'),
-	TopMenu = require('components/menu/app-top-menu');
+var About = require('components/dashboard/about.js'),
+	ActivityList = require('components/activity/activity-list'),
+	RecentTopics = require('components/dashboard/recent-topics'),
+	Stats = require('components/dashboard/stats'),
+	SearchBar = require('components/search/search-bar'),
+	CategoryList = require('components/category/category-list'),
+	TopMenu = require('components/menu/top-menu');
 
-var	TopicStore = require('stores/app-topic-store'),
-	CategoryStore = require('stores/app-category-store'),
-	LatestArticleStore = require('stores/app-latest-article-store');
+var	TopicStore = require('stores/topic-store'),
+	CategoryStore = require('stores/category-store'),
+	LatestArticleStore = require('stores/latest-article-store');
 
 function getStatesFromStore(){
 	var state = {

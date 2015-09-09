@@ -11,14 +11,14 @@ var TopMenu = React.createClass({
 				{path: '#/topic', label: 'Ukraine'},
 				{path: '#/topic', label: 'Hong Kong'},
 				{path: '#/topic', label: 'Thailand'},
-				]
+			]
 		};
 	},
 	render: function(){
 		return (
 			<div className="top-menu">
 				<ul className="nav nav-pills">
-					<li className="nav-item">Trending now: </li>
+					<li className="nav-item">Tags: </li>
 					{this._wrap(this.props.items)}
 				</ul>
 			</div>)

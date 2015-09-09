@@ -15,7 +15,7 @@ function _addArticle(article){
 
 var ArticleStore = assign({}, Store, {
     events: {
-        CHANGE_EVENT: "app-latest-article-store"
+        CHANGE_EVENT: "latest-article-store"
     },
     getAllArticles: function(){
         return _articles.toArray();

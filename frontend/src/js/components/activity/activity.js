@@ -1,10 +1,10 @@
 
 var React = require('react');
-var ViewsNum = require('../stats/app-views-num');
+var ViewsNum = require('../stats/views-num');
 var TopicActions = require('actions/topic-actions'),
     UserActions = require('actions/user-actions');
-var TopicStore = require('stores/app-topic-store'),
-    UserStore = require('stores/app-user-store');
+var TopicStore = require('stores/topic-store'),
+    UserStore = require('stores/user-store');
 
 var Activity = React.createClass({
     getInitialState: function(){
@@ -33,22 +33,24 @@ var Activity = React.createClass({
 
         return (
             <div className="activity">
+                <small className="meta">
+                    curated by <i>{this.state.user.name}</i>
+                </small>
                 <div>
                     On <a href={"/topic/"+this.props.article.topic_id}>
                         <strong>{this.state.topic.title}</strong>
                         </a>,
-                    <span className="label label-primary model">Article</span>
                 </div>
                 <blockquote>
                     <div>
                         <a href={"/link/"+this.props.article.id}>
                             {this.props.article.title}
-                        </a>
+                        </a> <span className="label label-primary">News</span>
                     </div>
                     <small>- {this.state.author.name}, {this.props.article.domain_name}</small>
                 </blockquote>
                 <small className="meta">
-                    added by <i>{this.state.user.name}</i>
+                    <span className="fa fa-comment"></span>
                 </small>
             </div>
         );

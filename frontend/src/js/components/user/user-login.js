@@ -3,9 +3,9 @@ var React = require('react'),
 	Locations = Router.Locations,
 	Location = Router.Location,
 	NotFound = Router.NotFound,
-    UserStore = require('../../stores/app-user-store'),
+    UserStore = require('../../stores/user-store'),
 	UserActions = require('../../actions/user-actions'),
-    AppServerAction = require('../../actions/app-server-actions');
+    AppServerAction = require('../../actions/server-actions');
 
 var LoginForm = React.createClass({
     propTypes: {

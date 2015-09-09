@@ -1,6 +1,6 @@
 
 var React = require('react'),
-    CategoryLink = require('./app-category-link'),
+    CategoryLink = require('./category-link'),
     TagActions = require('../../actions/tag-actions');
 
 var CategoryList = React.createClass({
