@@ -22,7 +22,7 @@ var CategoryList = React.createClass({
     },
 
     render: function() {
-        console.log(this.state.categories);
+        //console.log(this.state.categories);
         return (
             <div className="category-list panel panel-default">
                 <div className="panel-body">

@@ -19,9 +19,9 @@ app.use('/model.json', FalcorServer.dataSourceRoute(function(req, res){
 app.get('/public/*', function(req, res){
     res.sendFile(req.url, {root: "./backend"});
 });
-app.get('/*', function(req, res){
-    //var reactHtml = React.renderToString(React.createElement(APP, {url: req.url}));
-    res.render('index.ejs', {reactOutput: ""});
+app.get('*', function(req, res){
+    var reactHtml = React.renderToString(React.createElement(APP, {url: req.url}));
+    res.render('index.ejs', {reactOutput: reactHtml});
 });
 
 app.set('views', __dirname + '/views');

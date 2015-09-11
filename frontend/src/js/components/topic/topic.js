@@ -1,5 +1,6 @@
 
 var React = require('react/addons');
+var cx = require('classnames');
 var Hashtag = require('../tag/hashtag');
 var StoryList = require('../story/story-list');
 var StoryTimeline = require('../story/story-timeline');
@@ -10,46 +11,28 @@ var ArticlesNum =  require('../stats/articles-num');
 var TopicStats = require('../stats/topic-stats');
 
 var TopicStore = require('../../stores/topic-store');
-var ServerActions = require('../../actions/server-actions'),
-	TopicActions = require('../../actions/topic-actions');
+var TopicActions = require('../../actions/topic-actions');
 
 var Topic = React.createClass({
 	getInitialState: function() {
 		return {
 			topic: null,
-            summaryShown: false
+			summaryShown: false
 		};
 	},
-	topicId: null,
-	topic: null,
-
 	componentWillMount: function(){
-		this.topicId = parseInt(this.props.topicId);
-		this.topic = TopicStore.getTopic(this.topicId);
-		if(this.topic){
-			this.setState({topic: this.topic});
-		}
+		TopicStore.addChangeListener(this._handleStoreChange);
+	},
+	componentWillUnmount: function(){
+		TopicStore.removeChangeListener(this._handleStoreChange);
 	},
 	componentDidMount: function() {
-		if(!this.topic){
-			//TopicStore.addChangeListener(this._onTopicChange);
-			ServerActions.fetchTopic(this.topicId);
-		}
+		TopicActions.fetchTopicsById(this.props.topicId);
 	},
-	_onTopicChange: function(_topicId){
-		if(_topicId && this.topicId && _topicId == this.topicId){
-			var topic = TopicStore.getTopic(this.topicId);
-			this.setState({topic: topic});
-		}
-	},
-	render: function(){
-		console.log('topic', this.state);
-		if(this.state.topic == null){
-			return <div />;
-		}
-		var topic = this.state.topic;
 
-        var cx = React.addons.classSet;
+	render: function(){
+		var topic = this.state.topic || {};
+
         var toggled = cx({
             'short': !this.state.summaryShown,
             'long': this.state.summaryShown
@@ -72,19 +55,23 @@ var Topic = React.createClass({
 						<div className="meta">
 	                        <div className="content">
 							    <div><span>Hashtags:</span> <Hashtag tag={topic.hashtag} /></div>
-	                        	<div><span>Statistics:</span> <ArticlesNum articles={topic.meta.articles} text/>, <ViewsNum views={topic.meta.views} text/></div>
+	                        	<div><span>Statistics:</span> <ArticlesNum articles={topic.articles} text/>, <ViewsNum views={topic.views} text/></div>
 							    <div><span>Related Topics:</span> Venezuela</div>
-							    <div><span>Added:</span> {topic.meta.created_at}</div>
+							    <div><span>Added:</span> {topic.created_at}</div>
 	                        </div>
 						</div>
 					</div>
 				</div>
 				<div className="timeline">
 					<h2>Timeline</h2>
-					<StoryTimeline stories={topic.stories.all} />
+					<StoryTimeline stories={topic.links} />
 				</div>
 			</div>
 		)
+	},
+	_handleStoreChange: function(){
+		var topic = TopicStore.getTopic(this.props.topicId);
+		this.setState({topic, topic});
 	},
     _handleToggle: function(){
         this.setState({summaryShown: !this.state.summaryShown});

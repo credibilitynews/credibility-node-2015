@@ -13,7 +13,7 @@ var APP = React.createClass({
     render: function() {
         return (
             <Template>
-                <Locations hash path={this.props.url}>
+                <Locations path={this.props.url}>
                     <Location path="/topic/:topicId" handler={Topic} />
                     <Location path="/story" handler={Story} />
                     <Location path="/(*)" handler={Dashboard} />

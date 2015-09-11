@@ -1,3 +1,6 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+@import url(https://fonts.googleapis.com/css?family=Cardo);
+@import url(https://fonts.googleapis.com/css?family=Source+Serif+Pro);
 $enable-flex: true;
 $icon-font-path: "/bootstrap/fonts/";
 @import "bootstrap";
@@ -9,12 +12,17 @@ $icon-font-path: "/bootstrap/fonts/";
 
 @import "react-select";
 
+h1, h2, h3, h4, h5, h6{
+    font-family: 'Cardo', serif;
+}
+
 html {
   position: relative;
   min-height: 100%;
 }
 
 body {
+  font-family: 'Source Sans Pro', sans-serif;
   color: #666;
   margin-bottom: 60px;
 }
@@ -142,8 +150,8 @@ h1, h2, h3{
 
 .about{
     background-color: rgba(122, 191, 252, 0.69);
-    border: 1px solid rgba(74, 166, 242, 0.6);
-    border-width: 0 1px 4px 1px;
+    //border: 1px solid rgba(74, 166, 242, 0.6);
+    //border-width: 0 1px 4px 1px;
     margin-top:10px
 }
 
