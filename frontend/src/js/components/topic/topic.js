@@ -1,4 +1,3 @@
-
 var React = require('react/addons');
 var cx = require('classnames');
 var Hashtag = require('components/tag/hashtag');
@@ -80,7 +79,7 @@ var Topic = React.createClass({
 	_handleStoreChange: function(){
 		var topic = TopicStore.getTopic(this.props.topicId);
 		console.log('topic', topic);
-		this.setState({topic, topic});
+		this.setState({topic: topic});
 	},
     _handleToggle: function(){
         this.setState({summaryShown: !this.state.summaryShown});

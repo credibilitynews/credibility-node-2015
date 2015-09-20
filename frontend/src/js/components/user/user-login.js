@@ -8,34 +8,41 @@ var React = require('react'),
     AppServerAction = require('../../actions/server-actions');
 
 var LoginForm = React.createClass({
-    propTypes: {
-        onLogin: React.PropTypes.func.isRequired,
-        onCancel: React.PropTypes.func.isRequired
-    },
     render: function() {
+		
+		var validation_message = typeof validation === "undefined" && !this.props.validation ?
+			null : (this.props.validation || validation);
+		var error_message = typeof error === "undefined" && !this.props.error ?
+			null : (this.props.error || error);
+		var success_message = typeof success === "undefined" && !this.props.success ?
+			null : (this.props.success || success);
+
         return (
             <div className="panel panel-default">
                 <div className="panel-body">
-                    <h4>Login to Credibility.io</h4>
-                    <div className="form-group">
-                        <label for="username">Username</label>
-                        <input ref="username" name="username" type="text" className="form-control"/>
-
-                        <label for="password">Password</label>
-                        <input ref="password" name="password" type="password" className="form-control"/>
-                    </div>
-                    <div className="form-actions">
-                        <button onClick={this.props.onLogin} className="btn btn-primary">Login</button>
-                        <button onClick={this.props.onCancel} className="btn btn-default">Cancel</button>
-                    </div>
+					<form action="/account/sendtoken" method="post">
+	                    <h4>Login</h4>
+						<div>
+							<small>
+							We implement <a href="https://passwordless.net/">Passwordless</a>, NO password is needed.
+							</small>
+						</div>
+						{ validation_message ?
+							<div className="alert alert-danger">{validation_message['user']['msg']}</div> : ""}
+						{ error_message ?
+							<div className="alert alert-danger">{error_message}</div> : ""}
+						{ success_message ?
+							<div className="alert alert-success">{success_message}</div> : ""}
+	                    <div className="form-group">
+	                        <label>Email </label>
+	                        <input ref="user" name="user" type="text" className="form-control"/>
+	                    </div>
+	                    <div className="form-actions">
+	                        <input type="submit" className="btn btn-primary" value="Login" />
+	                    </div>
+					</form>
                 </div>
             </div>)
-    },
-    getUsername: function(){
-        return this.refs.username.getDOMNode().value;
-    },
-    getPassword: function(){
-        return this.refs.password.getDOMNode().value;
     }
 });
 
@@ -75,4 +82,4 @@ var UserLogin = React.createClass({
     }
 });
 
-module.exports = {};
+module.exports = LoginForm;

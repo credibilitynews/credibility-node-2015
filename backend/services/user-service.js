@@ -66,6 +66,22 @@ UserService.prototype = {
                 reject(why);
             });
         });
+    },
+    findOrCreateUser: function(email){
+        return new Promise(function (resolve, reject){
+            Users
+            .findOrCreate({
+                where: {email: email}
+            })
+            .then(function(result){
+                console.log('result', result[0]['dataValues']);
+                resolve(result[0]['dataValues']);
+            })
+            .catch(function(why){
+                console.log('caught:', why);
+                reject(why);
+            });
+        });
     }
 };
 

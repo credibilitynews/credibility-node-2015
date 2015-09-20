@@ -7,6 +7,18 @@
     <link rel="stylesheet" media="screen" href="/public/css/bundle.css">
 </head>
 <body>
+    <% if(validation) { %>
+        <script>var validation = <%-JSON.stringify(validation) %></script>
+    <% } %>
+    <% if(error) { %>
+        <script>var error = <%-JSON.stringify(error) %></script>
+    <% } %>
+    <% if(success) { %>
+        <script>var success = <%-JSON.stringify(success) %></script>
+    <% } %>
+    <% if(user) { %>
+        <script>var user = <%-JSON.stringify(user) %></script>
+    <% } %>
     <div id="credibility"><%- reactOutput %></div>
     <script src="/public/js/bundle.js"></script>
 </body>
