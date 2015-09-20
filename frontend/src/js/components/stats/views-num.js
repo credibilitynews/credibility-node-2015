@@ -10,8 +10,7 @@ var ViewsNum = React.createClass({
     render: function() {
         return (
             <span className="views-num label">
-                {this.props.text ? this.props.views : <span className="glyphicon glyphicon-eye-open"></span>}
-                {this.props.text ? <span className="text">Views</span> : this.props.views}
+                {this.props.views} views
             </span>
         );
     }

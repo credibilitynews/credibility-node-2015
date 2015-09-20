@@ -1,7 +1,7 @@
 var model = require('falcor-model');
 
-var ActionTypes = require('../constants/app-constants').ActionTypes,
-    AppDispatcher = require('../dispatchers/app-dispatcher');
+var ActionTypes = require('constants/app-constants').ActionTypes,
+    AppDispatcher = require('dispatchers/app-dispatcher');
 
 var request = function(){
     return require('superagent');
@@ -9,10 +9,10 @@ var request = function(){
 var LinkActions = {
     fetchLinks: function(ids){
         model()
-        .get(["linksById", ids, ['title', 'url', 'created_at', 'views', 'user_id', 'topic_id', 'type']])
+        .get(["linksById", ids, ['title', 'url', 'created_at', 'views', 'user_id', 'topic_id', 'bias', 'author_id', 'news_agency_id', 'content_type']])
         .then(function(response) {
             //console.log('linksById', response.json);
-        }).catch(function(why){console.log(why)});
+        }).catch(function(why){console.log('linksById/catch', why)});
     },
     fetchLatestLinks: function(){
         var dispatch = function(links){
@@ -22,12 +22,12 @@ var LinkActions = {
             })
         };
         model()
-        .get(["latestLinks", {from: 0, to: 4}, ['id', 'title', 'url', 'user_id', 'topic_id']])
+        .get(["latestLinks", {from: 0, to: 4}, ['id', 'title', 'url', 'user_id', 'topic_id', 'bias', 'author_id', 'news_agency_id', 'content_type']])
         .then(function(response) {
-            //console.log('latestLinks/result', response.json);
+            console.log('latestLinks/result', response.json);
             dispatch(response.json['latestLinks']);
         })
-        .catch(function(why){console.log(why)});
+        .catch(function(why){console.log('latestLinks/catch', why)});
     }
 };
 

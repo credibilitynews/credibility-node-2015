@@ -8,7 +8,7 @@ var About = React.createClass({
                 <div>
                     <h4>Credibility.io</h4>
                     <blockquote>Read from different sides of the story.</blockquote>
-                    <p><a>Submit</a> articles you read from different sources/perspectives and share your analysis.</p>
+                    <p><a>Submit</a> articles from different perspectives, share your views.</p>
                 </div>)
         };
     },

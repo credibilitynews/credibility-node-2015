@@ -17,9 +17,7 @@ var TopicActions = {
                 actionType: ActionTypes.FETCH_TOPICS_BY_ID,
                 topics: response.json['topicsById']
             })
-        }).catch(function(why){
-            console.log(why)
-        });
+        }).catch(function(why){console.log('topicsById/catch', why)});
     },
     fetchLatestTopics: function(){
         model()
@@ -30,9 +28,7 @@ var TopicActions = {
                 actionType: ActionTypes.FETCH_RECENT_TOPICS,
                 topics: response.json['latestTopics']
             });
-        }).catch(function(why){
-            console.log(why)
-        });
+        }).catch(function(why){console.log('latestTopics/catch', why)});
     }
 };
 

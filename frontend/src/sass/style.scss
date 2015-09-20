@@ -12,7 +12,7 @@ $icon-font-path: "/bootstrap/fonts/";
 
 @import "react-select";
 
-h1, h2, h3, h4, h5, h6{
+h1, h2, h3, h4, h5, h6, .navbar-brand{
     font-family: 'Cardo', serif;
 }
 
@@ -181,7 +181,12 @@ h1, h2, h3{
         }
         small.meta{
             color: #ccc;
-            float: right;
         }
     }
+}
+
+.link-title{
+    font-family: 'Cardo', serif;
+    font-size: 1.2em;
+    color: #888;
 }

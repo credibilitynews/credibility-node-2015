@@ -1,17 +1,19 @@
 
 var React = require('react/addons');
 var cx = require('classnames');
-var Hashtag = require('../tag/hashtag');
-var StoryList = require('../story/story-list');
-var StoryTimeline = require('../story/story-timeline');
+var Hashtag = require('components/tag/hashtag');
+var StoryList = require('components/story/story-list');
+var StoryTimeline = require('components/story/story-timeline');
 
-var Score = require('../stats/score');
-var ViewsNum =  require('../stats/views-num');
-var ArticlesNum =  require('../stats/articles-num');
-var TopicStats = require('../stats/topic-stats');
+var Score = require('components/stats/score');
+var ViewsNum =  require('components/stats/views-num');
+var ArticlesNum =  require('components/stats/articles-num');
+var TopicStats = require('components/stats/topic-stats');
 
-var TopicStore = require('../../stores/topic-store');
-var TopicActions = require('../../actions/topic-actions');
+var TopicStore = require('stores/topic-store');
+var TopicActions = require('actions/topic-actions');
+
+var SearchBar = require('components/search/search-bar');
 
 var Topic = React.createClass({
 	getInitialState: function() {
@@ -39,38 +41,45 @@ var Topic = React.createClass({
         });
 
 		return (
-			<div className="topic">
-				<div className="details">
-					<div className="content">
-						<div className="title">
-							<h2>{topic.title}</h2>
-							<a>World - Malaysia</a>
-	                        <blockquote className={toggled}>
-	                            The 2013 Lahad Datu standoff was a military conflict standoff that started on 11 February 2013 and ended on 24 March 2013,[5] it arose after 235 militants, some of whom were armed,[17] arrived by boats in Lahad Datu, Sabah, Malaysia from Simunul island, Tawi-Tawi in the southern Philippines on 11 February 2013.[12][18][19] The group, calling themselves the "Royal Security Forces of the Sultanate of Sulu and North Borneo",[12] was sent by Jamalul Kiram III, one of the claimants to the throne of the Sultanate of Sulu. Kiram stated that their objective was to assert the unresolved territorial claim of the Philippines to eastern Sabah (the former North Borneo).[20] Malaysian security forces surrounded the village of Tanduo in Lahad Datu where the group had gathered and after several weeks of negotiations and broken deadlines for the intruders to withdraw, security forces moved in and routed the Sulu militants.
-	                        </blockquote>
-	                        <a className="more-link" onClick={this._handleToggle}>
-	                            <div>{this.state.summaryShown ? "hide" : "read more"}</div>
-	                        </a>
-						</div>
-						<div className="meta">
-	                        <div className="content">
-							    <div><span>Hashtags:</span> <Hashtag tag={topic.hashtag} /></div>
-	                        	<div><span>Statistics:</span> <ArticlesNum articles={topic.articles} text/>, <ViewsNum views={topic.views} text/></div>
-							    <div><span>Related Topics:</span> Venezuela</div>
-							    <div><span>Added:</span> {topic.created_at}</div>
-	                        </div>
-						</div>
+			<div className="row topic">
+				<div className="col-sm-12 col-md-8">
+					<div className="">
+						<h1>{topic.title}</h1>
+						<a>{topic.hashtag}</a>
+                        <blockquote className={toggled}>
+                        </blockquote>
+					</div>
+					<div className="timeline">
+						<p>Timeline</p>
+						<StoryTimeline stories={topic.links} />
 					</div>
 				</div>
-				<div className="timeline">
-					<h2>Timeline</h2>
-					<StoryTimeline stories={topic.links} />
+				<div className="col-md-4 col-xs-12 right-sidebar">
+
+					<SearchBar />
+
+				    <div>
+						<h2>Details</h2>
+						<div>Created</div>
+							{topic.created_at}
+						<div>Hashtags</div>
+							<Hashtag tag={topic.hashtag} />
+					</div>
+                	<div>
+						<h2>Statistics</h2>
+						<ArticlesNum articles={topic.articles} text/>
+						<ViewsNum views={topic.views}/>
+					</div>
+				    <div>
+						<h2>Related</h2>
+					</div>
 				</div>
 			</div>
 		)
 	},
 	_handleStoreChange: function(){
 		var topic = TopicStore.getTopic(this.props.topicId);
+		console.log('topic', topic);
 		this.setState({topic, topic});
 	},
     _handleToggle: function(){

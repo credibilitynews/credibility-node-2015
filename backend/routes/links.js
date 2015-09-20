@@ -6,7 +6,7 @@ var linkService = require('../services/link-service');
 
 module.exports = [
     {
-        route: "linksById[{integers:linkIds}]['title', 'url', 'created_at', 'views', 'user_id', 'topic_id', 'type']",
+        route: "linksById[{integers:linkIds}]['title', 'url', 'created_at', 'updated_at', 'views', 'user_id', 'topic_id', 'bias', 'author_id', 'news_agency_id', 'content_type']",
         get: function(pathSet) {
             var userId = this.userId;
 
@@ -31,11 +31,11 @@ module.exports = [
 
                     });
                     return results;
-                }).catch(function(why){console.log(why)});
+                }).catch(function(why){console.log('links/get', why)});
         }
     },
     {
-        route: "latestLinks[{integers:n}]['id', 'title', 'url', 'created_at', 'views', 'user_id', 'topic_id', 'type']",
+        route: "latestLinks[{integers:n}]['id', 'title', 'url', 'created_at', 'updated_at', 'views', 'user_id', 'topic_id', 'bias', 'author_id', 'news_agency_id', 'content_type']",
         get: function(pathSet) {
             var userId = this.userId;
             var limit = pathSet.n.slice(-1)[0] - pathSet.n[0] + 1;
@@ -54,6 +54,7 @@ module.exports = [
                         var fields = pathSet[2];
                         fields.forEach(function(field){
                             var value = linkRecord && linkRecord[field] ? linkRecord[field] : undefined;
+
                             results.push({
                                 path: ['latestLinks', n, field],
                                 value: value
@@ -62,7 +63,7 @@ module.exports = [
 
                     });
                     return results;
-                }).catch(function(why){console.log(why)});
+                }).catch(function(why){console.log('latestLinks/error', why)});
         }
     }
 ]

@@ -32,7 +32,7 @@ module.exports = [
 
                     });
                     return results;
-                }).catch(function(why){console.log(why)});
+                }).catch(function(why){console.log('tagsById/error', why)});
         }
     },
     {
@@ -44,7 +44,6 @@ module.exports = [
                 .getAllTags()
                 .then(function(tags) {
                     var results = [];
-                    console.log('tags', tags);
                     Object.keys(tags).forEach(function(tagId, index) {
                         var tagRecord = tags[tagId] || {};
                         pathSet[2].forEach(function(key){
@@ -59,9 +58,8 @@ module.exports = [
                         })
 
                     });
-                    console.log('results', results);
                     return results;
-                }).catch(function(why){console.log(why)});
+                }).catch(function(why){console.log('tags/error', why)});
         }
     },
     {
@@ -72,12 +70,11 @@ module.exports = [
             return tagService
                 .getTagsCount()
                 .then(function(length) {
-                    console.log('length', length);
                     return {
                         path: ['tags', 'length'],
                         value: length
                     };
-                }).catch(function(why){console.log(why)});
+                }).catch(function(why){console.log('tags.length/error', why)});
         }
     }
 ];

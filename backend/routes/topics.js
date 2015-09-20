@@ -9,16 +9,13 @@ module.exports = [
         route: "topicsById[{integers:topicIds}]['id','title','hashtag','created_at','views','user_id']",
         get: function(pathSet) {
             var userId = this.userId;
-            console.log('topicsById/pathSet', pathSet);
 
             return topicService
                 .getTopics(pathSet.topicIds)
                 .then(function(topics) {
                     var results = [];
-                    //console.log('topicsById/then', topics);
                     pathSet.topicIds.forEach(function(topicId) {
                         var topicRecord = topics[topicId] || {};
-                        //console.log('topicsById/pathSet[2]', pathSet[2]);
                         pathSet[2].forEach(function(key) {
                             var value = topicRecord[key];
                             if(value === null) value = undefined;
@@ -33,9 +30,8 @@ module.exports = [
                         });
 
                     });
-                    //console.log('results', results);
                     return results;
-                }).catch(function(why){console.log(why)});
+                }).catch(function(why){console.log('topicsById/error', why)});
         }
     },
     {
@@ -48,7 +44,6 @@ module.exports = [
             return topicService
                 .getLatestTopics(offset, limit)
                 .then(function(topics) {
-                    console.log(topics);
                     var results = [];
 
                     var topicIds = Object.keys(topics);
@@ -66,9 +61,8 @@ module.exports = [
                             });
                         })
                     });
-                    console.log(results);
                     return results;
-                }).catch(function(why){console.log(why)});
+                }).catch(function(why){console.log('latestTopics/error', why)});
         }
     }
 ];

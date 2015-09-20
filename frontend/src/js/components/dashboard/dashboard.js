@@ -38,8 +38,8 @@ var Dashboard = React.createClass({
 				<div className="col-xs-12 col-md-4">
 					<SearchBar />
 				</div>
-				<div className="col-sm-12 col-md-8">
 
+				<div className="col-sm-12 col-md-8">
 					<div className="row">
 						<div className="col-sm-12">
 							<ActivityList />

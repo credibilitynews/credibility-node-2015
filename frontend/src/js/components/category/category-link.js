@@ -15,7 +15,7 @@ var CategoryLink = React.createClass({
         );
     },
     _link: function(category){
-        return "/#categories/"+category.code;
+        return "/categories/"+category.code;
     }
 
 });

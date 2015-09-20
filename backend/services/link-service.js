@@ -5,7 +5,7 @@ var Links = sequelize.define('links', {
     "url": Sequelize.STRING,
     "user_id": Sequelize.INTEGER,
     "topic_id": Sequelize.INTEGER,
-    "type": Sequelize.INTEGER,
+    "bias": Sequelize.INTEGER,
     "active": Sequelize.BOOLEAN,
     "created_at": Sequelize.DATE,
     "updated_at": Sequelize.DATE
@@ -48,6 +48,9 @@ LinkService.prototype = {
         return new Promise(function (resolve, reject) {
             Links
             .findAll({
+                where: {
+                    active: true
+                },
                 order: [['created_at', 'desc']],
                 limit: limit,
                 offset: offset

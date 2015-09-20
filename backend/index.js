@@ -15,10 +15,14 @@ app.use('/model.json', FalcorServer.dataSourceRoute(function(req, res){
     return RouterFactory("1");
 }));
 
-//app.use('/public', express.static('./public'));
+app.get('/favicon.ico', function(req, res){
+    res.sendFile('favicon.ico', {root: './backend/public'})
+});
+
 app.get('/public/*', function(req, res){
     res.sendFile(req.url, {root: "./backend"});
 });
+
 app.get('*', function(req, res){
     var reactHtml = React.renderToString(React.createElement(APP, {url: req.url}));
     res.render('index.ejs', {reactOutput: reactHtml});

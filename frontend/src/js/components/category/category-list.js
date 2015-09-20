@@ -3,7 +3,7 @@ var React = require('react'),
     CategoryLink = require('components/category/category-link'),
     CategoryStore = require('stores/category-store'),
 
-    TagActions = require('../../actions/tag-actions');
+    TagActions = require('actions/tag-actions');
 
 var CategoryList = React.createClass({
     getInitialState: function() {
@@ -42,7 +42,6 @@ var CategoryList = React.createClass({
 
         return categories
             .map(function(item, index){
-                console.log(item);
                 return (
                     <span key={index} className={className}>
                         <CategoryLink category={item}/>
@@ -60,12 +59,10 @@ var CategoryList = React.createClass({
                     reduced.push(item);
                 return reduced;
             }, []);
-        console.log(children);
         return children;
     },
     _handleStoreChange: function(){
         var categories = CategoryStore.getAllCategories();
-        console.log(categories);
         if(categories){
             this.setState({categories: categories});
         }

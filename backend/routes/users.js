@@ -9,13 +9,10 @@ module.exports = [
         route: "usersById[{integers:userIds}]['id', 'name', 'email', 'active', 'created_at']",
         get: function(pathSet) {
             var userId = this.userId;
-            console.log('usersById', pathSet.userIds)
             return userService
                 .getUsers(pathSet.userIds)
                 .then(function(users) {
-                    console.log(users);
                     var results = [];
-                    //console.log('pathSet', pathSet);
                     pathSet.userIds.forEach(function(userId) {
                         var userRecord = users[userId] || {};
 
@@ -31,9 +28,8 @@ module.exports = [
                         });
 
                     });
-                    console.log(results);
                     return results;
-                }).catch(function(why){console.log(why)});
+                }).catch(function(why){console.log('usersById/error', why)});
         }
     },
     {
@@ -61,7 +57,7 @@ module.exports = [
                         });
                     });
                     return results;
-                }).catch(function(why){console.log(why)});
+                }).catch(function(why){console.log('latestUsers/error', why)});
         }
     }
 ];

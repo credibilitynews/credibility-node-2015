@@ -11,6 +11,7 @@ var Dashboard = require('components/dashboard/dashboard'),
 
 var APP = React.createClass({
     render: function() {
+        console.log('props', this.props);
         return (
             <Template>
                 <Locations path={this.props.url}>

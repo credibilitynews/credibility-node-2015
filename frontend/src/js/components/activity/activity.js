@@ -1,8 +1,10 @@
-
 var React = require('react');
-var ViewsNum = require('../stats/views-num');
+
+var ViewsNum = require('components/stats/views-num');
+
 var TopicActions = require('actions/topic-actions'),
     UserActions = require('actions/user-actions');
+
 var TopicStore = require('stores/topic-store'),
     UserStore = require('stores/user-store');
 
@@ -30,11 +32,10 @@ var Activity = React.createClass({
             UserActions.fetchUsersById(this.props.article.user_id);
     },
     render: function(){
-
         return (
             <div className="activity">
-                <small className="meta">
-                    curated by <i>{this.state.user.name}</i>
+                <small className="meta pull-right">
+                    <i>{this.state.user.name}</i>
                 </small>
                 <div>
                     On <a href={"/topic/"+this.props.article.topic_id}>
@@ -43,15 +44,15 @@ var Activity = React.createClass({
                 </div>
                 <blockquote>
                     <div>
-                        <a href={"/link/"+this.props.article.id}>
+                        <a className="link-title" href={"/link/"+this.props.article.id}>
                             {this.props.article.title}
                         </a> <span className="label label-primary">News</span>
                     </div>
-                    <small>- {this.state.author.name}, {this.props.article.domain_name}</small>
+                    <small className="meta">
+                        - {this.props.article.author_id || '(unknown author)'}
+                        , {this.props.article.news_agency_id || '(unknown publisher)'}
+                    </small>
                 </blockquote>
-                <small className="meta">
-                    <span className="fa fa-comment"></span>
-                </small>
             </div>
         );
     },

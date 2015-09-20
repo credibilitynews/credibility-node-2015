@@ -27,7 +27,7 @@ var RecentTopics = React.createClass({
         return (
             <div>
                 <h3>Recent Topics</h3>
-                {this._wrap(this.state.topics)}
+                <ol>{this._wrap(this.state.topics)}</ol>
             </div>
         );
     },
@@ -35,9 +35,9 @@ var RecentTopics = React.createClass({
         if(!items) return <div />
         return items.map(function(item){
             return(
-                <div key={item.id}>
+                <li key={item.id}>
                     <TopicStats topic={item}/>
-                </div>);
+                </li>);
         });
     },
     _handleStoreChange: function(){

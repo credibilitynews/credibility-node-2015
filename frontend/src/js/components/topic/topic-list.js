@@ -1,11 +1,17 @@
 
-var React = require('react');
+var React = require('react/addons');
 var TopicLink = require('./topic-link');
 
 var TopicList = React.createClass({
+	propTypes: {
+		list: React.PropTypes.array.isRequired
+	},
 	render: function(){
 		var topics = this.props.list.map(function(i){
-			return (<li><TopicLink meta={i.meta} title={i.title} /></li>)
+			return (
+				<li>
+					<TopicLink meta={i.meta} title={i.title} />
+				</li>);
 		});
 
 		return (
