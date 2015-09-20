@@ -48,14 +48,14 @@ MERGE (link)-[about:ABOUT]->(topic)
 ON CREATE SET submit.created_at = row.created_at
 RETURN *;
 
-CREATE (:BIAS {id: "0", name: "fact"});
-CREATE (:BIAS {id: "1", name: "left"});
-CREATE (:BIAS {id: "2", name: "right"});
+CREATE (:Bias {id: "0", name: "fact"});
+CREATE (:Bias {id: "1", name: "left"});
+CREATE (:Bias {id: "2", name: "right"});
 
 USING PERIODIC COMMIT
 LOAD CSV WITH HEADERS FROM "file:/tmp/pgdump/links.csv" AS row
 MATCH (link:Link {id: row.id})
-MATCH (bias:BIAS {id: row.bias})
+MATCH (bias:Bias {id: row.bias})
 MERGE (link)-[b:BIAS_TOWARDS]->(bias)
 RETURN *;
 
@@ -68,7 +68,48 @@ LOAD CSV WITH HEADERS FROM "file:/tmp/pgdump/comments.csv" AS row
 MATCH (comment:Comment {id: row.id})
 MATCH (user:User {id: row.user_id})
 MATCH (link:Link {id: row.link_id})
-MERGE (comment)-[regard:REGARDING]->(link)
+MERGE (comment)-[regard:COMMENT_ON]->(link)
 MERGE (user)-[submit:submit]->(comment)
 ON CREATE SET submit.created_at = row.created_at
 RETURN *;
+
+USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS FROM "file:/tmp/pgdump/tags.csv" AS row
+MATCH (tag:Tag {id: row.id})
+MATCH (parent:Tag {id: row.parent_id})
+MERGE (parent)-[b:PARENT_OF]->(tag)
+RETURN *;
+
+MATCH (:User)-[s:SUBMIT]-(item)
+MERGE (y:Year {year: substring(s.created_at, 0, 4)})
+MERGE (m:Month {month: substring(s.created_at, 5, 2)})
+MERGE (d:Day {day: substring(s.created_at, 8, 2)})
+RETURN *;
+
+CREATE CONSTRAINT ON (y:Year) ASSERT y.year IS UNIQUE
+CREATE CONSTRAINT ON (m:Month) ASSERT m.month IS UNIQUE
+CREATE CONSTRAINT ON (d:Day) ASSERT d.day IS UNIQUE
+
+MATCH (y:Year)
+MATCH (m:Month)
+MERGE (y)-[:YYYYMM]->(m)
+RETURN *;
+
+MATCH (m:Month)
+MATCH (d:Day)
+MERGE (m)-[:MMDD]->(d)
+RETURN *;
+
+MATCH (:User)-[s:SUBMIT]-(item)
+MATCH (y:Year {year: substring(s.created_at, 0, 4)})
+MATCH (m:Month {month: substring(s.created_at, 5, 2)})
+MATCH (d:Day {day: substring(s.created_at, 8, 2)})
+MATCH (y)-[ym:YYYYMM]->(m)
+MATCH (m)-[md:MMDD]->(d)
+MERGE (y)-[:YYYYMM]->(m)-[:MMDD]->(d)<-[q:SUBMITTED_ON]-(item)
+RETURN *;
+
+// latest link
+MATCH (u:User)-[:SUBMIT]-(l:Topic)--[:SUBMITTED_ON]-(d:Day)--(m:Month)--(y:Year)
+RETURN u, l, y, m, d
+ORDER BY toInt(y.year) DESC, toInt(m.month) DESC, toInt(d.day) DESC LIMIT 5;
