@@ -1,5 +1,5 @@
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize(process.env.DATABASE_URL);
+var sequelize = new Sequelize(process.env.DATABASE_URL, {native: true});
 var Topics = sequelize.define('topics', {
     "title": Sequelize.STRING,
     "hashtag": Sequelize.STRING,
