@@ -8,7 +8,7 @@ module.exports = [
     {
         route: "topicsById[{integers:topicIds}]['id','title','hashtag','created_at','views','user_id']",
         get: function(pathSet) {
-            var userId = this.userId;
+            
 
             return topicService
                 .getTopics(pathSet.topicIds)
@@ -37,7 +37,7 @@ module.exports = [
     {
         route: "latestTopics[{integers:n}]['id','title','hashtag','created_at','views','user_id']",
         get: function(pathSet) {
-            var userId = this.userId;
+            
             var limit = pathSet.n.slice(-1)[0] - pathSet.n[0] + 1;
             var offset = pathSet.n[0];
 
