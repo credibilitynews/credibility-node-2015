@@ -4,6 +4,7 @@ var React = require('react'),
     LinkActions = require('actions/link-actions'),
     LatestActicleStore = require('stores/latest-article-store');
 
+LinkActions.fetchLatestLinks();
 var ActivityList = React.createClass({
     getInitialState: function() {
         return {
@@ -17,7 +18,8 @@ var ActivityList = React.createClass({
         LatestActicleStore.removeChangeListener(this._handleStoreChange);
     },
     componentDidMount: function(){
-        LinkActions.fetchLatestLinks();
+        if(this.state.articles.length == 0)
+            LinkActions.fetchLatestLinks();
     },
     render: function() {
         //console.log('activity-list', this.state);

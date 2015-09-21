@@ -3,8 +3,10 @@ var React = require('react'),
     TopicStats = require('../stats/topic-stats'),
     merge = require('object.assign'),
 
+    TopicActions = require('actions/topic-actions'),
     TopicStore = require('stores/topic-store');
 
+TopicActions.fetchLatestTopics();
 var RecentTopics = React.createClass({
     getInitialState: function() {
         return {
@@ -19,7 +21,8 @@ var RecentTopics = React.createClass({
         TopicStore.removeChangeListener(this._handleStoreChange);
     },
     componentDidMount: function(){
-        TopicActions.fetchLatestTopics();
+        if(this.state.topics.length == 0)
+            TopicActions.fetchLatestTopics();
     },
 
     render: function() {

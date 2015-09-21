@@ -5,6 +5,7 @@ var React = require('react'),
 
     TagActions = require('actions/tag-actions');
 
+TagActions.fetchAllTags();
 var CategoryList = React.createClass({
     getInitialState: function() {
         return {
@@ -18,7 +19,8 @@ var CategoryList = React.createClass({
         CategoryStore.removeChangeListener(this._handleStoreChange);
     },
     componentDidMount: function(){
-        TagActions.fetchAllTags();
+        if(this.state.categories.length == 0)
+            TagActions.fetchAllTags();
     },
 
     render: function() {

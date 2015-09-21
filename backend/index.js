@@ -17,13 +17,13 @@ var account = require('./routes/account');
 var APP = require('../frontend/src/js/components/app.js');
 
 app.use(session({
-  store: new pgSession({
-    pg : pg,                                  // Use global pg-module
-    conString : process.env.DATABASE_URL, // Connect using something else than default DATABASE_URL env variable
-    tableName : 'user_sessions'               // Use another table-name than the default "session" one
-  }),
-  secret: process.env.COOKIE_SECRET,
-  cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
+    store: new pgSession({
+        pg : pg,                                  // Use global pg-module
+        conString : process.env.DATABASE_URL, // Connect using something else than default DATABASE_URL env variable
+        tableName : 'user_sessions'               // Use another table-name than the default "session" one
+    }),
+    secret: process.env.COOKIE_SECRET,
+    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
 }));
 
 app.use(flash());

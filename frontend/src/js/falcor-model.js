@@ -1,6 +1,5 @@
 var falcor = require('falcor');
 
-
 module.exports = function(){
     if(typeof window === 'undefined') {
         return new falcor.Model({

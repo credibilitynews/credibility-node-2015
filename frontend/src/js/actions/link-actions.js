@@ -12,7 +12,8 @@ var LinkActions = {
         .get(["linksById", ids, ['title', 'url', 'created_at', 'views', 'user_id', 'topic_id', 'bias', 'author_id', 'news_agency_id', 'content_type']])
         .then(function(response) {
             //console.log('linksById', response.json);
-        }).catch(function(why){console.log('linksById/catch', why)});
+        })
+        .catch(function(why){console.log('linksById/catch', why)});
     },
     fetchLatestLinks: function(){
         var dispatch = function(links){
