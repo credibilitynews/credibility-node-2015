@@ -22,7 +22,6 @@ var TagActions = {
         model()
         .get("tags.length")
         .then(function(response) {
-            console.log(response.json);
             var length = response.json['tags']['length'];
             fetchTagsWithLength(length);
         }).catch(function(why){console.log("tags.length", why)});
@@ -32,7 +31,7 @@ var TagActions = {
         model()
         .get(["tagsById", tagIds, ["name", "code", "parent_id"]])
         .then(function(response) {
-            console.log(response.json);
+            //console.log(response.json);
         }).catch(function(why){console.log("tagsById", why)});
     }
 };

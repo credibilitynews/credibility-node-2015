@@ -6,12 +6,12 @@ var Footer = require('./app-footer.js');
 var Template = React.createClass({
 	render: function(){
 
-		var user_details = typeof user === "undefined" && !this.props.user ?
+		var userDoc = typeof user === 'undefined' && !this.props.user ?
 			null : (this.props.user || user);
-		console.log(user_details, this.props);	
+
 		return (
 			<div>
-			    <Header user={user_details}/>
+			    <Header user={userDoc}/>
 				<div className="container-fluid content">
 					{this.props.children}
 				</div>

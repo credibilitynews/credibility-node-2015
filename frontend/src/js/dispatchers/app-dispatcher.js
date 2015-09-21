@@ -15,6 +15,15 @@ Dispatcher.prototype = assign(Dispatcher.prototype, {
       source: PayloadSources.SERVER_ACTION,
       action: action
     });
+  },
+  waitForAll: function(myself){
+      var tokens = this.getAllTokens().filter(function(token){
+          return myself !== token;
+      });
+      return this.waitFor(tokens);
+  },
+  getAllTokens: function(){
+      return Object.keys(this.$Dispatcher_callbacks);
   }
 });
 
