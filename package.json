@@ -55,6 +55,7 @@
     "ejs": "^2.3.3",
     "es6-promise": "^2.0.1",
     "express": "^4.13.3",
+    "express-cluster": "0.0.4",
     "express-session": "^1.11.3",
     "express-sslify": "^0.1.2",
     "express-validator": "^2.17.1",
@@ -87,7 +88,7 @@
     "postinstall": "npm run build && npm run rejoice",
     "build": "cd frontend && gulp",
     "rejoice": "echo gulped!",
-    "start": "node backend/index.js",
+    "start": "node backend/cluster.js",
     "test": "NODE_PATH=frontend/src/js:node_modules jest"
   },
   "jest": {

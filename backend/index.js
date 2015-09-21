@@ -80,7 +80,7 @@ app.get('*', function(req, res){
 
 app.set('views', __dirname + '/views');
 
-var server = app.listen(process.env.PORT || 5000, function(err){
+module.export = app.listen(process.env.PORT || 5000, function(err){
     if(err){
         console.error(err);
         return;
