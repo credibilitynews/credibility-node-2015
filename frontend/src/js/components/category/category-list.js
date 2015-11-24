@@ -6,24 +6,31 @@ var React = require('react'),
     TagActions = require('actions/tag-actions');
 
 TagActions.fetchAllTags();
-var CategoryList = React.createClass({
-    getInitialState: function() {
-        return {
+
+class CategoryList extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this._handleStoreChange = this._handleStoreChange.bind(this);
+
+        this.state = {
             categories: CategoryStore.getAllCategories()
         };
-    },
-    componentWillMount: function(){
+    }
+
+    componentWillMount() {
         CategoryStore.addChangeListener(this._handleStoreChange);
-    },
-    componentWillUnmount: function(){
+    }
+
+    componentWillUnmount() {
         CategoryStore.removeChangeListener(this._handleStoreChange);
-    },
-    componentDidMount: function(){
+    }
+
+    componentDidMount() {
         if(this.state.categories.length == 0)
             TagActions.fetchAllTags();
-    },
+    }
 
-    render: function() {
+    render() {
         //console.log(this.state.categories);
         return (
             <div className="category-list panel panel-default">
@@ -37,9 +44,9 @@ var CategoryList = React.createClass({
                 </div>
             </div>
         );
-    },
+    }
 
-    _wrap: function(categories, className){
+    _wrap(categories, className) {
         if(!categories) return <div />;
 
         return categories
@@ -54,22 +61,23 @@ var CategoryList = React.createClass({
                         </span>
                     </span>)
             }.bind(this));
-    },
-    _childrenOf: function(categories, parentId){
+    }
+
+    _childrenOf(categories, parentId) {
         var children = categories.reduce(function(reduced, item){
                 if(item.parent_id == parentId)
                     reduced.push(item);
                 return reduced;
             }, []);
         return children;
-    },
-    _handleStoreChange: function(){
+    }
+
+    _handleStoreChange() {
         var categories = CategoryStore.getAllCategories();
         if(categories){
             this.setState({categories: categories});
         }
     }
-
-});
+}
 
 module.exports = CategoryList;

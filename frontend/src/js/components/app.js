@@ -10,8 +10,8 @@ var Dashboard = require('components/dashboard/dashboard'),
     Template = require('components/app-template'),
     AppLogin = require('components/user/user-login');
 
-var APP = React.createClass({
-    render: function() {
+class APP extends React.Component {
+    render() {
         return (
             <Template user={this.props.user}>
                 <Locations path={this.props.url}>
@@ -22,7 +22,6 @@ var APP = React.createClass({
                 </Locations>
             </Template>);
     }
-
-});
+}
 
 module.exports = APP;

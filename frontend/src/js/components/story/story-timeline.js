@@ -2,17 +2,8 @@
 var React = require('react');
 var StoryLink = require('../story/story-link');
 
-var StoryTimeline = React.createClass({
-	getDefaultProps: function() {
-		return {
-			stories: {
-				title: "",
-				meta: {articles: 0},
-				stories: []
-			}
-		};
-	},
-	render: function(){
+class StoryTimeline extends React.Component {
+    render() {
 		console.log('story-timeline', this.props);
 		var stories = this.props.stories;
 		return (
@@ -22,8 +13,9 @@ var StoryTimeline = React.createClass({
                 </div>
 			</div>
 		)
-	},
-	_wrap: function(items){
+	}
+
+    _wrap(items) {
 		var times = {};
 		return items
 		.reduce(function(sets, item){
@@ -65,6 +57,14 @@ var StoryTimeline = React.createClass({
 				</div>)
 		});
 	}
-});
+}
+
+StoryTimeline.defaultProps = {
+    stories: {
+        title: "",
+        meta: {articles: 0},
+        stories: []
+    }
+};
 
 module.exports = StoryTimeline;

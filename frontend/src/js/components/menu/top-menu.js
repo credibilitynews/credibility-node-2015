@@ -1,20 +1,11 @@
 
 var React = require('react');
 var Link = require('react-router-component').Link;
+
 // var ReactIntlMixin = require("react-intl").ReactIntlMixin;
 
-var TopMenu = React.createClass({
-	getDefaultProps: function() {
-		return {
-			items: [
-				{path: '#/topic', label: 'USA'},
-				{path: '#/topic', label: 'Ukraine'},
-				{path: '#/topic', label: 'Hong Kong'},
-				{path: '#/topic', label: 'Thailand'},
-			]
-		};
-	},
-	render: function(){
+class TopMenu extends React.Component {
+    render() {
 		return (
 			<div className="top-menu">
 				<ul className="nav nav-pills">
@@ -22,8 +13,9 @@ var TopMenu = React.createClass({
 					{this._wrap(this.props.items)}
 				</ul>
 			</div>)
-	},
-	_wrap: function(items){
+	}
+
+    _wrap(items) {
 		return items.map(function(item){
 			return (
 				<li key={item.label} className="nav-item">
@@ -31,6 +23,15 @@ var TopMenu = React.createClass({
 				</li>);
 		})
 	}
-})
+}
+
+TopMenu.defaultProps = {
+    items: [
+        {path: '#/topic', label: 'USA'},
+        {path: '#/topic', label: 'Ukraine'},
+        {path: '#/topic', label: 'Hong Kong'},
+        {path: '#/topic', label: 'Thailand'},
+    ]
+};
 
 module.exports = TopMenu;

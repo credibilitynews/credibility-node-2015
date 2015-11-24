@@ -1,17 +1,8 @@
 
 var React = require('react');
 
-var Story = React.createClass({
-	getDefaultProps: function() {
-		return {
-			meta: {
-				domain_name: "credibility.io",
-				author: "admin",
-				created_at: "2013-01-01"
-			}
-		};
-	},
-	render: function(){
+class Story extends React.Component {
+    render() {
 		return (
 			<div className="panel">
 				<div className="panel-body">
@@ -22,6 +13,14 @@ var Story = React.createClass({
 			</div>
 		)
 	}
-});
+}
+
+Story.defaultProps = {
+    meta: {
+        domain_name: "credibility.io",
+        author: "admin",
+        created_at: "2013-01-01"
+    }
+};
 
 module.exports = Story;

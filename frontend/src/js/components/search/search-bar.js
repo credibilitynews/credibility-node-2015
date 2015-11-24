@@ -1,10 +1,10 @@
 var React = require('react');
 var Select = require('react-select');
 
-var SearchBar = React.createClass({
-	render: function(){
+class SearchBar extends React.Component {
+    render() {
 		return (<Select placeholder="Search" />)
 	}
-});
+}
 
 module.exports = SearchBar;

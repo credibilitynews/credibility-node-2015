@@ -2,21 +2,17 @@
 var React = require('react');
 var TopicLink = require('../topic/topic-link');
 
-var LatestTopics = React.createClass({
-    getDefaultProps: function() {
-        return {
-            topics: []
-        };
-    },
-    render: function() {
+class LatestTopics extends React.Component {
+    render() {
         return (
             <div className="latest-topics">
                 <h3>News Update</h3>
                 <ul>{this._wrapItems(this.props.topics)}</ul>
             </div>
         );
-    },
-    _wrapItems: function(items) {
+    }
+
+    _wrapItems(items) {
         return items.map(function(item){
             return (
                 <li key={item.id}>
@@ -24,7 +20,10 @@ var LatestTopics = React.createClass({
                 </li>)
         });
     }
+}
 
-});
+LatestTopics.defaultProps = {
+    topics: []
+};
 
 module.exports = LatestTopics;

@@ -3,8 +3,8 @@ var React = require('react'),
 	Link = require('react-router-component').Link,
 	LinkActions = require('../../actions/link-actions');
 
-var StoryLink = React.createClass({
-	render: function(){
+class StoryLink extends React.Component {
+    render() {
 		console.log("story-link", this.props);
 		var story = this.props.story;
 
@@ -26,6 +26,6 @@ var StoryLink = React.createClass({
 			</div>
 		)
 	}
-});
+}
 
 module.exports = StoryLink;

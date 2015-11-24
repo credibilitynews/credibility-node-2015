@@ -1,13 +1,8 @@
 
 var React = require('react');
 
-var ArticlesNum = React.createClass({
-	getDefaultProps: function() {
-		return {
-			text: false
-		};
-	},
-	render: function(){
+class ArticlesNum extends React.Component {
+    render() {
 		return (
 			<span className="articles-num label">
 				{this.props.text ? this.props.articles : <i className="fa fa-file-text-o"></i>}
@@ -15,6 +10,10 @@ var ArticlesNum = React.createClass({
 			</span>
 		)
 	}
-})
+}
+
+ArticlesNum.defaultProps = {
+    text: false
+};
 
 module.exports = ArticlesNum;

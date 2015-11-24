@@ -5,23 +5,31 @@ var React = require('react'),
     LatestActicleStore = require('stores/latest-article-store');
 
 LinkActions.fetchLatestLinks();
-var ActivityList = React.createClass({
-    getInitialState: function() {
-        return {
+
+class ActivityList extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this._handleStoreChange = this._handleStoreChange.bind(this);
+
+        this.state = {
             articles: LatestActicleStore.getAllArticles()
         };
-    },
-    componentWillMount: function(){
+    }
+
+    componentWillMount() {
         LatestActicleStore.addChangeListener(this._handleStoreChange);
-    },
-    componentWillUnMount: function(){
+    }
+
+    componentWillUnMount() {
         LatestActicleStore.removeChangeListener(this._handleStoreChange);
-    },
-    componentDidMount: function(){
+    }
+
+    componentDidMount() {
         if(this.state.articles.length == 0)
             LinkActions.fetchLatestLinks();
-    },
-    render: function() {
+    }
+
+    render() {
         //console.log('activity-list', this.state);
         return (
             <div className="activity-list row">
@@ -32,9 +40,9 @@ var ActivityList = React.createClass({
                     {this._wrap(this.state.articles)}
                 </div>
             </div>);
-    },
+    }
 
-    _wrap: function(items){
+    _wrap(items) {
         return items.map(function(item, index){
             return (
                 <div key={index} className="activity-list-item">
@@ -43,10 +51,11 @@ var ActivityList = React.createClass({
                     </div>
                 </div>)
         });
-    },
-    _handleStoreChange: function(){
+    }
+
+    _handleStoreChange() {
         this.setState(this.getInitialState());
     }
-});
+}
 
 module.exports = ActivityList;

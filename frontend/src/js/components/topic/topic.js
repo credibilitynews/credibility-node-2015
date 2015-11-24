@@ -14,24 +14,32 @@ var TopicActions = require('actions/topic-actions');
 
 var SearchBar = require('components/search/search-bar');
 
-var Topic = React.createClass({
-	getInitialState: function() {
-		return {
+class Topic extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this._handleStoreChange = this._handleStoreChange.bind(this);
+
+        this.state = {
 			topic: null,
 			summaryShown: false
 		};
-	},
-	componentWillMount: function(){
-		TopicStore.addChangeListener(this._handleStoreChange);
-	},
-	componentWillUnmount: function(){
-		TopicStore.removeChangeListener(this._handleStoreChange);
-	},
-	componentDidMount: function() {
-		TopicActions.fetchTopicsById(this.props.topicId);
-	},
+    }
 
-	render: function(){
+    componentWillMount() {
+		TopicStore.addChangeListener(this._handleStoreChange);
+	}
+
+    componentWillUnmount() {
+		TopicStore.removeChangeListener(this._handleStoreChange);
+	}
+
+    componentDidMount() {
+		if(!this.state.topic)
+			TopicActions.fetchTopicsById(this.props.topicId);
+	}
+
+    render() {
+		console.log(this.props);
 		var topic = this.state.topic || {};
 
         var toggled = cx({
@@ -75,15 +83,17 @@ var Topic = React.createClass({
 				</div>
 			</div>
 		)
-	},
-	_handleStoreChange: function(){
+	}
+
+    _handleStoreChange() {
 		var topic = TopicStore.getTopic(this.props.topicId);
 		console.log('topic', topic);
 		this.setState({topic: topic});
-	},
-    _handleToggle: function(){
+	}
+
+    _handleToggle() {
         this.setState({summaryShown: !this.state.summaryShown});
     }
-});
+}
 
 module.exports = Topic;

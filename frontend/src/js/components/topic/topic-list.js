@@ -2,11 +2,8 @@
 var React = require('react/addons');
 var TopicLink = require('./topic-link');
 
-var TopicList = React.createClass({
-	propTypes: {
-		list: React.PropTypes.array.isRequired
-	},
-	render: function(){
+class TopicList extends React.Component {
+    render() {
 		var topics = this.props.list.map(function(i){
 			return (
 				<li>
@@ -22,6 +19,10 @@ var TopicList = React.createClass({
 			</div>
 		)
 	}
-});
+}
+
+TopicList.propTypes = {
+    list: React.PropTypes.array.isRequired
+};
 
 module.exports = TopicList;

@@ -7,8 +7,8 @@ var React = require('react'),
 	UserActions = require('../../actions/user-actions'),
     AppServerAction = require('../../actions/server-actions');
 
-var LoginForm = React.createClass({
-    render: function() {
+class LoginForm extends React.Component {
+    render() {
 		
 		var validation_message = typeof validation === "undefined" && !this.props.validation ?
 			null : (this.props.validation || validation);
@@ -44,10 +44,18 @@ var LoginForm = React.createClass({
                 </div>
             </div>)
     }
-});
+}
 
-var UserLogin = React.createClass({
-    render: function() {
+class UserLogin extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this._handleCancel = this._handleCancel.bind(this);
+        this._handleLogin = this._handleLogin.bind(this);
+        this._handleLoginError = this._handleLoginError.bind(this);
+        this._handleLoginSuccess = this._handleLoginSuccess.bind(this);
+    }
+
+    render() {
         return (
 			<Locations ref="router" contextual>
 				<Location path="/user/login"
@@ -56,30 +64,36 @@ var UserLogin = React.createClass({
                     onCancel={this._handleCancel} ref="login" />
 				<NotFound handler={<div/>} />
 			</Locations>);
-    },
-    componentWillMount: function() {
+    }
+
+    componentWillMount() {
         UserStore.addListener(UserStore.events.LOGIN_EVENT_SUCCESS, this._handleLoginSuccess);
         UserStore.addListener(UserStore.events.LOGIN_EVENT_ERROR, this._handleLoginError);
-    },
-    componentWillUnmount: function() {
+    }
+
+    componentWillUnmount() {
         UserStore.removeListener(UserStore.events.LOGIN_EVENT_SUCCESS, this._handleLoginSuccess);
         UserStore.removeListener(UserStore.events.LOGIN_EVENT_ERROR, this._handleLoginError);
-    },
-    _handleLogin: function(){
+    }
+
+    _handleLogin() {
         console.log('logging in');
         var username = this.refs.router.refs.login.getUsername();
         var password = this.refs.router.refs.login.getPassword();
         AppServerAction.login(username, password);
-    },
-    _handleCancel: function(){
+    }
+
+    _handleCancel() {
         this.refs.router.navigate('/')
-    },
-    _handleLoginError: function(err){
+    }
+
+    _handleLoginError(err) {
         alert(err);
-    },
-    _handleLoginSuccess: function(token){
+    }
+
+    _handleLoginSuccess(token) {
         alert(token);
     }
-});
+}
 
 module.exports = LoginForm;

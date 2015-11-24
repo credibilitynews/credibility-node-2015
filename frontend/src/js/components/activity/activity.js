@@ -8,30 +8,35 @@ var TopicActions = require('actions/topic-actions'),
 var TopicStore = require('stores/topic-store'),
     UserStore = require('stores/user-store');
 
-var Activity = React.createClass({
-    getInitialState: function(){
-        return {
+class Activity extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this._handleTopicStoreChange = this._handleTopicStoreChange.bind(this);
+        this._handleUserStoreChange = this._handleUserStoreChange.bind(this);
+
+        this.state = {
             topic: {},
             author: {},
             user: {},
-        }
-    },
-    componentWillMount: function(){
+        };
+    }
+
+    componentWillMount() {
         UserStore.addChangeListener(this._handleUserStoreChange);
         TopicStore.addChangeListener(this._handleTopicStoreChange);
-    },
-    componentWillUnmount: function(){
+    }
+
+    componentWillUnmount() {
         UserStore.removeChangeListener(this._handleUserStoreChange);
         TopicStore.removeChangeListener(this._handleTopicStoreChange);
-    },
-    componentDidMount: function(){
-        if(this.props.article.topic_id)
-            TopicActions.fetchTopicsById(this.props.article.topic_id);
+    }
 
+    componentDidMount() {
         if(this.props.article.user_id)
             UserActions.fetchUsersById(this.props.article.user_id);
-    },
-    render: function(){
+    }
+
+    render() {
         return (
             <div className="activity">
                 <small className="meta pull-right">
@@ -39,7 +44,7 @@ var Activity = React.createClass({
                 </small>
                 <div>
                     On <a href={"/topic/"+this.props.article.topic_id}>
-                        <strong>{this.state.topic.title}</strong>
+                        <strong>{this.props.article.topic_title}</strong>
                         </a>,
                 </div>
                 <blockquote>
@@ -55,16 +60,18 @@ var Activity = React.createClass({
                 </blockquote>
             </div>
         );
-    },
-    _handleUserStoreChange: function(){
+    }
+
+    _handleUserStoreChange() {
         var user = UserStore.getUser(this.props.article.user_id);
         if(user) this.setState({user: user});
-    },
-    _handleTopicStoreChange: function(){
+    }
+
+    _handleTopicStoreChange() {
         var topic = TopicStore.getTopic(this.props.article.topic_id);
         //console.log(topic);
         if(topic) this.setState({topic: topic})
     }
-});
+}
 
 module.exports = Activity;

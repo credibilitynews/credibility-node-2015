@@ -1,8 +1,8 @@
 
 var React = require('react');
 
-var Score = React.createClass({
-	render: function(){
+class Score extends React.Component {
+    render() {
 		var style= {"marginRight": "5px"};
 		return (
 			<span className="label label-warning">
@@ -10,6 +10,6 @@ var Score = React.createClass({
 			</span>
 		)
 	}
-})
+}
 
 module.exports = Score;

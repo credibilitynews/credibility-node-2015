@@ -25,11 +25,13 @@ function getStatesFromStore(){
 	return state;
 }
 
-var Dashboard = React.createClass({
-	getInitialState: function() {
-		return getStatesFromStore();
-	},
- 	render: function(){
+class Dashboard extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = getStatesFromStore();
+    }
+
+    render() {
 		return (
 			<div className="row">
 				<div className="col-xs-12 col-md-8">
@@ -56,11 +58,11 @@ var Dashboard = React.createClass({
 				</div>
 			</div>
 		)
-	},
+	}
 
-	_onChange: function(){
+    _onChange() {
 		this.setState(getStatesFromStore())
 	}
-});
+}
 
 module.exports = Dashboard;

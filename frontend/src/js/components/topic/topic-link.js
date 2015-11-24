@@ -4,15 +4,8 @@ var React = require('react'),
 	Score = require('../stats/score'),
 	ViewsNum = require('../stats/views-num');
 
-var TopicLink = React.createClass({
-	getDefaultProps: function() {
-		return {
-			title: "[Topic Title]",
-			hashtag: "[#hashtag]",
-			score: 0
-		};
-	},
-	render: function(){
+class TopicLink extends React.Component {
+    render() {
 		return (
 			<div className="topic-link">
 				<div className="row">
@@ -34,6 +27,12 @@ var TopicLink = React.createClass({
 			</div>
 		)
 	}
-});
+}
+
+TopicLink.defaultProps = {
+    title: "[Topic Title]",
+    hashtag: "[#hashtag]",
+    score: 0
+};
 
 module.exports = TopicLink;

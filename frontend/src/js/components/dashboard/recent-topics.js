@@ -7,25 +7,31 @@ var React = require('react'),
     TopicStore = require('stores/topic-store');
 
 TopicActions.fetchLatestTopics();
-var RecentTopics = React.createClass({
-    getInitialState: function() {
-        return {
+
+class RecentTopics extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this._handleStoreChange = this._handleStoreChange.bind(this);
+
+        this.state = {
             topics: TopicStore.getLatestTopics()
         };
-    },
+    }
 
-    componentWillMount: function(){
+    componentWillMount() {
         TopicStore.addChangeListener(this._handleStoreChange);
-    },
-    componentWillUnmount: function(){
+    }
+
+    componentWillUnmount() {
         TopicStore.removeChangeListener(this._handleStoreChange);
-    },
-    componentDidMount: function(){
+    }
+
+    componentDidMount() {
         if(this.state.topics.length == 0)
             TopicActions.fetchLatestTopics();
-    },
+    }
 
-    render: function() {
+    render() {
         //console.log("debates", this.props);
         return (
             <div>
@@ -33,8 +39,9 @@ var RecentTopics = React.createClass({
                 <ol>{this._wrap(this.state.topics)}</ol>
             </div>
         );
-    },
-    _wrap: function(items){
+    }
+
+    _wrap(items) {
         if(!items) return <div />
         return items.map(function(item){
             return(
@@ -42,11 +49,12 @@ var RecentTopics = React.createClass({
                     <TopicStats topic={item}/>
                 </li>);
         });
-    },
-    _handleStoreChange: function(){
+    }
+
+    _handleStoreChange() {
         //console.log('changed');
         this.setState(this.getInitialState());
     }
-});
+}
 
 module.exports = RecentTopics;

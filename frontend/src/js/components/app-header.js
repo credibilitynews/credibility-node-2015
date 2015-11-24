@@ -2,8 +2,8 @@ var React = require('react');
 var TopMenu = require('./menu/top-menu');
 var UserMenu = require('./menu/user-menu');
 
-var Header = React.createClass({
-	render: function(){
+class Header extends React.Component {
+    render() {
 		return (
 			<nav className="header navbar navbar-light bg-faded" role="navigation">
 				<a className="navbar-brand" href="/">
@@ -15,6 +15,6 @@ var Header = React.createClass({
 			</nav>
 		)
 	}
-})
+}
 
 module.exports = Header;

@@ -1,29 +1,30 @@
 
 var React = require('react');
 
-var Hashtag = React.createClass({
-	getDefaultProps: function() {
-		return {
-			tag: ""
-		};
-	},
-	_link: function(hashtag){
+class Hashtag extends React.Component {
+    _link(hashtag) {
 		return "https://twitter.com/hashtag/"+hashtag.slice(1);
-	},
-	_split: function(hashtags){
+	}
+
+    _split(hashtags) {
 		return hashtags
 			.split(' ')
 			.map(function(tag){
 				return (<span key={tag}><a href={this._link(tag)}>{tag}</a>&nbsp;</span>)
 			}.bind(this))
-	},
-	render: function(){
+	}
+
+    render() {
 		return (
 			<div className="tag" href="#">
 				{this._split(this.props.tag)}
 			</div>
 		)
 	}
-});
+}
+
+Hashtag.defaultProps = {
+    tag: ""
+};
 
 module.exports = Hashtag;

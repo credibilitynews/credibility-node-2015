@@ -1,20 +1,18 @@
 
 var React = require('react');
 
-var ViewsNum = React.createClass({
-    getDefaultProps: function() {
-        return {
-            text: false
-        };
-    },
-    render: function() {
+class ViewsNum extends React.Component {
+    render() {
         return (
             <span className="views-num label">
                 {this.props.views} views
             </span>
         );
     }
+}
 
-});
+ViewsNum.defaultProps = {
+    text: false
+};
 
 module.exports = ViewsNum;

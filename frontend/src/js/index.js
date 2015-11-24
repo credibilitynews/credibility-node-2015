@@ -1,5 +1,7 @@
 var React = require('react');
 
+var ReactDOM = require('react-dom');
+
 if(typeof window !== "undefined") {
     var FalcorModel = require('./falcor-model');
     FalcorModel.prepareForHydration();
@@ -8,6 +10,6 @@ if(typeof window !== "undefined") {
     FalcorModel
         .hydrate()
         .then(function(){
-            React.render(<APP />, document.querySelector('#credibility'));
+            ReactDOM.render(<APP />, document.querySelector('#credibility'));
         });
 }

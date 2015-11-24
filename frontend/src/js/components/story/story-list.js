@@ -2,17 +2,8 @@
 var React = require('react');
 var StoryLink = require('../story/story-link');
 
-var StoryList = React.createClass({
-	getDefaultProps: function() {
-		return {
-			stories: {
-				title: "",
-				meta: {articles: 0},
-				stories: []
-			}
-		};
-	},
-	render: function(){
+class StoryList extends React.Component {
+    render() {
 		console.log('story-list', this.props);
 		var stories = this.props.stories;
 		return (
@@ -24,12 +15,21 @@ var StoryList = React.createClass({
 				</ul>
 			</div>
 		)
-	},
-	_wrap: function(items){
+	}
+
+    _wrap(items) {
 		return items.map(function(item){
 			return (<li key={item.id}><StoryLink story={item} /></li>)
 		});
 	}
-});
+}
+
+StoryList.defaultProps = {
+    stories: {
+        title: "",
+        meta: {articles: 0},
+        stories: []
+    }
+};
 
 module.exports = StoryList;

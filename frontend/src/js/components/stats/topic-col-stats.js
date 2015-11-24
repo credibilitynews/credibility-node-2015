@@ -3,16 +3,8 @@ var React = require('react'),
     ArticlesNum = require('../stats/articles-num'),
     ViewsNum = require('../stats/views-num');
 
-var TopicColStats = React.createClass({
-    getDefaultProps: function() {
-        return {
-            title: "[Title]",
-            meta:{
-                articles: 0
-            }
-        }
-    },
-    render: function() {
+class TopicColStats extends React.Component {
+    render() {
         console.log("topic-col-stats", this.props.stats);
         return (
             <div className="topic-col-stats">
@@ -23,7 +15,13 @@ var TopicColStats = React.createClass({
             </div>
         );
     }
+}
 
-});
+TopicColStats.defaultProps = {
+    title: "[Title]",
+    meta:{
+        articles: 0
+    }
+};
 
 module.exports = TopicColStats;
