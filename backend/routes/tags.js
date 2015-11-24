@@ -19,7 +19,7 @@ module.exports = [
                             var value = tagRecord ? tagRecord[key] : undefined;
 
                             switch(key){
-                            case 'parent_id': value = value ? $ref(['tagsById', value]) : value; break;
+                            case parent_id: value = value ? $ref(['tagsById', value]) : value; break;
                             default: value = value; break;
                             }
                             results.push({

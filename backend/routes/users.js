@@ -8,7 +8,7 @@ module.exports = [
     {
         route: 'usersById[{integers:userIds}][\'id\', \'name\', \'email\', \'active\', \'created_at\']',
         get: function(pathSet) {
-            
+
             return userService
                 .getUsers(pathSet.userIds)
                 .then(function(users) {
@@ -35,7 +35,7 @@ module.exports = [
     {
         route: 'latestUsers[{integers:n}][\'id\']',
         get: function(pathSet, args) {
-            
+
             var limit = pathSet.n.slice(-1)[0] - pathSet.n[0] + 1;
             var offset = pathSet.n[0];
 

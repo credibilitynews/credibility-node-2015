@@ -1,7 +1,6 @@
 import Router from 'falcor-router';
 
-var CredRouterBase = Router.createClass(
-        [
+var CredRouterBase = Router.createClass([
         {
             // match a request for the key "greeting"
             route: 'greeting',
@@ -10,7 +9,7 @@ var CredRouterBase = Router.createClass(
                 return {path:['greeting'], value: 'Hello World'};
             }
         }
-        ]
+    ]
     .concat(require('./routes/links'))
     .concat(require('./routes/topics'))
     .concat(require('./routes/tags'))

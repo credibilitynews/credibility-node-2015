@@ -1,9 +1,9 @@
 import Sequelize from 'sequelize';
 var sequelize = new Sequelize(process.env.DATABASE_URL, {native: true});
 var Tags = sequelize.define('tags', {
-    'name': Sequelize.STRING,
-    'code': Sequelize.STRING,
-    'parent_id': Sequelize.INTEGER
+    name: Sequelize.STRING,
+    code: Sequelize.STRING,
+    parent_id: Sequelize.INTEGER
 }, {
     timestamps: false
 });

@@ -9,11 +9,6 @@
         "quote-props": [2, "as-needed", {"numbers": true}],
         "dot-notation": 2
     },
-    "env": {
-        "es6": true,
-        "browser": true,
-        "commonjs": true
-    },
 
     "ecmaFeatures": {
         "jsx": true,
@@ -32,11 +27,5 @@
     },
     "plugins": [
         "react"
-    ],
-    "globals": {
-        "user": true,
-        "validation": true,
-        "error": true,
-        "success": true
-    }
+    ]
 }

@@ -1,12 +1,12 @@
 import Sequelize from 'sequelize';
 var sequelize = new Sequelize(process.env.DATABASE_URL, {native: true});
 var Users = sequelize.define('users', {
-    'name': Sequelize.STRING,
-    'email': Sequelize.STRING,
-    'password': Sequelize.STRING,
-    'active': Sequelize.BOOLEAN,
-    'created_at': Sequelize.DATE,
-    'updated_at': Sequelize.DATE
+    name: Sequelize.STRING,
+    email: Sequelize.STRING,
+    password: Sequelize.STRING,
+    active: Sequelize.BOOLEAN,
+    created_at: Sequelize.DATE,
+    updated_at: Sequelize.DATE
 }, {
     createdAt: 'created_at',
     updatedAt: 'updated_at'

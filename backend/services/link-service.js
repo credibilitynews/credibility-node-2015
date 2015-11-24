@@ -3,14 +3,14 @@ import {def as Topics} from './topic-service';
 
 var sequelize = new Sequelize(process.env.DATABASE_URL, {native: true});
 var Links = sequelize.define('links', {
-    'title': Sequelize.STRING,
-    'url': Sequelize.STRING,
-    'user_id': Sequelize.INTEGER,
-    'topic_id': Sequelize.INTEGER,
-    'bias': Sequelize.INTEGER,
-    'active': Sequelize.BOOLEAN,
-    'created_at': Sequelize.DATE,
-    'updated_at': Sequelize.DATE
+    title: Sequelize.STRING,
+    url: Sequelize.STRING,
+    user_id: Sequelize.INTEGER,
+    topic_id: Sequelize.INTEGER,
+    bias: Sequelize.INTEGER,
+    active: Sequelize.BOOLEAN,
+    created_at: Sequelize.DATE,
+    updated_at: Sequelize.DATE
 }, {
     createdAt: 'created_at',
     updatedAt: 'updated_at'
