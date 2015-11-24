@@ -1,4 +1,4 @@
-import sequence from 'run-sequence';
+var sequence = require('run-sequence');
 
 module.exports = function(gulp, opts, $){
     var config = opts.config;
