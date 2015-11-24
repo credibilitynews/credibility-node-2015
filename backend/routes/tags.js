@@ -6,7 +6,7 @@ import tagService from '../services/tag-service';
 
 module.exports = [
     {
-        route: "tagsById[{integers:tagIds}]['id', 'name', 'code', 'parent_id']",
+        route: 'tagsById[{integers:tagIds}][\'id\', \'name\', \'code\', \'parent_id\']',
         get: function(pathSet) {
             return tagService
                 .getTags(pathSet.tagIds)
@@ -19,8 +19,8 @@ module.exports = [
                             var value = tagRecord ? tagRecord[key] : undefined;
 
                             switch(key){
-                                case "parent_id": value = value ? $ref(['tagsById', value]) : value; break;
-                                default: value = value; break;
+                            case 'parent_id': value = value ? $ref(['tagsById', value]) : value; break;
+                            default: value = value; break;
                             }
                             results.push({
                                 path: ['tagsById', tagId, key],
@@ -30,11 +30,11 @@ module.exports = [
 
                     });
                     return results;
-                }).catch(function(why){console.log('tagsById/error', why)});
+                }).catch(function(why){console.log('tagsById/error', why);});
         }
     },
     {
-        route: "tags[{integers:n}]['id', 'name', 'code', 'parent_id']",
+        route: 'tags[{integers:n}][\'id\', \'name\', \'code\', \'parent_id\']',
         get: function(pathSet) {
             return tagService
                 .getAllTags()
@@ -45,21 +45,21 @@ module.exports = [
                         pathSet[2].forEach(function(key){
                             var value = tagRecord[key];
                             if(value === null) value = undefined;
-                            if(typeof value === "object") value = value.toString();
+                            if(typeof value === 'object') value = value.toString();
 
                             results.push({
                                 path: ['tags', index, key],
                                 value: value
                             });
-                        })
+                        });
 
                     });
                     return results;
-                }).catch(function(why){console.log('tags/error', why)});
+                }).catch(function(why){console.log('tags/error', why);});
         }
     },
     {
-        route: "tags.length",
+        route: 'tags.length',
         get: function(pathSet) {
             return tagService
                 .getTagsCount()
@@ -68,7 +68,7 @@ module.exports = [
                         path: ['tags', 'length'],
                         value: length
                     };
-                }).catch(function(why){console.log('tags.length/error', why)});
+                }).catch(function(why){console.log('tags.length/error', why);});
         }
     }
 ];

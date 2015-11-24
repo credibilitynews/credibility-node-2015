@@ -6,7 +6,7 @@ import userService from '../services/user-service';
 
 module.exports = [
     {
-        route: "usersById[{integers:userIds}]['id', 'name', 'email', 'active', 'created_at']",
+        route: 'usersById[{integers:userIds}][\'id\', \'name\', \'email\', \'active\', \'created_at\']',
         get: function(pathSet) {
             
             return userService
@@ -17,9 +17,9 @@ module.exports = [
                         var userRecord = users[userId] || {};
 
                         pathSet[2].forEach(function(key) {
-                            var value = userRecord[key] || "";
+                            var value = userRecord[key] || '';
 
-                            if(typeof value === "object") value = value.toString();
+                            if(typeof value === 'object') value = value.toString();
 
                             results.push({
                                 path: ['usersById', userId, key],
@@ -29,11 +29,11 @@ module.exports = [
 
                     });
                     return results;
-                }).catch(function(why){console.log('usersById/error', why)});
+                }).catch(function(why){console.log('usersById/error', why);});
         }
     },
     {
-        route: "latestUsers[{integers:n}]['id']",
+        route: 'latestUsers[{integers:n}][\'id\']',
         get: function(pathSet, args) {
             
             var limit = pathSet.n.slice(-1)[0] - pathSet.n[0] + 1;
@@ -57,7 +57,7 @@ module.exports = [
                         });
                     });
                     return results;
-                }).catch(function(why){console.log('latestUsers/error', why)});
+                }).catch(function(why){console.log('latestUsers/error', why);});
         }
     }
 ];

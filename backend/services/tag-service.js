@@ -1,9 +1,9 @@
 import Sequelize from 'sequelize';
 var sequelize = new Sequelize(process.env.DATABASE_URL, {native: true});
 var Tags = sequelize.define('tags', {
-    "name": Sequelize.STRING,
-    "code": Sequelize.STRING,
-    "parent_id": Sequelize.INTEGER
+    'name': Sequelize.STRING,
+    'code': Sequelize.STRING,
+    'parent_id': Sequelize.INTEGER
 }, {
     timestamps: false
 });
@@ -28,10 +28,10 @@ TagService.prototype = {
             })
             .then(function(result){
                 var values = result.reduce(function(reduced, row){
-                     row = row.dataValues;
-                     reduced[row.id] = row;
-                     return reduced;
-                }, {})
+                    row = row.dataValues;
+                    reduced[row.id] = row;
+                    return reduced;
+                }, {});
                 resolve(values);
             })
             .catch(function(why){
@@ -44,14 +44,14 @@ TagService.prototype = {
         return new Promise(function (resolve, reject) {
             Tags
             .findAll({
-                order: [["name", 'asc']]
+                order: [['name', 'asc']]
             })
             .then(function(result){
                 var values = result.reduce(function(reduced, row){
-                     row = row.dataValues;
-                     reduced[row.id] = row;
-                     return reduced;
-                }, {})
+                    row = row.dataValues;
+                    reduced[row.id] = row;
+                    return reduced;
+                }, {});
                 resolve(values);
             })
             .catch(function(why){

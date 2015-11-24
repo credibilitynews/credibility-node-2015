@@ -1,12 +1,12 @@
 import Sequelize from 'sequelize';
 var sequelize = new Sequelize(process.env.DATABASE_URL, {native: true});
 var Users = sequelize.define('users', {
-    "name": Sequelize.STRING,
-    "email": Sequelize.STRING,
-    "password": Sequelize.STRING,
-    "active": Sequelize.BOOLEAN,
-    "created_at": Sequelize.DATE,
-    "updated_at": Sequelize.DATE
+    'name': Sequelize.STRING,
+    'email': Sequelize.STRING,
+    'password': Sequelize.STRING,
+    'active': Sequelize.BOOLEAN,
+    'created_at': Sequelize.DATE,
+    'updated_at': Sequelize.DATE
 }, {
     createdAt: 'created_at',
     updatedAt: 'updated_at'
@@ -33,10 +33,10 @@ UserService.prototype = {
             })
             .then(function(result){
                 var values = result.reduce(function(reduced, row){
-                     row = row.dataValues;
-                     reduced[row.id] = row;
-                     return reduced;
-                }, {})
+                    row = row.dataValues;
+                    reduced[row.id] = row;
+                    return reduced;
+                }, {});
                 resolve(values);
             })
             .catch(function(why){
@@ -55,10 +55,10 @@ UserService.prototype = {
             })
             .then(function(result){
                 var values = result.reduce(function(reduced, row){
-                     row = row.dataValues;
-                     reduced[row.id] = row;
-                     return reduced;
-                }, {})
+                    row = row.dataValues;
+                    reduced[row.id] = row;
+                    return reduced;
+                }, {});
                 resolve(values);
             })
             .catch(function(why){

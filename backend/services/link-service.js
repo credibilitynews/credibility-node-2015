@@ -3,14 +3,14 @@ import {def as Topics} from './topic-service';
 
 var sequelize = new Sequelize(process.env.DATABASE_URL, {native: true});
 var Links = sequelize.define('links', {
-    "title": Sequelize.STRING,
-    "url": Sequelize.STRING,
-    "user_id": Sequelize.INTEGER,
-    "topic_id": Sequelize.INTEGER,
-    "bias": Sequelize.INTEGER,
-    "active": Sequelize.BOOLEAN,
-    "created_at": Sequelize.DATE,
-    "updated_at": Sequelize.DATE
+    'title': Sequelize.STRING,
+    'url': Sequelize.STRING,
+    'user_id': Sequelize.INTEGER,
+    'topic_id': Sequelize.INTEGER,
+    'bias': Sequelize.INTEGER,
+    'active': Sequelize.BOOLEAN,
+    'created_at': Sequelize.DATE,
+    'updated_at': Sequelize.DATE
 }, {
     createdAt: 'created_at',
     updatedAt: 'updated_at'
@@ -35,10 +35,10 @@ LinkService.prototype = {
             })
             .then(function(result){
                 var values = result.reduce(function(reduced, row){
-                     row = row.dataValues;
-                     reduced[row.id] = row;
-                     return reduced;
-                }, {})
+                    row = row.dataValues;
+                    reduced[row.id] = row;
+                    return reduced;
+                }, {});
                 resolve(values);
             })
             .catch(function(why){
@@ -63,11 +63,11 @@ LinkService.prototype = {
             })
             .then(function(result){
                 var values = result.reduce(function(reduced, row){
-                     row = row.dataValues;
-                     reduced[row.id] = row;
-                     reduced[row.id]['topic_title'] = row.topic.title;
-                     return reduced;
-                }, {})
+                    row = row.dataValues;
+                    reduced[row.id] = row;
+                    reduced[row.id]['topic_title'] = row.topic.title;
+                    return reduced;
+                }, {});
                 console.log(values);
                 resolve(values);
             })

@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 import express from 'express';
 import bodyParser from 'body-parser';
@@ -48,15 +48,15 @@ app.use(expressValidator({
 app.use('/account', account);
 app.use('/model.json', FalcorServer.dataSourceRoute(function(req, res){
     //console.log('/model.json', req.query);
-    return RouterFactory("1");
+    return RouterFactory('1');
 }));
 
 app.get('/favicon.ico', function(req, res){
-    res.sendFile('favicon.ico', {root: './backend/public'})
+    res.sendFile('favicon.ico', {root: './backend/public'});
 });
 
 app.get('/public/*', function(req, res){
-    res.sendFile(req.url, {root: "./backend"});
+    res.sendFile(req.url, {root: './backend'});
 });
 
 app.get('*', function(req, res){
@@ -89,5 +89,5 @@ module.export = app.listen(process.env.PORT || 5000, function(err){
         console.error(err);
         return;
     }
-    console.log("navigate to "+process.env.CREDIBILITY_URL+":"+(process.env.PORT || 5000));
+    console.log('navigate to '+process.env.CREDIBILITY_URL+':'+(process.env.PORT || 5000));
 });

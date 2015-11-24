@@ -14,10 +14,10 @@ mandrill_client.users.ping2({}, function(result) {
 
 
 var emailText = function(html, token, uid) {
-	var startP = function() { return (html) ? '<p>' : ''; }
-	var endP = function() { return (html) ? '</p>' : '\n\n'; }
-	var linkA = function(url) { return (html) ? ('<a href="' + url + '">' + url + '</a>') : url; }
-	return startP() + 'Hello!' + endP() +
+	    var startP = function() { return (html) ? '<p>' : ''; };
+	    var endP = function() { return (html) ? '</p>' : '\n\n'; };
+	    var linkA = function(url) { return (html) ? ('<a href="' + url + '">' + url + '</a>') : url; };
+	    return startP() + 'Hello!' + endP() +
 					startP() + 'You have successfully set up your Credibility.io account' + endP() +
 					startP() + 'You can now access it by clicking on the following link:' + endP() +
 					startP() + linkA(process.env.CREDIBILITY_URL + '/?token=' + encodeURIComponent(token)
@@ -28,56 +28,56 @@ var emailText = function(html, token, uid) {
 
 module.exports = function(app) {
 
-	passwordless.init(new PostgreStore(process.env.DATABASE_URL));
+	    passwordless.init(new PostgreStore(process.env.DATABASE_URL));
 
-	passwordless.addDelivery(
+	    passwordless.addDelivery(
 		function(tokenToSend, uidToSend, recipient, callback) {
 
-			var message = {
-			    "html": emailText(true, tokenToSend, uidToSend),
-			    "text": emailText(false, tokenToSend, uidToSend),
-			    "subject": "Login Token for Credibility.io",
-			    "from_email": process.env.MANDRILL_API_EMAIL,
-			    "from_name": "Credibility.io",
-			    "to": [{
-			            "email": recipient,
-			            "name": "",
-			            "type": "to"
+			    var message = {
+			    'html': emailText(true, tokenToSend, uidToSend),
+			    'text': emailText(false, tokenToSend, uidToSend),
+			    'subject': 'Login Token for Credibility.io',
+			    'from_email': process.env.MANDRILL_API_EMAIL,
+			    'from_name': 'Credibility.io',
+			    'to': [{
+			            'email': recipient,
+			            'name': '',
+			            'type': 'to'
 			        }],
-			    "headers": {
-			        "Reply-To": process.env.MANDRILL_API_EMAIL
+			    'headers': {
+			        'Reply-To': process.env.MANDRILL_API_EMAIL
 			    },
 			};
-			console.log('sending', tokenToSend, uidToSend, recipient, message);
+			    console.log('sending', tokenToSend, uidToSend, recipient, message);
 
-			mandrill_client.messages.send({"message": message, "async": false, "ip_pool": null, "send_at": null},
+			    mandrill_client.messages.send({'message': message, 'async': false, 'ip_pool': null, 'send_at': null},
 				function(result) {
-					console.log(result);
+					    console.log(result);
     				// success
     				callback();
 				}, function(e) {
-					var err = 'An email delivery error occurred: ' + e.name + ' - ' + e.message;
-				    console.log(err);
-				    callback(err);
+					    var err = 'An email delivery error occurred: ' + e.name + ' - ' + e.message;
+				        console.log(err);
+				        callback(err);
 				});
 		});
 
-	app.use(passwordless.sessionSupport());
-	app.use(passwordless.acceptToken( {	successFlash: 'You are logged in. Welcome to Passwordless!',
+	    app.use(passwordless.sessionSupport());
+	    app.use(passwordless.acceptToken( {	successFlash: 'You are logged in. Welcome to Passwordless!',
 										failureFlash: 'The supplied token is not valid (anymore). Please request another one.',
 										successRedirect: '/account/login' } ));
 
 	// For every request: provide user data to the view
-	app.use(function(req, res, next) {
-		if(req.user) {
-			User.getUsers([req.user])
+	    app.use(function(req, res, next) {
+		    if(req.user) {
+			    User.getUsers([req.user])
             .then(function(userdoc) {
                 console.log(userdoc);
-				res.locals.user = userdoc[req.user];
-				next();
-			});
+				                res.locals.user = userdoc[req.user];
+				                next();
+			            });
 		} else {
-			next();
+			    next();
 		}
-	})
-}
+	});
+};

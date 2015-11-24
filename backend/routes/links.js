@@ -6,7 +6,7 @@ import linkService from '../services/link-service';
 
 module.exports = [
     {
-        route: "linksById[{integers:linkIds}]['title', 'url', 'created_at', 'updated_at', 'views', 'user_id', 'topic_id', 'bias', 'author_id', 'news_agency_id', 'content_type']",
+        route: 'linksById[{integers:linkIds}][\'title\', \'url\', \'created_at\', \'updated_at\', \'views\', \'user_id\', \'topic_id\', \'bias\', \'author_id\', \'news_agency_id\', \'content_type\']',
         get: function(pathSet) {
             return linkService
                 .getLinks(pathSet.linkIds)
@@ -19,7 +19,7 @@ module.exports = [
                             var value = linkRecord[key];
 
                             if(value === null) value = undefined;
-                            if(typeof value === 'object') value = value.toString()
+                            if(typeof value === 'object') value = value.toString();
 
                             results.push({
                                 path: ['linksById', linkId, key],
@@ -29,11 +29,11 @@ module.exports = [
 
                     });
                     return results;
-                }).catch(function(why){console.log('links/get', why)});
+                }).catch(function(why){console.log('links/get', why);});
         }
     },
     {
-        route: "latestLinks[{integers:n}]['id', 'title', 'url', 'created_at', 'updated_at', 'views', 'user_id', 'topic_id', 'topic_title', 'bias', 'author_id', 'news_agency_id', 'content_type']",
+        route: 'latestLinks[{integers:n}][\'id\', \'title\', \'url\', \'created_at\', \'updated_at\', \'views\', \'user_id\', \'topic_id\', \'topic_title\', \'bias\', \'author_id\', \'news_agency_id\', \'content_type\']',
         get: function(pathSet) {
             var limit = pathSet.n.slice(-1)[0] - pathSet.n[0] + 1;
             var offset = pathSet.n[0];
@@ -60,7 +60,7 @@ module.exports = [
 
                     });
                     return results;
-                }).catch(function(why){console.log('latestLinks/error', why)});
+                }).catch(function(why){console.log('latestLinks/error', why);});
         }
     }
-]
+];
