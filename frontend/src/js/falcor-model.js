@@ -3,8 +3,8 @@ import Promise from 'promise';
 import AppDispatcher from 'dispatchers/app-dispatcher';
 import HttpDataSource from 'falcor-http-datasource';
 
-var _promises = {};
-var _actions = [];
+var _promises = [];
+var _actions = {};
 var _prepareForHydration = false;
 
 function wrap(context, fn, cb){
@@ -61,9 +61,5 @@ FalcorModel.hydrate = function(){
         else Promise.all(_promises).then(postHydrate(resolve));
     });
 };
-
-FalcorModel.falcorize = function(Base, components, actions){
-    return Base;
-}
 
 module.exports = FalcorModel;

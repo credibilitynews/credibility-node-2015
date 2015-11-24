@@ -9,8 +9,7 @@ import Story from 'components/story/story';
 import Template from 'components/app-template';
 import AppLogin from 'components/user/user-login';
 
-class APP extends React.Component {
-
+class App extends React.Component {
     render() {
         return (
             <Template user={this.props.user}>
@@ -24,4 +23,4 @@ class APP extends React.Component {
     }
 }
 
-module.exports = APP;
+module.exports = App;

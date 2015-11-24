@@ -5,8 +5,7 @@ import ReactDOMServer from 'react-dom/server';
 import assign from 'object-assign';
 import App from './components/app';
 
-// import ReactUpdates from 'react/lib/ReactUpdates';
-// console.log(ReactUpdates.asap);
+import FalcorModel from './falcor-model';
 
 export default class ReactComponentRenderer {
     constructor(url, props) {
@@ -18,7 +17,6 @@ export default class ReactComponentRenderer {
     }
 
     renderToString(cb){
-        var FalcorModel = require('./falcor-model');
         FalcorModel.prepareForHydration();
 
         FalcorModel
@@ -29,12 +27,11 @@ export default class ReactComponentRenderer {
                 cb(html);
             })
             .catch((why)=>{
-                console.error('renderToString', why);
+                console.error('ReactComponentRenderer#renderToString', why);
             });
     }
 
     render(container){
-        var FalcorModel = require('./falcor-model');
         FalcorModel.prepareForHydration();
 
         FalcorModel
@@ -44,7 +41,7 @@ export default class ReactComponentRenderer {
                 ReactDOM.render(reactEl, container);
             })
             .catch((why)=>{
-                console.error('renderToString', why);
+                console.error('ReactComponentRenderer#render', why);
             });
 
     }
