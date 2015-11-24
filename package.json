@@ -16,7 +16,11 @@
     "iojs": "3.3.0"
   },
   "devDependencies": {
+    "babel": "^6.1.18",
+    "babel-cli": "^6.2.0",
     "babel-jest": "^5.3.0",
+    "babel-preset-es2015": "^6.1.18",
+    "babel-preset-react": "^6.1.18",
     "babelify": "^6.1.2",
     "bootstrap": "^3.3.2",
     "browserify": "7.0.0",
@@ -92,7 +96,8 @@
     "build": "cd frontend && gulp",
     "rejoice": "echo gulped!",
     "start": "node backend/cluster.js",
-    "test": "NODE_PATH=frontend/src/js:node_modules jest"
+    "test": "NODE_PATH=frontend/src/js:node_modules jest",
+    "eslint": "eslint frontend/src/js"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
