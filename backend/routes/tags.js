@@ -8,8 +8,6 @@ module.exports = [
     {
         route: "tagsById[{integers:tagIds}]['id', 'name', 'code', 'parent_id']",
         get: function(pathSet) {
-            
-
             return tagService
                 .getTags(pathSet.tagIds)
                 .then(function(tags) {
@@ -38,8 +36,6 @@ module.exports = [
     {
         route: "tags[{integers:n}]['id', 'name', 'code', 'parent_id']",
         get: function(pathSet) {
-            
-
             return tagService
                 .getAllTags()
                 .then(function(tags) {
@@ -65,8 +61,6 @@ module.exports = [
     {
         route: "tags.length",
         get: function(pathSet) {
-            
-
             return tagService
                 .getTagsCount()
                 .then(function(length) {

@@ -68,5 +68,6 @@ TopicService.prototype = {
         });
     }
 };
-
-module.exports = new TopicService();
+const instance = new TopicService();
+instance.def = Topics;
+module.exports = instance;

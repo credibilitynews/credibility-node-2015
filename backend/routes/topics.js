@@ -4,40 +4,51 @@ var $error = jsonGraph.error;
 
 var topicService = require('../services/topic-service');
 
+function pushTopics(routeName, ids, keys){
+
+    return function(topics) {
+        var results = [];
+        ids.forEach(function(topicId) {
+            var topicRecord = topics[topicId] || {};
+            keys.forEach(function(key) {
+                var value = topicRecord[key];
+                if(value === null) value = undefined;
+                if(typeof value === "object"){
+                    value = value.toString();
+                };
+
+                results.push({
+                    path: ['topicsById', topicId, key],
+                    value: value
+                });
+            });
+        });
+        return results;
+    };
+}
+
 module.exports = [
     {
         route: "topicsById[{integers:topicIds}]['id','title','hashtag','created_at','views','user_id']",
         get: function(pathSet) {
-            
-
             return topicService
                 .getTopics(pathSet.topicIds)
-                .then(function(topics) {
-                    var results = [];
-                    pathSet.topicIds.forEach(function(topicId) {
-                        var topicRecord = topics[topicId] || {};
-                        pathSet[2].forEach(function(key) {
-                            var value = topicRecord[key];
-                            if(value === null) value = undefined;
-                            if(typeof value === "object"){
-                                value = value.toString();
-                                //throw new Error('Invalid value of '+key)
-                            };
-                            results.push({
-                                path: ['topicsById', topicId, key],
-                                value: value
-                            });
-                        });
-
-                    });
-                    return results;
-                }).catch(function(why){console.log('topicsById/error', why)});
+                .then(pushTopics('topicsById', pathSet.topicIds, pathSet[2]))
+                .catch(function(why){console.log('topicsById/error', why)});
+        }
+    },
+    {
+        route: "topicsById[{integers:topicIds}].links.length",
+        get: function(pathSet) {
+            return topicService
+                .getTopics(pathSet.topicIds)
+                .then(pushTopics('topicsById', pathSet.topicIds, pathSet[2]))
+                .catch(function(why){console.log('topicsById.links.length/error', why)});
         }
     },
     {
         route: "latestTopics[{integers:n}]['id','title','hashtag','created_at','views','user_id']",
         get: function(pathSet) {
-            
             var limit = pathSet.n.slice(-1)[0] - pathSet.n[0] + 1;
             var offset = pathSet.n[0];
 

@@ -1,5 +1,6 @@
 var Sequelize = require('sequelize');
 var sequelize = new Sequelize(process.env.DATABASE_URL, {native: true});
+var Topics = require('./topic-service').def;
 var Links = sequelize.define('links', {
     "title": Sequelize.STRING,
     "url": Sequelize.STRING,
@@ -13,6 +14,7 @@ var Links = sequelize.define('links', {
     createdAt: 'created_at',
     updatedAt: 'updated_at'
 });
+Links.belongsTo(Topics, { foreignKey: 'topic_id' });
 
 var batch = require('./batch');
 var path = require('path');
@@ -48,6 +50,9 @@ LinkService.prototype = {
         return new Promise(function (resolve, reject) {
             Links
             .findAll({
+                include: {
+                    model: Topics
+                },
                 where: {
                     active: true
                 },
@@ -59,8 +64,10 @@ LinkService.prototype = {
                 var values = result.reduce(function(reduced, row){
                      row = row.dataValues;
                      reduced[row.id] = row;
+                     reduced[row.id]['topic_title'] = row.topic.title;
                      return reduced;
                 }, {})
+                console.log(values);
                 resolve(values);
             })
             .catch(function(why){
@@ -71,4 +78,6 @@ LinkService.prototype = {
     }
 };
 
-module.exports = new LinkService();
+const instance = new LinkService();
+instance.def = Links;
+module.exports = instance;
