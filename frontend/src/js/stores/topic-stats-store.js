@@ -5,7 +5,7 @@ var assign = require('object-assign'),
     Store = require('stores/app-store'),
     Immutable = require('immutable');
 
-var CHANGE_EVENT = "topicStats-change";
+var CHANGE_EVENT = 'topicStats-change';
 
 var _topicStats = Immutable.List();
 
@@ -19,7 +19,7 @@ function _addTopicStats(topicStats){
 
 var TopicStatsStore = assign({}, Store, {
     events: {
-        CHANGE_EVENT: "topic-stats-store"
+        CHANGE_EVENT: 'topic-stats-store'
     },
     getTopicStat: function(categoryId){
         return _topicStats
@@ -48,6 +48,6 @@ var TopicStatsStore = assign({}, Store, {
         // TopicStatsStore.emitChange();
         return true;
     })
-})
+});
 
 module.exports = TopicStatsStore;

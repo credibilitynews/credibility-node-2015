@@ -43,13 +43,13 @@ class Activity extends React.Component {
                     <i>{this.state.user.name}</i>
                 </small>
                 <div>
-                    On <a href={"/topic/"+this.props.article.topic_id}>
+                    On <a href={'/topic/'+this.props.article.topic_id}>
                         <strong>{this.props.article.topic_title}</strong>
                         </a>,
                 </div>
                 <blockquote>
                     <div>
-                        <a className="link-title" href={"/link/"+this.props.article.id}>
+                        <a className="link-title" href={'/link/'+this.props.article.id}>
                             {this.props.article.title}
                         </a> <span className="label label-primary">News</span>
                     </div>
@@ -70,7 +70,7 @@ class Activity extends React.Component {
     _handleTopicStoreChange() {
         var topic = TopicStore.getTopic(this.props.article.topic_id);
         //console.log(topic);
-        if(topic) this.setState({topic: topic})
+        if(topic) this.setState({topic: topic});
     }
 }
 

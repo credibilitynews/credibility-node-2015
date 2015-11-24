@@ -17,7 +17,7 @@ class LatestTopics extends React.Component {
             return (
                 <li key={item.id}>
                     <TopicLink title={item.title} hashtag={item.hashtag} score={item.meta.views}/>
-                </li>)
+                </li>);
         });
     }
 }

@@ -17,17 +17,17 @@ var UserActions = {
                 actionType: ActionTypes.FETCH_USERS_BY_ID,
                 users: response.json['usersById']
             });
-        }).catch(function(why){console.log('usersById/error', why)});
+        }).catch(function(why){console.log('usersById/error', why);});
     },
     fetchLatestUsers: function(){
         model()
-        .get(["latestUsers", {from:0, to:4}, ['id']])
+        .get(['latestUsers', {from:0, to:4}, ['id']])
         .then(function(response) {
             //console.log(response.json);
             //document.write('response: '+response.json);
-        }).catch(function(why){console.log('latestUsers/error', why)});
+        }).catch(function(why){console.log('latestUsers/error', why);});
     }
 };
 
-if(typeof window !== "undefined") window.UserActions = UserActions;
+if(typeof window !== 'undefined') window.UserActions = UserActions;
 module.exports = UserActions;

@@ -17,4 +17,4 @@ module.exports = {
 
         FETCH_ALL_TAGS: null
     })
-}
+};

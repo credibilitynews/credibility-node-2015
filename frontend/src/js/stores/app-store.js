@@ -8,11 +8,11 @@ var AppStore = assign({}, EventEmitter.prototype, {
     },
     addChangeListener: function(handler){
         if(!this.events.CHANGE_EVENT) throw new Error('CHANGE_EVENT not defined');
-        this.addListener(this.events.CHANGE_EVENT, handler)
+        this.addListener(this.events.CHANGE_EVENT, handler);
     },
     removeChangeListener: function(handler){
         if(!this.events.CHANGE_EVENT) throw new Error('CHANGE_EVENT not defined');
-        this.removeListener(this.events.CHANGE_EVENT, handler)
+        this.removeListener(this.events.CHANGE_EVENT, handler);
     }
 });
 

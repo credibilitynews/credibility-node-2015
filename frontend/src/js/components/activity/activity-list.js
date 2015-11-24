@@ -49,7 +49,7 @@ class ActivityList extends React.Component {
                     <div className="content">
                         <Activity key={item.id} article={item}/>
                     </div>
-                </div>)
+                </div>);
         });
     }
 

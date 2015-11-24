@@ -11,7 +11,7 @@ function wrap(context, fn, cb){
         cb(promise);
         return promise;
     }.bind(context);
-};
+}
 
 var FalcorModel = function(){
     if(typeof window === 'undefined') {
@@ -25,7 +25,7 @@ var FalcorModel = function(){
 
         ['get', 'getValue', 'set', 'setValue', 'call'].forEach(function(method){
             model[method] = wrap(model, model[method], function(promise){
-               if(_prepareForHydration) _promises.push(promise);
+                if(_prepareForHydration) _promises.push(promise);
             });
         });
 
@@ -36,7 +36,7 @@ var FalcorModel = function(){
 
 FalcorModel.prepareForHydration = function(){
     _prepareForHydration = true;
-}
+};
 
 FalcorModel.hydrate = function(){
     var postHydrate = function(resolve){
@@ -50,12 +50,12 @@ FalcorModel.hydrate = function(){
                 _prepareForHydration = false;
                 resolve();
             });
-        }
+        };
     };
 
     return new Promise(function (resolve, reject) {
-         if(!_prepareForHydration)
-            reject('Please make sure you have called prepareForHydration()')
+        if(!_prepareForHydration)
+            reject('Please make sure you have called prepareForHydration()');
          else Promise.all(_promises).then(postHydrate(resolve));
     });
 };

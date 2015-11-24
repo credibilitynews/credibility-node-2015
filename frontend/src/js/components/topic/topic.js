@@ -20,76 +20,76 @@ class Topic extends React.Component {
         this._handleStoreChange = this._handleStoreChange.bind(this);
 
         this.state = {
-			topic: null,
-			summaryShown: false
-		};
+            topic: null,
+            summaryShown: false
+        };
     }
 
     componentWillMount() {
-		TopicStore.addChangeListener(this._handleStoreChange);
-	}
+        TopicStore.addChangeListener(this._handleStoreChange);
+    }
 
     componentWillUnmount() {
-		TopicStore.removeChangeListener(this._handleStoreChange);
-	}
+        TopicStore.removeChangeListener(this._handleStoreChange);
+    }
 
     componentDidMount() {
-		if(!this.state.topic)
-			TopicActions.fetchTopicsById(this.props.topicId);
-	}
+        if(!this.state.topic)
+                    TopicActions.fetchTopicsById(this.props.topicId);
+    }
 
     render() {
-		console.log(this.props);
-		var topic = this.state.topic || {};
+        console.log(this.props);
+        var topic = this.state.topic || {};
 
         var toggled = cx({
             'short': !this.state.summaryShown,
             'long': this.state.summaryShown
         });
 
-		return (
-			<div className="row topic">
-				<div className="col-sm-12 col-md-8">
-					<div className="">
-						<h1>{topic.title}</h1>
-						<a>{topic.hashtag}</a>
+        return (
+            <div className="row topic">
+                <div className="col-sm-12 col-md-8">
+                    <div className="">
+                        <h1>{topic.title}</h1>
+                        <a>{topic.hashtag}</a>
                         <blockquote className={toggled}>
                         </blockquote>
-					</div>
-					<div className="timeline">
-						<p>Timeline</p>
-						<StoryTimeline stories={topic.links} />
-					</div>
-				</div>
-				<div className="col-md-4 col-xs-12 right-sidebar">
+                    </div>
+                    <div className="timeline">
+                        <p>Timeline</p>
+                        <StoryTimeline stories={topic.links} />
+                    </div>
+                </div>
+                <div className="col-md-4 col-xs-12 right-sidebar">
 
-					<SearchBar />
+                    <SearchBar />
 
-				    <div>
-						<h2>Details</h2>
-						<div>Created</div>
-							{topic.created_at}
-						<div>Hashtags</div>
-							<Hashtag tag={topic.hashtag} />
-					</div>
-                	<div>
-						<h2>Statistics</h2>
-						<ArticlesNum articles={topic.articles} text/>
-						<ViewsNum views={topic.views}/>
-					</div>
-				    <div>
-						<h2>Related</h2>
-					</div>
-				</div>
-			</div>
-		)
-	}
+                    <div>
+                        <h2>Details</h2>
+                        <div>Created</div>
+                            {topic.created_at}
+                        <div>Hashtags</div>
+                            <Hashtag tag={topic.hashtag} />
+                    </div>
+                    <div>
+                        <h2>Statistics</h2>
+                        <ArticlesNum articles={topic.articles} text/>
+                        <ViewsNum views={topic.views}/>
+                    </div>
+                    <div>
+                        <h2>Related</h2>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     _handleStoreChange() {
-		var topic = TopicStore.getTopic(this.props.topicId);
-		console.log('topic', topic);
-		this.setState({topic: topic});
-	}
+        var topic = TopicStore.getTopic(this.props.topicId);
+        console.log('topic', topic);
+        this.setState({topic: topic});
+    }
 
     _handleToggle() {
         this.setState({summaryShown: !this.state.summaryShown});

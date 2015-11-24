@@ -6,7 +6,7 @@ var assign = require('object-assign'),
 
     Immutable = require('immutable');
 
-var CHANGE_EVENT = "categories-change";
+var CHANGE_EVENT = 'categories-change';
 
 var _categories = Immutable.OrderedMap();
 
@@ -23,10 +23,10 @@ function _addCategories(categories){
 
 var CategoryStore = assign({}, Store, {
     events: {
-        CHANGE_EVENT: "category-store"
+        CHANGE_EVENT: 'category-store'
     },
     getCategory: function(categoryId){
-        return _categories.get(categoryId.toString())
+        return _categories.get(categoryId.toString());
     },
     getAllCategories: function(){
         return _categories.toArray();
@@ -34,14 +34,14 @@ var CategoryStore = assign({}, Store, {
     dispatcherIndex: AppDispatcher.register(function(payload){
         var action = payload.action;
         switch(action.actionType){
-            case ActionTypes.FETCH_ALL_TAGS:
+        case ActionTypes.FETCH_ALL_TAGS:
                 //console.log("store/category-store", payload.action.tags);
-                _addCategories(payload.action.tags);
-                CategoryStore.emitChange();
-                break;
+            _addCategories(payload.action.tags);
+            CategoryStore.emitChange();
+            break;
         }
         return true;
     })
-})
+});
 
 module.exports = CategoryStore;

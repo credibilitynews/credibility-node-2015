@@ -42,7 +42,7 @@ class RecentTopics extends React.Component {
     }
 
     _wrap(items) {
-        if(!items) return <div />
+        if(!items) return <div />;
         return items.map(function(item){
             return(
                 <li key={item.id}>

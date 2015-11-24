@@ -5,7 +5,7 @@ var assign = require('object-assign'),
     Store = require('stores/app-store'),
     Immutable = require('immutable');
 
-var CHANGE_EVENT = "latest-articles-change";
+var CHANGE_EVENT = 'latest-articles-change';
 
 var _articles = Immutable.OrderedMap();
 
@@ -15,7 +15,7 @@ function _addArticle(article){
 
 var ArticleStore = assign({}, Store, {
     events: {
-        CHANGE_EVENT: "latest-article-store"
+        CHANGE_EVENT: 'latest-article-store'
     },
     getAllArticles: function(){
         return _articles.toArray();
@@ -24,18 +24,18 @@ var ArticleStore = assign({}, Store, {
         var action = payload.action;
 
         switch(action.actionType){
-            case ActionTypes.FETCH_LATEST_LINKS:
+        case ActionTypes.FETCH_LATEST_LINKS:
                 //console.log("store/latest-article-store", action);
-                Object.keys(action.links).forEach(function(n){
-                    var link = action.links[n];
+            Object.keys(action.links).forEach(function(n){
+                var link = action.links[n];
 
-                    _addArticle(link);
-                });
-                ArticleStore.emitChange();
-                break;
+                _addArticle(link);
+            });
+            ArticleStore.emitChange();
+            break;
         }
         return true;
     })
-})
+});
 
 module.exports = ArticleStore;

@@ -11,12 +11,12 @@ class CategoryLink extends React.Component {
     }
 
     _link(category) {
-        return "/categories/"+category.code;
+        return '/categories/'+category.code;
     }
 }
 
 CategoryLink.defaultProps = {
-    category: { title: "[Category Title]" }
+    category: { title: '[Category Title]' }
 };
 
 module.exports = CategoryLink;

@@ -57,18 +57,18 @@ class CategoryList extends React.Component {
                         <span>
                             { this._wrap(
                                 this._childrenOf(this.state.categories, item.id),
-                                "child")}
+                                'child')}
                         </span>
-                    </span>)
+                    </span>);
             }.bind(this));
     }
 
     _childrenOf(categories, parentId) {
         var children = categories.reduce(function(reduced, item){
-                if(item.parent_id == parentId)
-                    reduced.push(item);
-                return reduced;
-            }, []);
+            if(item.parent_id == parentId)
+                reduced.push(item);
+            return reduced;
+        }, []);
         return children;
     }
 

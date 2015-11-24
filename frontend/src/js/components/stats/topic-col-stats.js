@@ -5,7 +5,7 @@ var React = require('react'),
 
 class TopicColStats extends React.Component {
     render() {
-        console.log("topic-col-stats", this.props.stats);
+        console.log('topic-col-stats', this.props.stats);
         return (
             <div className="topic-col-stats">
                 <div>
@@ -18,7 +18,7 @@ class TopicColStats extends React.Component {
 }
 
 TopicColStats.defaultProps = {
-    title: "[Title]",
+    title: '[Title]',
     meta:{
         articles: 0
     }

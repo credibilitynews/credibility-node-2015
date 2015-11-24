@@ -34,12 +34,12 @@ var UserStore = assign({}, Store, {
             //     if(data.errors)
             //         this.emit(LOGIN_EVENT_ERROR, data.error);
             //     break;
-            case ActionTypes.FETCH_USERS_BY_ID:
-                _addUsers(action.users);
+        case ActionTypes.FETCH_USERS_BY_ID:
+            _addUsers(action.users);
                 //console.log(_users.toArray());
-                UserStore.emitChange();
-                break;
-            default: break;
+            UserStore.emitChange();
+            break;
+        default: break;
         }
     })
 });
@@ -47,7 +47,7 @@ var UserStore = assign({}, Store, {
 function _addUsers(users){
     Object.keys(users).forEach(function(key){
         _users = _users.set(key.toString(), users[key]);
-    })
+    });
 }
 
 module.exports = UserStore;
