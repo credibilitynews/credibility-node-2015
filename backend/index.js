@@ -1,22 +1,24 @@
 "use strict";
 
-var jsx = require('node-jsx').install();
-var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
-var FalcorServer = require('falcor-express');
-var RouterFactory = require('./router-factory');
-var React = require('react');
-var flash = require('connect-flash');
-var enforce = require('express-sslify');
-var passwordless = require('./auth/passwordless');
-var pg = require('pg');
-var session = require('express-session');
-var pgSession = require('connect-pg-simple')(session);
-var expressValidator = require('express-validator');
+import express from 'express';
+import bodyParser from 'body-parser';
 
-var account = require('./routes/account');
-var APP = require('../frontend/src/js/components/app.js');
+import FalcorServer from 'falcor-express';
+import RouterFactory from './router-factory';
+import React from 'react';
+import flash from 'connect-flash';
+import enforce from 'express-sslify';
+import passwordless from './auth/passwordless';
+import pg from 'pg';
+import session from 'express-session';
+import expressValidator from 'express-validator';
+
+import account from './routes/account';
+import APP from '../frontend/src/js/components/app.js';
+
+var pgSession = require('connect-pg-simple')(session);
+var jsx = require('node-jsx').install();
+var app = express();
 
 app.use(session({
     store: new pgSession({

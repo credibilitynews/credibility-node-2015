@@ -1,4 +1,4 @@
-var Sequelize = require('sequelize');
+import Sequelize from 'sequelize';
 var sequelize = new Sequelize(process.env.DATABASE_URL, {native: true});
 var Tags = sequelize.define('tags', {
     "name": Sequelize.STRING,
@@ -8,9 +8,9 @@ var Tags = sequelize.define('tags', {
     timestamps: false
 });
 
-var batch = require('./batch');
-var path = require('path');
-var Promise = require('promise');
+import batch from './batch';
+import path from 'path';
+import Promise from 'promise';
 
 var conString = process.env.DATABASE_URL;
 

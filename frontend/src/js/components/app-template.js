@@ -1,8 +1,8 @@
 
 'use strict';
-var React = require('react');
-var Header = require('./app-header.js');
-var Footer = require('./app-footer.js');
+import React from 'react';
+import Header from './app-header.js';
+import Footer from './app-footer.js';
 
 class Template extends React.Component {
     render() {

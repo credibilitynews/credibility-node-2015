@@ -1,16 +1,16 @@
 'use strict';
-var React = require('react');
+import React from 'react';
 
-var About = require('components/dashboard/about.js'),
-    ActivityList = require('components/activity/activity-list'),
-    RecentTopics = require('components/dashboard/recent-topics'),
-    SearchBar = require('components/search/search-bar'),
-    CategoryList = require('components/category/category-list'),
-    TopMenu = require('components/menu/top-menu');
+import About from 'components/dashboard/about.js';
+import ActivityList from 'components/activity/activity-list';
+import RecentTopics from 'components/dashboard/recent-topics';
+import SearchBar from 'components/search/search-bar';
+import CategoryList from 'components/category/category-list';
+import TopMenu from 'components/menu/top-menu';
 
-var TopicStore = require('stores/topic-store'),
-    CategoryStore = require('stores/category-store'),
-    LatestArticleStore = require('stores/latest-article-store');
+import TopicStore from 'stores/topic-store';
+import CategoryStore from 'stores/category-store';
+import LatestArticleStore from 'stores/latest-article-store';
 
 function getStatesFromStore(){
     var state = {

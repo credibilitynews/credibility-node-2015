@@ -1,16 +1,16 @@
 'use strict';
-var React = require('react');
-var cx = require('classnames');
-var Hashtag = require('components/tag/hashtag');
-var StoryTimeline = require('components/story/story-timeline');
+import React from 'react';
+import cx from 'classnames';
+import Hashtag from 'components/tag/hashtag';
+import StoryTimeline from 'components/story/story-timeline';
 
-var ViewsNum =  require('components/stats/views-num');
-var ArticlesNum =  require('components/stats/articles-num');
+import ViewsNum from 'components/stats/views-num';
+import ArticlesNum from 'components/stats/articles-num';
 
-var TopicStore = require('stores/topic-store');
-var TopicActions = require('actions/topic-actions');
+import TopicStore from 'stores/topic-store';
+import TopicActions from 'actions/topic-actions';
 
-var SearchBar = require('components/search/search-bar');
+import SearchBar from 'components/search/search-bar';
 
 class Topic extends React.Component {
     constructor(props, context) {

@@ -1,6 +1,6 @@
 
 'use strict';
-var React = require('react');
+import React from 'react';
 
 class ViewsNum extends React.Component {
     render() {

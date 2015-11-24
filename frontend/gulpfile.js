@@ -1,4 +1,4 @@
-var args = require('yargs').argv,
+import {argv as args} from 'yargs';
     gulp = require('gulp'),
     $ = require('gulp-load-plugins')(),
     opts = {args: args},

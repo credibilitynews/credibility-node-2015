@@ -1,4 +1,4 @@
-var Router = require('falcor-router');
+import Router from 'falcor-router';
 
 var CredRouterBase = Router.createClass(
     [

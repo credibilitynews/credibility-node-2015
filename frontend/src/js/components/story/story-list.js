@@ -1,7 +1,7 @@
 
 'use strict';
-var React = require('react');
-var StoryLink = require('../story/story-link');
+import React from 'react';
+import StoryLink from '../story/story-link';
 
 class StoryList extends React.Component {
     render() {

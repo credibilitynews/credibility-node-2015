@@ -1,6 +1,7 @@
-var falcor = require('falcor'),
-    Promise = require('promise'),
-    AppDispatcher = require('dispatchers/app-dispatcher');
+import falcor from 'falcor';
+import Promise from 'promise';
+import AppDispatcher from 'dispatchers/app-dispatcher';
+import HttpDataSource from 'falcor-http-datasource';
 
 var _promises = [];
 var _prepareForHydration = false;
@@ -20,7 +21,6 @@ var FalcorModel = function(){
             source: require('../../../backend/router-factory')(userDoc)
         });
     }else{
-        var HttpDataSource = require('falcor-http-datasource');
         var model = new falcor.Model({source: new HttpDataSource('/model.json') });
 
         ['get', 'getValue', 'set', 'setValue', 'call'].forEach(function(method){

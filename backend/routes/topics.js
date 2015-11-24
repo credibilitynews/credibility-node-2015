@@ -1,8 +1,8 @@
-var jsonGraph = require('falcor-json-graph');
+import jsonGraph from 'falcor-json-graph';
 var $ref = jsonGraph.ref;
 var $error = jsonGraph.error;
 
-var topicService = require('../services/topic-service');
+import topicService from '../services/topic-service';
 
 function pushTopics(routeName, ids, keys){
 

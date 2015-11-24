@@ -1,9 +1,9 @@
 
 'use strict';
-var React = require('react');
-var Link = require('react-router-component').Link;
+import React from 'react';
+import {Link} from 'react-router-component';
 
-// var ReactIntlMixin = require("react-intl").ReactIntlMixin;
+// import {ReactIntlMixin as ReactIntlMixin} from "react-intl";
 
 class TopMenu extends React.Component {
     render() {

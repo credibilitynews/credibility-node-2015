@@ -1,9 +1,9 @@
-var AppDispatcher = require('dispatchers/app-dispatcher'),
-    ActionTypes = require('constants/app-constants').ActionTypes;
+import AppDispatcher from 'dispatchers/app-dispatcher';
+import {ActionTypes as ActionTypes} from 'constants/app-constants';
 
-var assign = require('object-assign'),
-    Store = require('stores/app-store'),
-    Immutable = require('immutable');
+import assign from 'object-assign';
+import Store from 'stores/app-store';
+import Immutable from 'immutable';
 
 var CHANGE_EVENT = 'topics-change';
 

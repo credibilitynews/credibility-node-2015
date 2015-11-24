@@ -1,9 +1,9 @@
 'use strict';
 
-var express = require('express');
+import express from 'express';
 var router = express.Router();
-var passwordless = require('passwordless');
-var User = require('../services/user-service');
+import passwordless from 'passwordless';
+import User from '../services/user-service';
 
 /* GET logout. */
 router.get('/logout', passwordless.logout( {successFlash: 'Hope to see you soon!'} ),

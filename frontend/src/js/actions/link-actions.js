@@ -1,7 +1,7 @@
-var model = require('falcor-model');
+import model from 'falcor-model';
 
-var ActionTypes = require('constants/app-constants').ActionTypes,
-    AppDispatcher = require('dispatchers/app-dispatcher');
+import {ActionTypes} from 'constants/app-constants';
+import AppDispatcher from 'dispatchers/app-dispatcher';
 
 var LinkActions = {
     fetchLinks: function(ids){

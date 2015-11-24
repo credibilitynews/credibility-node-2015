@@ -1,11 +1,11 @@
 
 'use strict';
-var React = require('react');
+import React from 'react';
 
-//TopicColStats = require('./topic-col-stats'),
-//ArticlesNum = require('../stats/articles-num'),
-//ViewsNum = require('../stats/views-num'),
-//HashTag = require('../tag/hashtag');
+// import TopicColStats from './topic-col-stats';
+// import ArticlesNum from '../stats/articles-num';
+// import ViewsNum from '../stats/views-num';
+// import HashTag from '../tag/hashtag';
 
 class TopicStats extends React.Component {
     render() {

@@ -1,10 +1,10 @@
-var sequence = require('run-sequence');
-var color = require('cli-color');
+import sequence from 'run-sequence';
+import color from 'cli-color';
 
-var browserify = require('browserify');
-var source = require('vinyl-source-stream');
-var babelify = require('babelify');
-var watchify = require('watchify');
+import browserify from 'browserify';
+import source from 'vinyl-source-stream';
+import babelify from 'babelify';
+import watchify from 'watchify';
 
 module.exports = function(gulp, opts, $){
     var config = opts.config;

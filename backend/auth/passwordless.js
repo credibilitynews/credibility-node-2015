@@ -1,8 +1,8 @@
-var passwordless = require('passwordless');
-var PostgreStore = require('passwordless-postgrestore');
-var User = require('../services/user-service');
+import passwordless from 'passwordless';
+import PostgreStore from 'passwordless-postgrestore';
+import User from '../services/user-service';
 
-var mandrill = require('mandrill-api/mandrill');
+import mandrill from 'mandrill-api/mandrill';
 var mandrill_client = new mandrill.Mandrill(process.env.MANDRILL_API_KEY);
 mandrill_client.users.ping2({}, function(result) {
     console.log(result);

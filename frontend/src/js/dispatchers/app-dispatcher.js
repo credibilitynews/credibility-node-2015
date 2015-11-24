@@ -1,7 +1,7 @@
-var Dispatcher = require('flux').Dispatcher,
-    assign = require('object-assign');
+import {Dispatcher} from 'flux';
+import assign from 'object-assign';
 
-var PayloadSources = require('../constants/app-constants').PayloadSources;
+import {PayloadSources as PayloadSources} from '../constants/app-constants';
 
 Dispatcher.prototype = assign(Dispatcher.prototype, {
     handleViewAction: function(action){

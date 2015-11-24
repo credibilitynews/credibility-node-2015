@@ -1,6 +1,7 @@
-var Sequelize = require('sequelize');
+import Sequelize from 'sequelize';
+import {def as Topics} from './topic-service';
+
 var sequelize = new Sequelize(process.env.DATABASE_URL, {native: true});
-var Topics = require('./topic-service').def;
 var Links = sequelize.define('links', {
     "title": Sequelize.STRING,
     "url": Sequelize.STRING,
@@ -16,9 +17,9 @@ var Links = sequelize.define('links', {
 });
 Links.belongsTo(Topics, { foreignKey: 'topic_id' });
 
-var batch = require('./batch');
-var path = require('path');
-var Promise = require('promise');
+import batch from './batch';
+import path from 'path';
+import Promise from 'promise';
 
 function LinkService() {}
 LinkService.prototype = {

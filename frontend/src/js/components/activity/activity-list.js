@@ -1,9 +1,9 @@
 'use strict';
-var React = require('react'),
-    Activity = require('components/activity/activity'),
+import React from 'react';
+import Activity from 'components/activity/activity';
 
-    LinkActions = require('actions/link-actions'),
-    LatestActicleStore = require('stores/latest-article-store');
+import LinkActions from 'actions/link-actions';
+import LatestActicleStore from 'stores/latest-article-store';
 
 LinkActions.fetchLatestLinks();
 

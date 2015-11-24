@@ -1,15 +1,13 @@
 'use strict';
-var React = require('react');
+import React from 'react';
 
-var Router = require('react-router-component'),
-    Locations = Router.Locations,
-    Location = Router.Location;
+import {Locations, Location} from 'react-router-component';
 
-var Dashboard = require('components/dashboard/dashboard'),
-    Topic = require('components/topic/topic'),
-    Story = require('components/story/story'),
-    Template = require('components/app-template'),
-    AppLogin = require('components/user/user-login');
+import Dashboard from 'components/dashboard/dashboard';
+import Topic from 'components/topic/topic';
+import Story from 'components/story/story';
+import Template from 'components/app-template';
+import AppLogin from 'components/user/user-login';
 
 class APP extends React.Component {
 

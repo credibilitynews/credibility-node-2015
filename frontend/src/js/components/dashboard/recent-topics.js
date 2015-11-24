@@ -1,9 +1,9 @@
 'use strict';
-var React = require('react'),
-    TopicStats = require('../stats/topic-stats'),
+import React from 'react';
+import TopicStats from '../stats/topic-stats';
 
-    TopicActions = require('actions/topic-actions'),
-    TopicStore = require('stores/topic-store');
+import TopicActions from 'actions/topic-actions';
+import TopicStore from 'stores/topic-store';
 
 TopicActions.fetchLatestTopics();
 

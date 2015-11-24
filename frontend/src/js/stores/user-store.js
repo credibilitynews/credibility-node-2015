@@ -1,9 +1,9 @@
-var Store = require('./app-store'),
-    assign = require('object-assign'),
-    Immutable = require('immutable'),
+import Store from './app-store';
+import assign from 'object-assign';
+import Immutable from 'immutable';
 
-    ActionTypes = require('constants/app-constants').ActionTypes,
-    AppDispatcher = require('dispatchers/app-dispatcher');
+import {ActionTypes as ActionTypes} from 'constants/app-constants';
+import AppDispatcher from 'dispatchers/app-dispatcher';
 
 var CHANGE_EVENT = 'user-store-change',
     LOGIN_EVENT_SUCCESS = 'user-store-login-success',

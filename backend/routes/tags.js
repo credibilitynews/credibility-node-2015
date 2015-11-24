@@ -1,8 +1,8 @@
-var jsonGraph = require('falcor-json-graph');
+import jsonGraph from 'falcor-json-graph';
 var $ref = jsonGraph.ref;
 var $error = jsonGraph.error;
 
-var tagService = require('../services/tag-service');
+import tagService from '../services/tag-service';
 
 module.exports = [
     {

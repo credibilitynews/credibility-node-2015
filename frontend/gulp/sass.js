@@ -1,5 +1,5 @@
-var sequence = require('run-sequence');
-var color = require('cli-color');
+import sequence from 'run-sequence';
+import color from 'cli-color';
 
 module.exports = function(gulp, opts, $){
     var config = opts.config;

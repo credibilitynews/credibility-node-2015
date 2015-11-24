@@ -1,4 +1,4 @@
-var cluster = require('express-cluster');
+import cluster from 'express-cluster';
 
 cluster(function(worker){
     return require('./index');

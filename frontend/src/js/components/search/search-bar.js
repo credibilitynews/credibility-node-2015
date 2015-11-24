@@ -1,6 +1,6 @@
 'use strict';
-var React = require('react');
-var Select = require('react-select');
+import React from 'react';
+import Select from 'react-select';
 
 class SearchBar extends React.Component {
     render() {

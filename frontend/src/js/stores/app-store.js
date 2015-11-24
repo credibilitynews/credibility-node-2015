@@ -1,5 +1,5 @@
-var assign = require('object-assign');
-var EventEmitter = require('events').EventEmitter;
+import assign from 'object-assign';
+import {EventEmitter as EventEmitter} from 'events';
 
 var AppStore = assign({}, EventEmitter.prototype, {
     emitChange: function(data){

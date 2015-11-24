@@ -1,7 +1,7 @@
 
 'use strict';
-var React = require('react'),
-    Link = require('react-router-component').Link;
+import React from 'react';
+import {Link as Link} from 'react-router-component';
 
 class StoryLink extends React.Component {
     render() {

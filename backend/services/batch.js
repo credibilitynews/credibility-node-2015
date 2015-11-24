@@ -1,4 +1,4 @@
-var Promise = require('promise');
+import Promise from 'promise';
 
 //fun = [1,2,3] -> Promise({1: {}, 2: {}, 3: {}})
 module.exports = function batch(fun) {

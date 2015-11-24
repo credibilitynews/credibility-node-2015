@@ -1,10 +1,10 @@
 'use strict';
-var React = require('react'),
+import React from 'react';
 
-    CategoryLink = require('components/category/category-link'),
-    CategoryStore = require('stores/category-store'),
+import CategoryLink from 'components/category/category-link';
+import CategoryStore from 'stores/category-store';
 
-    TagActions = require('actions/tag-actions');
+import TagActions from 'actions/tag-actions';
 
 TagActions.fetchAllTags();
 

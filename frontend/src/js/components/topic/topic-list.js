@@ -1,7 +1,7 @@
 
 'use strict';
-var React = require('react');
-var TopicLink = require('./topic-link');
+import React from 'react';
+import TopicLink from './topic-link';
 
 class TopicList extends React.Component {
     render() {

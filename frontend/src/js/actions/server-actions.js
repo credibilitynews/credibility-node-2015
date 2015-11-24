@@ -1,5 +1,5 @@
-var ActionTypes = require('../constants/app-constants').ActionTypes,
-    AppDispatcher = require('../dispatchers/app-dispatcher');
+import {ActionTypes} from '../constants/app-constants';
+import AppDispatcher from '../dispatchers/app-dispatcher';
 
 var request = function(){
     return require('superagent');

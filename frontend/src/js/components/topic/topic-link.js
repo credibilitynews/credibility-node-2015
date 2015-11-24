@@ -1,9 +1,9 @@
 
 'use strict';
-var React = require('react'),
-    Tag = require('../tag/hashtag'),
-    Score = require('../stats/score'),
-    ViewsNum = require('../stats/views-num');
+import React from 'react';
+import Tag from '../tag/hashtag';
+import Score from '../stats/score';
+import ViewsNum from '../stats/views-num';
 
 class TopicLink extends React.Component {
     render() {

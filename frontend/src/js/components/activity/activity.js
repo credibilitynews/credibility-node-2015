@@ -1,9 +1,9 @@
 'use strict';
-var React = require('react'),
-    UserActions = require('actions/user-actions');
+import React from 'react';
+import UserActions from 'actions/user-actions';
 
-var TopicStore = require('stores/topic-store'),
-    UserStore = require('stores/user-store');
+import TopicStore from 'stores/topic-store';
+import UserStore from 'stores/user-store';
 
 class Activity extends React.Component {
     constructor(props, context) {

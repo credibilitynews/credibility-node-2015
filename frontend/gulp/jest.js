@@ -1,6 +1,6 @@
-var npm = require('npm');
-var color = require('cli-color');
-var fs = require('fs');
+import npm from 'npm';
+import color from 'cli-color';
+import fs from 'fs';
 
 module.exports = function(gulp, opts, $){
     var config = opts.config;
