@@ -1,3 +1,4 @@
+"use strict";
 var React = require('react'),
     TopicLink = require('../topic/topic-link'),
     TopicStats = require('../stats/topic-stats'),

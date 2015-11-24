@@ -1,4 +1,5 @@
-var React = require('react/addons');
+"use strict";
+var React = require('react');
 var cx = require('classnames');
 var Hashtag = require('components/tag/hashtag');
 var StoryList = require('components/story/story-list');

@@ -1,5 +1,6 @@
 
-var React = require('react/addons');
+"use strict";
+var React = require('react');
 var TopicLink = require('./topic-link');
 
 class TopicList extends React.Component {

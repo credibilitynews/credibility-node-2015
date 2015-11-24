@@ -1,4 +1,5 @@
 
+"use strict";
 var React = require('react');
 var Header = require('./app-header.js');
 var Footer = require('./app-footer.js');

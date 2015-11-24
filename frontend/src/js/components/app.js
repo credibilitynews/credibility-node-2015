@@ -1,3 +1,4 @@
+"use strict";
 var React = require('react');
 
 var Router = require('react-router-component'),
@@ -11,6 +12,7 @@ var Dashboard = require('components/dashboard/dashboard'),
     AppLogin = require('components/user/user-login');
 
 class APP extends React.Component {
+
     render() {
         return (
             <Template user={this.props.user}>

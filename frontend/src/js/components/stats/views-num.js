@@ -1,4 +1,5 @@
 
+"use strict";
 var React = require('react');
 
 class ViewsNum extends React.Component {

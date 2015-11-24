@@ -1,4 +1,5 @@
 
+"use strict";
 var React = require('react'),
     Tag = require('../tag/hashtag'),
     Score = require('../stats/score'),

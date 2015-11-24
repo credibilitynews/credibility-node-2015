@@ -1,4 +1,5 @@
 
+"use strict";
 var React = require('react');
 
 class Hashtag extends React.Component {

@@ -1,4 +1,5 @@
 
+"use strict";
 var React = require('react');
 
 class UserMenu extends React.Component {

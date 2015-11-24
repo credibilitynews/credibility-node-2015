@@ -1,4 +1,5 @@
 
+"use strict";
 var React = require('react'),
     ArticlesNum = require('../stats/articles-num'),
     ViewsNum = require('../stats/views-num');
