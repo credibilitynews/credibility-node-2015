@@ -5,11 +5,10 @@ import Activity from 'components/activity/activity';
 import LinkActions from 'actions/link-actions';
 import LatestActicleStore from 'stores/latest-article-store';
 
-LinkActions.fetchLatestLinks();
-
 class ActivityList extends React.Component {
     constructor(props, context) {
         super(props, context);
+
         this._handleStoreChange = this._handleStoreChange.bind(this);
 
         this.state = {
@@ -55,8 +54,11 @@ class ActivityList extends React.Component {
     }
 
     _handleStoreChange() {
-        this.setState(this.getInitialState());
+        this.setState({
+            articles: LatestActicleStore.getAllArticles()
+        });
     }
 }
 
+// LinkActions.fetchLatestLinks();
 module.exports = ActivityList;

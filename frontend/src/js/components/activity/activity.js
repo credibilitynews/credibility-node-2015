@@ -28,16 +28,11 @@ class Activity extends React.Component {
         TopicStore.removeChangeListener(this._handleTopicStoreChange);
     }
 
-    componentDidMount() {
-        if(this.props.article.user_id)
-            UserActions.fetchUsersById(this.props.article.user_id);
-    }
-
     render() {
         return (
             <div className="activity">
                 <small className="meta pull-right">
-                    <i>{this.state.user.name}</i>
+                    <i>{this.props.article.user_name}</i>
                 </small>
                 <div>
                     On <a href={'/topic/'+this.props.article.topic_id}>

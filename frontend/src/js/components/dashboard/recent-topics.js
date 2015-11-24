@@ -5,7 +5,7 @@ import TopicStats from '../stats/topic-stats';
 import TopicActions from 'actions/topic-actions';
 import TopicStore from 'stores/topic-store';
 
-TopicActions.fetchLatestTopics();
+// TopicActions.fetchLatestTopics();
 
 class RecentTopics extends React.Component {
     constructor(props, context) {
@@ -52,7 +52,9 @@ class RecentTopics extends React.Component {
 
     _handleStoreChange() {
         //console.log('changed');
-        this.setState(this.getInitialState());
+        this.setState({
+            topics: TopicStore.getLatestTopics()
+        });
     }
 }
 

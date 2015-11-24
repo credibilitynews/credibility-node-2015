@@ -1,15 +1,9 @@
 'use strict';
-var React = require('react');
-var ReactDOM = require('react-dom');
+import ReactComponentRenderer from 'renderer';
 
 if(typeof window !== 'undefined') {
-    var FalcorModel = require('./falcor-model');
-    FalcorModel.prepareForHydration();
-
-    var APP = require('./components/app');
-    FalcorModel
-        .hydrate()
-        .then(function(){
-            ReactDOM.render(React.createElement(APP), document.querySelector('#credibility'));
-        });
+    new ReactComponentRenderer(document.location.pathname)
+    .render(
+        document.querySelector('#credibility')
+    );
 }

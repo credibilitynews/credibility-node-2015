@@ -74,7 +74,7 @@ UserService.prototype = {
                 where: {email: email}
             })
             .then(function(result){
-                console.log('result', result[0]['dataValues']);
+                // console.log('result', result[0]['dataValues']);
                 resolve(result[0]['dataValues']);
             })
             .catch(function(why){
@@ -84,5 +84,6 @@ UserService.prototype = {
         });
     }
 };
-
-module.exports = new UserService();
+const instance = new UserService();
+instance.model = Users;
+module.exports = instance;

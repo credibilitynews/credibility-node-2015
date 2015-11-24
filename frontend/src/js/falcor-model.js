@@ -3,7 +3,8 @@ import Promise from 'promise';
 import AppDispatcher from 'dispatchers/app-dispatcher';
 import HttpDataSource from 'falcor-http-datasource';
 
-var _promises = [];
+var _promises = {};
+var _actions = [];
 var _prepareForHydration = false;
 
 function wrap(context, fn, cb){
@@ -15,22 +16,21 @@ function wrap(context, fn, cb){
 }
 
 var FalcorModel = function(){
+    var model;
     if(typeof window === 'undefined') {
         var userDoc = (typeof user === 'undefined') ? null : user;
-        return new falcor.Model({
+        model = new falcor.Model({
             source: require('../../../backend/router-factory')(userDoc)
         });
     }else{
-        var model = new falcor.Model({source: new HttpDataSource('/model.json') });
-
-        ['get', 'getValue', 'set', 'setValue', 'call'].forEach(function(method){
-            model[method] = wrap(model, model[method], function(promise){
-                if(_prepareForHydration) _promises.push(promise);
-            });
-        });
-
-        return model;
+        model = new falcor.Model({source: new HttpDataSource('/model.json') });
     }
+
+    ['get', 'getValue', 'set', 'setValue', 'call'].forEach(function(method){
+        model[method] = wrap(model, model[method], function(promise){
+            if(_prepareForHydration) _promises.push(promise);
+        });
+    });
     return model;
 };
 
@@ -54,10 +54,16 @@ FalcorModel.hydrate = function(){
     };
 
     return new Promise(function (resolve, reject) {
+        if(_promises.length == 0) return resolve();
+
         if(!_prepareForHydration)
             reject('Please make sure you have called prepareForHydration()');
-         else Promise.all(_promises).then(postHydrate(resolve));
+        else Promise.all(_promises).then(postHydrate(resolve));
     });
 };
+
+FalcorModel.falcorize = function(Base, components, actions){
+    return Base;
+}
 
 module.exports = FalcorModel;

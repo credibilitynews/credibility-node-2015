@@ -1,5 +1,6 @@
 import Sequelize from 'sequelize';
-import {def as Topics} from './topic-service';
+import {model as Topics} from './topic-service';
+import {model as Users} from './user-service';
 
 var sequelize = new Sequelize(process.env.DATABASE_URL, {native: true});
 var Links = sequelize.define('links', {
@@ -16,6 +17,7 @@ var Links = sequelize.define('links', {
     updatedAt: 'updated_at'
 });
 Links.belongsTo(Topics, { foreignKey: 'topic_id' });
+Links.belongsTo(Users, { foreignKey: 'user_id' });
 
 import batch from './batch';
 import path from 'path';
@@ -51,9 +53,9 @@ LinkService.prototype = {
         return new Promise(function (resolve, reject) {
             Links
             .findAll({
-                include: {
-                    model: Topics
-                },
+                include: [
+                    Topics, Users
+                ],
                 where: {
                     active: true
                 },
@@ -66,9 +68,10 @@ LinkService.prototype = {
                     row = row.dataValues;
                     reduced[row.id] = row;
                     reduced[row.id]['topic_title'] = row.topic.title;
+                    reduced[row.id]['user_name'] = row.user.name;
                     return reduced;
                 }, {});
-                console.log(values);
+                //console.log(values);
                 resolve(values);
             })
             .catch(function(why){
@@ -80,5 +83,5 @@ LinkService.prototype = {
 };
 
 const instance = new LinkService();
-instance.def = Links;
+instance.model = Links;
 module.exports = instance;

@@ -2,10 +2,12 @@
 
 import express from 'express';
 import bodyParser from 'body-parser';
+import Promise from 'promise';
 
 import FalcorServer from 'falcor-express';
 import RouterFactory from './router-factory';
 import React from 'react';
+import ReactDOMServer from 'react-dom/server';
 import flash from 'connect-flash';
 import enforce from 'express-sslify';
 import passwordless from './auth/passwordless';
@@ -14,10 +16,9 @@ import session from 'express-session';
 import expressValidator from 'express-validator';
 
 import account from './routes/account';
-import APP from '../frontend/src/js/components/app.js';
+import ReactComponentRenderer from '../frontend/src/js/renderer';
 
 var pgSession = require('connect-pg-simple')(session);
-var jsx = require('node-jsx').install();
 var app = express();
 
 app.use(session({
@@ -64,21 +65,21 @@ app.get('*', function(req, res){
         error = req.flash('passwordless')[0],
         success = req.flash('passwordless-success')[0];
 
-    var reactEl = React.createElement(APP, {
-        url: req.url,
+    var renderer = new ReactComponentRenderer(req.url, {
         user: res.locals ? res.locals.user : null,
         validation: validation,
         error: error,
         success: success
     });
 
-    var reactHtml = React.renderToString(reactEl);
-    res.render('index.ejs', {
-        reactOutput: reactHtml,
-        user: res.locals ? res.locals.user : null,
-        validation: validation,
-        error: error,
-        success: success
+    renderer.renderToString(function(reactHtml){
+        res.render('index.ejs', {
+            reactOutput: reactHtml,
+            user: res.locals ? res.locals.user : null,
+            validation: validation,
+            error: error,
+            success: success
+        });
     });
 });
 

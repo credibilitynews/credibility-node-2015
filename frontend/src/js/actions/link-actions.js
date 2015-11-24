@@ -31,10 +31,10 @@ var LinkActions = {
         };
         model()
         .get(
-            ['latestLinks', {from: 0, to: 4}, ['id', 'title', 'url', 'user_id', 'topic_id', 'topic_title', 'bias', 'author_id', 'news_agency_id', 'content_type']]
+            ['latestLinks', {from: 0, to: 4}, ['id', 'title', 'url', 'user_id', 'user_name', 'topic_id', 'topic_title', 'bias', 'author_id', 'news_agency_id', 'content_type']]
         )
         .then(function(response) {
-            // console.log('latestLinks/result', response.json);
+            console.log('latestLinks/result', response.json);
             dispatch(response.json.latestLinks);
         })
         .catch(function(why){

@@ -33,5 +33,4 @@ var TopicActions = {
     }
 };
 
-if(typeof window !== 'undefined') window.TopicActions = TopicActions;
 module.exports = TopicActions;

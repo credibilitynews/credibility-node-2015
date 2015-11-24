@@ -69,5 +69,5 @@ TopicService.prototype = {
     }
 };
 const instance = new TopicService();
-instance.def = Topics;
+instance.model = Topics;
 module.exports = instance;

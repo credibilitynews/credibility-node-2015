@@ -6,7 +6,7 @@ import CategoryStore from 'stores/category-store';
 
 import TagActions from 'actions/tag-actions';
 
-TagActions.fetchAllTags();
+// TagActions.fetchAllTags();
 
 class CategoryList extends React.Component {
     constructor(props, context) {
