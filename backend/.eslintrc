@@ -1,7 +1,13 @@
 {
+    "rules": {
+        "no-console": 0,
+        "quotes": [1,"single"],
+    },
+
     "env": {
         "es6": true,
-        "commonjs": true
+        "commonjs": true,
+        "node": true
     },
 
     "globals": {

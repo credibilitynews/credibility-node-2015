@@ -1,6 +1,6 @@
 {
   "name": "credibilityio-web",
-  "version": "0.0.0",
+  "version": "0.14.0",
   "description": "Credibility.io",
   "homepage": "https://credibility.io",
   "author": {
@@ -41,7 +41,7 @@
     "gulp-sourcemaps": "^1.2.8",
     "gulp-util": "^3.0.1",
     "jest-cli": "alvinsj/jest#default-module-path",
-    "jquery": "^2.1.3",
+    "nodemon": "^1.8.1",
     "npm": "^2.14.0",
     "opener": "^1.4.0",
     "react-tools": "^0.12.2",
@@ -95,9 +95,11 @@
     "postinstall": "npm run build && npm run rejoice",
     "build": "cd frontend && gulp",
     "rejoice": "echo gulped!",
-    "start": "node backend/cluster.js",
+    "start": "babel-node backend/cluster.js",
     "test": "NODE_PATH=frontend/src/js:node_modules jest",
-    "eslint": "eslint frontend/src/js"
+    "eslint": "eslint frontend/src/js",
+    "eslint-backend": "eslint backend",
+    "nodemon": "NODE_PATH=node_modules:frontend/src/js DATABASE_URL=postgres://localhost:5432/credibility nodemon --exec babel-node --watch backend backend/cluster.js"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
