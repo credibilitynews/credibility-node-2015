@@ -1,12 +1,9 @@
-
-"use strict";
-var React = require('react'),
-    ArticlesNum = require('../stats/articles-num'),
-    ViewsNum = require('../stats/views-num');
+'use strict';
+var React = require('react');
 
 class TopicColStats extends React.Component {
     render() {
-        console.log('topic-col-stats', this.props.stats);
+        // console.log('topic-col-stats', this.props.stats);
         return (
             <div className="topic-col-stats">
                 <div>

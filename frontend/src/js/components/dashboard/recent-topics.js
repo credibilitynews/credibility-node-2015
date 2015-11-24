@@ -1,8 +1,6 @@
-"use strict";
+'use strict';
 var React = require('react'),
-    TopicLink = require('../topic/topic-link'),
     TopicStats = require('../stats/topic-stats'),
-    merge = require('object.assign'),
 
     TopicActions = require('actions/topic-actions'),
     TopicStore = require('stores/topic-store');

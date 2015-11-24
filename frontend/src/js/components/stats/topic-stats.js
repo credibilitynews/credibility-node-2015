@@ -1,5 +1,5 @@
 
-"use strict";
+'use strict';
 var React = require('react');
 
 //TopicColStats = require('./topic-col-stats'),

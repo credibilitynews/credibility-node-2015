@@ -1,9 +1,5 @@
-"use strict";
-var React = require('react');
-
-var ViewsNum = require('components/stats/views-num');
-
-var TopicActions = require('actions/topic-actions'),
+'use strict';
+var React = require('react'),
     UserActions = require('actions/user-actions');
 
 var TopicStore = require('stores/topic-store'),
@@ -18,7 +14,7 @@ class Activity extends React.Component {
         this.state = {
             topic: {},
             author: {},
-            user: {},
+            user: {}
         };
     }
 

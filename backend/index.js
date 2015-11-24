@@ -7,7 +7,6 @@ var app = express();
 var FalcorServer = require('falcor-express');
 var RouterFactory = require('./router-factory');
 var React = require('react');
-var ReactDOM = require('react-dom');
 var flash = require('connect-flash');
 var enforce = require('express-sslify');
 var passwordless = require('./auth/passwordless');

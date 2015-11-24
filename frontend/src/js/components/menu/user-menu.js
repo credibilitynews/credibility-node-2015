@@ -1,12 +1,12 @@
 
-"use strict";
+'use strict';
 var React = require('react');
 
 class UserMenu extends React.Component {
     render() {
         var items = this.props.items.map(function(item){
-                    return <li key={item.label} className="text-right"><a href={item.path}>{item.label}</a></li>;
-                });
+            return <li key={item.label} className="text-right"><a href={item.path}>{item.label}</a></li>;
+        });
         return (
             <ul className="nav navbar-nav navbar-right">{items}</ul>
         );

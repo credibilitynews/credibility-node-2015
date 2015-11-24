@@ -1,28 +1,23 @@
-"use strict";
-var React = require('react'),
-    Router = require('react-router-component'),
-    Locations = Router.Locations,
-    Location = Router.Location,
-    NotFound = Router.NotFound;
+'use strict';
+var React = require('react');
 
 var About = require('components/dashboard/about.js'),
     ActivityList = require('components/activity/activity-list'),
     RecentTopics = require('components/dashboard/recent-topics'),
-    Stats = require('components/dashboard/stats'),
     SearchBar = require('components/search/search-bar'),
     CategoryList = require('components/category/category-list'),
     TopMenu = require('components/menu/top-menu');
 
-var    TopicStore = require('stores/topic-store'),
+var TopicStore = require('stores/topic-store'),
     CategoryStore = require('stores/category-store'),
     LatestArticleStore = require('stores/latest-article-store');
 
 function getStatesFromStore(){
     var state = {
-            topics: TopicStore.getAllTopics(),
-            categories: CategoryStore.getAllCategories(),
-            latest_articles: LatestArticleStore.getAllArticles()
-        };
+        topics: TopicStore.getAllTopics(),
+        categories: CategoryStore.getAllCategories(),
+        latest_articles: LatestArticleStore.getAllArticles()
+    };
     return state;
 }
 

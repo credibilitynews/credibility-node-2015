@@ -1,16 +1,16 @@
 
-"use strict";
+'use strict';
 var React = require('react');
 var TopicLink = require('./topic-link');
 
 class TopicList extends React.Component {
     render() {
         var topics = this.props.list.map(function(i){
-                    return (
+            return (
                 <li>
                     <TopicLink meta={i.meta} title={i.title} />
                 </li>);
-                });
+        });
 
         return (
             <div className="col-xs-12">

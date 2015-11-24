@@ -1,12 +1,11 @@
 
-"use strict";
+'use strict';
 var React = require('react'),
-    Link = require('react-router-component').Link,
-    LinkActions = require('../../actions/link-actions');
+    Link = require('react-router-component').Link;
 
 class StoryLink extends React.Component {
     render() {
-        console.log('story-link', this.props);
+        // console.log('story-link', this.props);
         var story = this.props.story;
 
         return (

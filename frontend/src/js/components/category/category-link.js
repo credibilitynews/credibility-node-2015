@@ -1,5 +1,5 @@
 
-"use strict";
+'use strict';
 var React = require('react');
 
 class CategoryLink extends React.Component {

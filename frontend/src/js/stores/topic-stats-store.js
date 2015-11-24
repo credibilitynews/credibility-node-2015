@@ -19,7 +19,7 @@ function _addTopicStats(topicStats){
 
 var TopicStatsStore = assign({}, Store, {
     events: {
-        CHANGE_EVENT: 'topic-stats-store'
+        CHANGE_EVENT: CHANGE_EVENT
     },
     getTopicStat: function(categoryId){
         return _topicStats
@@ -36,16 +36,16 @@ var TopicStatsStore = assign({}, Store, {
     },
     dispatcherIndex: AppDispatcher.register(function(payload){
         var action = payload.action;
-        // switch(action.actionType){
-        //     case ActionTypes.RECEIVE_LAYOUT:
-        //         console.log("store/topic-stats-store", payload.action.layout.latest_topics);
-        //         _addTopicStats(payload.action.layout.latest_topics);
-        //         break;
-        //     case ActionTypes.ADD_TOPIC:
-        //         _addTopicStat(payload.action.topic)
-        //         break;
-        // }
-        // TopicStatsStore.emitChange();
+        switch(action.actionType){
+        case ActionTypes.RECEIVE_LAYOUT:
+            // console.log('store/topic-stats-store', payload.action.layout.latest_topics);
+            _addTopicStats(payload.action.layout.latest_topics);
+            break;
+        case ActionTypes.ADD_TOPIC:
+            _addTopicStat(payload.action.topic);
+            break;
+        }
+        TopicStatsStore.emitChange();
         return true;
     })
 });

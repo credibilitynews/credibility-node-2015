@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 var React = require('react'),
 
     CategoryLink = require('components/category/category-link'),

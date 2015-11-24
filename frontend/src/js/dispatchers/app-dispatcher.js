@@ -6,20 +6,20 @@ var PayloadSources = require('../constants/app-constants').PayloadSources;
 Dispatcher.prototype = assign(Dispatcher.prototype, {
     handleViewAction: function(action){
         this.dispatch({
-          source: PayloadSources.VIEW_ACTION,
-          action: action
-      });
+            source: PayloadSources.VIEW_ACTION,
+            action: action
+        });
     },
     handleServerAction: function(action){
         this.dispatch({
-          source: PayloadSources.SERVER_ACTION,
-          action: action
-      });
+            source: PayloadSources.SERVER_ACTION,
+            action: action
+        });
     },
     waitForAll: function(myself){
         var tokens = this.getAllTokens().filter(function(token){
-          return myself !== token;
-      });
+            return myself !== token;
+        });
         return this.waitFor(tokens);
     },
     getAllTokens: function(){

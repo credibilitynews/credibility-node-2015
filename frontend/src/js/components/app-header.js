@@ -1,7 +1,5 @@
-"use strict";
+'use strict';
 var React = require('react');
-var TopMenu = require('./menu/top-menu');
-var UserMenu = require('./menu/user-menu');
 
 class Header extends React.Component {
     render() {

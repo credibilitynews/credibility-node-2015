@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 var React = require('react');
 var ReactDOM = require('react-dom');
 
@@ -10,6 +10,6 @@ if(typeof window !== 'undefined') {
     FalcorModel
         .hydrate()
         .then(function(){
-            ReactDOM.render(<APP />, document.querySelector('#credibility'));
+            ReactDOM.render(React.createElement(APP), document.querySelector('#credibility'));
         });
 }

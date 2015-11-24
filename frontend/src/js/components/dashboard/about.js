@@ -1,5 +1,5 @@
 
-"use strict";
+'use strict';
 var React = require('react');
 
 class About extends React.Component {

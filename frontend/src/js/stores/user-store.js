@@ -22,7 +22,7 @@ var UserStore = assign({}, Store, {
         return _users.get(id.toString());
     },
     getDispatherToken: function(){
-        return _dispatchToken;
+        return UserStore._dispatchToken;
     },
     _dispatchToken: AppDispatcher.register(function(payload){
         var action = payload.action;

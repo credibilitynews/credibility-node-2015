@@ -3,9 +3,6 @@ var model = require('falcor-model');
 var ActionTypes = require('../constants/app-constants').ActionTypes,
     AppDispatcher = require('../dispatchers/app-dispatcher');
 
-var request = function(){
-    return require('superagent');
-};
 var TopicActions = {
     fetchTopicsById: function(ids){
         //console.log('fetchTopicsById', ids);
@@ -15,9 +12,11 @@ var TopicActions = {
             //console.log('result/fetchTopicsById', ids, response.json);
             AppDispatcher.handleServerAction({
                 actionType: ActionTypes.FETCH_TOPICS_BY_ID,
-                topics: response.json['topicsById']
+                topics: response.json.topicsById
             });
-        }).catch(function(why){console.log('topicsById/catch', why);});
+        }).catch(function(why){
+            // console.log('topicsById/catch', why);
+        });
     },
     fetchLatestTopics: function(){
         model()
@@ -26,9 +25,11 @@ var TopicActions = {
             //console.log('result/fetchLatestTopics', response.json);
             AppDispatcher.handleServerAction({
                 actionType: ActionTypes.FETCH_RECENT_TOPICS,
-                topics: response.json['latestTopics']
+                topics: response.json.latestTopics
             });
-        }).catch(function(why){console.log('latestTopics/catch', why);});
+        }).catch(function(why){
+            // console.log('latestTopics/catch', why);
+        });
     }
 };
 

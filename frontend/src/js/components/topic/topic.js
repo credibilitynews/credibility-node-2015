@@ -1,14 +1,11 @@
-"use strict";
+'use strict';
 var React = require('react');
 var cx = require('classnames');
 var Hashtag = require('components/tag/hashtag');
-var StoryList = require('components/story/story-list');
 var StoryTimeline = require('components/story/story-timeline');
 
-var Score = require('components/stats/score');
 var ViewsNum =  require('components/stats/views-num');
 var ArticlesNum =  require('components/stats/articles-num');
-var TopicStats = require('components/stats/topic-stats');
 
 var TopicStore = require('stores/topic-store');
 var TopicActions = require('actions/topic-actions');
@@ -36,16 +33,15 @@ class Topic extends React.Component {
 
     componentDidMount() {
         if(!this.state.topic)
-                    TopicActions.fetchTopicsById(this.props.topicId);
+            TopicActions.fetchTopicsById(this.props.topicId);
     }
 
     render() {
-        console.log(this.props);
         var topic = this.state.topic || {};
 
         var toggled = cx({
-            'short': !this.state.summaryShown,
-            'long': this.state.summaryShown
+            short: !this.state.summaryShown,
+            long: this.state.summaryShown
         });
 
         return (
@@ -88,7 +84,6 @@ class Topic extends React.Component {
 
     _handleStoreChange() {
         var topic = TopicStore.getTopic(this.props.topicId);
-        console.log('topic', topic);
         this.setState({topic: topic});
     }
 

@@ -1,11 +1,10 @@
-
-"use strict";
+'use strict';
 var React = require('react');
 var StoryLink = require('../story/story-link');
 
 class StoryTimeline extends React.Component {
     render() {
-        console.log('story-timeline', this.props);
+        // console.log('story-timeline', this.props);
         var stories = this.props.stories;
         return (
             <div className="story-timeline">
@@ -17,30 +16,29 @@ class StoryTimeline extends React.Component {
     }
 
     _wrap(items) {
-        var times = {};
         return items
         .reduce(function(sets, item){
-            var index = sets['keys'][item.meta.created_key];
+            var index = sets.keys[item.meta.created_key];
             if(index != 0 && !index){
                 // record index
-                    index = sets['groups'].length;
-                    sets['keys'][item.meta.created_key] = index;
+                index = sets.groups.length;
+                sets.keys[item.meta.created_key] = index;
 
                 // create new group with 3 arrays, because 3 types
-                    sets['groups'].push([[],[],[]]);
-                }
-            sets['groups'][index][item.type].push(item);
+                sets.groups.push([[],[],[]]);
+            }
+            sets.groups[index][item.type].push(item);
             return sets;
         }, {keys: {}, groups: []})
         .groups
         .map(function(group){
             var time = null;
             for(var type=0; type<3; type++){
-                    group[type] = group[type].map(function(link){
-                        time = link.meta.created_at;
-                        return <StoryLink key={link.id} story={link} />;
-                    });
-                }
+                group[type] = group[type].map(function(link){
+                    time = link.meta.created_at;
+                    return <StoryLink key={link.id} story={link} />;
+                });
+            }
             return (
                 <div key={time}>
                     <div className="time">{time}&nbsp;&nbsp;<i className="fa fa-calendar-o"></i></div>

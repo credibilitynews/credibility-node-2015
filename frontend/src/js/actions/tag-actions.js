@@ -3,9 +3,6 @@ var model = require('falcor-model');
 var ActionTypes = require('../constants/app-constants').ActionTypes,
     AppDispatcher = require('../dispatchers/app-dispatcher');
 
-var request = function(){
-    return require('superagent');
-};
 var TagActions = {
     fetchAllTags: function(){
         var fetchTagsWithLength = function(length){
@@ -15,16 +12,20 @@ var TagActions = {
                 //console.log(response.json);
                 AppDispatcher.handleServerAction({
                     actionType: ActionTypes.FETCH_ALL_TAGS,
-                    tags: response.json['tags']
+                    tags: response.json.tags
                 });
-            }).catch(function(why){console.log('tags', why);});
+            }).catch(function(why){
+                // console.log('tags', why);
+            });
         };
         model()
         .get('tags.length')
         .then(function(response) {
-            var length = response.json['tags']['length'];
+            var length = response.json.tags.length;
             fetchTagsWithLength(length);
-        }).catch(function(why){console.log('tags.length', why);});
+        }).catch(function(why){
+            // console.log('tags.length', why);
+        });
     },
 
     fetchTagsById: function(tagIds){
@@ -32,7 +33,9 @@ var TagActions = {
         .get(['tagsById', tagIds, ['name', 'code', 'parent_id']])
         .then(function(response) {
             //console.log(response.json);
-        }).catch(function(why){console.log('tagsById', why);});
+        }).catch(function(why){
+            // console.log('tagsById', why);
+        });
     }
 };
 

@@ -23,7 +23,7 @@ function _addCategories(categories){
 
 var CategoryStore = assign({}, Store, {
     events: {
-        CHANGE_EVENT: 'category-store'
+        CHANGE_EVENT: CHANGE_EVENT
     },
     getCategory: function(categoryId){
         return _categories.get(categoryId.toString());

@@ -1,11 +1,11 @@
 
-"use strict";
+'use strict';
 var React = require('react');
 var StoryLink = require('../story/story-link');
 
 class StoryList extends React.Component {
     render() {
-        console.log('story-list', this.props);
+        // console.log('story-list', this.props);
         var stories = this.props.stories;
         return (
             <div className="story-list">
@@ -20,8 +20,8 @@ class StoryList extends React.Component {
 
     _wrap(items) {
         return items.map(function(item){
-                    return (<li key={item.id}><StoryLink story={item} /></li>);
-                });
+            return (<li key={item.id}><StoryLink story={item} /></li>);
+        });
     }
 }
 

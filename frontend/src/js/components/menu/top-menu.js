@@ -1,5 +1,5 @@
 
-"use strict";
+'use strict';
 var React = require('react');
 var Link = require('react-router-component').Link;
 
@@ -18,11 +18,11 @@ class TopMenu extends React.Component {
 
     _wrap(items) {
         return items.map(function(item){
-                    return (
+            return (
                 <li key={item.label} className="nav-item">
                     <Link href={item.path}>{item.label}</Link>
                 </li>);
-                });
+        });
     }
 }
 
@@ -31,7 +31,7 @@ TopMenu.defaultProps = {
         {path: '#/topic', label: 'USA'},
         {path: '#/topic', label: 'Ukraine'},
         {path: '#/topic', label: 'Hong Kong'},
-        {path: '#/topic', label: 'Thailand'},
+        {path: '#/topic', label: 'Thailand'}
     ]
 };
 
