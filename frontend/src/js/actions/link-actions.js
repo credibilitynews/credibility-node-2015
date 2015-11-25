@@ -12,7 +12,7 @@ var LinkActions = {
             });
         };
 
-        model()
+        return model()
         .get(['linksById', ids, ['title', 'url', 'created_at', 'views', 'user_id', 'topic_id', 'bias', 'author_id', 'news_agency_id', 'content_type']])
         .then(function(response) {
             //console.log('linksById', response.json);
@@ -29,12 +29,12 @@ var LinkActions = {
                 links: links
             });
         };
-        model()
+        return model()
         .get(
             ['latestLinks', {from: 0, to: 4}, ['id', 'title', 'url', 'user_id', 'user_name', 'topic_id', 'topic_title', 'bias', 'author_id', 'news_agency_id', 'content_type']]
         )
         .then(function(response) {
-            console.log('latestLinks/result', response.json);
+            // console.log('latestLinks/result', response.json);
             dispatch(response.json.latestLinks);
         })
         .catch(function(why){
@@ -49,7 +49,7 @@ var LinkActions = {
             });
         };
 
-        model()
+        return model()
         .get(['linksByTopicId', ids, ['title', 'url', 'created_at', 'views', 'user_id', 'topic_id', 'bias', 'author_id', 'news_agency_id', 'content_type']])
         .then(function(response) {
             //console.log('linksById', response.json);

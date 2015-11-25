@@ -6,7 +6,7 @@ import AppDispatcher from 'dispatchers/app-dispatcher';
 var UserActions = {
     fetchUsersById: function(ids){
         //console.log('fetchUsersById', ids);
-        model()
+        return model()
         .get(['usersById', ids, ['id', 'name', 'email', 'active', 'created_at']])
         .then(function(response) {
             //console.log('fetchUsersById/result', ids, response.json);
@@ -19,7 +19,7 @@ var UserActions = {
         });
     },
     fetchLatestUsers: function(){
-        model()
+        return model()
         .get(['latestUsers', {from:0, to:4}, ['id']])
         .then(function(response) {
             //console.log(response.json);

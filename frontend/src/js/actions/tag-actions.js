@@ -18,7 +18,7 @@ var TagActions = {
                 // console.log('tags', why);
             });
         };
-        model()
+        return model()
         .get('tags.length')
         .then(function(response) {
             var length = response.json.tags.length;
@@ -29,7 +29,7 @@ var TagActions = {
     },
 
     fetchTagsById: function(tagIds){
-        model()
+        return model()
         .get(['tagsById', tagIds, ['name', 'code', 'parent_id']])
         .then(function(response) {
             //console.log(response.json);

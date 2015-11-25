@@ -6,7 +6,7 @@ import AppDispatcher from '../dispatchers/app-dispatcher';
 var TopicActions = {
     fetchTopicsById: function(ids){
         //console.log('fetchTopicsById', ids);
-        model()
+        return model()
         .get(['topicsById', ids, ['id','title','hashtag','created_at','views','user_id']])
         .then(function(response) {
             //console.log('result/fetchTopicsById', ids, response.json);
@@ -19,7 +19,7 @@ var TopicActions = {
         });
     },
     fetchLatestTopics: function(){
-        model()
+        return model()
         .get(['latestTopics', {from:0, to:4}, ['id','title','hashtag','created_at','views','user_id']])
         .then(function(response) {
             //console.log('result/fetchLatestTopics', response.json);
