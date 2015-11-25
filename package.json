@@ -13,7 +13,7 @@
   },
   "license": "MIT",
   "engines": {
-    "iojs": "3.3.0"
+    "node": "5.0.0"
   },
   "devDependencies": {
     "babel": "^6.1.18",
