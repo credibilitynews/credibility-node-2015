@@ -51,17 +51,17 @@ class CategoryList extends React.Component {
         if(!categories) return <div />;
 
         return categories
-            .map(function(item, index){
+            .map((item, index) => {
                 return (
                     <span key={index} className={className}>
                         <CategoryLink category={item}/>
-                        <span>
+                        <div className="category-group">
                             { this._wrap(
                                 this._childrenOf(this.state.categories, item.id),
                                 'child')}
-                        </span>
+                        </div>
                     </span>);
-            }.bind(this));
+            });
     }
 
     _childrenOf(categories, parentId) {
