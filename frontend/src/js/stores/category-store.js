@@ -35,7 +35,7 @@ var CategoryStore = assign({}, Store, {
         var action = payload.action;
         switch(action.actionType){
         case ActionTypes.FETCH_ALL_TAGS:
-                //console.log("store/category-store", payload.action.tags);
+            // console.log("store/category-store", payload.action.tags);
             _addCategories(payload.action.tags);
             CategoryStore.emitChange();
             break;

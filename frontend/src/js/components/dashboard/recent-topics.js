@@ -5,7 +5,7 @@ import TopicStats from '../stats/topic-stats';
 import TopicActions from 'actions/topic-actions';
 import TopicStore from 'stores/topic-store';
 
-// TopicActions.fetchLatestTopics();
+import {preFetchable, preFetchableDestructor} from 'pre-fetchable';
 
 class RecentTopics extends React.Component {
     constructor(props, context) {
@@ -58,4 +58,7 @@ class RecentTopics extends React.Component {
     }
 }
 
-module.exports = RecentTopics;
+module.exports = preFetchable(
+    RecentTopics,
+    TopicActions.fetchLatestTopics
+);

@@ -61,4 +61,10 @@ class Dashboard extends React.Component {
     }
 }
 
-module.exports = Dashboard;
+import {preFetchable, preFetchDataAction, preFetchableDestructor} from 'pre-fetchable';
+let children = [TopMenu, SearchBar, ActivityList, RecentTopics, CategoryList, About];
+module.exports = preFetchable(
+    Dashboard,
+    preFetchDataAction(...children),
+    preFetchableDestructor(Dashboard, ...children)
+);

@@ -6,7 +6,7 @@ import CategoryStore from 'stores/category-store';
 
 import TagActions from 'actions/tag-actions';
 
-// TagActions.fetchAllTags();
+import {preFetchable} from 'pre-fetchable';
 
 class CategoryList extends React.Component {
     constructor(props, context) {
@@ -27,12 +27,12 @@ class CategoryList extends React.Component {
     }
 
     componentDidMount() {
-        if(this.state.categories.length == 0)
-            TagActions.fetchAllTags();
+        // if(this.state.categories.length == 0)
+        //     TagActions.fetchAllTags();
     }
 
     render() {
-        //console.log(this.state.categories);
+        // console.log(this.props, this.state);
         return (
             <div className="category-list panel panel-default">
                 <div className="panel-body">
@@ -81,4 +81,7 @@ class CategoryList extends React.Component {
     }
 }
 
-module.exports = CategoryList;
+module.exports = preFetchable(
+    CategoryList,
+    TagActions.fetchAllTags
+);

@@ -4,10 +4,9 @@ import AppDispatcher from 'dispatchers/app-dispatcher';
 import HttpDataSource from 'falcor-http-datasource';
 
 var _promises = [];
-var _actions = {};
 var _prepareForHydration = false;
 
-function wrap(context, fn, cb){
+function tap(context, fn, cb){
     return function(){
         var promise = fn.apply(context, arguments);
         cb(promise);
@@ -15,45 +14,66 @@ function wrap(context, fn, cb){
     }.bind(context);
 }
 
+var _model;
 var FalcorModel = function(){
-    var model;
-    if(typeof window === 'undefined') {
+
+    if(!_model && typeof window === 'undefined') {
         var userDoc = (typeof user === 'undefined') ? null : user;
-        model = new falcor.Model({
+        _model = new falcor.Model({
             source: require('../../../backend/router-factory')(userDoc)
         });
-    }else{
-        model = new falcor.Model({source: new HttpDataSource('/model.json') });
+    }else if(!_model){
+        _model = new falcor.Model({source: new HttpDataSource('/model.json') });
     }
 
-    ['get', 'getValue', 'set', 'setValue', 'call'].forEach(function(method){
-        model[method] = wrap(model, model[method], function(promise){
-            if(_prepareForHydration) _promises.push(promise);
+    if(_prepareForHydration)
+        ['get', 'getValue', 'set', 'setValue', 'call'].forEach(function(method){
+            _model[method] = tap(_model, _model[method], function(promise){
+                if(_prepareForHydration) _promises.push(promise);
+
+                Promise.all([promise])
+                .then(() => {
+                    // console.log('done model#'+method);
+                    _promises.splice(_promises.indexOf(promise), 1);
+                })
+                .catch((why) => {
+                    // console.log('error model#'+method, why);
+                    _promises.splice(_promises.indexOf(promise), 1);
+                });
+            });
         });
-    });
-    return model;
+
+    return _model;
 };
 
+var _dispatcherToken;
 FalcorModel.prepareForHydration = function(){
     _prepareForHydration = true;
+    _dispatcherToken = AppDispatcher.register((payload) => {
+        // console.log('waitForAll', payload.action);
+        AppDispatcher.waitForAll(token);
+    });
 };
 
+
 FalcorModel.hydrate = function(){
+
     var postHydrate = function(resolve){
-        return function(){
-            // wait for dispatcher actions
-            var token = AppDispatcher.register(function(payload){
-                AppDispatcher.waitForAll(token);
-                AppDispatcher.unregister(token);
-                //console.log('hydrated', _promises.length, 'promises');
-                _promises = [];
-                _prepareForHydration = false;
-                resolve();
-            });
+        return () => {
+            // console.log('postHydrate');
+            AppDispatcher.unregister(_dispatcherToken);
+
+            _dispatcherToken = null;
+            _model = null;
+            _promises = [];
+            _prepareForHydration = false;
+            // console.log('postHydrate#resolve');
+            resolve();
         };
     };
 
     return new Promise(function (resolve, reject) {
+        // console.log('hydrate', _promises.length);
         if(_promises.length == 0) return resolve();
 
         if(!_prepareForHydration)

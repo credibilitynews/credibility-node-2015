@@ -60,5 +60,8 @@ class ActivityList extends React.Component {
     }
 }
 
-// LinkActions.fetchLatestLinks();
-module.exports = ActivityList;
+import {preFetchable, preFetchableDestructor} from 'pre-fetchable';
+if(typeof window !== 'undefined') window.ActivityList = ActivityList;
+module.exports = preFetchable(
+    ActivityList,
+    LinkActions.fetchLatestLinks);

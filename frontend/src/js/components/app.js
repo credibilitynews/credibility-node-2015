@@ -23,4 +23,11 @@ class App extends React.Component {
     }
 }
 
-module.exports = App;
+import {preFetchable, preFetchDataAction, preFetchableDestructor} from 'pre-fetchable';
+const children = [AppLogin, Topic, Story, Dashboard];
+
+module.exports = preFetchable(
+    App,
+    preFetchDataAction(...children),
+    preFetchableDestructor(App, ...children)
+);
