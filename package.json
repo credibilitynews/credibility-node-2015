@@ -44,7 +44,6 @@
     "nodemon": "^1.8.1",
     "npm": "^2.14.0",
     "opener": "^1.4.0",
-    "react-tools": "^0.12.2",
     "readable-stream": "^2.0.4",
     "run-sequence": "^1.0.2",
     "vinyl-source-stream": "^1.0.0",
@@ -58,7 +57,6 @@
     "connect-flash": "^0.1.1",
     "connect-pg-simple": "^3.0.2",
     "ejs": "^2.3.3",
-    "es6-promise": "^2.0.1",
     "express": "^4.13.3",
     "express-cluster": "0.0.4",
     "express-session": "^1.11.3",
@@ -71,6 +69,7 @@
     "falcor-router": "^0.2.9",
     "flux": "2.0.1",
     "immutable": "^3.3.0",
+    "invariant": "^2.2.0",
     "keymirror": "^0.1.1",
     "mandrill-api": "^1.0.45",
     "object-assign": "^2.0.0",
@@ -82,7 +81,6 @@
     "promise": "^7.0.4",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
-    "react-intl": "^1.2.1",
     "react-redux": "^4.0.0",
     "react-router-component": "^0.28.0",
     "react-select": "^0.6.7",
@@ -99,7 +97,7 @@
     "test": "NODE_PATH=frontend/src/js:node_modules jest",
     "eslint": "eslint frontend/src/js",
     "eslint-backend": "eslint backend",
-    "nodemon": "NODE_PATH=node_modules:frontend/src/js DATABASE_URL=postgres://localhost:5432/credibility nodemon --exec babel-node --watch backend --watch frontend/src/js backend/cluster.js"
+    "nodemon": "NODE_PATH=node_modules:frontend/src/js DATABASE_URL=postgres://localhost:5432/credibility nodemon --exec babel-node --watch backend --watch frontend/src/js backend/index.js"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
