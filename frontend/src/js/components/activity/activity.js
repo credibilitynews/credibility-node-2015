@@ -5,11 +5,15 @@ import UserActions from 'actions/user-actions';
 import TopicStore from 'stores/topic-store';
 import UserStore from 'stores/user-store';
 
+import {environment} from 'react-router-component';
+
 class Activity extends React.Component {
     constructor(props, context) {
         super(props, context);
         this._handleTopicStoreChange = this._handleTopicStoreChange.bind(this);
         this._handleUserStoreChange = this._handleUserStoreChange.bind(this);
+        this._handleTopicClick = this._handleTopicClick.bind(this);
+        this._handleLinkClick = this._handleLinkClick.bind(this);
 
         this.state = {
             topic: {},
@@ -35,13 +39,13 @@ class Activity extends React.Component {
                     <i>{this.props.article.user_name}</i>
                 </small>
                 <div>
-                    On <a href={'/topic/'+this.props.article.topic_id}>
+                    On <a onClick={this._handleTopicClick}>
                         <strong>{this.props.article.topic_title}</strong>
                         </a>,
                 </div>
                 <blockquote>
                     <div>
-                        <a className="link-title" href={'/link/'+this.props.article.id}>
+                        <a className="link-title" onClick={this._handleLinkClick}>
                             {this.props.article.title}
                         </a> <span className="label label-primary">News</span>
                     </div>
@@ -52,6 +56,16 @@ class Activity extends React.Component {
                 </blockquote>
             </div>
         );
+    }
+
+    _handleTopicClick(e) {
+        if(e) e.preventDefault();
+        environment.defaultEnvironment.navigate('/topic/'+this.props.article.topic_id);
+    }
+
+    _handleLinkClick(e) {
+        if(e) e.preventDefault();
+        environment.defaultEnvironment.navigate('/link/'+this.props.article.id);
     }
 
     _handleUserStoreChange() {
