@@ -1,5 +1,6 @@
 'use strict';
 
+import compress from 'compression';
 import express from 'express';
 import bodyParser from 'body-parser';
 import Promise from 'promise';
@@ -18,6 +19,7 @@ import expressValidator from 'express-validator';
 import account from './routes/account';
 import ReactComponentRenderer from '../frontend/src/js/renderer';
 
+
 var pgSession = require('connect-pg-simple')(session);
 var app = express();
 
@@ -31,7 +33,10 @@ app.use(session({
     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
 }));
 
+
 app.use(flash());
+app.use(compress({level: 9}));
+app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
@@ -46,6 +51,18 @@ app.use(expressValidator({
     }
 }));
 
+app.get('*.js', function (req, res, next) {
+  req.url = req.url + '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
+
+app.get('*.css', function (req, res, next) {
+  req.url = req.url + '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
+
 app.use('/account', account);
 app.use('/model.json', FalcorServer.dataSourceRoute(function(req, res){
     //console.log('/model.json', req.query);
@@ -56,9 +73,9 @@ app.get('/favicon.ico', function(req, res){
     res.sendFile('favicon.ico', {root: './backend/public'});
 });
 
-app.get('/public/*', function(req, res){
-    res.sendFile(req.url, {root: './backend'});
-});
+// app.get('/public/*', function(req, res){
+//     res.sendFile(req.url, {root: './backend'});
+// });
 
 app.get('*', function(req, res){
     var validation = req.flash('validation')[0],
