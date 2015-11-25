@@ -1,6 +1,6 @@
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
-@import url(https://fonts.googleapis.com/css?family=Cardo);
-@import url(https://fonts.googleapis.com/css?family=Source+Serif+Pro);
+// @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+// @import url(https://fonts.googleapis.com/css?family=Cardo);
+// @import url(https://fonts.googleapis.com/css?family=Source+Serif+Pro);
 $enable-flex: true;
 $icon-font-path: "/bootstrap/fonts/";
 @import "bootstrap";
@@ -186,7 +186,7 @@ h1, h2, h3{
 }
 
 .link-title{
-    font-family: 'Cardo', serif;
+    // font-family: 'Cardo', serif;
     font-size: 1.2em;
     color: #888;
 }
