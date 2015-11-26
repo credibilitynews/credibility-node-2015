@@ -85,11 +85,11 @@ LinkService.prototype = {
             Links
             sequelize
             .query(`Select links.*, tags.name as tag_name, topics.title as topic_title, users.name as user_name from links
-                join topic_tags on topic_tags.tag_id = ${tagId} and topic_tags.topic_id = links.topic_id
+                join topic_tags on topic_tags.tag_id = ? and topic_tags.topic_id = links.topic_id
                 left join tags on topic_tags.tag_id = tags.id
                 left join topics on links.topic_id = topics.id
                 left join users on links.user_id = users.id order by links.created_at desc;`,
-                { type: sequelize.QueryTypes.SELECT})
+                { type: sequelize.QueryTypes.SELECT, replacements: [tagId]})
             .then(function(result){
                 console.log(result);
                 var values = result.reduce(function(reduced, row){
