@@ -7,7 +7,6 @@ import App from './components/app';
 import Promise from 'promise';
 
 import FalcorModel from './falcor-model';
-import LinkActions from 'actions/link-actions';
 import UrlPattern from 'url-pattern';
 
 import {preFetchDataAction, destructPreFetchable} from 'pre-fetchable';
@@ -39,7 +38,7 @@ export default class ReactComponentRenderer {
                 cb(html);
             })
             .catch((why)=>{
-                console.log('ReactComponentRenderer#renderToString', why);
+                // console.log('ReactComponentRenderer#renderToString', why);
             });
         };
 
@@ -59,9 +58,9 @@ export default class ReactComponentRenderer {
                 ReactDOM.render(this.reactEl, container);
             })
             .catch((why)=>{
-                console.log('ReactComponentRenderer#render', why);
+                // console.log('ReactComponentRenderer#render', why);
             });
-        }
+        };
         Promise.all([this.preFetchDataforRoute(this.url)]).then(hydrate);
 
     }
@@ -71,7 +70,7 @@ export default class ReactComponentRenderer {
             topic: new UrlPattern('/topic/:topicId'),
             story: new UrlPattern('/story'),
             home: new UrlPattern('/*')
-        }
+        };
 
         if(routes.topic.match(path)){
             var Topic = require('components/topic/topic');

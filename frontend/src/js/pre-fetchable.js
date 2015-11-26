@@ -32,7 +32,7 @@ export function preFetchableDestructor(...components){
                 module.exports.destructPreFetchable(item);
             }
         });
-    }
+    };
 }
 
 export function preFetchDataAction(...components){
@@ -43,15 +43,15 @@ export function preFetchDataAction(...components){
                 // console.log(item.name+'.__prefetchData()');
                 promises.push(item.__prefetchData());
             }
-        })
-        return Promise.all(promises)
-    }
+        });
+        return Promise.all(promises);
+    };
 }
 
 export function combine(...args){
     return function(){
         args.forEach((fn)=>{
             fn();
-        })
-    }
+        });
+    };
 }

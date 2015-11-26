@@ -29,17 +29,15 @@ var TagActions = {
     },
 
     fetchTopTags () {
-        console.log('fetchTopTags')
         return model()
         .get(['topTags', {length: 5}, ['id', 'name', 'code', 'parent_id', 'topic_count']])
         .then(function(response){
-            console.log(response.json);
             AppDispatcher.handleServerAction({
                 actionType: ActionTypes.FETCH_TOP_TAGS,
                 topTags: response.json.topTags
             });
         }).catch(function(why){
-            console.log('topTags', why);
+            // console.log('topTags', why);
         });
     },
 

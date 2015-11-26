@@ -12,7 +12,7 @@ class TopMenu extends React.Component {
         this._handleStoreChange = this._handleStoreChange.bind(this);
         this.state = {
             items: CategoryStore.getTopCategories()
-        }
+        };
     }
 
     componentWillMount() {
@@ -48,8 +48,8 @@ class TopMenu extends React.Component {
     }
 
     _handleStoreChange(){
-        console.log('_handleStoreChange', CategoryStore.getTopCategories())
-        this.setState({items: CategoryStore.getTopCategories()})
+        // console.log('_handleStoreChange', CategoryStore.getTopCategories());
+        this.setState({items: CategoryStore.getTopCategories()});
     }
 }
 

@@ -60,7 +60,7 @@ class ActivityList extends React.Component {
     }
 }
 
-import {preFetchable, preFetchableDestructor} from 'pre-fetchable';
+import {preFetchable} from 'pre-fetchable';
 if(typeof window !== 'undefined') window.ActivityList = ActivityList;
 module.exports = preFetchable(
     ActivityList,

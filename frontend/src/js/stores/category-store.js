@@ -46,7 +46,7 @@ var CategoryStore = assign({}, Store, {
             CategoryStore.emitChange();
             break;
         case ActionTypes.FETCH_TOP_TAGS:
-            console.log("store/category-store", payload.action);
+            // console.log('store/category-store', payload.action);
             _topCategories = _addCategories(_topCategories, payload.action.topTags);
             CategoryStore.emitChange();
             break;

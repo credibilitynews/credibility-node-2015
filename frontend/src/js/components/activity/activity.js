@@ -1,6 +1,5 @@
 'use strict';
 import React from 'react';
-import UserActions from 'actions/user-actions';
 
 import TopicStore from 'stores/topic-store';
 import UserStore from 'stores/user-store';
