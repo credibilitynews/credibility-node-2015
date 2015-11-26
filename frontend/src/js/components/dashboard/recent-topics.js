@@ -33,9 +33,11 @@ class RecentTopics extends React.Component {
     render() {
         //console.log("debates", this.props);
         return (
-            <div>
-                <h3>Recent Topics</h3>
-                <ol>{this._wrap(this.state.topics)}</ol>
+            <div className="recent-topics panel panel-default">
+                <div className="panel-body">
+                    <h4>Recent Topics</h4>
+                    <div>{this._wrap(this.state.topics)}</div>
+                </div>
             </div>
         );
     }
@@ -44,9 +46,9 @@ class RecentTopics extends React.Component {
         if(!items) return <div />;
         return items.map(function(item){
             return(
-                <li key={item.id}>
+                <div key={item.id}>
                     <TopicStats topic={item}/>
-                </li>);
+                </div>);
         });
     }
 

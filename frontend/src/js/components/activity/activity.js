@@ -4,15 +4,14 @@ import React from 'react';
 import TopicStore from 'stores/topic-store';
 import UserStore from 'stores/user-store';
 
-import {environment} from 'react-router-component';
+import {Link} from 'react-router-component';
+import slug from 'slug';
 
 class Activity extends React.Component {
     constructor(props, context) {
         super(props, context);
         this._handleTopicStoreChange = this._handleTopicStoreChange.bind(this);
         this._handleUserStoreChange = this._handleUserStoreChange.bind(this);
-        this._handleTopicClick = this._handleTopicClick.bind(this);
-        this._handleLinkClick = this._handleLinkClick.bind(this);
 
         this.state = {
             topic: {},
@@ -38,15 +37,15 @@ class Activity extends React.Component {
                     <i>{this.props.article.user_name}</i>
                 </small>
                 <div>
-                    On <a onClick={this._handleTopicClick}>
+                    On <Link href={'/topic/'+this.props.article.topic_id+'/'+slug(this.props.article.topic_title)}>
                         <strong>{this.props.article.topic_title}</strong>
-                        </a>,
+                        </Link>,
                 </div>
                 <blockquote>
                     <div>
-                        <a className="link-title" onClick={this._handleLinkClick}>
+                        <Link className="link-title" href={'/link/'+this.props.article.id+'/'+slug(this.props.article.title)}>
                             {this.props.article.title}
-                        </a> <span className="label label-primary">News</span>
+                        </Link> <span className="label label-primary">News</span>
                     </div>
                     <small className="meta">
                         - {this.props.article.author_id || '(unknown author)'}
@@ -55,16 +54,6 @@ class Activity extends React.Component {
                 </blockquote>
             </div>
         );
-    }
-
-    _handleTopicClick(e) {
-        if(e) e.preventDefault();
-        environment.defaultEnvironment.navigate('/topic/'+this.props.article.topic_id);
-    }
-
-    _handleLinkClick(e) {
-        if(e) e.preventDefault();
-        environment.defaultEnvironment.navigate('/link/'+this.props.article.id);
     }
 
     _handleUserStoreChange() {

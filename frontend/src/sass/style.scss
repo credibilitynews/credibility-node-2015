@@ -97,6 +97,9 @@ h1, h2, h3{
 //         }
 //     }
 // }
+.header{
+    a.login{line-height: 40px;}
+}
 .footer{margin-top:30px;}
 .copyright{
     padding-top: 10px;
@@ -149,6 +152,7 @@ h1, h2, h3{
 }
 
 .about{
+    font-size: 0.8em;
     background-color: rgba(122, 191, 252, 0.69);
     //border: 1px solid rgba(74, 166, 242, 0.6);
     //border-width: 0 1px 4px 1px;
@@ -189,4 +193,11 @@ h1, h2, h3{
     // font-family: 'Cardo', serif;
     font-size: 1.2em;
     color: #888;
+}
+
+.panel-body{
+    h4{
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 1.3em;
+    }
 }

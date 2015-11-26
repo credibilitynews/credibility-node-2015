@@ -1,16 +1,17 @@
 'use strict';
 import React from 'react';
+import {Link} from 'react-router-component';
 
 class Header extends React.Component {
     render() {
         return (
             <nav className="header navbar navbar-light bg-faded" role="navigation">
-                <a className="navbar-brand" href="/">
+                <Link className="navbar-brand" href="/">
                     <span className="col-brand">Credibility.io</span>
-                </a>
+                </Link>
                 { this.props.user ?
-                    <a href="/account/logout" className="pull-right">Logout</a>
-                    : <a href="/account/login" className="pull-right">Login</a> }
+                    <Link href="/account/logout" className="login pull-right">Logout</Link>
+                    : <Link href="/account/login" className="login pull-right">Login/Signup</Link> }
             </nav>
         );
     }

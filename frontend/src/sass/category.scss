@@ -1,5 +1,5 @@
 .category-list{
-    margin-top: 20px;
+    margin-top: 10px;
     background-color: #eaeeef;
     .group{
         width: 90%;
@@ -7,7 +7,6 @@
         flex-direction: row;
         >a:first-child{
             display:block;
-            font-weight: bold;
             margin-top: 10px;
         }
     }

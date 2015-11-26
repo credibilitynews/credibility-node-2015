@@ -15,7 +15,7 @@ class LoginForm extends React.Component {
             <div className="panel panel-default">
                 <div className="panel-body">
                     <form action="/account/sendtoken" method="post">
-                        <h4>Login</h4>
+                        <h4>Login/Signup</h4>
 
                         { validation_message ?
                             <div className="alert alert-danger">{validation_message.user.msg}</div> : ''}
@@ -27,7 +27,7 @@ class LoginForm extends React.Component {
                             <label>Email </label>
                             <input ref="user" name="user" type="text" className="form-control"/>
                             <small>
-                            We implement <a href="https://passwordless.net/">Passwordless</a>, NO password is needed.
+                            Signup/login is <a href="https://passwordless.net/">Passwordless</a>. Please login link will be sent to your email.
                             </small>
                         </div>
 
