@@ -62,5 +62,37 @@ module.exports = [
                     return results;
                 }).catch(function(why){console.log('latestLinks/error', why);});
         }
+    },
+    {
+        route: 'taggedLinks[{integers:n}][\'id\', \'title\', \'url\', \'created_at\', \'updated_at\', \'views\', \'user_id\', \'user_name\', \'topic_id\', \'topic_title\', \'bias\', \'author_id\', \'news_agency_id\', \'content_type\', \'tag_name\']',
+        call: function(pathSet, args) {
+            console.log('<<< call', args);
+            var limit = pathSet.n.slice(-1)[0] - pathSet.n[0] + 1;
+            var offset = pathSet.n[0];
+
+            return linkService
+                .getTaggedLinks(offset, limit, args[0])
+                .then(function(links) {
+
+                    var results = [];
+                    var linkIds = Object.keys(links);
+                    pathSet.n.forEach(function(n, index) {
+                        var id = linkIds[index];
+                        var linkRecord = links[id];
+
+                        var fields = pathSet[2];
+                        fields.forEach(function(field){
+                            var value = linkRecord && linkRecord[field] ? linkRecord[field] : undefined;
+
+                            results.push({
+                                path: ['latestLinks', n, field],
+                                value: value
+                            });
+                        });
+
+                    });
+                    return results;
+                }).catch(function(why){console.log('latestLinks/error', why);});
+        }
     }
 ];

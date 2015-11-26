@@ -79,6 +79,34 @@ LinkService.prototype = {
                 reject(why);
             });
         });
+    },
+    getTaggedLinks: function(offset, limit, tagId){
+        return new Promise(function (resolve, reject) {
+            Links
+            sequelize
+            .query(`Select links.*, tags.name as tag_name, topics.title as topic_title, users.name as user_name from links
+                join topic_tags on topic_tags.tag_id = ${tagId} and topic_tags.topic_id = links.topic_id
+                left join tags on topic_tags.tag_id = tags.id
+                left join topics on links.topic_id = topics.id
+                left join users on links.user_id = users.id order by links.created_at desc;`,
+                { type: sequelize.QueryTypes.SELECT})
+            .then(function(result){
+                console.log(result);
+                var values = result.reduce(function(reduced, row){
+                    reduced[row.id] = row;
+                    reduced[row.id]['topic_title'] = row.topic_title;
+                    reduced[row.id]['user_name'] = row.user_name;
+                    reduced[row.id]['tag_name'] = row.tag_name;
+                    return reduced;
+                }, {});
+                //console.log(values);
+                resolve(values);
+            })
+            .catch(function(why){
+                console.log('caught:', why);
+                reject(why);
+            });
+        });
     }
 };
 

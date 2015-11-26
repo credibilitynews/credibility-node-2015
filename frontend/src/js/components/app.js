@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 
-import {Locations, Location} from 'react-router-component';
+import {Locations, Location, NotFound} from 'react-router-component';
 
 import Dashboard from 'components/dashboard/dashboard';
 import Topic from 'components/topic/topic';
@@ -9,17 +9,46 @@ import Story from 'components/story/story';
 import Template from 'components/app-template';
 import AppLogin from 'components/user/user-login';
 
+const tap = (tapped, cb) => {
+    return function(...args){
+        let res = tapped(...args);
+        cb(...args);
+        return res;
+    };
+};
+
 class App extends React.Component {
+    constructor(props, context){
+        super(props, context);
+        this._handleUrlChange = this._handleUrlChange.bind(this);
+
+        this.state = {
+            url: props.url
+        };
+    }
+
+    componentWillMount(){
+        if(typeof window !== 'undefined'){
+            window.history.pushState = tap(
+                window.history.pushState.bind(window.history),
+                this._handleUrlChange);
+        }
+    }
+
     render() {
         return (
             <Template user={this.props.user}>
-                <Locations path={this.props.url}>
+                <Locations path={this.state.url}>
                     <Location path="/account/login" handler={AppLogin} {...this.props}/>
-                    <Location path="/topic/:topicId" handler={Topic} />
-                    <Location path="/story" handler={Story} />
-                    <Location path="/(*)" handler={Dashboard} />
+                    <Location path="/topic/:topicId/:slug" handler={Topic} />
+                    <Location path="/link/:linkId/:slug" handler={Story} />
+                    <NotFound handler={Dashboard} {...this.state}/>
                 </Locations>
             </Template>);
+    }
+
+    _handleUrlChange (...args){
+        this.setState({url: args[2]});
     }
 }
 

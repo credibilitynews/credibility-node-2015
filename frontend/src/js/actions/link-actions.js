@@ -22,6 +22,27 @@ var LinkActions = {
             // console.log('linksById/catch', why);
         });
     },
+    fetchTaggedLinks: function(tagId){
+        // console.log('fetchTaggedLinks', tagId);
+        var dispatch = function(links){
+            AppDispatcher.handleServerAction({
+                actionType: ActionTypes.FETCH_LATEST_LINKS,
+                links: links
+            });
+        };
+        return model()
+        .call(
+            ['taggedLinks', {from: 0, to: 4}, ['id', 'title', 'url', 'user_id', 'user_name', 'topic_id', 'topic_title', 'bias', 'author_id', 'news_agency_id', 'content_type', 'tag_name']],
+            [tagId]
+        )
+        .then(function(response) {
+            // console.log('latestLinks/result', response.json);
+            dispatch(response.json.latestLinks);
+        })
+        .catch(function(why){
+            // console.log('latestLinks/catch', why);
+        });
+    },
     fetchLatestLinks: function(){
         var dispatch = function(links){
             AppDispatcher.handleServerAction({

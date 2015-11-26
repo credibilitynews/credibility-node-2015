@@ -25,7 +25,8 @@ var ArticleStore = assign({}, Store, {
 
         switch(action.actionType){
         case ActionTypes.FETCH_LATEST_LINKS:
-                //console.log("store/latest-article-store", action);
+            _articles = Immutable.OrderedMap();
+            //console.log("store/latest-article-store", action);
             Object.keys(action.links).forEach(function(n){
                 var link = action.links[n];
 

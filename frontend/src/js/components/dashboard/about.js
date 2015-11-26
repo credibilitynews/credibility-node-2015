@@ -7,20 +7,13 @@ class About extends React.Component {
         return (
             <div className="about panel panel-default">
                 <div className="panel-body">
-                {this.props.text}
+                    <h4>About</h4>
+                    <div>Read both sides of the story.</div>
+                    <div><a>Submit</a> articles from different perspectives, share your views.</div>
                 </div>
             </div>
         );
     }
 }
-
-About.defaultProps = {
-    text: (
-        <div>
-            <h4>About</h4>
-            <blockquote>Read both sides of the story.</blockquote>
-            <p><a>Submit</a> articles from different perspectives, share your views.</p>
-        </div>)
-};
 
 module.exports = About;

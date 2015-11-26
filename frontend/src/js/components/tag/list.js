@@ -5,7 +5,7 @@ import Activity from 'components/activity/activity';
 import LinkActions from 'actions/link-actions';
 import LatestActicleStore from 'stores/latest-article-store';
 
-class ActivityList extends React.Component {
+class List extends React.Component {
     constructor(props, context) {
         super(props, context);
 
@@ -26,23 +26,28 @@ class ActivityList extends React.Component {
 
     componentDidMount() {
         if(this.state.articles.length == 0)
-            LinkActions.fetchLatestLinks();
+            LinkActions.fetchTaggedLinks(this.props.tagId);
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(this.props.tagId != nextProps.tagId){
+            LinkActions.fetchTaggedLinks(nextProps.tagId);
+        }
     }
 
     render() {
-        //console.log('activity-list', this.state);
         return (
             <div className="activity-list row">
                 <div className="col-xs-12">
-                    <h3>News Updates</h3>
+                    <h3>{this.state.articles && this.state.articles.length > 0? this.state.articles[0].tag_name : <i>Loading tag...</i>}</h3>
                 </div>
                 <div className="col-xs-12">
-                    {this._wrap(this.state.articles)}
+                    {this.renderLinks(this.state.articles)}
                 </div>
             </div>);
     }
 
-    _wrap(items) {
+    renderLinks(items) {
         return items.map(function(item, index){
             return (
                 <div key={index} className="activity-list-item">
@@ -54,13 +59,16 @@ class ActivityList extends React.Component {
     }
 
     _handleStoreChange() {
+        // console.log('_handleStoreChange')
         this.setState({
             articles: LatestActicleStore.getAllArticles()
         });
     }
 }
 
+
+
 import {preFetchable} from 'pre-fetchable';
 module.exports = preFetchable(
-    ActivityList,
-    LinkActions.fetchLatestLinks);
+    List,
+    LinkActions.fetchTaggedLinks);

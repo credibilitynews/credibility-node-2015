@@ -31,7 +31,7 @@ export default class ReactComponentRenderer {
             FalcorModel
             .hydrate()
             .then(() => {
-                // console.log('destructPreFetchable');
+                // console.log('>>> hydrated');
                 destructPreFetchable(App);
 
                 var html = ReactDOMServer.renderToString(this.reactEl);
@@ -46,13 +46,14 @@ export default class ReactComponentRenderer {
     }
 
     render(container){
-        // console.log('ReactComponentRenderer#render');
+        // console.log('>>> ReactComponentRenderer#render');
+
         FalcorModel.prepareForHydration();
         let hydrate = () => {
             FalcorModel
             .hydrate()
             .then(() => {
-                // console.log('destructPreFetchable');
+                // console.log('>>> hydrated');
                 destructPreFetchable(App);
 
                 ReactDOM.render(this.reactEl, container);
@@ -66,10 +67,11 @@ export default class ReactComponentRenderer {
     }
 
     preFetchDataforRoute(path){
+
         let routes = {
-            topic: new UrlPattern('/topic/:topicId'),
-            story: new UrlPattern('/story'),
-            home: new UrlPattern('/*')
+            topic: new UrlPattern('/topic/:topicId/:slug'),
+            story: new UrlPattern('/link/:linkId/:slug'),
+            tag: new UrlPattern('/tags/:tagId/:slug')
         };
 
         if(routes.topic.match(path)){
@@ -80,10 +82,20 @@ export default class ReactComponentRenderer {
             var Story = require('components/story/story');
             return preFetchDataAction(Story)();
         }
-        if(routes.home.match(path)){
-            var Dashboard = require('components/dashboard/dashboard');
-            return preFetchDataAction(Dashboard)();
+
+        var promises = [];
+        if(routes.tag.match(path)){
+            var parts = routes.tag.match(path);
+            var TaggedList = require('components/tag/list');
+            promises.push(preFetchDataAction(TaggedList)(parts.tagId));
+        }else{
+            var ActivityList = require('components/activity/activity-list');
+            promises.push(preFetchDataAction(ActivityList)());
         }
-        throw new Error('path not found: ', path);
+
+        var Dashboard = require('components/dashboard/dashboard');
+        promises.push(preFetchDataAction(Dashboard)());
+
+        return Promise.all(promises);
     }
 }

@@ -1,8 +1,8 @@
 import invariant from 'invariant';
 
 export function preFetchable(Base, fetch, destructor){
-    Base.__prefetchData = function(){
-        var promise = fetch();
+    Base.__prefetchData = function(...args){
+        var promise = fetch(...args);
         invariant(promise && typeof promise.then === 'function',
             Base.name+'#'+fetch.name, 'does not return a promise');
         return promise;
@@ -36,12 +36,12 @@ export function preFetchableDestructor(...components){
 }
 
 export function preFetchDataAction(...components){
-    return function(){
+    return function(...args){
         let promises = [];
         components.forEach((item) => {
             if(item.__prefetchData){
                 // console.log(item.name+'.__prefetchData()');
-                promises.push(item.__prefetchData());
+                promises.push(item.__prefetchData(...args));
             }
         });
         return Promise.all(promises);
