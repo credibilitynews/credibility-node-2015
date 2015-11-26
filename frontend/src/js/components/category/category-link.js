@@ -1,18 +1,19 @@
 
 'use strict';
 import React from 'react';
+import {Link} from 'react-router-component';
 
 class CategoryLink extends React.Component {
     render() {
         return (
-            <a className="category-link" href={this._link(this.props.category)}>
+            <Link className="category-link" href={this._link(this.props.category)}>
                 {this.props.category.name}
-            </a>
+            </Link>
         );
     }
 
     _link(category) {
-        return '/categories/'+category.code;
+        return `/tags/${category.id}/${category.code}`;
     }
 }
 

@@ -4,7 +4,7 @@ import {ActionTypes} from '../constants/app-constants';
 import AppDispatcher from '../dispatchers/app-dispatcher';
 
 var TagActions = {
-    fetchAllTags: function(){
+    fetchAllTags (){
         var fetchTagsWithLength = function(length){
             model()
             .get(['tags', {length: length}, ['id', 'name', 'code', 'parent_id']])
@@ -28,7 +28,22 @@ var TagActions = {
         });
     },
 
-    fetchTagsById: function(tagIds){
+    fetchTopTags () {
+        console.log('fetchTopTags')
+        return model()
+        .get(['topTags', {length: 5}, ['id', 'name', 'code', 'parent_id', 'topic_count']])
+        .then(function(response){
+            console.log(response.json);
+            AppDispatcher.handleServerAction({
+                actionType: ActionTypes.FETCH_TOP_TAGS,
+                topTags: response.json.topTags
+            });
+        }).catch(function(why){
+            console.log('topTags', why);
+        });
+    },
+
+    fetchTagsById (tagIds){
         return model()
         .get(['tagsById', tagIds, ['name', 'code', 'parent_id']])
         .then(function(response) {

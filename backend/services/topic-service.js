@@ -17,8 +17,6 @@ import batch from './batch';
 import path from 'path';
 import Promise from 'promise';
 
-var conString = process.env.DATABASE_URL;
-
 function TopicService() {}
 TopicService.prototype = {
     getTopics: function(topicIds){

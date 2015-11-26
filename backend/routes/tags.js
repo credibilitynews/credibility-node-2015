@@ -34,7 +34,7 @@ module.exports = [
         }
     },
     {
-        route: 'tags[{integers:n}][\'id\', \'name\', \'code\', \'parent_id\']',
+        route: 'tags[{integers:n}][\'id\', \'name\', \'code\', \'parent_id\', \'topic_count\']',
         get: function(pathSet) {
             return tagService
                 .getAllTags()
@@ -49,6 +49,32 @@ module.exports = [
 
                             results.push({
                                 path: ['tags', index, key],
+                                value: value
+                            });
+                        });
+
+                    });
+                    return results;
+                }).catch(function(why){console.log('tags/error', why);});
+        }
+    },
+    {
+        route: 'topTags[{integers:n}][\'id\', \'name\', \'code\', \'parent_id\']',
+        get: function(pathSet) {
+            console.log('???');
+            return tagService
+                .getTopTags()
+                .then(function(tags) {
+                    var results = [];
+                    Object.keys(tags).forEach(function(tagId, index) {
+                        var tagRecord = tags[tagId] || {};
+                        pathSet[2].forEach(function(key){
+                            var value = tagRecord[key];
+                            if(value === null) value = undefined;
+                            if(typeof value === 'object') value = value.toString();
+
+                            results.push({
+                                path: ['topTags', index, key],
                                 value: value
                             });
                         });

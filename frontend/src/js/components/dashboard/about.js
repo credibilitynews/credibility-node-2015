@@ -17,8 +17,8 @@ class About extends React.Component {
 About.defaultProps = {
     text: (
         <div>
-            <h4>Credibility.io</h4>
-            <blockquote>Read from different sides of the story.</blockquote>
+            <h4>About</h4>
+            <blockquote>Read both sides of the story.</blockquote>
             <p><a>Submit</a> articles from different perspectives, share your views.</p>
         </div>)
 };

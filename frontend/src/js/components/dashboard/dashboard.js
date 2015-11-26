@@ -66,5 +66,5 @@ let children = [TopMenu, SearchBar, ActivityList, RecentTopics, CategoryList, Ab
 module.exports = preFetchable(
     Dashboard,
     preFetchDataAction(...children),
-    preFetchableDestructor(Dashboard, ...children)
+    preFetchableDestructor(...children)
 );

@@ -51,7 +51,7 @@ FalcorModel.prepareForHydration = function(){
     _prepareForHydration = true;
     _dispatcherToken = AppDispatcher.register((payload) => {
         // console.log('waitForAll', payload.action);
-        AppDispatcher.waitForAll(token);
+        AppDispatcher.waitForAll(_dispatcherToken);
     });
 };
 

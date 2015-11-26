@@ -9,16 +9,19 @@ import Immutable from 'immutable';
 var CHANGE_EVENT = 'categories-change';
 
 var _categories = Immutable.OrderedMap();
+var _topCategories = Immutable.OrderedMap();
 
-function _addCategory(category){
-    _categories = _categories.set(category.id.toString(), category);
+function _addCategory(store, category){
+    store = store.set(category.id, category);
+    return store;
 }
 
-function _addCategories(categories){
-    Object.keys(categories).forEach(function(key){
+function _addCategories(store, categories){
+    Object.keys(categories).map(function(key){
         var category = categories[key];
-        _addCategory(category);
+        store = _addCategory(store, category);
     });
+    return store;
 }
 
 var CategoryStore = assign({}, Store, {
@@ -31,12 +34,20 @@ var CategoryStore = assign({}, Store, {
     getAllCategories: function(){
         return _categories.toArray();
     },
+    getTopCategories: function(){
+        return _topCategories.toArray();
+    },
     dispatcherIndex: AppDispatcher.register(function(payload){
         var action = payload.action;
         switch(action.actionType){
         case ActionTypes.FETCH_ALL_TAGS:
             // console.log("store/category-store", payload.action.tags);
-            _addCategories(payload.action.tags);
+            _categories = _addCategories(_categories, payload.action.tags);
+            CategoryStore.emitChange();
+            break;
+        case ActionTypes.FETCH_TOP_TAGS:
+            console.log("store/category-store", payload.action);
+            _topCategories = _addCategories(_topCategories, payload.action.topTags);
             CategoryStore.emitChange();
             break;
         }
