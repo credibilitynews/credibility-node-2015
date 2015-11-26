@@ -11,7 +11,7 @@ module.exports = function(gulp, opts, $){
 
     function build(watch, watchCallback){
         var b = browserify({
-            debug: true,
+            // debug: true,
             cache: {},
             packageCache: {},
             fullPaths: true,
