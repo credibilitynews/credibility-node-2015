@@ -98,7 +98,7 @@
     "test": "NODE_PATH=frontend/src/js:node_modules jest",
     "eslint": "eslint frontend/src/js",
     "eslint-backend": "eslint backend",
-    "nodemon": "NODE_PATH=node_modules:frontend/src/js DATABASE_URL=postgres://localhost:5432/credibility nodemon --exec babel-node --watch backend --watch frontend/src/js backend/cluster.js"
+    "nodemon": "NODE_PATH=node_modules:frontend/src/js DATABASE_URL=postgres://localhost:5432/credibility nodemon --exec babel-node --watch backend --watch frontend/src/js --ignore backend/public backend/cluster.js"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
