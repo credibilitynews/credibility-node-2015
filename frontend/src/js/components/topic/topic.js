@@ -17,6 +17,7 @@ class Topic extends React.Component {
         this._listeners = [];
         this._handleTopicChange = this._handleTopicChange.bind(this);
         this._handleLinksChange = this._handleLinksChange.bind(this);
+        this.renderTab = this.renderTab.bind(this);
 
         this.state = {
             topic: TopicStore.getTopic(props.topicId),
@@ -86,7 +87,7 @@ class Topic extends React.Component {
                                     Unknown
                                 </a>
                             </li>
-                            <li className="nav-item disabled">
+                            <li className="nav-item">
                                 <a className={classes('right')} onClick={onClick('right')}>
                                     Right
                                 </a>
@@ -110,6 +111,10 @@ class Topic extends React.Component {
             return <StoryTimeline links={this.state.links.filter(link => link.bias == 2)}/>;
         case 'unknown':
             return <StoryTimeline links={this.state.links.filter(link => link.bias != 1 && link.bias != 2)}/>;
+        case 'tweets':
+            return <div />;
+        default:
+            return <div />;
         }
     }
 
