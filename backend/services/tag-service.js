@@ -81,7 +81,7 @@ TagService.prototype = {
     getTopTags: function(){
         return new Promise(function (resolve, reject) {
             sequelize
-            .query("SELECT count(topic_tags.topic_id) as topic_count, tags.* FROM topic_tags left join tags on topic_tags.tag_id = tags.id group by tags.id, tags.name, tags.code, tags.parent_id order by topic_count;", { type: sequelize.QueryTypes.SELECT})
+            .query("SELECT count(topic_tags.topic_id) as topic_count, tags.* FROM topic_tags left join tags on topic_tags.tag_id = tags.id where parent_id is not null group by tags.id, tags.name, tags.code, tags.parent_id order by topic_count;", { type: sequelize.QueryTypes.SELECT})
             .then(function(result){
                 var values = result.reduce(function(reduced, row){
                     reduced[row.id] = row;
