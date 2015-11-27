@@ -50,6 +50,53 @@
     }
 }
 
+.story-view{
+    margin-top: 20px;
+    .story-link{
+        border-left: 2px solid #ddd;
+        &>div.info{
+            width: auto;
+            white-space: normal;
+            overflow: visible;
+            text-overflow: inherit;
+        }
+    }
+}
+
+.story-link{
+
+    a{font-family: Serif;color: #545454;}
+    &>div.info{
+        width: auto;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 15px;
+
+        .title{
+            font-size: 1.3em;
+        }
+        .domain_name{
+            color: #777;
+            font-size: 0.9em;
+            display: block;
+            width: auto;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .author{
+            font-size: 0.8em;
+            font-style: italic;
+        }
+        .created_at{
+            color: #999;
+            font-size: 0.8em;
+            font-style: italic;
+        }
+    }
+}
+
 .story-timeline{
     padding-bottom: 100px;
 
@@ -70,41 +117,6 @@
         margin-left: -20px;
         font-size: 0.8em;
         line-height: 30px;
-    }
-    .story-link{
-
-        a{font-family: Serif;color: #545454;}
-        &>div.info{
-            width: auto;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            padding: 15px;
-
-            .title{
-                font-size: 1.3em;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-            }
-            .domain_name{
-                color: #777;
-                font-size: 0.9em;
-                display: block;
-                width: auto;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-            .author{
-                font-size: 0.8em;
-                font-style: italic;
-            }
-            .created_at{
-                color: #999;
-                font-size: 0.8em;
-                font-style: italic;
-            }
-        }
     }
 
     .type{

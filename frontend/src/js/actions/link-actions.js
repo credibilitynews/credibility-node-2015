@@ -13,13 +13,13 @@ var LinkActions = {
         };
 
         return model()
-        .get(['linksById', ids, ['title', 'url', 'created_at', 'views', 'user_id', 'topic_id', 'bias', 'author_id', 'news_agency_id', 'content_type']])
+        .get(['linksById', ids, ['id', 'title', 'url', 'created_at', 'views', 'user_id', 'topic_id', 'bias', 'author_id', 'news_agency_id', 'content_type', 'topic_title', 'user_name']])
         .then(function(response) {
-            //console.log('linksById', response.json);
+            // console.log('linksById', response.json);
             dispatch(response.json.linksById);
         })
         .catch(function(why){
-            // console.log('linksById/catch: '+ why);
+            // console.log('linksById/catch: '+ why.stack);
         });
     },
     fetchTagLinks: function(tagId){

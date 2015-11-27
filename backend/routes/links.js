@@ -6,7 +6,7 @@ import linkService from '../services/link-service';
 
 module.exports = [
     {
-        route: 'linksById[{integers:linkIds}][\'title\', \'url\', \'created_at\', \'updated_at\', \'views\', \'user_id\', \'topic_id\', \'bias\', \'author_id\', \'news_agency_id\', \'content_type\']',
+        route: 'linksById[{integers:linkIds}][\'id\', \'title\', \'url\', \'created_at\', \'updated_at\', \'views\', \'user_id\', \'topic_id\', \'bias\', \'author_id\', \'news_agency_id\', \'content_type\', \'topic_title\', \'user_name\']',
         get: function(pathSet) {
             return linkService
                 .getLinks(pathSet.linkIds)

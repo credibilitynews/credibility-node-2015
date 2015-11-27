@@ -29,6 +29,9 @@ LinkService.prototype = {
         return new Promise(function (resolve, reject) {
             Links
             .findAll({
+                include: [
+                    Topics, Users
+                ],
                 where: {
                     id: {
                         $in: linkIds
@@ -39,6 +42,8 @@ LinkService.prototype = {
                 var values = result.reduce(function(reduced, row){
                     row = row.dataValues;
                     reduced[row.id] = row;
+                    reduced[row.id]['topic_title'] = row.topic.title;
+                    reduced[row.id]['user_name'] = row.user.name;
                     return reduced;
                 }, {});
                 resolve(values);

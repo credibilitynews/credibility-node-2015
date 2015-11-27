@@ -1,10 +1,11 @@
 'use strict';
 import React from 'react';
-import Select from 'react-select';
+// import Select from 'react-select';
 
 class SearchBar extends React.Component {
     render() {
-        return (<Select placeholder="Search" />);
+        return <div />;
+        // return (<Select placeholder="Search" />);
     }
 }
 

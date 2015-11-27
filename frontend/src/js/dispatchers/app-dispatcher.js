@@ -23,7 +23,8 @@ Dispatcher.prototype = assign(Dispatcher.prototype, {
         return this.waitFor(tokens);
     },
     getAllTokens: function(){
-        return Object.keys(this.$Dispatcher_callbacks);
+        // console.log(this);
+        return Object.keys(this._callbacks);
     }
 });
 

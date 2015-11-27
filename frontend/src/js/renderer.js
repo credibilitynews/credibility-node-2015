@@ -71,7 +71,7 @@ export default class ReactComponentRenderer {
 
         let routes = {
             topic: new UrlPattern('/topics/:topicId/:slug'),
-            story: new UrlPattern('/links/:linkId/:slug'),
+            story: new UrlPattern('/stories/:storyId/:slug'),
             tag: new UrlPattern('/tags/:tagId/:slug')
         };
         var parts;
@@ -81,12 +81,14 @@ export default class ReactComponentRenderer {
             var Topic = require('components/topic/topic');
             return preFetchDataAction(Topic)(parts.topicId);
         }
+        var promises = [];
         if(routes.story.match(path)){
+            parts = routes.story.match(path);
             var Story = require('components/story/story');
-            return preFetchDataAction(Story)();
+            promises.push(preFetchDataAction(Story)(parts.storyId));
         }
 
-        var promises = [];
+
         if(routes.tag.match(path)){
             parts = routes.tag.match(path);
             var TaggedList = require('components/tag/list');

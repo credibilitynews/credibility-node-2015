@@ -8,6 +8,7 @@ import RecentTopics from 'components/dashboard/recent-topics';
 import SearchBar from 'components/search/search-bar';
 import CategoryList from 'components/category/category-list';
 import TopMenu from 'components/menu/top-menu';
+import Story from 'components/story/story';
 
 import TopicStore from 'stores/topic-store';
 import CategoryStore from 'stores/category-store';
@@ -43,6 +44,7 @@ class Dashboard extends React.Component {
                         <div className="col-sm-12">
                             <Locations path={this.props.url}>
                                 <Location path="/tags/:tagId/:slug" handler={TaggedList}/>
+                                <Location path="/stories/:storyId/:slug" handler={Story}/>
                                 <NotFound handler={ActivityList} />
                             </Locations>
                         </div>

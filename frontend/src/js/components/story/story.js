@@ -1,27 +1,57 @@
-
 'use strict';
+
 import React from 'react';
 
+import LinkActions from 'actions/link-actions';
+import LinkStore from 'stores/link-store';
+
+import StoryLink from 'components/story/story-link';
+
+import {preFetchable, preFetchableDestructor} from 'pre-fetchable';
+
 class Story extends React.Component {
+    constructor(props, context){
+        super(props, context);
+
+        this._listeners = [];
+        this._handleLinkChange = this._handleLinkChange.bind(this);
+
+        this.state = {
+            link: LinkStore.getLinkById(this.props.storyId)
+        };
+    }
+
+    componentWillMount() {
+        this._listeners.push(
+            LinkStore.addListener(this._handleLinkChange));
+    }
+
+    componentWillUnmount() {
+        this._listeners.forEach(listener => listener.remove());
+    }
+
+    componentDidMount (){
+        if(!this.state.link)
+            LinkActions.fetchLinks(this.props.storyId);
+    }
+
     render() {
+        if(!this.state.link) return <div/>;
+
         return (
-            <div className="panel">
-                <div className="panel-body">
-                    <div>{this.props.meta.domain_name}</div>
-                    <div>{this.props.meta.author}</div>
-                    <div>{this.props.meta.created_at}</div>
-                </div>
+            <div className="story-view">
+                <StoryLink story={this.state.link}/>
             </div>
         );
     }
+    _handleLinkChange () {
+        this.setState({
+            link: LinkStore.getLinkById(this.props.storyId)
+        });
+    }
 }
 
-Story.defaultProps = {
-    meta: {
-        domain_name: 'credibility.io',
-        author: 'admin',
-        created_at: '2013-01-01'
-    }
-};
-
-module.exports = Story;
+module.exports = preFetchable(Story,
+    LinkActions.fetchLinks,
+    preFetchableDestructor(Story)
+);
