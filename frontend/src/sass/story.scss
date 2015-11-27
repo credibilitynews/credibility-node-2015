@@ -123,7 +123,8 @@
         &-0{
             text-align: center;
             // @extend .col-md-4;
-            border: 2px solid $fact-color-background;
+            border-left: 2px solid $fact-color-background;
+            border-right: 2px solid $fact-color-background;
             .story-link{
                 border-bottom: 1px solid darken($fact-color-background, 10%);
             }

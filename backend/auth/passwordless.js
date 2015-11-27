@@ -63,7 +63,7 @@ module.exports = function(app) {
         });
 
         app.use(passwordless.sessionSupport());
-        app.use(passwordless.acceptToken( {    successFlash: 'You are logged in. Welcome to Passwordless!',
+        app.use(passwordless.acceptToken( {    successFlash: 'You are logged in. Welcome!',
                                         failureFlash: 'The supplied token is not valid (anymore). Please request another one.',
                                         successRedirect: '/account/login' } ));
 
