@@ -1,15 +1,15 @@
 'use strict';
 import React from 'react';
-import StoryLink from '../story/story-link';
+import StoryLink from 'components/story/story-link';
 
 class StoryTimeline extends React.Component {
     render() {
         // console.log('story-timeline', this.props);
-        var stories = this.props.stories;
+        var links = this.props.links;
         return (
             <div className="story-timeline">
                 <div className="line">
-                    <div>{this._wrap(stories.stories)}</div>
+                    <div>{this._wrap(links.links)}</div>
                 </div>
             </div>
         );
@@ -59,10 +59,10 @@ class StoryTimeline extends React.Component {
 }
 
 StoryTimeline.defaultProps = {
-    stories: {
+    links: {
         title: '',
         meta: {articles: 0},
-        stories: []
+        links: []
     }
 };
 

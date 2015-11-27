@@ -14,7 +14,7 @@ class TagLinksStore extends MapStore {
         switch(action.actionType){
         case ActionTypes.FETCH_TAG_LINKS:
             state = Immutable.OrderedMap();
-            console.log("store/tag-links-store", action);
+            // console.log('store/tag-links-store', action);
             Object.keys(action.links).forEach(function(n){
                 var link = action.links[n];
                 state = state.set(link.id, link);

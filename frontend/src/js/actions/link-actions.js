@@ -3,6 +3,8 @@ import model from 'falcor-model';
 import {ActionTypes} from 'constants/app-constants';
 import AppDispatcher from 'dispatchers/app-dispatcher';
 
+import invariant from 'invariant';
+
 var LinkActions = {
     fetchLinks: function(ids){
         var dispatch = function(links){
@@ -19,7 +21,8 @@ var LinkActions = {
             dispatch(response.json.linksById);
         })
         .catch(function(why){
-            // console.log('linksById/catch', why);
+            invariant(false,
+                'linksById/catch: '+ why);
         });
     },
     fetchTagLinks: function(tagId){
@@ -40,7 +43,8 @@ var LinkActions = {
             dispatch(response.json.latestLinks);
         })
         .catch(function(why){
-            // console.log('latestLinks/catch', why);
+            invariant(false,
+                'latestLinks/catch: ' + why);
         });
     },
     fetchLatestLinks: function(){
@@ -59,11 +63,12 @@ var LinkActions = {
             dispatch(response.json.latestLinks);
         })
         .catch(function(why){
-            // console.log('latestLinks/catch', why);
+            invariant(false,
+                'latestLinks/catch: ' + why);
         });
     },
     fetchTopicLinks: function(topicId){
-        console.log('fetchTopicLinks', topicId);
+        // console.log('fetchTopicLinks', topicId);
         var dispatch = function(links){
             AppDispatcher.handleServerAction({
                 actionType: ActionTypes.FETCH_TOPIC_LINKS,
@@ -78,11 +83,12 @@ var LinkActions = {
             [topicId]
         )
         .then(function(response) {
-            console.log('linksByTopicId', response.json);
+            // console.log('linksByTopicId', response.json);
             dispatch(response.json.latestLinks);
         })
         .catch(function(why){
-            console.log('linksByTopicId/catch', why);
+            invariant(false,
+                'linksByTopicId/catch: ' + why);
         });
     }
 };

@@ -1,11 +1,7 @@
 'use strict';
 import React from 'react';
 import cx from 'classnames';
-import Hashtag from 'components/tag/hashtag';
 import StoryTimeline from 'components/story/story-timeline';
-
-import ViewsNum from 'components/stats/views-num';
-import ArticlesNum from 'components/stats/articles-num';
 
 import TopicStore from 'stores/topic-store';
 import TopicActions from 'actions/topic-actions';
@@ -13,7 +9,7 @@ import TopicActions from 'actions/topic-actions';
 import TopicLinksStore from 'stores/topic-links-store';
 import LinkActions from 'actions/link-actions';
 
-import {preFetchable, preFetchableDestructor, preFetchDataAction, makePipe} from 'pre-fetchable';
+import {preFetchable, preFetchableDestructor, makePipe} from 'pre-fetchable';
 
 class Topic extends React.Component {
     constructor(props, context) {
@@ -54,16 +50,16 @@ class Topic extends React.Component {
 
         var classes = (type) => {
             return cx({
-                "nav-link active": this.state.showing == type,
-                "nav-link": true
+                'nav-link active': this.state.showing == type,
+                'nav-link': true
             });
-        }
+        };
         var onClick = (type) => {
             return (e) => {
                 if(e) e.preventDefault();
-                this.setState({showing: type})
-            }
-        }
+                this.setState({showing: type});
+            };
+        };
 
         return (
             <div className="row topic">
@@ -106,13 +102,13 @@ class Topic extends React.Component {
     renderTab(tab){
         switch(tab){
         case 'timeline':
-            return <StoryTimeline />
+            return <StoryTimeline links={this.state.links}/>;
         case 'left':
-            return <div>Left</div>
+            return <div>Left</div>;
         case 'right':
-            return <div>Right</div>
+            return <div>Right</div>;
         case 'unknown':
-            return <div>Unknown</div>
+            return <div>Unknown</div>;
         }
     }
 

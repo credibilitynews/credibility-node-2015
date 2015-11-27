@@ -32,7 +32,7 @@ class ActivityList extends React.Component {
     }
 
     render() {
-        console.log('activity-list', this.state);
+        // console.log('activity-list', this.state);
         return (
             <div className="activity-list row">
                 <div className="col-xs-12">
