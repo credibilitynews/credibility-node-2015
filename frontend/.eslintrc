@@ -9,6 +9,7 @@
         "user": true,
         "validation": true,
         "error": true,
-        "success": true
+        "success": true,
+        "process": true
     }
 }

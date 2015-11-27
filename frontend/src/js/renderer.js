@@ -8,7 +8,6 @@ import Promise from 'promise';
 
 import FalcorModel from './falcor-model';
 import UrlPattern from 'url-pattern';
-import invariant from 'invariant';
 
 import {preFetchDataAction, destructPreFetchable} from 'pre-fetchable';
 
@@ -61,7 +60,7 @@ export default class ReactComponentRenderer {
                 ReactDOM.render(this.reactEl, container);
             })
             .catch((why)=>{
-                console.log(`catch/#render: ` + why.stack);
+                // console.log(`catch/#render: ` + why.stack);
             });
         };
         Promise.all([this.preFetchDataforRoute(this.url)]).then(hydrate);

@@ -15,7 +15,7 @@ class LatestLinksStore extends MapStore {
         switch(action.actionType){
         case ActionTypes.FETCH_TOPIC_LINKS:
             var links = Immutable.OrderedMap();
-            console.log('store/topic-links-store', action);
+            // console.log('store/topic-links-store', action);
             Object.keys(action.links).forEach(function(n){
                 var link = action.links[n];
                 links = links.set(link.id, link);

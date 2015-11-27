@@ -19,8 +19,7 @@ var LinkActions = {
             dispatch(response.json.linksById);
         })
         .catch(function(why){
-            console.log(
-                'linksById/catch: '+ why);
+            // console.log('linksById/catch: '+ why);
         });
     },
     fetchTagLinks: function(tagId){
@@ -42,8 +41,7 @@ var LinkActions = {
             dispatch(response.json.latestLinks);
         })
         .catch(function(why){
-            console.log(
-                'latestLinks/catch: ' + why);
+            // console.log('latestLinks/catch: ' + why);
         });
     },
     fetchLatestLinks: function(){
@@ -62,8 +60,7 @@ var LinkActions = {
             dispatch(response.json.latestLinks);
         })
         .catch(function(why){
-            console.log(
-                'latestLinks/catch: ' + why);
+            // console.log('latestLinks/catch: ' + why);
         });
     },
     fetchTopicLinks: function(topicId){
@@ -86,7 +83,7 @@ var LinkActions = {
             dispatch(response.json.latestLinks);
         })
         .catch(function(why){
-            console.log('linksByTopicId/catch: ' + why);
+            // console.log('linksByTopicId/catch: ' + why);
         });
     }
 };

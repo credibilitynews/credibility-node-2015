@@ -49,7 +49,7 @@ class StoryTimeline extends React.Component {
                 timeline.push(group[type].map(function(link){
                     time = timeAgo(ts(link.created_at));
                     return (
-                        <div className={"type-"+type}>
+                        <div className={'type-'+type}>
                             <StoryLink key={link.id} story={link} />
                         </div>);
                 }));

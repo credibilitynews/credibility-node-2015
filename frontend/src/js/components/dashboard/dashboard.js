@@ -11,7 +11,6 @@ import TopMenu from 'components/menu/top-menu';
 
 import TopicStore from 'stores/topic-store';
 import CategoryStore from 'stores/category-store';
-import LatestLinksStore from 'stores/latest-links-store';
 
 import {Location, Locations, NotFound} from 'react-router-component';
 
