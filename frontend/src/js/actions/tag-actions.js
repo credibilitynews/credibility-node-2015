@@ -52,5 +52,4 @@ var TagActions = {
     }
 };
 
-if(typeof window !== 'undefined') window.TagActions = TagActions;
 module.exports = TagActions;

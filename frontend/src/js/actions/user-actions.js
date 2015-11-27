@@ -30,5 +30,4 @@ var UserActions = {
     }
 };
 
-if(typeof window !== 'undefined') window.UserActions = UserActions;
 module.exports = UserActions;
