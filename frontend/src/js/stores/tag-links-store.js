@@ -5,20 +5,22 @@ import Immutable from 'immutable';
 import {MapStore} from 'flux/utils';
 
 class TagLinksStore extends MapStore {
-    getAllLinks (){
-        return this.getState().toArray();
+    getAllLinks (tagId){
+        var links = this.getState().get(tagId);
+        return links ? links.toArray() : [];
     }
     reduce (state, payload){
         var action = payload.action;
 
         switch(action.actionType){
         case ActionTypes.FETCH_TAG_LINKS:
-            state = Immutable.OrderedMap();
+            var links = Immutable.OrderedMap();
             // console.log('store/tag-links-store', action);
             Object.keys(action.links).forEach(function(n){
                 var link = action.links[n];
-                state = state.set(link.id, link);
+                links = links.set(link.id, link);
             });
+            state = state.set(action.tagId, links);
             break;
         }
         return state;

@@ -37,8 +37,10 @@ export default class ReactComponentRenderer {
                 cb(html);
             })
             .catch((why)=>{
-                invariant(false,
-                    'catch/ReactComponentRenderer#renderToString: ' + why);
+                if(typeof process !== 'undefined'){
+                    process.stdout.write(
+                        `catch/#renderToString: ` + why.stack);
+                }
             });
         };
 
@@ -59,8 +61,7 @@ export default class ReactComponentRenderer {
                 ReactDOM.render(this.reactEl, container);
             })
             .catch((why)=>{
-                invariant(false,
-                    'catch/ReactComponentRenderer#render: '+why);
+                console.log(`catch/#render: ` + why.stack);
             });
         };
         Promise.all([this.preFetchDataforRoute(this.url)]).then(hydrate);

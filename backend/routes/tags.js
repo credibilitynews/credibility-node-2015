@@ -12,7 +12,6 @@ module.exports = [
                 .getTags(pathSet.tagIds)
                 .then(function(tags) {
                     var results = [];
-                    //console.log('pathSet', pathSet);
                     pathSet.tagIds.forEach(function(tagId) {
                         var tagRecord = tags[tagId];
                         pathSet[2].forEach(function(key) {
@@ -30,7 +29,9 @@ module.exports = [
 
                     });
                     return results;
-                }).catch(function(why){console.log('tagsById/error', why);});
+                }).catch(function(why){
+                    process.stdout.write('catch#tagsById'+ why + why.stack);
+                });
         }
     },
     {
@@ -55,13 +56,14 @@ module.exports = [
 
                     });
                     return results;
-                }).catch(function(why){console.log('tags/error', why);});
+                }).catch(function(why){
+                    process.stdout.write('catch#tags' + why + why.stack);
+                });
         }
     },
     {
         route: 'topTags[{integers:n}][\'id\', \'name\', \'code\', \'parent_id\']',
         get: function(pathSet) {
-            console.log('???');
             return tagService
                 .getTopTags()
                 .then(function(tags) {
@@ -81,7 +83,9 @@ module.exports = [
 
                     });
                     return results;
-                }).catch(function(why){console.log('tags/error', why);});
+                }).catch(function(why){
+                    process.stdout.write('catch#topTags' + why + why.stack);
+                });
         }
     },
     {
@@ -94,7 +98,9 @@ module.exports = [
                         path: ['tags', 'length'],
                         value: length
                     };
-                }).catch(function(why){console.log('tags.length/error', why);});
+                }).catch(function(why){
+                    process.stdout.write('catch#tags.length' + why + why.stack);
+                });
         }
     }
 ];

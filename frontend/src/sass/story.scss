@@ -44,11 +44,18 @@
     }
 }
 
+.timeline{
+    .nav-tabs{
+        font-size: 0.8em;
+    }
+}
+
 .story-timeline{
     padding-bottom: 100px;
+
     &>div.line{
-        border-left: 5px solid darken(powderblue, 30%);
-        @extend .col-md-12;
+        padding-top: 10px;
+        border-left: 1px solid #ddd;
         @extend .col-md-12;
         /* @extend .col-md-offset-1 */;
     }
@@ -57,47 +64,72 @@
         padding-left: 10px;
     }
     .time{
-        background-color: white;
-        color: darkcyan;
-        @media (min-width: 992px){
-            margin-left: -20px;
-            border-bottom: 1px solid #eee;
-            line-height: 40px;
-        }
+        padding-top: 20px;
+        background-color: transparent;
+        color: darken(#ddd, 50%);
+        margin-left: -20px;
+        font-size: 0.8em;
         line-height: 30px;
     }
     .story-link{
 
         a{font-family: Serif;color: #545454;}
         &>div.info{
+            width: auto;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
             padding: 15px;
-            a{font-size: 16px; font-size: 1.3em;}
-            .domain_name{ color: #777;}
-            .author{}
-            .created_at{ color: #999;}
+
+            .title{
+                font-size: 1.3em;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            .domain_name{
+                color: #777;
+                font-size: 0.9em;
+                display: block;
+                width: auto;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .author{
+                font-size: 0.8em;
+                font-style: italic;
+            }
+            .created_at{
+                color: #999;
+                font-size: 0.8em;
+                font-style: italic;
+            }
         }
     }
 
     .type{
         &-0{
-            @extend .col-md-4;
-            background-color:  $fact-color-background;
+            text-align: center;
+            // @extend .col-md-4;
+            border: 2px solid $fact-color-background;
             .story-link{
                 border-bottom: 1px solid darken($fact-color-background, 10%);
             }
             .story-link:last-child {border-bottom: none;}
         }
         &-1{
-            @extend .col-md-4;
-            background-color: $left-color-background;
+            text-align: left;
+            // @extend .col-md-4;
+            border-left: 2px solid $left-color-background;
             .story-link{
                 border-bottom: 1px solid darken($left-color-background, 10%);
             }
             .story-link:last-child {border-bottom: none;}
         }
         &-2{
-            @extend .col-md-4;
-            background-color: $right-color-background;
+            text-align: right;
+            // @extend .col-md-4;
+            border-right: 2px solid $right-color-background;
             .story-link{
                 border-bottom: 1px solid darken($right-color-background, 10%);
             }

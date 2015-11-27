@@ -1,6 +1,7 @@
 'use strict';
 import React from 'react';
 import StoryLink from 'components/story/story-link';
+import {timeAgo, timeStamp as ts} from 'app-utils';
 
 class StoryTimeline extends React.Component {
     render() {
@@ -9,61 +10,61 @@ class StoryTimeline extends React.Component {
         return (
             <div className="story-timeline">
                 <div className="line">
-                    <div>{this._wrap(links.links)}</div>
+                    <div>{this.renderStories(links)}</div>
                 </div>
             </div>
         );
     }
 
-    _wrap(items) {
+    renderStories(items) {
+        if(items.length == 0) return <i>No stories yet.</i>;
+
         return items
         .reduce(function(sets, item){
-            var index = sets.keys[item.meta.created_key];
+            var dateKey = new Date(item.created_at);
+            dateKey.setHours(0);
+            dateKey.setMinutes(0);
+            dateKey.setSeconds(0);
+            dateKey.setMilliseconds(0);
+            dateKey = dateKey.getTime();
+
+            var index = sets.keys[dateKey];
             if(index != 0 && !index){
                 // record index
                 index = sets.groups.length;
-                sets.keys[item.meta.created_key] = index;
+                sets.keys[dateKey] = index;
 
                 // create new group with 3 arrays, because 3 types
                 sets.groups.push([[],[],[]]);
             }
-            sets.groups[index][item.type].push(item);
+
+            sets.groups[index][item.bias || 0].push(item);
             return sets;
         }, {keys: {}, groups: []})
         .groups
-        .map(function(group){
+        .map(function(group, index){
             var time = null;
+            var timeline = [];
             for(var type=0; type<3; type++){
-                group[type] = group[type].map(function(link){
-                    time = link.meta.created_at;
-                    return <StoryLink key={link.id} story={link} />;
-                });
+                timeline.push(group[type].map(function(link){
+                    time = timeAgo(ts(link.created_at));
+                    return (
+                        <div className={"type-"+type}>
+                            <StoryLink key={link.id} story={link} />
+                        </div>);
+                }));
             }
+
+
             return (
-                <div key={time}>
-                    <div className="time">{time}&nbsp;&nbsp;<i className="fa fa-calendar-o"></i></div>
-                    <div className="row">
-                        <div className="type-1">
-                            {group[1]}
-                        </div>
-                        <div className="type-0">
-                            {group[0]}
-                        </div>
-                        <div className="type-2">
-                            {group[2]}
-                        </div>
+                <div key={'timeline'+index}>
+                    <div className="time">● {time}</div>
+                    <div>
+                        {timeline}
                     </div>
                 </div>);
         });
     }
 }
-
-StoryTimeline.defaultProps = {
-    links: {
-        title: '',
-        meta: {articles: 0},
-        links: []
-    }
-};
 
 module.exports = StoryTimeline;

@@ -29,7 +29,9 @@ module.exports = [
 
                     });
                     return results;
-                }).catch(function(why){console.log('usersById/error', why);});
+                }).catch(function(why){
+                    process.stdout.write('catch#usersById' + why + why.stack);
+                });
         }
     },
     {
@@ -57,7 +59,9 @@ module.exports = [
                         });
                     });
                     return results;
-                }).catch(function(why){console.log('latestUsers/error', why);});
+                }).catch(function(why){
+                    process.stdout.write('catch#latestUsers/error' + why + why.stack);
+                });
         }
     }
 ];

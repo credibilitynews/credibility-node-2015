@@ -12,7 +12,6 @@ module.exports = [
                 .getLinks(pathSet.linkIds)
                 .then(function(links) {
                     var results = [];
-                    //console.log('pathSet', pathSet);
                     pathSet.linkIds.forEach(function(linkId) {
                         var linkRecord = links[linkId] || {};
                         pathSet[2].forEach(function(key) {
@@ -29,7 +28,9 @@ module.exports = [
 
                     });
                     return results;
-                }).catch(function(why){console.log('links/get', why);});
+                }).catch(function(why){
+                    console.log('linksById/get'+ why + why.stack);
+                });
         }
     },
     {
@@ -60,13 +61,14 @@ module.exports = [
 
                     });
                     return results;
-                }).catch(function(why){console.log('latestLinks/error', why);});
+                }).catch(function(why){
+                    console.log('catch#latestLinks'+ why + why.stack);
+                });
         }
     },
     {
         route: 'taggedLinks[{integers:n}][\'id\', \'title\', \'url\', \'created_at\', \'updated_at\', \'views\', \'user_id\', \'user_name\', \'topic_id\', \'topic_title\', \'bias\', \'author_id\', \'news_agency_id\', \'content_type\', \'tag_name\']',
         call: function(pathSet, args) {
-            console.log('<<< call', args);
             var limit = pathSet.n.slice(-1)[0] - pathSet.n[0] + 1;
             var offset = pathSet.n[0];
 
@@ -92,13 +94,14 @@ module.exports = [
 
                     });
                     return results;
-                }).catch(function(why){console.log('latestLinks/error', why);});
+                }).catch(function(why){
+                    console.log('catch#taggedLinks'+ why + why.stack);
+                });
         }
     },
     {
-        route: 'linksByTopicId[{integers:n}][\'id\', \'title\', \'url\', \'created_at\', \'updated_at\', \'views\', \'user_id\', \'user_name\', \'topic_id\', \'topic_title\', \'bias\', \'author_id\', \'news_agency_id\', \'content_type\', \'tag_name\']',
+        route: 'linksByTopicId[{integers:n}][\'id\', \'title\', \'url\', \'created_at\', \'views\', \'user_id\', \'user_name\', \'topic_id\', \'topic_title\', \'bias\', \'author_id\', \'news_agency_id\', \'content_type\', \'tag_name\']',
         call: function(pathSet, args) {
-            console.log('<<< call', args);
             var limit = pathSet.n.slice(-1)[0] - pathSet.n[0] + 1;
             var offset = pathSet.n[0];
 
@@ -114,7 +117,7 @@ module.exports = [
 
                         var fields = pathSet[2];
                         fields.forEach(function(field){
-                            var value = linkRecord && linkRecord[field] ? linkRecord[field] : undefined;
+                            var value = linkRecord && linkRecord[field] ? linkRecord[field].toString() : undefined;
 
                             results.push({
                                 path: ['latestLinks', n, field],
@@ -124,7 +127,9 @@ module.exports = [
 
                     });
                     return results;
-                }).catch(function(why){console.log('latestLinks/error', why);});
+                }).catch(function(why){
+                    console.log('catch#linksByTopicId' + why + why.stack);
+                });
         }
     }
 ];

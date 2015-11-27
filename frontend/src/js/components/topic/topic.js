@@ -15,24 +15,25 @@ class Topic extends React.Component {
     constructor(props, context) {
         super(props, context);
         this._listeners = [];
-        this._handleStoreChange = this._handleStoreChange.bind(this);
+        this._handleTopicChange = this._handleTopicChange.bind(this);
+        this._handleLinksChange = this._handleLinksChange.bind(this);
 
         this.state = {
-            topic: TopicStore.getTopic(this.props.topicId),
+            topic: TopicStore.getTopic(props.topicId),
             showing: 'timeline',
-            links: TopicLinksStore.getAllLinks()
+            links: TopicLinksStore.getAllLinks(props.topicId)
         };
     }
 
     componentWillMount() {
-        TopicStore.addChangeListener(this._handleStoreChange);
+        TopicStore.addChangeListener(this._handleTopicChange);
 
         this._listeners.push(
-            TopicLinksStore.addListener(this._handleStoreChange));
+            TopicLinksStore.addListener(this._handleLinksChange));
     }
 
     componentWillUnmount() {
-        TopicStore.removeChangeListener(this._handleStoreChange);
+        TopicStore.removeChangeListener(this._handleTopicChange);
 
         this._listeners.forEach(listener => listener.remove());
     }
@@ -63,10 +64,10 @@ class Topic extends React.Component {
 
         return (
             <div className="row topic">
-                <div className="col-sm-12 col-md-12">
+                <div className="col-xs-12">
                     <div style={{textAlign: 'center'}}>
                         <h1>{topic.title}</h1>
-                        <a>{topic.hashtag}</a>
+                        <small>{topic.hashtag}</small>
                     </div>
                     <div className="timeline">
                         <ul className="nav nav-tabs">
@@ -104,21 +105,23 @@ class Topic extends React.Component {
         case 'timeline':
             return <StoryTimeline links={this.state.links}/>;
         case 'left':
-            return <div>Left</div>;
+            return <StoryTimeline links={this.state.links.filter(link => link.bias == 1)}/>;
         case 'right':
-            return <div>Right</div>;
+            return <StoryTimeline links={this.state.links.filter(link => link.bias == 2)}/>;
         case 'unknown':
-            return <div>Unknown</div>;
+            return <StoryTimeline links={this.state.links.filter(link => link.bias == 0)}/>;
         }
     }
 
-    _handleStoreChange() {
+    _handleTopicChange() {
         var topic = TopicStore.getTopic(this.props.topicId);
         this.setState({topic: topic});
     }
 
     _handleLinksChange() {
-        this.setState({links: TopicLinksStore.getAllLinks()});
+        this.setState({
+            links: TopicLinksStore.getAllLinks(this.props.topicId)
+        });
     }
 
     _handleToggle() {

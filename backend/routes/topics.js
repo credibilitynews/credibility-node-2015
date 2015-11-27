@@ -34,7 +34,9 @@ module.exports = [
             return topicService
                 .getTopics(pathSet.topicIds)
                 .then(pushTopics('topicsById', pathSet.topicIds, pathSet[2]))
-                .catch(function(why){console.log('topicsById/error', why);});
+                .catch(function(why){
+                    process.stdout.write('catch#topicsById' + why + why.stack);
+                });
         }
     },
     {
@@ -43,7 +45,9 @@ module.exports = [
             return topicService
                 .getTopics(pathSet.topicIds)
                 .then(pushTopics('topicsById', pathSet.topicIds, pathSet[2]))
-                .catch(function(why){console.log('topicsById.links.length/error', why);});
+                .catch(function(why){
+                    process.stdout.write('catch#topicsById.links.length' + why + why.stack);
+                });
         }
     },
     {
@@ -73,7 +77,9 @@ module.exports = [
                         });
                     });
                     return results;
-                }).catch(function(why){console.log('latestTopics/error', why);});
+                }).catch(function(why){
+                    process.stdout.write('catch#latestTopics' + why + why.stack);
+                });
         }
     }
 ];

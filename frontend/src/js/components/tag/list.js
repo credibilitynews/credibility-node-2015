@@ -12,7 +12,7 @@ class List extends React.Component {
         this._handleStoreChange = this._handleStoreChange.bind(this);
 
         this.state = {
-            articles: TagLinksStore.getAllLinks()
+            articles: TagLinksStore.getAllLinks(props.tagId)
         };
     }
 
@@ -65,7 +65,7 @@ class List extends React.Component {
     _handleStoreChange() {
         // console.log('_handleStoreChange')
         this.setState({
-            articles: TagLinksStore.getAllLinks()
+            articles: TagLinksStore.getAllLinks(this.props.tagId)
         });
     }
 }

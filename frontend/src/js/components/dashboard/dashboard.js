@@ -18,8 +18,7 @@ import {Location, Locations, NotFound} from 'react-router-component';
 function getStatesFromStore(){
     var state = {
         topics: TopicStore.getAllTopics(),
-        categories: CategoryStore.getAllCategories(),
-        latest_articles: LatestLinksStore.getAllLinks()
+        categories: CategoryStore.getAllCategories()
     };
     return state;
 }

@@ -3,8 +3,6 @@ import model from 'falcor-model';
 import {ActionTypes} from 'constants/app-constants';
 import AppDispatcher from 'dispatchers/app-dispatcher';
 
-import invariant from 'invariant';
-
 var LinkActions = {
     fetchLinks: function(ids){
         var dispatch = function(links){
@@ -21,7 +19,7 @@ var LinkActions = {
             dispatch(response.json.linksById);
         })
         .catch(function(why){
-            invariant(false,
+            console.log(
                 'linksById/catch: '+ why);
         });
     },
@@ -30,6 +28,7 @@ var LinkActions = {
         var dispatch = function(links){
             AppDispatcher.handleServerAction({
                 actionType: ActionTypes.FETCH_TAG_LINKS,
+                tagId: tagId,
                 links: links
             });
         };
@@ -43,7 +42,7 @@ var LinkActions = {
             dispatch(response.json.latestLinks);
         })
         .catch(function(why){
-            invariant(false,
+            console.log(
                 'latestLinks/catch: ' + why);
         });
     },
@@ -63,7 +62,7 @@ var LinkActions = {
             dispatch(response.json.latestLinks);
         })
         .catch(function(why){
-            invariant(false,
+            console.log(
                 'latestLinks/catch: ' + why);
         });
     },
@@ -79,7 +78,7 @@ var LinkActions = {
 
         return model()
         .call(
-            ['linksByTopicId', {from: 0, to: 25}, ['id', 'title', 'url', 'user_id', 'user_name', 'topic_id', 'topic_title', 'bias', 'author_id', 'news_agency_id', 'content_type']],
+            ['linksByTopicId', {from: 0, to: 25}, ['id', 'title', 'url', 'user_id', 'user_name', 'topic_id', 'topic_title', 'bias', 'author_id', 'news_agency_id', 'content_type', 'created_at']],
             [topicId]
         )
         .then(function(response) {
@@ -87,8 +86,7 @@ var LinkActions = {
             dispatch(response.json.latestLinks);
         })
         .catch(function(why){
-            invariant(false,
-                'linksByTopicId/catch: ' + why);
+            console.log('linksByTopicId/catch: ' + why);
         });
     }
 };
