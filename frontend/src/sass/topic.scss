@@ -8,7 +8,12 @@
 .recent-topics{
     margin-top: 20px;
     background-color: #fafafa;
-    a, a:link, a:visited{
-        font-size: 0.8em
+    .topic-link, a, a:link, a:visited{
+        width: auto;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-right: 20px;
+        font-size: 0.9em
     }
 }

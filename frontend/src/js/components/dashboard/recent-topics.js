@@ -46,7 +46,7 @@ class RecentTopics extends React.Component {
         if(!items) return <div />;
         return items.map(function(item){
             return(
-                <div key={item.id}>
+                <div key={item.id} className="topic-link">
                     <TopicStats topic={item}/>
                 </div>);
         });
