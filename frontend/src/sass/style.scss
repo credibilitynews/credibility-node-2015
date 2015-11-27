@@ -22,7 +22,9 @@ html {
 }
 
 body {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
   color: #666;
   margin-bottom: 60px;
 }
@@ -38,10 +40,6 @@ body {
 }
 
 footer{
-}
-
-h1, h2, h3{
-    margin-top: 1em;
 }
 
 .content{
@@ -98,12 +96,15 @@ h1, h2, h3{
 //     }
 // }
 .header{
-    a.login{line-height: 40px;}
+    a.login{
+        font-size: 0.8em;
+        line-height: 40px;
+    }
 }
 .footer{margin-top:30px;}
 .copyright{
-    padding-top: 10px;
-    font-weight: strong;
+    line-height: 40px;
+    font-size: 0.8em;
 }
 
 .views-num, .articles-num{
@@ -171,6 +172,7 @@ h1, h2, h3{
 }
 
 .activity-list{
+    padding-top: 2em;
     .activity-list-item{
         margin-bottom: 1em;
     }

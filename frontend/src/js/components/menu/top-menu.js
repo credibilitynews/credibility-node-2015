@@ -1,6 +1,6 @@
 'use strict';
 import React from 'react';
-import {Link} from 'react-router-component';
+import {TagLink} from 'app-link';
 
 import {fetchTopTags} from 'actions/tag-actions';
 import CategoryStore from 'stores/category-store';
@@ -42,7 +42,7 @@ class TopMenu extends React.Component {
         return items.map(function(item){
             return (
                 <li key={item.code} className="nav-item">
-                    <Link href={`/tags/${item.id}/${item.code}`}>{item.name}</Link>
+                    <TagLink link={item}>{item.name}</TagLink>
                 </li>);
         });
     }

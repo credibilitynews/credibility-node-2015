@@ -7,9 +7,11 @@ module.exports = {
     }),
     ActionTypes: keyMirror({
         FETCH_LATEST_LINKS: null,
+        FETCH_TAG_LINKS: null,
+        FETCH_TOPIC_LINKS: null,
+
         FETCH_LINKS: null,
 
-        FETCH_TOPICS_BY_ID: null,
         FETCH_RECENT_TOPICS: null,
 
         FETCH_USERS_BY_ID: null,

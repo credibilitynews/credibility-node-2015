@@ -19,7 +19,6 @@ import expressValidator from 'express-validator';
 import account from './routes/account';
 import ReactComponentRenderer from '../frontend/src/js/renderer';
 
-
 var pgSession = require('connect-pg-simple')(session);
 var app = express();
 

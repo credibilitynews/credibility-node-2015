@@ -40,8 +40,8 @@ class App extends React.Component {
             <Template user={this.props.user}>
                 <Locations path={this.state.url}>
                     <Location path="/account/login" handler={AppLogin} {...this.props}/>
-                    <Location path="/topic/:topicId/:slug" handler={Topic} />
-                    <Location path="/link/:linkId/:slug" handler={Story} />
+                    <Location path="/topics/:topicId/:slug" handler={Topic} />
+                    <Location path="/links/:linkId/:slug" handler={Story} />
                     <NotFound handler={Dashboard} {...this.state}/>
                 </Locations>
             </Template>);

@@ -48,10 +48,12 @@ export function preFetchDataAction(...components){
     };
 }
 
-export function combine(...args){
-    return function(){
-        args.forEach((fn)=>{
-            fn();
+export function makePipe(...actions){
+    return function(...args){
+        var promises = [];
+        actions.forEach((fetch)=>{
+            promises.push(fetch(...args));
         });
+        return Promise.all(promises);
     };
 }

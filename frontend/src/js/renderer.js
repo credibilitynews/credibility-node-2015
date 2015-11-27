@@ -8,10 +8,9 @@ import Promise from 'promise';
 
 import FalcorModel from './falcor-model';
 import UrlPattern from 'url-pattern';
+import invariant from 'invariant';
 
 import {preFetchDataAction, destructPreFetchable} from 'pre-fetchable';
-
-// var App = React.createFactory(require('./components/App'))
 
 export default class ReactComponentRenderer {
     constructor(url, props) {
@@ -38,7 +37,8 @@ export default class ReactComponentRenderer {
                 cb(html);
             })
             .catch((why)=>{
-                // console.log('ReactComponentRenderer#renderToString', why);
+                invariant(false,
+                    'catch/ReactComponentRenderer#renderToString: ' + why);
             });
         };
 
@@ -59,7 +59,8 @@ export default class ReactComponentRenderer {
                 ReactDOM.render(this.reactEl, container);
             })
             .catch((why)=>{
-                // console.log('ReactComponentRenderer#render', why);
+                invariant(false,
+                    'catch/ReactComponentRenderer#render: '+why);
             });
         };
         Promise.all([this.preFetchDataforRoute(this.url)]).then(hydrate);
@@ -69,14 +70,15 @@ export default class ReactComponentRenderer {
     preFetchDataforRoute(path){
 
         let routes = {
-            topic: new UrlPattern('/topic/:topicId/:slug'),
-            story: new UrlPattern('/link/:linkId/:slug'),
+            topic: new UrlPattern('/topics/:topicId/:slug'),
+            story: new UrlPattern('/links/:linkId/:slug'),
             tag: new UrlPattern('/tags/:tagId/:slug')
         };
 
         if(routes.topic.match(path)){
+            var parts = routes.topic.match(path);
             var Topic = require('components/topic/topic');
-            return preFetchDataAction(Topic)();
+            return preFetchDataAction(Topic)(parts.topicId);
         }
         if(routes.story.match(path)){
             var Story = require('components/story/story');

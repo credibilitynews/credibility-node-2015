@@ -10,76 +10,110 @@ import ArticlesNum from 'components/stats/articles-num';
 import TopicStore from 'stores/topic-store';
 import TopicActions from 'actions/topic-actions';
 
-import SearchBar from 'components/search/search-bar';
+import TopicLinksStore from 'stores/topic-links-store';
+import LinkActions from 'actions/link-actions';
+
+import {preFetchable, preFetchableDestructor, preFetchDataAction, makePipe} from 'pre-fetchable';
 
 class Topic extends React.Component {
     constructor(props, context) {
         super(props, context);
+        this._listeners = [];
         this._handleStoreChange = this._handleStoreChange.bind(this);
 
         this.state = {
-            topic: null,
-            summaryShown: false
+            topic: TopicStore.getTopic(this.props.topicId),
+            showing: 'timeline',
+            links: TopicLinksStore.getAllLinks()
         };
     }
 
     componentWillMount() {
         TopicStore.addChangeListener(this._handleStoreChange);
+
+        this._listeners.push(
+            TopicLinksStore.addListener(this._handleStoreChange));
     }
 
     componentWillUnmount() {
         TopicStore.removeChangeListener(this._handleStoreChange);
+
+        this._listeners.forEach(listener => listener.remove());
     }
 
     componentDidMount() {
         if(!this.state.topic)
             TopicActions.fetchTopicsById(this.props.topicId);
+
+        if(!this.state.links || this.state.links.length == 0)
+            LinkActions.fetchTopicLinks(this.props.topicId);
     }
 
     render() {
         var topic = this.state.topic || {};
 
-        var toggled = cx({
-            short: !this.state.summaryShown,
-            long: this.state.summaryShown
-        });
+        var classes = (type) => {
+            return cx({
+                "nav-link active": this.state.showing == type,
+                "nav-link": true
+            });
+        }
+        var onClick = (type) => {
+            return (e) => {
+                if(e) e.preventDefault();
+                this.setState({showing: type})
+            }
+        }
 
         return (
             <div className="row topic">
-                <div className="col-sm-12 col-md-8">
-                    <div className="">
+                <div className="col-sm-12 col-md-12">
+                    <div style={{textAlign: 'center'}}>
                         <h1>{topic.title}</h1>
                         <a>{topic.hashtag}</a>
-                        <blockquote className={toggled}>
-                        </blockquote>
                     </div>
                     <div className="timeline">
-                        <p>Timeline</p>
-                        <StoryTimeline stories={topic.links} />
+                        <ul className="nav nav-tabs">
+                            <li className="nav-item">
+                                <a className={classes('timeline')} onClick={onClick('timeline')}>
+                                    Timeline
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a className={classes('left')} onClick={onClick('left')}>
+                                    Left
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a className={classes('unknown')} onClick={onClick('unknown')}>
+                                    Unknown
+                                </a>
+                            </li>
+                            <li className="nav-item disabled">
+                                <a className={classes('right')} onClick={onClick('right')}>
+                                    Right
+                                </a>
+                            </li>
+                        </ul>
+                        {this.renderTab(this.state.showing)}
                     </div>
                 </div>
-                <div className="col-md-4 col-xs-12 right-sidebar">
 
-                    <SearchBar />
-
-                    <div>
-                        <h2>Details</h2>
-                        <div>Created</div>
-                            {topic.created_at}
-                        <div>Hashtags</div>
-                            <Hashtag tag={topic.hashtag} />
-                    </div>
-                    <div>
-                        <h2>Statistics</h2>
-                        <ArticlesNum articles={topic.articles} text/>
-                        <ViewsNum views={topic.views}/>
-                    </div>
-                    <div>
-                        <h2>Related</h2>
-                    </div>
-                </div>
             </div>
         );
+    }
+
+    renderTab(tab){
+        switch(tab){
+        case 'timeline':
+            return <StoryTimeline />
+        case 'left':
+            return <div>Left</div>
+        case 'right':
+            return <div>Right</div>
+        case 'unknown':
+            return <div>Unknown</div>
+        }
     }
 
     _handleStoreChange() {
@@ -87,9 +121,15 @@ class Topic extends React.Component {
         this.setState({topic: topic});
     }
 
+    _handleLinksChange() {
+        this.setState({links: TopicLinksStore.getAllLinks()});
+    }
+
     _handleToggle() {
         this.setState({summaryShown: !this.state.summaryShown});
     }
 }
 
-module.exports = Topic;
+module.exports = preFetchable(Topic,
+    makePipe(TopicActions.fetchTopicsById, LinkActions.fetchTopicLinks),
+    preFetchableDestructor(Topic));

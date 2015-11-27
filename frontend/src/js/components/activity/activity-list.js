@@ -3,25 +3,27 @@ import React from 'react';
 import Activity from 'components/activity/activity';
 
 import LinkActions from 'actions/link-actions';
-import LatestActicleStore from 'stores/latest-article-store';
+import LatestLinksStore from 'stores/latest-links-store';
 
 class ActivityList extends React.Component {
     constructor(props, context) {
         super(props, context);
-
+        this._listeners = [];
         this._handleStoreChange = this._handleStoreChange.bind(this);
 
         this.state = {
-            articles: LatestActicleStore.getAllArticles()
+            articles: LatestLinksStore.getAllLinks()
         };
     }
 
     componentWillMount() {
-        LatestActicleStore.addChangeListener(this._handleStoreChange);
+        this._listeners.push(
+            LatestLinksStore.addListener(this._handleStoreChange));
     }
 
     componentWillUnMount() {
-        LatestActicleStore.removeChangeListener(this._handleStoreChange);
+        this._listeners.forEach(listener => listener.remove());
+        delete this._listeners;
     }
 
     componentDidMount() {
@@ -30,7 +32,7 @@ class ActivityList extends React.Component {
     }
 
     render() {
-        //console.log('activity-list', this.state);
+        console.log('activity-list', this.state);
         return (
             <div className="activity-list row">
                 <div className="col-xs-12">
@@ -55,7 +57,7 @@ class ActivityList extends React.Component {
 
     _handleStoreChange() {
         this.setState({
-            articles: LatestActicleStore.getAllArticles()
+            articles: LatestLinksStore.getAllLinks()
         });
     }
 }

@@ -6,6 +6,7 @@ import AppDispatcher from '../dispatchers/app-dispatcher';
 var TopicActions = {
     fetchTopicsById: function(ids){
         //console.log('fetchTopicsById', ids);
+
         return model()
         .get(['topicsById', ids, ['id','title','hashtag','created_at','views','user_id']])
         .then(function(response) {

@@ -6,7 +6,6 @@ import Footer from './app-footer.js';
 
 class Template extends React.Component {
     render() {
-
         var userDoc = typeof user === 'undefined' && !this.props.user ?
             null : (this.props.user || user);
 

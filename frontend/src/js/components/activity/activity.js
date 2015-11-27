@@ -4,8 +4,7 @@ import React from 'react';
 import TopicStore from 'stores/topic-store';
 import UserStore from 'stores/user-store';
 
-import {Link} from 'react-router-component';
-import slug from 'slug';
+import {TopicLink, StoryLink} from 'app-link';
 
 class Activity extends React.Component {
     constructor(props, context) {
@@ -37,15 +36,15 @@ class Activity extends React.Component {
                     <i>{this.props.article.user_name}</i>
                 </small>
                 <div>
-                    On <Link href={'/topic/'+this.props.article.topic_id+'/'+slug(this.props.article.topic_title)}>
+                    On <TopicLink id={this.props.article.topic_id} title={this.props.article.topic_title}>
                         <strong>{this.props.article.topic_title}</strong>
-                        </Link>,
+                        </TopicLink>,
                 </div>
                 <blockquote>
                     <div>
-                        <Link className="link-title" href={'/link/'+this.props.article.id+'/'+slug(this.props.article.title)}>
+                        <StoryLink className="link-title" link={this.props.article}>
                             {this.props.article.title}
-                        </Link> <span className="label label-primary">News</span>
+                        </StoryLink> <span className="label label-primary">News</span>
                     </div>
                     <small className="meta">
                         - {this.props.article.author_id || '(unknown author)'}

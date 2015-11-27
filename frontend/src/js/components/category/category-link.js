@@ -6,7 +6,7 @@ import {Link} from 'react-router-component';
 class CategoryLink extends React.Component {
     render() {
         return (
-            <Link className="category-link" href={this._link(this.props.category)}>
+            <Link href={this._link(this.props.category)}>
                 {this.props.category.name}
             </Link>
         );

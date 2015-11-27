@@ -36,13 +36,13 @@ class RecentTopics extends React.Component {
             <div className="recent-topics panel panel-default">
                 <div className="panel-body">
                     <h4>Recent Topics</h4>
-                    <div>{this._wrap(this.state.topics)}</div>
+                    <div>{this.renderTopics(this.state.topics)}</div>
                 </div>
             </div>
         );
     }
 
-    _wrap(items) {
+    renderTopics(items) {
         if(!items) return <div />;
         return items.map(function(item){
             return(

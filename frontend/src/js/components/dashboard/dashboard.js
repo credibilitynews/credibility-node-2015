@@ -11,7 +11,7 @@ import TopMenu from 'components/menu/top-menu';
 
 import TopicStore from 'stores/topic-store';
 import CategoryStore from 'stores/category-store';
-import LatestArticleStore from 'stores/latest-article-store';
+import LatestLinksStore from 'stores/latest-links-store';
 
 import {Location, Locations, NotFound} from 'react-router-component';
 
@@ -19,7 +19,7 @@ function getStatesFromStore(){
     var state = {
         topics: TopicStore.getAllTopics(),
         categories: CategoryStore.getAllCategories(),
-        latest_articles: LatestArticleStore.getAllArticles()
+        latest_articles: LatestLinksStore.getAllLinks()
     };
     return state;
 }

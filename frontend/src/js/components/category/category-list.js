@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 
-import CategoryLink from 'components/category/category-link';
+import {TagLink} from 'app-link';
 import CategoryStore from 'stores/category-store';
 
 import TagActions from 'actions/tag-actions';
@@ -54,7 +54,7 @@ class CategoryList extends React.Component {
             .map((item, index) => {
                 return (
                     <span key={index} className={className}>
-                        <CategoryLink category={item}/>
+                        <TagLink className="category-link" link={item}>{item.name}</TagLink>
                         <div className="category-group">
                             { this._wrap(
                                 this._childrenOf(this.state.categories, item.id),

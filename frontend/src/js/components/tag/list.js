@@ -3,35 +3,37 @@ import React from 'react';
 import Activity from 'components/activity/activity';
 
 import LinkActions from 'actions/link-actions';
-import LatestActicleStore from 'stores/latest-article-store';
+import TagLinksStore from 'stores/tag-links-store';
 
 class List extends React.Component {
     constructor(props, context) {
         super(props, context);
-
+        this._listeners = [];
         this._handleStoreChange = this._handleStoreChange.bind(this);
 
         this.state = {
-            articles: LatestActicleStore.getAllArticles()
+            articles: TagLinksStore.getAllLinks()
         };
     }
 
     componentWillMount() {
-        LatestActicleStore.addChangeListener(this._handleStoreChange);
+        this._listeners.push(
+            TagLinksStore.addListener(this._handleStoreChange));
     }
 
     componentWillUnMount() {
-        LatestActicleStore.removeChangeListener(this._handleStoreChange);
+        this._listeners.forEach(listener => listener.remove());
+        delete this._listeners;
     }
 
     componentDidMount() {
         if(this.state.articles.length == 0)
-            LinkActions.fetchTaggedLinks(this.props.tagId);
+            LinkActions.fetchTagLinks(this.props.tagId);
     }
 
     componentWillReceiveProps(nextProps){
         if(this.props.tagId != nextProps.tagId){
-            LinkActions.fetchTaggedLinks(nextProps.tagId);
+            LinkActions.fetchTagLinks(nextProps.tagId);
         }
     }
 
@@ -39,7 +41,9 @@ class List extends React.Component {
         return (
             <div className="activity-list row">
                 <div className="col-xs-12">
-                    <h3>{this.state.articles && this.state.articles.length > 0? this.state.articles[0].tag_name : <i>Loading tag...</i>}</h3>
+                    <h3>
+                        News Update: {this.state.articles && this.state.articles.length > 0? this.state.articles[0].tag_name : <div/>}
+                    </h3>
                 </div>
                 <div className="col-xs-12">
                     {this.renderLinks(this.state.articles)}
@@ -61,7 +65,7 @@ class List extends React.Component {
     _handleStoreChange() {
         // console.log('_handleStoreChange')
         this.setState({
-            articles: LatestActicleStore.getAllArticles()
+            articles: TagLinksStore.getAllLinks()
         });
     }
 }
@@ -71,4 +75,4 @@ class List extends React.Component {
 import {preFetchable} from 'pre-fetchable';
 module.exports = preFetchable(
     List,
-    LinkActions.fetchTaggedLinks);
+    LinkActions.fetchTagLinks);
