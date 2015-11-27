@@ -20,6 +20,23 @@ class StoryTimeline extends React.Component {
         if(items.length == 0) return <i>No stories yet.</i>;
 
         return items
+        .sort((a, b) => {
+            var a = new Date(a.created_at);
+            a.setHours(0);
+            a.setMinutes(0);
+            a.setSeconds(0);
+            a.setMilliseconds(0);
+            a = a.getTime();
+
+            var b = new Date(b.created_at);
+            b.setHours(0);
+            b.setMinutes(0);
+            b.setSeconds(0);
+            b.setMilliseconds(0);
+            b = b.getTime();
+
+            return b-a;
+        })
         .reduce(function(sets, item){
             var dateKey = new Date(item.created_at);
             dateKey.setHours(0);
