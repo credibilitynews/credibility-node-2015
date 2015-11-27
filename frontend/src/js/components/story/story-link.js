@@ -1,8 +1,8 @@
 
 'use strict';
 import React from 'react';
-import {Link as Link} from 'react-router-component';
 import {timeAgo, timeStamp as ts} from 'app-utils';
+import {StoryLink as Link} from 'app-link';
 
 class StoryLink extends React.Component {
     render() {
@@ -12,7 +12,7 @@ class StoryLink extends React.Component {
         return (
             <div className="story-link" data-created={ts(story.created_at)}>
                 <div className="info">
-                    <Link className="title" href={'/#/story/'+story.id} to={'/#/story/'+story.id}>
+                    <Link className="title" link={story}>
                         {story.title}
                     </Link>
                     <a href={story.url} className="domain_name">
