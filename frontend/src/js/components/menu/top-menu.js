@@ -32,7 +32,7 @@ class TopMenu extends React.Component {
         return (
             <div className="top-menu">
                 <ul className="nav nav-pills">
-                    <li className="nav-item">Tags: </li>
+                    <li className="nav-item">Most Tags: </li>
                     {this.renderItem(this.state.items)}
                 </ul>
             </div>);

@@ -48,6 +48,16 @@ footer{
 
 .top-menu{
     height: 2.5em;
+    .nav-item{
+
+        a, a:link, a:active{
+            padding-left: 5px;
+            padding: 5px;
+            background-color: #eaeeef;
+            font-size: 0.9em;
+            color: #666;
+        }
+    }
 }
 // .logo{
 //     width: 35px;
