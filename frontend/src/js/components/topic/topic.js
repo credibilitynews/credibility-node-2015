@@ -109,7 +109,7 @@ class Topic extends React.Component {
         case 'right':
             return <StoryTimeline links={this.state.links.filter(link => link.bias == 2)}/>;
         case 'unknown':
-            return <StoryTimeline links={this.state.links.filter(link => link.bias == 0)}/>;
+            return <StoryTimeline links={this.state.links.filter(link => link.bias != 1 && link.bias != 2)}/>;
         }
     }
 
