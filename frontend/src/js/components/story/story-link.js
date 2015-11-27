@@ -16,7 +16,7 @@ class StoryLink extends React.Component {
                         {story.title}
                     </Link>
                     <a href={story.url} className="domain_name">
-                        {story.url}
+                        {decodeURI(story.url)}
                     </a>
                     <span className="author">
                         submitted by {story.user_name}
