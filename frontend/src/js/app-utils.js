@@ -17,12 +17,7 @@ export function timeAgo(time){
             diff =  Math.floor(diff / unit.in_seconds);
             return diff + ' ' + unit.name + (diff>1 ? 's' : '');
         }else {
-            var options = {
-                weekday: 'long', year: 'numeric', month: 'short',
-                day: 'numeric', hour: '2-digit', minute: '2-digit'
-            };
-            var str = new Date(time).toLocaleTimeString('en-us', options);
-            return str.slice(0, str.lastIndexOf(','));
+            return new Date(time).toDateString().replace(' ', ', ');
         }
         unit = units[i++];
     }
