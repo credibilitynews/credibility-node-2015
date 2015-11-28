@@ -9,6 +9,7 @@ import Story from 'components/story/story';
 import Template from 'components/app-template';
 import AppLogin from 'components/user/user-login';
 import Post from 'components/post/post';
+import AboutPage from 'components/about/about';
 
 const tap = (tapped, cb) => {
     return function(...args){
@@ -41,6 +42,7 @@ class App extends React.Component {
             <Template user={this.props.user}>
                 <Locations path={this.state.url}>
                     <Location path="/post" handler={Post} {...this.props}/>
+                    <Location path="/about" handler={AboutPage} />
                     <Location path="/account/login" handler={AppLogin} {...this.props}/>
                     <Location path="/topics/:topicId/:slug" handler={Topic} />
                     <Location path="/links/:linkId/:slug" handler={Story} />
