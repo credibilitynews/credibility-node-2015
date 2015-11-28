@@ -18,12 +18,12 @@ var emailText = function(html, token, uid) {
         var endP = function() { return (html) ? '</p>' : '\n\n'; };
         var linkA = function(url) { return (html) ? ('<a href="' + url + '">' + url + '</a>') : url; };
         return startP() + 'Hello!' + endP() +
-                    startP() + 'You have successfully set up your Credibility.io account' + endP() +
+                    startP() + 'You have successfully set up your Credibility account' + endP() +
                     startP() + 'You can now access it by clicking on the following link:' + endP() +
                     startP() + linkA(process.env.CREDIBILITY_URL + '/?token=' + encodeURIComponent(token)
                     + '&uid=' + encodeURIComponent(uid)) + endP() +
                     startP() + 'See you soon!' + endP() +
-                    startP() + 'Credibility.io Team' + endP();
+                    startP() + 'Credibility Team' + endP();
 };
 
 module.exports = function(app) {
@@ -36,9 +36,9 @@ module.exports = function(app) {
                 var message = {
                 html: emailText(true, tokenToSend, uidToSend),
                 text: emailText(false, tokenToSend, uidToSend),
-                subject: 'Login Token for Credibility.io',
+                subject: 'Login Token for Credibility',
                 from_email: process.env.MANDRILL_API_EMAIL,
-                from_name: 'Credibility.io',
+                from_name: 'Credibility',
                 to: [{
                         email: recipient,
                         name: '',

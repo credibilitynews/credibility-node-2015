@@ -13,7 +13,18 @@ $icon-font-path: "/bootstrap/fonts/";
 @import "react-select";
 
 h1, h2, h3, h4, h5, h6, .navbar-brand{
-    font-family: 'Cardo', serif;
+    font-family: serif;
+
+}
+.brand{
+    letter-spacing: 1px;
+    small{
+        margin-bottom: -10px;
+    }
+}
+
+input.form-control, textarea.form-control {
+    border-radius: 0px;
 }
 
 html {
@@ -22,11 +33,37 @@ html {
 }
 
 body {
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1rem;
   line-height: 1.5;
   color: #666;
   margin-bottom: 60px;
+}
+
+.about-page{
+    margin-top: 20px;
+    strong{
+        font-family: serif;
+        font-size: 1.2em;
+    }
+    blockquote{
+        margin-left: 10px;
+        padding-left: 10px;
+        border-left: 2px solid #eee;
+        font-style: italic;
+        // font-size: .1em;
+    }
+}
+
+.btn {
+    border: none;
+    padding: 5px 10px;
+    border-radius: 0px;
+}
+.alert{
+    border: none;
+    border-radius: 0px;
+    padding:10px;
 }
 
 .footer {
@@ -34,9 +71,11 @@ body {
   bottom: 0;
   width: 100%;
 
-  height: 60px;
   background-color: #f8f8f8;
   padding: 10px;
+  a {
+      font-size: 0.8em;
+  }
 }
 
 footer{
@@ -189,14 +228,22 @@ footer{
     .activity{
         font-size: 14px;
         blockquote{
-            font-size: 110%;
+            font-family: Serif; color: #545454;
+            font-size: 1.1rem;
             margin-bottom: 0px;
         }
         .label{
             float: right;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 0.7em;
+            font-weight: normal;
+            border-radius: 0px;
+
         }
         small.meta{
             color: #ccc;
+            font-size: 0.7em;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
     }
 }
@@ -209,7 +256,10 @@ footer{
 
 .panel-body{
     h4{
-        font-family: 'Source Sans Pro', sans-serif;
         font-size: 1.3em;
     }
+}
+
+.line{
+    margin-top: 30px;
 }

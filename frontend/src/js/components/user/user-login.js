@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 
-class LoginForm extends React.Component {
+export default class UserLogin extends React.Component {
     render() {
 
         var validation_message = typeof validation === 'undefined' && !this.props.validation ?
@@ -10,13 +10,15 @@ class LoginForm extends React.Component {
             null : (this.props.error || error);
         var success_message = typeof success === 'undefined' && !this.props.success ?
             null : (this.props.success || success);
+        var info_message = typeof info === 'undefined' && !this.props.info ?
+            null : (this.props.info || success);
 
         return (
             <div className="panel panel-default">
                 <div className="panel-body">
                     <form action="/account/sendtoken" method="post">
-                        <h4>Login/Signup</h4>
-
+                        { info_message ?
+                            <div className="alert alert-info">{info_message}</div> : ''}
                         { validation_message ?
                             <div className="alert alert-danger">{validation_message.user.msg}</div> : ''}
                         { error_message ?
@@ -27,7 +29,7 @@ class LoginForm extends React.Component {
                             <label>Email </label>
                             <input ref="user" name="user" type="text" className="form-control"/>
                             <small>
-                            Signup/login is <a href="https://passwordless.net/">Passwordless</a>. Please login link will be sent to your email.
+                            Login is <a href="https://passwordless.net/">passwordless</a>, you will receive a login link sent to your email.
                             </small>
                         </div>
 
@@ -39,5 +41,3 @@ class LoginForm extends React.Component {
             </div>);
     }
 }
-
-module.exports = LoginForm;

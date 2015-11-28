@@ -79,19 +79,24 @@ app.get('/favicon.ico', function(req, res){
 app.get('*', function(req, res){
     var validation = req.flash('validation')[0],
         error = req.flash('passwordless')[0],
-        success = req.flash('passwordless-success')[0];
+        success = req.flash('passwordless-success')[0],
+        user = res.locals && res.locals.user ?
+            {
+                id: res.locals.user.id,
+                email: res.locals.user.email
+            } : null;
 
     var renderer = new ReactComponentRenderer(req.url, {
-        user: res.locals ? res.locals.user : null,
+        user: user,
         validation: validation,
         error: error,
         success: success
     });
 
-    renderer.renderToString(function(reactHtml){
+    renderer.renderToString((reactHtml) => {
         res.render('index.ejs', {
             reactOutput: reactHtml,
-            user: res.locals ? res.locals.user : null,
+            user: user,
             validation: validation,
             error: error,
             success: success

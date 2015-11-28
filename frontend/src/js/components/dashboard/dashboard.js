@@ -1,7 +1,8 @@
 'use strict';
 import React from 'react';
 
-import About from 'components/dashboard/about.js';
+import About from 'components/dashboard/about';
+import AboutPage from 'components/about/about';
 import ActivityList from 'components/activity/activity-list';
 import TaggedList from 'components/tag/list';
 import RecentTopics from 'components/dashboard/recent-topics';
@@ -45,6 +46,7 @@ class Dashboard extends React.Component {
                             <Locations path={this.props.url}>
                                 <Location path="/tags/:tagId/:slug" handler={TaggedList}/>
                                 <Location path="/stories/:storyId/:slug" handler={Story}/>
+                                <Location path="/about" handler={AboutPage}/>
                                 <NotFound handler={ActivityList} />
                             </Locations>
                         </div>
@@ -69,5 +71,5 @@ let children = [TopMenu, SearchBar, RecentTopics, CategoryList, About];
 module.exports = preFetchable(
     Dashboard,
     preFetchDataAction(...children),
-    preFetchableDestructor(...children)
+    preFetchableDestructor(ActivityList, TaggedList, Story, ...children)
 );

@@ -7,11 +7,14 @@ class Header extends React.Component {
         return (
             <nav className="header navbar navbar-light bg-faded" role="navigation">
                 <Link className="navbar-brand" href="/">
-                    <span className="col-brand">Credibility.io</span>
+                    <span className="brand">Credibility</span>
                 </Link>
-                { this.props.user ?
-                    <Link href="/account/logout" className="login pull-right">Logout</Link>
-                    : <Link href="/account/login" className="login pull-right">Login/Signup</Link> }
+                <div className="pull-right">
+                    { this.props.user ?
+                        <Link href="/account/logout" className="login">Logout</Link>
+                        : <Link href="/account/login" className="login">Login/Signup</Link> }
+                </div>
+
             </nav>
         );
     }

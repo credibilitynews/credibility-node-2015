@@ -82,13 +82,12 @@ export default class ReactComponentRenderer {
             return preFetchDataAction(Topic)(parts.topicId);
         }
         var promises = [];
+
         if(routes.story.match(path)){
             parts = routes.story.match(path);
             var Story = require('components/story/story');
             promises.push(preFetchDataAction(Story)(parts.storyId));
         }
-
-
         if(routes.tag.match(path)){
             parts = routes.tag.match(path);
             var TaggedList = require('components/tag/list');

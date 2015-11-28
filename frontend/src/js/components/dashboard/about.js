@@ -1,6 +1,7 @@
 
 'use strict';
 import React from 'react';
+import {Link} from 'react-router-component';
 
 class About extends React.Component {
     render() {
@@ -9,7 +10,7 @@ class About extends React.Component {
                 <div className="panel-body">
                     <h4>About</h4>
                     <div>Read both sides of the story.</div>
-                    <div><a>Submit</a> articles from different perspectives, share your views.</div>
+                    <div><Link href="/post">Submit</Link> articles from different perspectives, share your views.</div>
                 </div>
             </div>
         );

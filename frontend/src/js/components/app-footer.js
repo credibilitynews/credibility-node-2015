@@ -1,13 +1,15 @@
-
 'use strict';
 import React from 'react';
+import {Link} from 'react-router-component';
 
 class Footer extends React.Component {
     render() {
         return (
             <footer className="footer">
                 <div className="text-right container-fluid">
-                    <div className="copyright">some rights reserved</div>
+                    <Link href="/about">About</Link> | <Link href="/about">Privacy &amp; Terms</Link> | <Link rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">
+                        <img alt="Creative Commons License" style={{borderWidth: 0}} src="http://i.creativecommons.org/l/by/3.0/80x15.png" />
+                    </Link>
                 </div>
             </footer>
         );

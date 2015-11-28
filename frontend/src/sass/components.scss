@@ -1,0 +1,23 @@
+.typeahead {
+    &> div {
+        width: 100%;
+    }
+    input.autocomplete {
+        @extend .form-control;
+        padding: 10px;
+        width: 100%;
+        &+ div {
+            z-index:3000;
+        }
+    }
+
+    .typeahead-option{
+        padding: 10px;
+        cursor: default;
+
+        &.highlighted {
+            color: white;
+            background: hsl(200, 50%, 50%);
+        }
+    }
+}

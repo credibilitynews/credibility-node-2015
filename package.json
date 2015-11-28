@@ -1,7 +1,7 @@
 {
   "name": "credibilityio-web",
   "version": "0.14.0",
-  "description": "Credibility.io",
+  "description": "Credibility",
   "homepage": "https://credibility.io",
   "author": {
     "name": "alvinsj",
@@ -81,6 +81,7 @@
     "pg-native": "^1.9.0",
     "promise": "^7.0.4",
     "react": "^0.14.3",
+    "react-autocomplete": "^0.1.4",
     "react-dom": "^0.14.3",
     "react-redux": "^4.0.0",
     "react-router-component": "^0.28.0",
