@@ -37,7 +37,7 @@ class Activity extends React.Component {
                 </small>
                 <div>
                     On <TopicLink id={this.props.article.topic_id} title={this.props.article.topic_title}>
-                        <strong>{this.props.article.topic_title}</strong>
+                        {this.props.article.topic_title}
                         </TopicLink>,
                 </div>
                 <blockquote>

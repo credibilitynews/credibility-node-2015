@@ -8,7 +8,7 @@ export class TagLink extends React.Component{
         var id = this.props.link ? this.props.link.id : this.props.id;
 
         return (
-            <Link className={this.props.className} href={'/tags/'+id+'/'+slug(title)}>
+            <Link className={this.props.className + ' tag-title'} href={'/tags/'+id+'/'+slug(title)}>
                 {this.props.children}
             </Link>);
     }
@@ -20,7 +20,7 @@ export class TopicLink extends React.Component{
         var id = this.props.link ? this.props.link.id : this.props.id;
 
         return (
-            <Link className={this.props.className} href={'/topics/'+id+'/'+slug(title)}>
+            <Link className={this.props.className + ' topic-title'} href={'/topics/'+id+'/'+slug(title)}>
                 {this.props.children}
             </Link>);
     }
@@ -32,7 +32,7 @@ export class StoryLink extends React.Component{
         var id = this.props.link ? this.props.link.id : this.props.id;
 
         return (
-            <Link className={this.props.className} href={'/stories/'+id+'/'+slug(title)}>
+            <Link className={this.props.className + ' link-title'} href={'/stories/'+id+'/'+slug(title)}>
                 {this.props.children}
             </Link>);
     }

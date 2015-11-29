@@ -1,0 +1,27 @@
+
+input.form-control, textarea.form-control {
+    border-radius: 0px;
+}
+
+.btn {
+    border: none;
+    padding: 5px 10px;
+    border-radius: 0px;
+}
+.alert{
+    border: none;
+    border-radius: 0px;
+    padding:10px;
+}
+
+.panel-body{
+    h4{
+        font-size: 1.3em;
+    }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    input[type="date"].form-control, .typeahead input[type="date"].autocomplete, input[type="time"].form-control, .typeahead input[type="time"].autocomplete, input[type="datetime-local"].form-control, .typeahead input[type="datetime-local"].autocomplete, input[type="month"].form-control, .typeahead input[type="month"].autocomplete{
+        line-height: 1.5;
+    }
+}

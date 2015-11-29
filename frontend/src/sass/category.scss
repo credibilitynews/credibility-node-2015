@@ -1,6 +1,6 @@
 .category-list{
     margin-top: 10px;
-    background-color: #eaeeef;
+    background-color: darken(#f7f7f9, 5%);
     .group{
         width: 90%;
         display: block;
@@ -19,7 +19,7 @@
     }
     .child{
 
-        font-size: 0.8em;
+        font-size: 12px;
     }
     .category-link{
         padding-right: 10px;

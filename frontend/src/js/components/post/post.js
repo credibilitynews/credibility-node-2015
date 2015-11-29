@@ -46,14 +46,14 @@ export default class Post extends React.Component {
                     [col(4, 'author', 'publisher', 'published_date')],
                     [hidden('image_url'), hidden('text_summary')]
                 ),
-                section('Select Topic',
+                section('Attach to Topic',
                     [col(12, 'topic')]
                 )
             );
         }
 
         return layout(props,
-            section('',
+            section('Add New Article',
                 [col(12, 'url')]
             )
         );
@@ -71,7 +71,7 @@ export default class Post extends React.Component {
 
                     [hidden('image_url'), hidden('text_summary')]
                 ),
-                section('Select Topic',
+                section('Attach to Topic',
                     [col(12, 'topic')]
                 )
             );
@@ -124,20 +124,22 @@ export default class Post extends React.Component {
 
     renderButtons() {
         return (
-        <div className="form-group">
+        <div className="form-group pull-right text-right">
             {this.state.meta.title ?
                 <div style={{marginBottom: '20px'}}>
                     <a onClick={this._toggleShowAll}>{this.state.showAll ? 'hide details...' : 'more details...'}</a>
                 </div> : <div />}
-            <button className="btn btn-default"
-                onClick={this._fetchUrlMeta}>Retrieve Article Information</button>&nbsp;
-            {this.state.url ? <button className="btn btn-primary"
-                onClick={this._addArticle}>Add Article</button>: <div />}&nbsp;
 
             {this.state.status && this.state.status.length >0 ?
                 <span className="">
                     {this.state.status}
                 </span> : <span />}
+            &nbsp;<button className="btn btn-default"
+                onClick={this._fetchUrlMeta}>Retrieve Article Information</button>&nbsp;
+            {this.state.url ? <button className="btn btn-primary"
+                onClick={this._addArticle}>Add Article</button>: <div />}&nbsp;
+
+
         </div>);
     }
 

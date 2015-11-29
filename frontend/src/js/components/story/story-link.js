@@ -12,7 +12,7 @@ class StoryLink extends React.Component {
         return (
             <div className="story-link" data-created={ts(story.created_at)}>
                 <div className="info">
-                    <Link className="title" link={story}>
+                    <Link className="title link-title" link={story}>
                         {story.title}
                     </Link>
                     <a href={story.url} className="domain_name">

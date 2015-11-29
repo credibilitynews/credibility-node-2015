@@ -46,7 +46,7 @@
 
 .timeline{
     .nav-tabs{
-        font-size: 0.8em;
+        font-size: 12px;
     }
 }
 
@@ -65,7 +65,7 @@
 
 .story-link{
 
-    a{font-family: Serif; color: #545454;}
+    a{color: #545454;}
     &>div.info{
         width: auto;
         white-space: nowrap;
@@ -78,7 +78,7 @@
         }
         .domain_name{
             color: #777;
-            font-size: 0.9em;
+            font-size: 12px;
             display: block;
             width: auto;
             white-space: nowrap;
@@ -86,12 +86,12 @@
             text-overflow: ellipsis;
         }
         .author{
-            font-size: 0.8em;
+            font-size: 12px;
             font-style: italic;
         }
         .created_at{
             color: #999;
-            font-size: 0.8em;
+            font-size: 12px;
             font-style: italic;
         }
     }
@@ -115,7 +115,7 @@
         background-color: transparent;
         color: darken(#ddd, 50%);
         margin-left: -20px;
-        font-size: 0.8em;
+        font-size: 12px;
         line-height: 30px;
     }
 
