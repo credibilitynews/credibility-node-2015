@@ -32,7 +32,7 @@ class Activity extends React.Component {
     render() {
         return (
             <div className="activity">
-                <small className="meta pull-right">
+                <span className="label label-primary">News</span> <small className="label meta pull-right">
                     <i>{this.props.article.user_name}</i>
                 </small>
                 <div>
@@ -44,7 +44,7 @@ class Activity extends React.Component {
                     <div>
                         <StoryLink className="link-title" link={this.props.article}>
                             {this.props.article.title}
-                        </StoryLink> <span className="label label-primary">News</span>
+                        </StoryLink>
                     </div>
                     <small className="meta">
                         - {this.props.article.author_id || '(unknown author)'}
