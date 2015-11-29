@@ -10,6 +10,7 @@ class ActivityList extends React.Component {
         super(props, context);
         this._listeners = [];
         this._handleStoreChange = this._handleStoreChange.bind(this);
+        this.renderArticles = this.renderArticles.bind(this);
 
         this.state = {
             articles: LatestLinksStore.getAllLinks()
@@ -39,13 +40,18 @@ class ActivityList extends React.Component {
                     <h3>News Updates</h3>
                 </div>
                 <div className="col-xs-12">
-                    {this._wrap(this.state.articles)}
+                    {this.renderArticles(this.state.articles)}
                 </div>
             </div>);
     }
 
-    _wrap(items) {
-        return items.map(function(item, index){
+    renderArticles(items) {
+        return items
+        .sort((a, b) => {
+            // console.log(a, b);
+            return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+        })
+        .map(function(item, index){
             return (
                 <div key={index} className="activity-list-item">
                     <div className="content">

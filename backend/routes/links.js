@@ -51,7 +51,7 @@ module.exports = [
 
                         var fields = pathSet[2];
                         fields.forEach(function(field){
-                            var value = linkRecord && linkRecord[field] ? linkRecord[field] : undefined;
+                            var value = linkRecord && linkRecord[field] ? linkRecord[field].toString() : undefined;
 
                             results.push({
                                 path: ['latestLinks', n, field],
@@ -84,7 +84,7 @@ module.exports = [
 
                         var fields = pathSet[2];
                         fields.forEach(function(field){
-                            var value = linkRecord && linkRecord[field] ? linkRecord[field] : undefined;
+                            var value = linkRecord && linkRecord[field] ? linkRecord[field].toString() : undefined;
 
                             results.push({
                                 path: ['latestLinks', n, field],
@@ -185,8 +185,6 @@ module.exports = [
     {
         route: 'postNewLink[\'id\', \'errors\']',
         call: function(pathSet, args){
-            console.log(args);
-
             return linkService
             .postNewLink(args[0], this.userId)
             .then((result) => {
@@ -199,7 +197,6 @@ module.exports = [
                     path: ['postNewLink', 'errors'],
                     value: result.errors
                 });
-
                 return results;
             })
             .catch(function(why){
