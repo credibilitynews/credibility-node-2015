@@ -108,11 +108,11 @@ export default class Post extends React.Component {
             },
             image_url: {
                 type: 'hidden',
-                value: this.state.meta.image
+                defaultValue: this.state.meta.image
             },
             text_summary: {
                 type: 'hidden',
-                value: this.state.meta.article
+                defaultValue: this.state.meta.article
             },
             topic: {
                 type: 'text',
@@ -131,8 +131,8 @@ export default class Post extends React.Component {
                 </div> : <div />}
             <button className="btn btn-default"
                 onClick={this._fetchUrlMeta}>Retrieve Article Information</button>&nbsp;
-            <button className="btn btn-primary"
-                onClick={this._addArticle}>Add Article</button>&nbsp;
+            {this.state.url ? <button className="btn btn-primary"
+                onClick={this._addArticle}>Add Article</button>: <div />}&nbsp;
 
             {this.state.status && this.state.status.length >0 ?
                 <span className="">
@@ -141,11 +141,13 @@ export default class Post extends React.Component {
         </div>);
     }
 
-    _addArticle (){
+    _addArticle (e){
+        if(e) e.preventDefault();
         var values = formInputsSerialize(this.refs.form.refs.form);
-        // console.log(values);
+        this.setState({defaultValues: values});
 
         LinkActions.postNewLink(values, (res) => {
+            // console.log(res);
             if(res.id){
                 environment.defaultEnvironment.navigate('/stories/'+res.id+'/'+slug(values.title));
             }else{
@@ -164,7 +166,7 @@ export default class Post extends React.Component {
             return <UserLogin info="Please sign in to submit a link"/>;
 
         let Form = createForm(FormField, this.getFieldProps, this.getFullLayout, this.getShortLayout, this.renderButtons());
-        return <Form ref="form" showAll={this.state.showAll}/>;
+        return <Form ref="form" showAll={this.state.showAll} defaultValues={this.state.defaultValues}/>;
     }
 
     topicComponent () {

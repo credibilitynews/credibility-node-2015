@@ -15,6 +15,7 @@ var LinkActions = {
         return model()
         .call(['postNewLink', ['id', 'errors']], [values])
         .then((response) => {
+            // console.log(response);
             cb(response.json.postNewLink);
         })
         .catch((why)=>{
@@ -76,7 +77,7 @@ var LinkActions = {
         };
         return model()
         .call(
-            ['taggedLinks', {from: 0, to: 4}, ['id', 'title', 'url', 'user_id', 'user_name', 'topic_id', 'topic_title', 'bias', 'author_id', 'news_agency_id', 'content_type', 'tag_name']],
+            ['taggedLinks', {from: 0, to: 4}, ['id', 'title', 'url', 'user_id', 'user_name', 'topic_id', 'topic_title', 'bias', 'author_id', 'news_agency_id', 'content_type', 'tag_name', 'created_at']],
             [tagId]
         )
         .then((response) => {
@@ -96,7 +97,7 @@ var LinkActions = {
         };
         return model()
         .get(
-            ['latestLinks', {from: 0, to: 4}, ['id', 'title', 'url', 'user_id', 'user_name', 'topic_id', 'topic_title', 'bias', 'author_id', 'news_agency_id', 'content_type']]
+            ['latestLinks', {from: 0, to: 4}, ['id', 'title', 'url', 'user_id', 'user_name', 'topic_id', 'topic_title', 'bias', 'author_id', 'news_agency_id', 'content_type', 'created_at']]
         )
         .then((response) => {
             // console.log('latestLinks/result', response.json);

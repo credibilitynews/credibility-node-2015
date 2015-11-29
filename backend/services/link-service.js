@@ -9,18 +9,56 @@ var textapi = new AYLIENTextAPI({
 
 var sequelize = new Sequelize(process.env.DATABASE_URL, {native: true});
 var Links = sequelize.define('links', {
-    title: Sequelize.STRING,
-    url: Sequelize.STRING,
-    user_id: Sequelize.INTEGER,
-    topic_id: Sequelize.INTEGER,
-    bias: Sequelize.INTEGER,
-    active: Sequelize.BOOLEAN,
+    title: {
+        type: Sequelize.STRING,
+        unique: true,
+        notNull: true
+    },
+    url: {
+        type: Sequelize.STRING,
+        unique: true,
+        notNull: true
+    },
+    user_id: {
+        type: Sequelize.INTEGER,
+        references: {
+            model: Users,
+            key: 'id',
+            deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
+        }
+    },
+    topic_id:  {
+        type: Sequelize.INTEGER,
+        references: {
+            model: Topics,
+            key: 'id',
+            deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
+       }
+    },
+    bias: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+    },
+    active: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
+    },
     created_at: Sequelize.DATE,
     updated_at: Sequelize.DATE
 }, {
     createdAt: 'created_at',
-    updatedAt: 'updated_at'
+    updatedAt: 'updated_at',
+    validate: {
+        custom: function(){
+            var labels = {topic_id: 'Article Topic', user_id: 'User', title: 'Article Title', url: 'Article URL'};
+            ['url', 'title', 'topic_id', 'user_id'].forEach(field => {
+                if(!this[field] || (typeof this[field] === 'string' && this[field].length == 0))
+                    throw new Error(labels[field]+' cannot be empty')
+            })
+        }
+    }
 });
+
 Links.belongsTo(Topics, { foreignKey: 'topic_id' });
 Links.belongsTo(Users, { foreignKey: 'user_id' });
 
@@ -169,15 +207,37 @@ LinkService.prototype = {
     },
     postNewLink (data, userId) {
         return new Promise((resolve, reject) =>{
-            if(data.topic_id && data.url && data.title){
-                Links.create({ topic_id: data.topic_id, url: data.url, title: data.title, user_id: userId})
-                .then(function(link) {
-                    resolve({id: link.id})
+
+            let createTopicLink = (topic_id) =>{
+                Links.create({
+                    topic_id: topic_id,
+                    url: data.url,
+                    title: data.title,
+                    user_id: userId
+                })
+                .then((link) => {
+                    resolve({id: link.id});
                 })
                 .catch((why) => {
-                    resolve({errors: why})
+                    console.log('catch#postNewLink', why, why.stack);
+                    resolve({errors: why.message});
                 });
-            }else reject()
+            }
+            if(data.topic && data.topic.length > 0){
+                Topics.create({
+                    title: data.topic
+                })
+                .then((topic) => {
+                    createTopicLink(topic.id);
+                })
+                .catch((why) => {
+                    console.log('catch#postNewLink', why, why.stack);
+                    resolve({errors: why.message});
+                });
+            }else{
+                createTopicLink(data.topic_id);
+            }
+
         });
     }
 };
