@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import StoryLink from 'components/story/story-link';
-import {timeAgo, timeStamp as ts} from 'app-utils';
+import {timeAgo, timeStamp as ts} from 'utils/time';
 
 class StoryTimeline extends React.Component {
     render() {

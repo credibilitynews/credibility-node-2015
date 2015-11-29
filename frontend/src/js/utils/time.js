@@ -15,7 +15,7 @@ export function timeAgo(time){
     while (unit) {
         if (diff < unit.limit || !unit.limit){
             diff =  Math.floor(diff / unit.in_seconds);
-            return diff + ' ' + unit.name + (diff>1 ? 's' : '');
+            return diff + ' ' + unit.name + (diff>1 ? 's' : '') + ' ago';
         }else {
             return new Date(time).toDateString().replace(' ', ', ');
         }
