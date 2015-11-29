@@ -88,7 +88,7 @@ LinkService.prototype = {
                     row = row.dataValues;
                     reduced[row.id] = row;
                     reduced[row.id]['topic_title'] = row.topic.title;
-                    reduced[row.id]['user_name'] = row.user.name;
+                    reduced[row.id]['user_name'] = row.user.name || 'anonymous';
                     return reduced;
                 }, {});
                 resolve(values);
@@ -118,7 +118,7 @@ LinkService.prototype = {
                     row = row.dataValues;
                     reduced[row.id] = row;
                     reduced[row.id]['topic_title'] = row.topic.title;
-                    reduced[row.id]['user_name'] = row.user.name;
+                    reduced[row.id]['user_name'] = row.user.name || 'anonymous';
                     return reduced;
                 }, {});
                 //console.log(values);
@@ -145,7 +145,7 @@ LinkService.prototype = {
                 var values = result.reduce(function(reduced, row){
                     reduced[row.id] = row;
                     reduced[row.id]['topic_title'] = row.topic_title;
-                    reduced[row.id]['user_name'] = row.user_name;
+                    reduced[row.id]['user_name'] = row.user_name || 'anonymous';
                     reduced[row.id]['tag_name'] = row.tag_name;
                     return reduced;
                 }, {});
@@ -172,7 +172,7 @@ LinkService.prototype = {
                 var values = result.reduce(function(reduced, row){
                     reduced[row.id] = row;
                     reduced[row.id]['topic_title'] = row.topic_title;
-                    reduced[row.id]['user_name'] = row.user_name;
+                    reduced[row.id]['user_name'] = row.user_name || 'anonymous';
                     reduced[row.id]['tag_name'] = row.tag_name;
                     return reduced;
                 }, {});
