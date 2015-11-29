@@ -37,7 +37,7 @@ class ActivityList extends React.Component {
         return (
             <div className="activity-list row">
                 <div className="col-xs-12">
-                    <h3>News Updates</h3>
+                    <h1>News Updates</h1>
                 </div>
                 <div className="col-xs-12">
                     {this.renderArticles(this.state.articles)}

@@ -7,7 +7,7 @@ class LatestTopics extends React.Component {
     render() {
         return (
             <div className="latest-topics">
-                <h3>News Update</h3>
+                <h1>News Update</h1>
                 <ul>{this._wrapItems(this.props.topics)}</ul>
             </div>
         );

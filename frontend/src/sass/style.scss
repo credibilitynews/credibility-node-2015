@@ -26,6 +26,26 @@ body {
     margin-bottom: 60px;
 }
 
+h1{
+    font-size: 1.75em;
+}
+
+h2{
+    font-size: 1.3em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+h4 {
+    font-size: 1.15em;
+}
+
+strong{
+    font-weight: 500;
+}
+
 .brand{
     letter-spacing: 1px;
     small{
@@ -67,7 +87,7 @@ body {
         a, a:link, a:active{
             padding-left: 5px;
             padding: 5px;
-            background-color: #eaeeef;
+            background-color: #e8e8ee;
             font-size: 12px;
             color: #666;
         }

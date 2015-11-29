@@ -8,7 +8,7 @@ class About extends React.Component {
         return (
             <div className="about panel panel-default">
                 <div className="panel-body">
-                    <h4>About</h4>
+                    <h2>About</h2>
                     <div className="summary">
                         <div>Read both sides of the story.</div>
                         <div><Link href="/post">Submit</Link> articles from different perspectives, share your views.</div>

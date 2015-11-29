@@ -35,7 +35,7 @@ class RecentTopics extends React.Component {
         return (
             <div className="recent-topics panel panel-default">
                 <div className="panel-body">
-                    <h4>Recent Topics</h4>
+                    <h2>Recent Topics</h2>
                     <div>{this.renderTopics(this.state.topics)}</div>
                 </div>
             </div>

@@ -41,9 +41,9 @@ class List extends React.Component {
         return (
             <div className="activity-list row">
                 <div className="col-xs-12">
-                    <h3>
+                    <h1>
                         News Update: {this.state.articles && this.state.articles.length > 0? this.state.articles[0].tag_name : <div/>}
-                    </h3>
+                    </h1>
                 </div>
                 <div className="col-xs-12">
                     {this.renderLinks(this.state.articles)}

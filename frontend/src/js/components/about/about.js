@@ -9,7 +9,7 @@ class AboutPage extends React.Component {
         return (
             <div className="about-page">
                 <div className="line">
-                    <h2>About</h2>
+                    <h1>About</h1>
                     <blockquote>"Read both sides of the story"</blockquote>
                     <p>
                         In this information overloaded age, news/articles are written and published by human authors. Aside from reporting facts, writings sometimes can be biased and opinionated, or even made up for some hidden agenda. We should always investigate the source of information, or even better, we shall read more from different perspectives to understand the issue better.

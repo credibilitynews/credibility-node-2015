@@ -36,7 +36,7 @@ class CategoryList extends React.Component {
         return (
             <div className="category-list panel panel-default">
                 <div className="panel-body">
-                    <h4>Categories</h4>
+                    <h2>Categories</h2>
                     <div>
                         {this._wrap(
                             this._childrenOf(this.state.categories, undefined),
