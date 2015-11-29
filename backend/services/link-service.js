@@ -1,6 +1,11 @@
 import Sequelize from 'sequelize';
 import {model as Topics} from './topic-service';
 import {model as Users} from './user-service';
+import AYLIENTextAPI from 'aylien_textapi';
+var textapi = new AYLIENTextAPI({
+    application_id: process.env.AYLIEN_API_ID,
+    application_key: process.env.AYLIEN_API_KEY
+});
 
 var sequelize = new Sequelize(process.env.DATABASE_URL, {native: true});
 var Links = sequelize.define('links', {
@@ -22,10 +27,12 @@ Links.belongsTo(Users, { foreignKey: 'user_id' });
 import batch from './batch';
 import path from 'path';
 import Promise from 'promise';
+import request from 'superagent';
+
 
 function LinkService() {}
 LinkService.prototype = {
-    getLinks: function(linkIds){
+    getLinks (linkIds){
         return new Promise(function (resolve, reject) {
             Links
             .findAll({
@@ -54,7 +61,7 @@ LinkService.prototype = {
             });
         });
     },
-    getLatestLinks: function(offset, limit){
+    getLatestLinks (offset, limit){
         return new Promise(function (resolve, reject) {
             Links
             .findAll({
@@ -85,9 +92,8 @@ LinkService.prototype = {
             });
         });
     },
-    getTaggedLinks: function(offset, limit, tagId){
+    getTaggedLinks (offset, limit, tagId){
         return new Promise(function (resolve, reject) {
-            Links
             sequelize
             .query(`Select links.*, tags.name as tag_name, topics.title as topic_title, users.name as user_name from links
                 join topic_tags on topic_tags.tag_id = ? and topic_tags.topic_id = links.topic_id
@@ -114,7 +120,7 @@ LinkService.prototype = {
             });
         });
     },
-    getLinksByTopicId: function(offset, limit, topicId){
+    getLinksByTopicId (offset, limit, topicId){
         return new Promise(function (resolve, reject) {
             Links
             sequelize
@@ -139,6 +145,39 @@ LinkService.prototype = {
                 console.log('caught:', why);
                 reject(why);
             });
+        });
+    },
+    fetchUrlMeta (url) {
+        return new Promise((resolve, reject) =>{
+            var title = null;
+            var topics = [];
+            textapi.extract({url: url, best_image: true}, (err, res) => {
+                if(err) reject(err);
+                resolve(res);
+            });
+        });
+    },
+    fetchTopicsFromUrl (url) {
+        return new Promise((resolve, reject) =>{
+            var title = null;
+            var topics = [];
+            textapi.hashtags({url: url}, (err, res) => {
+                if(err) reject(err);
+                resolve(res);
+            });
+        });
+    },
+    postNewLink (data, userId) {
+        return new Promise((resolve, reject) =>{
+            if(data.topic_id && data.url && data.title){
+                Links.create({ topic_id: data.topic_id, url: data.url, title: data.title, user_id: userId})
+                .then(function(link) {
+                    resolve({id: link.id})
+                })
+                .catch((why) => {
+                    resolve({errors: why})
+                });
+            }else reject()
         });
     }
 };

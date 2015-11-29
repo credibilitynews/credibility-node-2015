@@ -131,5 +131,80 @@ module.exports = [
                     console.log('catch#linksByTopicId' + why + why.stack);
                 });
         }
+    },
+    {
+        route: 'fetchUrlMeta[\'title\', \'author\', \'image\', \'article\']',
+        call: function(pathSet, args){
+            return linkService
+            .fetchUrlMeta(args[0])
+            .then((meta) => {
+                console.log(meta);
+                var results = [];
+                var fields = pathSet[1];
+
+                fields.forEach((field) => {
+                    results.push({
+                        path: ['fetchUrlMeta', field],
+                        value: meta[field]
+                    });
+                });
+
+                return results;
+            })
+            .catch(function(why){
+                console.log('routes/catch#fetchUrlMeta' + why + why.stack);
+            });
+        }
+    },
+    {
+        route: 'fetchTopicsFromUrl[\'hashtags\']',
+        call: function(pathSet, args){
+            return linkService
+            .fetchTopicsFromUrl(args[0])
+            .then((meta) => {
+                console.log(meta);
+                var results = [];
+                var fields = pathSet[1];
+
+                if(meta.hashtags){
+                    meta.hashtags.forEach((hashtag, index) => {
+                        results.push({
+                            path: ['fetchTopicsFromUrl', 'hashtags', index],
+                            value: hashtag
+                        });
+                    });
+                }
+
+                return results;
+            })
+            .catch(function(why){
+                console.log('routes/catch#fetchUrlMeta' + why + why.stack);
+            });
+        }
+    },
+    {
+        route: 'postNewLink[\'id\', \'errors\']',
+        call: function(pathSet, args){
+            console.log(args);
+
+            return linkService
+            .postNewLink(args[0], this.userId)
+            .then((result) => {
+                var results = [];
+                results.push({
+                    path: ['postNewLink', 'id'],
+                    value: result.id
+                });
+                results.push({
+                    path: ['postNewLink', 'errors'],
+                    value: result.errors
+                });
+
+                return results;
+            })
+            .catch(function(why){
+                console.log('routes/catch#fetchUrlMeta' + why + why.stack);
+            });
+        }
     }
 ];

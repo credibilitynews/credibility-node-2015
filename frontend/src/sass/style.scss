@@ -10,12 +10,17 @@ $icon-font-path: "/bootstrap/fonts/";
 @import "topic";
 @import "category";
 
-@import "react-select";
+@import 'components';
 
 h1, h2, h3, h4, h5, h6, .navbar-brand{
     font-family: serif;
 
 }
+
+.columns{
+    @extend .row;
+}
+
 .brand{
     letter-spacing: 1px;
     small{

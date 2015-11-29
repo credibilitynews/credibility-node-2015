@@ -65,7 +65,7 @@ app.get('*.css', function (req, res, next) {
 app.use('/account', account);
 app.use('/model.json', FalcorServer.dataSourceRoute(function(req, res){
     //console.log('/model.json', req.query);
-    return RouterFactory('1');
+    return RouterFactory(res.locals.user ? res.locals.user.id : null);
 }));
 
 app.get('/favicon.ico', function(req, res){

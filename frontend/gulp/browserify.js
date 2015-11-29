@@ -18,6 +18,7 @@ module.exports = function(gulp, opts, $){
             paths: [config.jsDir],
             extensions: ['js']
         });
+        b.exclude('../../../backend/router-factory');
         b.transform("babelify", {presets: ["es2015", "react"]});
         b = watch ? watchify(b) : b;
         b.add(config.jsDir+'/index.js');

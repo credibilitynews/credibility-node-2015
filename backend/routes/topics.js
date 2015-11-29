@@ -81,5 +81,34 @@ module.exports = [
                     process.stdout.write('catch#latestTopics' + why + why.stack);
                 });
         }
+    },
+    {
+        route: 'searchTopic[\'topics\']',
+        call: function(pathSet, args){
+            return topicService
+            .searchTopic(args[0])
+            .then((topics) => {
+                console.log(topics);
+                var results = [];
+
+                topics.forEach((topic, index) => {
+                    console.log(topic);
+                    results.push({
+                        path: ['searchTopic', 'topics', index, 'id'],
+                        value: topic.id
+                    });
+                    results.push({
+                        path: ['searchTopic', 'topics', index, 'title'],
+                        value: topic.title
+                    });
+                });
+
+
+                return results;
+            })
+            .catch(function(why){
+                console.log('routes/catch#fetchUrlMeta' + why + why.stack);
+            });
+        }
     }
 ];

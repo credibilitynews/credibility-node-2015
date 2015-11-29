@@ -19,6 +19,23 @@ import Promise from 'promise';
 
 function TopicService() {}
 TopicService.prototype = {
+    searchTopic: function(query){
+        query = query.toLowerCase();
+        return new Promise(function (resolve, reject) {
+            console.log(query);
+            sequelize
+            .query(`Select id, title from topics where lower(topics.title) like ?`,
+                { type: sequelize.QueryTypes.SELECT, replacements: [`%${query}%`]})
+            .then(function(result){
+                console.log(result);
+                resolve(result);
+            })
+            .catch(function(why){
+                console.log('caught:', why);
+                reject(why);
+            });
+        });
+    },
     getTopics: function(topicIds){
         return new Promise(function (resolve, reject) {
             Topics

@@ -1,6 +1,6 @@
 'use strict';
 import React from 'react';
-// import Select from 'components/typeahead';
+// import Select from 'components/base/typeahead';
 
 class SearchBar extends React.Component {
     render() {

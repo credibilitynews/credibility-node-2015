@@ -4,8 +4,50 @@ import {ActionTypes} from 'constants/app-constants';
 import AppDispatcher from 'dispatchers/app-dispatcher';
 
 var LinkActions = {
-    fetchLinks: function(ids){
-        var dispatch = function(links){
+    postNewLink (values, cb) {
+
+        var params = Object.keys(values);
+        var data = [];
+        params.forEach(param => {
+            data.push(values[param]);
+        });
+
+        return model()
+        .call(['postNewLink', ['id', 'errors']], [values])
+        .then((response) => {
+            cb(response.json.postNewLink);
+        })
+        .catch((why)=>{
+            // console.log('actions/catch#postNewLink', why, why.stack);
+        });
+    },
+
+    fetchTopicsFromUrl (url, cb){
+        return model()
+        .call(['fetchTopicsFromUrl', ['hashtags']], [url])
+        .then((response) => {
+            // console.log(response);
+            cb(response.json.fetchTopicsFromUrl);
+        })
+        .catch((why)=>{
+            // console.log('actions/catch#fetchTopicsFromUrl', why, why.stack);
+        });
+    },
+
+    fetchUrlMeta (url, cb){
+        return model()
+        .call(['fetchUrlMeta', ['title', 'author', 'image', 'article']], [url])
+        .then((response) => {
+            // console.log(response);
+            cb(response.json.fetchUrlMeta);
+        })
+        .catch((why)=>{
+            // console.log('actions/catch#fetchUrlMeta', why);
+        });
+    },
+
+    fetchLinks (ids){
+        var dispatch = (links) => {
             AppDispatcher.handleServerAction({
                 actionType: ActionTypes.FETCH_LINKS,
                 links: links
@@ -14,17 +56,18 @@ var LinkActions = {
 
         return model()
         .get(['linksById', ids, ['id', 'title', 'url', 'created_at', 'views', 'user_id', 'topic_id', 'bias', 'author_id', 'news_agency_id', 'content_type', 'topic_title', 'user_name']])
-        .then(function(response) {
+        .then((response) => {
             // console.log('linksById', response.json);
             dispatch(response.json.linksById);
         })
-        .catch(function(why){
+        .catch((why) => {
             // console.log('linksById/catch: '+ why.stack);
         });
     },
-    fetchTagLinks: function(tagId){
+
+    fetchTagLinks (tagId){
         // console.log('fetchTagLinks', tagId);
-        var dispatch = function(links){
+        var dispatch = (links) => {
             AppDispatcher.handleServerAction({
                 actionType: ActionTypes.FETCH_TAG_LINKS,
                 tagId: tagId,
@@ -36,16 +79,16 @@ var LinkActions = {
             ['taggedLinks', {from: 0, to: 4}, ['id', 'title', 'url', 'user_id', 'user_name', 'topic_id', 'topic_title', 'bias', 'author_id', 'news_agency_id', 'content_type', 'tag_name']],
             [tagId]
         )
-        .then(function(response) {
+        .then((response) => {
             // console.log('latestLinks/result', response.json);
             dispatch(response.json.latestLinks);
         })
-        .catch(function(why){
+        .catch((why) => {
             // console.log('latestLinks/catch: ' + why);
         });
     },
-    fetchLatestLinks: function(){
-        var dispatch = function(links){
+    fetchLatestLinks (){
+        var dispatch = (links) => {
             AppDispatcher.handleServerAction({
                 actionType: ActionTypes.FETCH_LATEST_LINKS,
                 links: links
@@ -55,17 +98,17 @@ var LinkActions = {
         .get(
             ['latestLinks', {from: 0, to: 4}, ['id', 'title', 'url', 'user_id', 'user_name', 'topic_id', 'topic_title', 'bias', 'author_id', 'news_agency_id', 'content_type']]
         )
-        .then(function(response) {
+        .then((response) => {
             // console.log('latestLinks/result', response.json);
             dispatch(response.json.latestLinks);
         })
-        .catch(function(why){
+        .catch((why) => {
             // console.log('latestLinks/catch: ' + why);
         });
     },
-    fetchTopicLinks: function(topicId){
+    fetchTopicLinks (topicId){
         // console.log('fetchTopicLinks', topicId);
-        var dispatch = function(links){
+        var dispatch = (links) => {
             AppDispatcher.handleServerAction({
                 actionType: ActionTypes.FETCH_TOPIC_LINKS,
                 topicId: topicId,
@@ -78,11 +121,11 @@ var LinkActions = {
             ['linksByTopicId', {from: 0, to: 25}, ['id', 'title', 'url', 'user_id', 'user_name', 'topic_id', 'topic_title', 'bias', 'author_id', 'news_agency_id', 'content_type', 'created_at']],
             [topicId]
         )
-        .then(function(response) {
+        .then((response) => {
             // console.log('linksByTopicId', response.json);
             dispatch(response.json.latestLinks);
         })
-        .catch(function(why){
+        .catch((why) => {
             // console.log('linksByTopicId/catch: ' + why);
         });
     }

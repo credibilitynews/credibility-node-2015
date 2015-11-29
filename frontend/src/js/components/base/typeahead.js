@@ -101,13 +101,9 @@ class Typeahead extends React.Component {
     }
 
     _handleOptionSelected(value, item) {
+        // console.log(value, item);
         this.setState({selectedOption: item});
-        if(this.props.onChange) this.props.onChange({
-            target: {
-                name: this.props.name,
-                value: item.id
-            }
-        });
+        if(this.props.onChange) this.props.onChange(item);
 
     }
 }
