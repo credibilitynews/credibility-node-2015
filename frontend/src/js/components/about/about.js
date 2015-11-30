@@ -12,16 +12,16 @@ class AboutPage extends React.Component {
                     <h1>About</h1>
                     <blockquote>"Read both sides of the story"</blockquote>
                     <p>
-                        In this information overloaded age, news/articles are written and published by human authors. Aside from reporting facts, writings sometimes can be biased and opinionated, or even made up for some hidden agenda. We should always investigate the source of information, or even better, we shall read more from different perspectives to understand the issue better.
+                        In this information overloaded age, news/articles are written and published by human authors. Aside from reporting facts, writings sometimes can be biased and opinionated, or even made up for some hidden agenda. We should always investigate the source of information, and to understand a topic better, we shall view things from different perspectives/sides.
                     </p>
                     <p>
-                        <strong>Credibility</strong> project aims to contribute a space on the Internet to collect different stories from different perspectives/sides on particular controversial topics. Using technology, the project will be developed with more tools to ease the process of reviewing and overviewing articles, topics, publishers, or even related parties.
+                        <strong>Credibility</strong> project aims to contribute a space on the Internet to collect different stories from different perspectives/sides on controversial topics. Using technology, the project will be developed with more tools to ease the process of reviewing and overviewing articles, topics, publishers, and related parties.
                     </p>
                 </div>
                 <div className="line">
                     <h2>Story</h2>
                     <p>
-                        This project is started since 2013, after learning the news of <a href="https://en.wikipedia.org/wiki/Aaron_Swartz">Aaron Swartz</a>. This is a project specially tribute to him, for his contribution, inspiration to the Internet and human mankind.
+                        This project was started since 2013, after learning the news of <a href="https://en.wikipedia.org/wiki/Aaron_Swartz">Aaron Swartz</a>. This is a project specially tribute to him, for his contribution, inspiration to the Internet and human mankind.
                     </p>
                 </div>
                 <div className="line">

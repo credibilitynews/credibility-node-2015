@@ -9,7 +9,7 @@ class StoryTimeline extends React.Component {
         var links = this.props.links;
         return (
             <div className="story-timeline">
-                <div className="line">
+                <div className="stories">
                     <div>{this.renderStories(links)}</div>
                 </div>
             </div>
