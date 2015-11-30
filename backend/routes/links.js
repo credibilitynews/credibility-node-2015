@@ -133,47 +133,34 @@ module.exports = [
         }
     },
     {
-        route: 'fetchUrlMeta[\'title\', \'author\', \'image\', \'article\']',
+        route: 'fetchUrlMeta[\'title\', \'author\', \'image\', \'article\', \'hashtags\', \'polarity\', \'subjectivity\']',
         call: function(pathSet, args){
             return linkService
             .fetchUrlMeta(args[0])
             .then((meta) => {
-                console.log(meta);
                 var results = [];
                 var fields = pathSet[1];
 
                 fields.forEach((field) => {
                     results.push({
                         path: ['fetchUrlMeta', field],
-                        value: meta[field]
+                        value: meta.extract[field]
                     });
                 });
 
-                return results;
-            })
-            .catch(function(why){
-                console.log('routes/catch#fetchUrlMeta' + why + why.stack);
-            });
-        }
-    },
-    {
-        route: 'fetchTopicsFromUrl[\'hashtags\']',
-        call: function(pathSet, args){
-            return linkService
-            .fetchTopicsFromUrl(args[0])
-            .then((meta) => {
-                console.log(meta);
-                var results = [];
-                var fields = pathSet[1];
+                results.push({
+                    path: ['fetchUrlMeta', 'hashtags'],
+                    value: meta.hashtags.hashtags.slice(0, 5).join(' ')
+                });
 
-                if(meta.hashtags){
-                    meta.hashtags.forEach((hashtag, index) => {
-                        results.push({
-                            path: ['fetchTopicsFromUrl', 'hashtags', index],
-                            value: hashtag
-                        });
-                    });
-                }
+                results.push({
+                    path: ['fetchUrlMeta', 'polarity'],
+                    value: meta.sentiment.polarity + ' (' + meta.sentiment.polarity_confidence + ')'
+                });
+                results.push({
+                    path: ['fetchUrlMeta', 'subjectivity'],
+                    value: meta.sentiment.subjectivity + ' (' + meta.sentiment.subjectivity_confidence + ')'
+                });
 
                 return results;
             })
@@ -185,6 +172,8 @@ module.exports = [
     {
         route: 'postNewLink[\'id\', \'errors\']',
         call: function(pathSet, args){
+            console.log(args);
+
             return linkService
             .postNewLink(args[0], this.userId)
             .then((result) => {

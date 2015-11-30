@@ -189,19 +189,21 @@ LinkService.prototype = {
         return new Promise((resolve, reject) =>{
             var title = null;
             var topics = [];
-            textapi.extract({url: url, best_image: true}, (err, res) => {
-                if(err) reject(err);
-                resolve(res);
-            });
-        });
-    },
-    fetchTopicsFromUrl (url) {
-        return new Promise((resolve, reject) =>{
-            var title = null;
-            var topics = [];
-            textapi.hashtags({url: url}, (err, res) => {
-                if(err) reject(err);
-                resolve(res);
+            textapi.combined({
+                url: url,
+                best_image: true,
+                endpoint: ['extract', 'hashtags', 'sentiment'],
+                taxonomy: 'iab-qag'
+            }, (err, res) => {
+                console.log(err, res);
+                if(err) return reject(err);
+
+                var results = {};
+                res.results.forEach(function(r) {
+                    results[r.endpoint] = r.result;
+                });
+                console.log(results)
+                resolve(results);
             });
         });
     },
@@ -213,26 +215,31 @@ LinkService.prototype = {
                     topic_id: topic_id,
                     url: data.url,
                     title: data.title,
-                    user_id: userId
+                    user_id: userId,
+                    image_url: data.image_url,
+                    text_summary: data.text_summary,
+                    hashtags: data.hashtags
                 })
                 .then((link) => {
                     resolve({id: link.id});
                 })
                 .catch((why) => {
                     console.log('catch#postNewLink', why, why.stack);
-                    resolve({errors: why.message});
+                    resolve({errors: errorsToMessage(why)});
                 });
             }
             if(data.topic && data.topic.length > 0){
                 Topics.create({
-                    title: data.topic
+                    title: data.topic,
+                    user_id: userId,
+                    hashtags: data.hashtags
                 })
                 .then((topic) => {
                     createTopicLink(topic.id);
                 })
                 .catch((why) => {
-                    console.log('catch#postNewLink', why, why.stack);
-                    resolve({errors: why.message});
+                    console.log('catch#createTopic', why, why.stack);
+                    resolve({errors: errorsToMessage(why)});
                 });
             }else{
                 createTopicLink(data.topic_id);
@@ -241,6 +248,10 @@ LinkService.prototype = {
         });
     }
 };
+
+function errorsToMessage(why){
+    return why.message +': '+why.errors.map(e => e.message).join(', ');
+}
 
 const instance = new LinkService();
 instance.model = Links;

@@ -23,21 +23,9 @@ var LinkActions = {
         });
     },
 
-    fetchTopicsFromUrl (url, cb){
-        return model()
-        .call(['fetchTopicsFromUrl', ['hashtags']], [url])
-        .then((response) => {
-            // console.log(response);
-            cb(response.json.fetchTopicsFromUrl);
-        })
-        .catch((why)=>{
-            // console.log('actions/catch#fetchTopicsFromUrl', why, why.stack);
-        });
-    },
-
     fetchUrlMeta (url, cb){
         return model()
-        .call(['fetchUrlMeta', ['title', 'author', 'image', 'article']], [url])
+        .call(['fetchUrlMeta', ['title', 'author', 'image', 'article', 'hashtags', 'polarity', 'subjectivity']], [url])
         .then((response) => {
             // console.log(response);
             cb(response.json.fetchUrlMeta);

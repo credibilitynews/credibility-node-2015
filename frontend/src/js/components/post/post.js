@@ -11,6 +11,7 @@ import {create as createForm, formInputsSerialize} from 'react-form-layout';
 import FormField from 'components/base/form-field';
 import {environment} from 'react-router-component';
 import slug from 'slug';
+import cx from 'classnames';
 
 export default class Post extends React.Component {
     constructor(props, context){
@@ -31,7 +32,8 @@ export default class Post extends React.Component {
             meta: {},
             status: null,
             url: null,
-            showAll: false
+            showAll: false,
+            defaultValues: {}
         };
     }
 
@@ -43,8 +45,9 @@ export default class Post extends React.Component {
                 section('Add New Article',
                     [col(12, 'url')],
                     [col(12, 'title')],
+                    [col(12, 'hashtags')],
                     [col(4, 'author', 'publisher', 'published_date')],
-                    [hidden('image_url'), hidden('text_summary')]
+                    [hidden('image_url', this.state.meta.image), hidden('text_summary', this.state.meta.article)]
                 ),
                 section('Attach to Topic',
                     [col(12, 'topic')]
@@ -68,8 +71,11 @@ export default class Post extends React.Component {
                 section('Add New Article',
                     [col(12, 'url')],
                     [col(12, 'title')],
-
-                    [hidden('image_url'), hidden('text_summary')]
+                    [col(12, 'hashtags')],
+                    [
+                        hidden('author', this.state.defaultValues.author || this.state.meta.author),
+                        hidden('publisher'), hidden('published_date')],
+                    [hidden('image_url', this.state.meta.image), hidden('text_summary', this.state.meta.article)]
                 ),
                 section('Attach to Topic',
                     [col(12, 'topic')]
@@ -81,22 +87,25 @@ export default class Post extends React.Component {
     }
 
     getFieldProps (name) {
+        var desc;
+        if(this.state.meta.subjectivity)
+            desc = ' - subjectivity: '+ this.state.meta.subjectivity+', polarity: '+this.state.meta.polarity;
 
         return {
             url: {
                 type: 'text',
                 label: 'Article URL*',
-                defaultValue: this.state.url
+                defaultValue: this.state.defaultValues.url || this.state.url
             },
             title: {
                 type: 'text',
-                label: 'Article Title*',
-                defaultValue: this.state.meta.title
+                label: 'Article Title*'+desc,
+                defaultValue: this.state.defaultValues.title || this.state.meta.title
             },
             author: {
                 type: 'text',
                 label: 'Article Author',
-                defaultValue: this.state.meta.author
+                defaultValue: this.state.defaultValues.author || this.state.meta.author
             },
             publisher: {
                 type: 'text',
@@ -117,6 +126,10 @@ export default class Post extends React.Component {
             topic: {
                 type: 'text',
                 input: this.topicComponent()
+            },
+            hashtags: {
+                type: 'text',
+                defaultValue: this.state.meta.hashtags
             }
 
         }[name];
@@ -124,22 +137,18 @@ export default class Post extends React.Component {
 
     renderButtons() {
         return (
-        <div className="form-group pull-right text-right">
+        <div className="form-group">
             {this.state.meta.title ?
                 <div style={{marginBottom: '20px'}}>
                     <a onClick={this._toggleShowAll}>{this.state.showAll ? 'hide details...' : 'more details...'}</a>
                 </div> : <div />}
 
-            {this.state.status && this.state.status.length >0 ?
-                <span className="">
-                    {this.state.status}
-                </span> : <span />}
-            &nbsp;<button className="btn btn-default"
-                onClick={this._fetchUrlMeta}>Retrieve Article Information</button>&nbsp;
-            {this.state.url ? <button className="btn btn-primary"
-                onClick={this._addArticle}>Add Article</button>: <div />}&nbsp;
-
-
+            <div className="pull-right">
+                <button className="btn btn-info"
+                    onClick={this._fetchUrlMeta}>Retrieve Information from URL</button>&nbsp;
+                {this.state.url ? <button className="btn btn-primary"
+                    onClick={this._addArticle}>Add Article</button>: <div />}
+            </div>
         </div>);
     }
 
@@ -160,15 +169,39 @@ export default class Post extends React.Component {
 
     _toggleShowAll(e){
         if(e) e.preventDefault();
-        this.setState({showAll: !this.state.showAll});
+
+        var values = this.state.defaultValues;
+        if(this.state.showAll){
+            var form = ReactDOM.findDOMNode(this.refs.form.refs.form);
+            values = formInputsSerialize(form);
+        }
+
+        this.setState({showAll: !this.state.showAll, defaultValues: values});
     }
 
     render() {
         if(typeof user === 'undefined' && !this.props.user)
             return <UserLogin info="Please sign in to submit a link"/>;
 
+        var status = this.state.status || '';
+
+        var statusClass = cx({
+            'alert-danger': status.indexOf('error') > -1,
+            'alert-info': status.indexOf('error') == -1,
+            alert: this.state.status
+        });
+
         let Form = createForm(FormField, this.getFieldProps, this.getFullLayout, this.getShortLayout, this.renderButtons());
-        return <Form ref="form" showAll={this.state.showAll} defaultValues={this.state.defaultValues}/>;
+        return (
+            <div className="post">
+
+                {this.state.status && this.state.status.length >0 ?
+                    <div className={statusClass}>
+                        {this.state.status}
+                    </div> : <span />}
+
+                <Form ref="form" showAll={this.state.showAll} defaultValues={this.state.defaultValues}/>
+            </div>);
     }
 
     topicComponent () {
@@ -178,28 +211,34 @@ export default class Post extends React.Component {
                 super(props, context);
                 this._handleChange = this._handleChange.bind(this);
                 this._handleEdit = this._handleEdit.bind(this);
+
+                this.state = {
+                    topic: parent._topic
+                };
             }
             render() {
-                if(parent.state.topic)
+                if(this.state.topic)
                     return (<div className="form-group">
-                        <label>Related Topic <a onClick={this._handleEdit}>edit</a></label>
-                        <input type="hidden" name="topic_id" value={parent.state.topic.id} />
+                        <label>Related Topic* <a onClick={this._handleEdit}>edit</a></label>
+                        <input type="hidden" name="topic_id" value={this.state.topic.id} />
                         <input type="text" className="form-control"
-                            value={parent.state.topic.label} disabled/>
+                            value={this.state.topic.label} disabled/>
                         </div>);
 
                 return (
                 <div className="form-group">
-                    <label>Related Topic</label>
+                    <label>Related Topic*</label>
                     <Typeahead ref="topic" name="topic" className="form-control"
                         fetchOptionsAction={parent._fetchOptions} onChange={this._handleChange} />
                 </div>);
             }
             _handleEdit (){
-                parent.setState({topic: null});
+                parent._topic = null;
+                this.setState({topic: null});
             }
             _handleChange (topic){
-                parent.setState({topic: topic});
+                parent._topic = topic;
+                this.setState({topic: topic});
             }
         };
 
@@ -220,23 +259,10 @@ export default class Post extends React.Component {
         var url = values.url;
 
         if(url && url.length > 10){
-            // var fetchTopics = (url) => {
-            //     LinkActions.fetchTopicsFromUrl(url, (meta)=>{
-            //         var newMeta = assign(
-            //             this.state.meta,
-            //             {hashtags: arrayize(meta.hashtags)}
-            //         );
-            //         this.setState({meta: newMeta});
-            //     });
-            // }
-
             LinkActions.fetchUrlMeta(url, (meta)=>{
-                // console.log(meta);
-
                 this.setState({status: '', meta: meta || {title: ''}});
-                // fetchTopics(url);
             });
-            this.setState({url: url, meta: {}, status: 'Extracting information from article...'});
+            this.setState({url: url, meta: {}, defaultValues: {url: url}, status: 'Extracting information from article...'});
         }
     }
 }
