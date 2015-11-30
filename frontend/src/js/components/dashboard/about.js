@@ -10,8 +10,8 @@ class About extends React.Component {
                 <div className="panel-body">
                     <h2>About</h2>
                     <div className="summary">
-                        <div>Read both sides of the story.</div>
-                        <div><Link href="/post">Submit</Link> articles from different perspectives, share your views.</div>
+                        <blockquote>Read both sides of the story.</blockquote>
+                        <p><Link href="/post">Submit</Link> articles from different perspectives, share your views.</p>
                     </div>
                 </div>
             </div>

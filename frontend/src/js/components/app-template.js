@@ -12,7 +12,7 @@ class Template extends React.Component {
         return (
             <div>
                 <Header user={userDoc}/>
-                <div className="container-fluid content">
+                <div className="container content">
                     {this.props.children}
                 </div>
                 <Footer />

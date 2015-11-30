@@ -18,13 +18,14 @@ class StoryLink extends React.Component {
                     <a href={story.url} className="domain_name">
                         {decodeURI(story.url)}
                     </a>
-                    <span className="author">
-                        submitted by {story.user_name}
-                    </span>
-                    <span className="created_at">
-                        , {timeAgo(ts(story.created_at))}
-                    </span>
-
+                    <div className="details">
+                        <span className="author">
+                            submitted by {story.user_name}
+                        </span>
+                        <span className="created_at">
+                            , {timeAgo(ts(story.created_at))}
+                        </span>
+                    </div>
                 </div>
             </div>
         );

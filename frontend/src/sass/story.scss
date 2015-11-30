@@ -74,10 +74,10 @@
         padding: 15px;
 
         .title{
-            font-size: 1em;
+            font-size: 16px;
         }
         .domain_name{
-            color: #777;
+            color: #999;
             font-size: 12px;
             display: block;
             width: auto;
@@ -85,14 +85,17 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .author{
-            font-size: 12px;
-            font-style: italic;
-        }
-        .created_at{
-            color: #999;
-            font-size: 12px;
-            font-style: italic;
+        .details{
+            margin-top: 4px;
+            .author{
+                font-size: 12px;
+                font-style: italic;
+            }
+            .created_at{
+                color: #999;
+                font-size: 12px;
+                font-style: italic;
+            }
         }
     }
 }

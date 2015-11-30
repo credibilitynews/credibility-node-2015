@@ -42,7 +42,7 @@
 
         }
         small.meta{
-            color: #ccc;
+            color: #999;
             font-size: 12px;
         }
     }
@@ -67,5 +67,8 @@
     margin-top:10px;
     .summary {
         font-size: 12px;
+    }
+    blockquote{
+        font-style: italic;
     }
 }

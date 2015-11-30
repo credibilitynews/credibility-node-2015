@@ -13,12 +13,12 @@
     .category-group {
         display: flex;
         flex-flow: row wrap;
+        font-size: 14px;
         .child {
             flex-basis: auto;
         }
     }
     .child{
-
         font-size: 12px;
     }
     .category-link{
