@@ -5,6 +5,10 @@ import Immutable from "immutable";
 import { ReduceStore } from "flux/utils";
 
 class LatestLinksStore extends ReduceStore {
+  getInitialState() {
+    return Immutable.OrderedMap();
+  }
+
   getAllLinks() {
     return this.getState().toArray();
   }

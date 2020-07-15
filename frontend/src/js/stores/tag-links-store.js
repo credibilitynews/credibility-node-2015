@@ -5,6 +5,10 @@ import Immutable from "immutable";
 import { ReduceStore } from "flux/utils";
 
 class TagLinksStore extends ReduceStore {
+  getInitialState() {
+    return Immutable.OrderedMap();
+  }
+
   getAllLinks(tagId) {
     const links = this.getState().get(tagId);
     return links ? links.toArray() : [];

@@ -5,6 +5,10 @@ import Immutable from "immutable";
 import { ReduceStore } from "flux/utils";
 
 class LinkStore extends ReduceStore {
+  getInitialState() {
+    return Immutable.OrderedMap();
+  }
+
   getLinkById(storyId) {
     // console.log('getLinkById', this.getState().get(parseInt(storyId)));
     return this.getState().get(parseInt(storyId));
