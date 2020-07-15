@@ -5,14 +5,14 @@ import { PayloadSources } from "../constants/app-constants";
 
 Dispatcher.prototype = assign(Dispatcher.prototype, {
   handleViewAction(action) {
-    console.log("dispatch view");
+    // console.log("dispatch view");
     this.dispatch({
       source: PayloadSources.VIEW_ACTION,
       action,
     });
   },
   handleServerAction(action) {
-    console.log("dispatch server");
+    // console.log("dispatch server");
     this.dispatch({
       source: PayloadSources.SERVER_ACTION,
       action,

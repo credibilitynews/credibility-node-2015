@@ -47,7 +47,7 @@ class TopMenu extends React.Component {
   }
 
   _handleStoreChange() {
-    console.log("_handleStoreChange", CategoryStore.getTopCategories());
+    // console.log("_handleStoreChange", CategoryStore.getTopCategories());
     this.setState({ items: CategoryStore.getTopCategories() });
   }
 }

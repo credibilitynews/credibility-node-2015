@@ -36,7 +36,7 @@ class TopicStatsStore extends ReduceStore {
   }
 
   reduce(state, payload) {
-    console.log(state, payload);
+    // console.log(state, payload);
     const { action } = payload;
 
     switch (action.actionType) {
