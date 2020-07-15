@@ -1,39 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
     <meta name="title" content="Credibility - Read both sides of the story." />
-    <meta name="description" content="Read and contribute stories from different perspectives in various controversial topics." />
-    <meta name="mobile-web-app-capable" content="yes">
+    <meta
+      name="description"
+      content="Read and contribute stories from different perspectives in various controversial topics."
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
 
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
-    <link rel="stylesheet" media="screen" href="/css/bundle.css">
+    <link rel="stylesheet" media="screen" href="/css/bundle.css" />
 
-    <link rel="apple-touch-icon" href="/icons/touch-icon-iphone.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/icons/touch-icon-ipad.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/icons/touch-icon-iphone-retina.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/icons/touch-icon-ipad-retina.png">
+    <link rel="apple-touch-icon" href="/icons/touch-icon-iphone.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="/icons/touch-icon-ipad.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="/icons/touch-icon-iphone-retina.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="/icons/touch-icon-ipad-retina.png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <title>Credibility project</title>
-</head>
-<body>
+  </head>
+  <body>
     <% if(validation) { %>
-        <script>var validation = <%-JSON.stringify(validation) %></script>
+    <script>
+      var validation = <%-JSON.stringify(validation) %>
+    </script>
+    <% } %> <% if(error) { %>
+    <script>
+      var error = <%-JSON.stringify(error) %>
+    </script>
+    <% } %> <% if(success) { %>
+    <script>
+      var success = <%-JSON.stringify(success) %>
+    </script>
+    <% } %> <% if(user) { %>
+    <script>
+      var user = <%-JSON.stringify(user) %>
+    </script>
     <% } %>
-    <% if(error) { %>
-        <script>var error = <%-JSON.stringify(error) %></script>
-    <% } %>
-    <% if(success) { %>
-        <script>var success = <%-JSON.stringify(success) %></script>
-    <% } %>
-    <% if(user) { %>
-        <script>var user = <%-JSON.stringify(user) %></script>
-    <% } %>
-    <div id="credibility"><%- reactOutput %></div>
+    <div id="credibility"></div>
     <script src="/js/bundle.js"></script>
-</body>
+  </body>
 </html>
