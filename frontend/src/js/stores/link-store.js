@@ -1,10 +1,10 @@
-import AppDispatcher from 'dispatchers/app-dispatcher';
-import { ActionTypes } from 'constants/app-constants';
+import AppDispatcher from "dispatchers/app-dispatcher";
+import { ActionTypes } from "constants/app-constants";
 
-import Immutable from 'immutable';
-import { MapStore } from 'flux/utils';
+import Immutable from "immutable";
+import { ReduceStore } from "flux/utils";
 
-class LinkStore extends MapStore {
+class LinkStore extends ReduceStore {
   getLinkById(storyId) {
     // console.log('getLinkById', this.getState().get(parseInt(storyId)));
     return this.getState().get(parseInt(storyId));

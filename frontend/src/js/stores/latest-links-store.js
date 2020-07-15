@@ -1,10 +1,10 @@
-import AppDispatcher from 'dispatchers/app-dispatcher';
-import { ActionTypes } from 'constants/app-constants';
+import AppDispatcher from "dispatchers/app-dispatcher";
+import { ActionTypes } from "constants/app-constants";
 
-import Immutable from 'immutable';
-import { MapStore } from 'flux/utils';
+import Immutable from "immutable";
+import { ReduceStore } from "flux/utils";
 
-class LatestLinksStore extends MapStore {
+class LatestLinksStore extends ReduceStore {
   getAllLinks() {
     return this.getState().toArray();
   }
