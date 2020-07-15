@@ -18,6 +18,7 @@ examples/shared/*.js
 test/the-files-to-test.generated.js
 *.log*
 chrome-user-data
+backend/dist/
 backend/public/js
 backend/public/css
 frontend/vendor/bower_components

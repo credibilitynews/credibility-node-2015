@@ -1,31 +1,10 @@
 {
-    "extends": "eslint:recommended",
-    "rules": {
-        "indent": 2,
-        "no-unused-vars": [2, {"vars": "all", "args": "none"}],
-        "quotes": [2,"single"],
-        "semi": [2, "always"],
-        "no-mixed-spaces-and-tabs": 2,
-        "quote-props": [2, "as-needed", {"numbers": true}],
-        "dot-notation": 2
-    },
-
-    "ecmaFeatures": {
-        "jsx": true,
-        "modules": true,
-        "experimentalObjectRestSpread": true,
-        "templateStrings": true,
-        "superInFunctions": true,
-        "arrowFunctions": true,
-        "forOf": true,
-        "destructuring": true,
-        "defaultParams": true,
-        "classes": true,
-        "blockBindings": true,
-        "binaryLiterals": true
-
-    },
-    "plugins": [
-        "react"
-    ]
+  "extends": ["airbnb"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["frontend/src/js"]
+      }
+    }
+  }
 }
