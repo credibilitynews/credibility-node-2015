@@ -28,8 +28,8 @@ class Activity extends React.Component {
   render() {
     return (
       <div className="activity">
-        <span className="label label-primary">News</span>{" "}
-        <small className="label meta pull-right">
+        <span className="badge badge-primary">News</span>{" "}
+        <small className="badge meta pull-right">
           <i>{this.props.article.user_name}</i>
         </small>
         <div>

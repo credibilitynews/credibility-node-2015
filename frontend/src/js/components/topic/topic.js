@@ -62,7 +62,7 @@ class Topic extends React.Component {
           </div>
           <div className="timeline">
             <ul className="nav nav-tabs">
-              <li className="nav-item">
+              <li className="nav-item nav-link">
                 <a
                   className={classes("timeline")}
                   onClick={onClick("timeline")}
@@ -70,17 +70,17 @@ class Topic extends React.Component {
                   Timeline
                 </a>
               </li>
-              <li className="nav-item">
+              <li className="nav-item nav-link">
                 <a className={classes("left")} onClick={onClick("left")}>
                   Left
                 </a>
               </li>
-              <li className="nav-item">
+              <li className="nav-item nav-link">
                 <a className={classes("unknown")} onClick={onClick("unknown")}>
                   Unknown
                 </a>
               </li>
-              <li className="nav-item">
+              <li className="nav-item nav-link">
                 <a className={classes("right")} onClick={onClick("right")}>
                   Right
                 </a>

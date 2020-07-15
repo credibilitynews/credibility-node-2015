@@ -30,7 +30,7 @@ class TopMenu extends React.Component {
     return (
       <div className="top-menu">
         <ul className="nav nav-pills">
-          <li className="nav-item">Popular Tags: </li>
+          <li className="nav-item nav-link">Popular Tags: </li>
           {this.renderItem(this.state.items)}
         </ul>
       </div>
@@ -39,7 +39,7 @@ class TopMenu extends React.Component {
 
   renderItem(items) {
     return items.map((item) => (
-      <li key={item.code} className="nav-item">
+      <li key={item.code} className="nav-item nav-link">
         <TagLink link={item}>{item.name}</TagLink>
       </li>
     ));

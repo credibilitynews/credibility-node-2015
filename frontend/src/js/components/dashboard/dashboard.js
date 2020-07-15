@@ -39,15 +39,11 @@ class Dashboard extends React.Component {
         </div>
 
         <div className="col-xs-12 col-md-8">
-          <div className="row">
-            <div className="col-xs-12">
-              <Locations path={this.props.url}>
-                <Location path="/tags/:tagId/:slug" handler={TaggedList} />
-                <Location path="/stories/:storyId/:slug" handler={Story} />
-                <NotFound handler={ActivityList} />
-              </Locations>
-            </div>
-          </div>
+          <Locations path={this.props.url}>
+            <Location path="/tags/:tagId/:slug" handler={TaggedList} />
+            <Location path="/stories/:storyId/:slug" handler={Story} />
+            <NotFound handler={ActivityList} />
+          </Locations>
         </div>
         <div className="col-md-4 col-xs-12 right-sidebar">
           <RecentTopics />
