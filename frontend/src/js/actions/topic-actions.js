@@ -3,6 +3,7 @@ import model from "../falcor-model";
 import { arrayize } from "utils/object";
 import { ActionTypes } from "../constants/app-constants";
 import AppDispatcher from "../dispatchers/app-dispatcher";
+import App from "../components/app";
 
 const TopicActions = {
   searchTopic(query, cb) {
@@ -26,16 +27,21 @@ const TopicActions = {
       ])
       .then((response) => {
         // console.log('result/fetchTopicsById', ids, response.json);
-        AppDispatcher.handleServerAction({
-          actionType: ActionTypes.FETCH_TOPICS_BY_ID,
-          topics: response.json.topicsById,
-        });
+        // FIXME
+        setTimeout(
+          () =>
+            AppDispatcher.handleServerAction({
+              actionType: ActionTypes.FETCH_TOPICS_BY_ID,
+              topics: response.json.topicsById,
+            }),
+          0
+        );
       })
       .catch((why) => {
         // console.log('topicsById/catch', why);
       });
   },
-  fetchLatestTopics() {
+  fetchLatestTopics(store) {
     return model()
       .get([
         "latestTopics",
@@ -43,11 +49,15 @@ const TopicActions = {
         ["id", "title", "hashtag", "created_at", "views", "user_id"],
       ])
       .then((response) => {
-        console.log("result/fetchLatestTopics", response.json);
-        AppDispatcher.handleServerAction({
-          actionType: ActionTypes.FETCH_RECENT_TOPICS,
-          topics: response.json.latestTopics,
-        });
+        // FIXME: dispatch in dispatch
+        setTimeout(
+          () =>
+            AppDispatcher.handleServerAction({
+              actionType: ActionTypes.FETCH_RECENT_TOPICS,
+              topics: response.json.latestTopics,
+            }),
+          0
+        );
       })
       .catch((why) => {
         // console.log('latestTopics/catch', why);

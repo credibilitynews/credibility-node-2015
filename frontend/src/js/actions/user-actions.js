@@ -10,10 +10,15 @@ const UserActions = {
       .get(["usersById", ids, ["id", "name", "email", "active", "created_at"]])
       .then((response) => {
         // console.log('fetchUsersById/result', ids, response.json);
-        AppDispatcher.handleServerAction({
-          actionType: ActionTypes.FETCH_USERS_BY_ID,
-          users: response.json.usersById,
-        });
+        // FIXME
+        setTimeout(
+          () =>
+            AppDispatcher.handleServerAction({
+              actionType: ActionTypes.FETCH_USERS_BY_ID,
+              users: response.json.usersById,
+            }),
+          0
+        );
       })
       .catch((why) => {
         // console.log('usersById/error', why);

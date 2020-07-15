@@ -9,12 +9,18 @@ class RecentTopics extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.listeners = [];
-    this.handleStoreChange = this.handleStoreChange.bind(this);
 
     this.state = {
       topics: TopicStore.getLatestTopics(),
     };
   }
+
+  handleStoreChange = () => {
+    // console.log("changed", TopicStore.getLatestTopics());
+    this.setState({
+      topics: TopicStore.getLatestTopics(),
+    });
+  };
 
   componentWillMount() {
     this.listeners.push(TopicStore.addListener(this.handleStoreChange));
@@ -25,7 +31,8 @@ class RecentTopics extends React.Component {
   }
 
   componentDidMount() {
-    if (this.state.topics.length === 0) TopicActions.fetchLatestTopics();
+    if (this.state.topics.length === 0)
+      TopicActions.fetchLatestTopics(TopicStore);
   }
 
   render() {
@@ -42,18 +49,11 @@ class RecentTopics extends React.Component {
 
   renderTopics(items) {
     if (!items) return <div />;
-    return items.map(([id, item]) => (
+    return items.map((item) => (
       <div key={item.id} className="topic-link">
         <TopicStats topic={item} />
       </div>
     ));
-  }
-
-  handleStoreChange() {
-    console.log("changed", TopicStore.getLatestTopics());
-    this.setState({
-      topics: TopicStore.getLatestTopics(),
-    });
   }
 }
 

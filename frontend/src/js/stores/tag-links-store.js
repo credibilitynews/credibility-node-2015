@@ -11,7 +11,7 @@ class TagLinksStore extends ReduceStore {
 
   getAllLinks = (tagId) => {
     const links = this.getState().get(tagId);
-    return links ? links.toArray() : [];
+    return links ? links.toArray().map((i) => i[1]) : [];
   };
 
   reduce(state, payload) {

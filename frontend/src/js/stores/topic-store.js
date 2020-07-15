@@ -29,11 +29,15 @@ class TopicStore extends ReduceStore {
   };
 
   getAllTopics = () => {
-    return this.getState().topics.toArray();
+    return this.getState()
+      .topics.toArray()
+      .map((i) => i[1]);
   };
 
   getLatestTopics = () => {
-    return this.getState().recentTopics.toArray();
+    return this.getState()
+      .recentTopics.toArray()
+      .map((i) => i[1]);
   };
 
   reduce(state, payload) {
@@ -48,7 +52,6 @@ class TopicStore extends ReduceStore {
         };
 
       case ActionTypes.FETCH_RECENT_TOPICS:
-        console.log("called");
         return {
           ...state,
           recentTopics: addTopics(
@@ -59,7 +62,7 @@ class TopicStore extends ReduceStore {
       default:
       // do nothing
     }
-    return true;
+    return state;
   }
 }
 

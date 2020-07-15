@@ -11,7 +11,7 @@ class LatestLinksStore extends ReduceStore {
 
   getAllLinks = (topicId) => {
     const links = this.getState().get(parseInt(topicId));
-    return links ? links.toArray() : [];
+    return links ? links.toArray().map((i) => i[1]) : [];
   };
 
   reduce(state, payload) {

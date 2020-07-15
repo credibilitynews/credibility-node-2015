@@ -31,11 +31,15 @@ class CategoryStore extends ReduceStore {
   };
 
   getAllCategories = () => {
-    return this.getState().categories.toArray();
+    return this.getState()
+      .categories.toArray()
+      .map((i) => i[1]);
   };
 
   getTopCategories = () => {
-    return this.getState().topCategories.toArray();
+    return this.getState()
+      .topCategories.toArray()
+      .map((i) => i[1]);
   };
 
   reduce(state, payload) {

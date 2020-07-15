@@ -60,6 +60,7 @@ class ActivityList extends React.Component {
   }
 
   handleStoreChange() {
+    // console.log(LatestLinksStore.getAllLinks());
     this.setState({
       articles: LatestLinksStore.getAllLinks(),
     });

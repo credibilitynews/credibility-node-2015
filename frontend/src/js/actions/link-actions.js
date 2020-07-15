@@ -119,7 +119,7 @@ const LinkActions = {
       )
       .then((response) => {
         // console.log('latestLinks/result', response.json);
-        dispatch(response.json.latestLinks);
+        setTimeout(() => dispatch(response.json.latestLinks), 0);
       })
       .catch((why) => {
         // console.log('latestLinks/catch: ' + why);
@@ -153,7 +153,8 @@ const LinkActions = {
       ])
       .then((response) => {
         // console.log('latestLinks/result', response.json);
-        dispatch(response.json.latestLinks);
+        // FIXME
+        setTimeout(() => dispatch(response.json.latestLinks), 0);
       })
       .catch((why) => {
         // console.log('latestLinks/catch: ' + why);
@@ -193,7 +194,7 @@ const LinkActions = {
       )
       .then((response) => {
         // console.log('linksByTopicId', response.json);
-        dispatch(response.json.latestLinks);
+        setTimeout(() => dispatch(response.json.latestLinks), 0);
       })
       .catch((why) => {
         // console.log('linksByTopicId/catch: ' + why);

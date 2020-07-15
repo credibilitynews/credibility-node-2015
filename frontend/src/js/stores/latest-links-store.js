@@ -10,7 +10,9 @@ class LatestLinksStore extends ReduceStore {
   }
 
   getAllLinks = () => {
-    return this.getState().toArray();
+    return this.getState()
+      .toArray()
+      .map((i) => i[1]);
   };
 
   reduce(state, payload) {

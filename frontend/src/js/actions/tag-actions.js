@@ -9,10 +9,15 @@ export const fetchAllTags = () => {
       .get(["tags", { length }, ["id", "name", "code", "parent_id"]])
       .then((response) => {
         // console.log(response.json);
-        AppDispatcher.handleServerAction({
-          actionType: ActionTypes.FETCH_ALL_TAGS,
-          tags: response.json.tags,
-        });
+        // FIXME
+        setTimeout(
+          () =>
+            AppDispatcher.handleServerAction({
+              actionType: ActionTypes.FETCH_ALL_TAGS,
+              tags: response.json.tags,
+            }),
+          0
+        );
       })
       .catch((why) => {
         // console.log('tags', why);
@@ -37,10 +42,15 @@ export const fetchTopTags = () =>
       ["id", "name", "code", "parent_id", "topic_count"],
     ])
     .then((response) => {
-      AppDispatcher.handleServerAction({
-        actionType: ActionTypes.FETCH_TOP_TAGS,
-        topTags: response.json.topTags,
-      });
+      // FIXME
+      setTimeout(
+        () =>
+          AppDispatcher.handleServerAction({
+            actionType: ActionTypes.FETCH_TOP_TAGS,
+            topTags: response.json.topTags,
+          }),
+        0
+      );
     })
     .catch((why) => {
       // console.log('topTags', why);
