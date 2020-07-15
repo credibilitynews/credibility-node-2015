@@ -9,10 +9,10 @@ class TagLinksStore extends ReduceStore {
     return Immutable.OrderedMap();
   }
 
-  getAllLinks(tagId) {
+  getAllLinks = (tagId) => {
     const links = this.getState().get(tagId);
     return links ? links.toArray() : [];
-  }
+  };
 
   reduce(state, payload) {
     const { action } = payload;

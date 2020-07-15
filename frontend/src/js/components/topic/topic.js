@@ -8,14 +8,12 @@ import TopicActions from "actions/topic-actions";
 import TopicLinksStore from "stores/topic-links-store";
 import LinkActions from "actions/link-actions";
 
-import { preFetchable, preFetchableDestructor, makePipe } from "pre-fetchable";
-
 class Topic extends React.Component {
   constructor(props, context) {
     super(props, context);
     this._listeners = [];
-    this._handleTopicChange = this._handleTopicChange.bind(this);
-    this._handleLinksChange = this._handleLinksChange.bind(this);
+    this.handleTopicChange = this.handleTopicChange.bind(this);
+    this.handleLinksChange = this.handleLinksChange.bind(this);
     this.renderTab = this.renderTab.bind(this);
 
     this.state = {
@@ -26,9 +24,9 @@ class Topic extends React.Component {
   }
 
   componentWillMount() {
-    TopicStore.addListener(this._handleTopicChange);
+    TopicStore.addListener(this.handleTopicChange);
 
-    this._listeners.push(TopicLinksStore.addListener(this._handleLinksChange));
+    this._listeners.push(TopicLinksStore.addListener(this.handleLinksChange));
   }
 
   componentWillUnmount() {
@@ -38,7 +36,7 @@ class Topic extends React.Component {
   componentDidMount() {
     if (!this.state.topic) TopicActions.fetchTopicsById(this.props.topicId);
 
-    if (!this.state.links || this.state.links.length == 0)
+    if (!this.state.links || this.state.links.length === 0)
       LinkActions.fetchTopicLinks(this.props.topicId);
   }
 
@@ -47,7 +45,7 @@ class Topic extends React.Component {
 
     const classes = (type) =>
       cx({
-        "nav-link active": this.state.showing == type,
+        "nav-link active": this.state.showing === type,
         "nav-link": true,
       });
     const onClick = (type) => (e) => {
@@ -102,13 +100,13 @@ class Topic extends React.Component {
       case "left":
         return (
           <StoryTimeline
-            links={this.state.links.filter((link) => link.bias == 1)}
+            links={this.state.links.filter((link) => link.bias === 1)}
           />
         );
       case "right":
         return (
           <StoryTimeline
-            links={this.state.links.filter((link) => link.bias == 2)}
+            links={this.state.links.filter((link) => link.bias === 2)}
           />
         );
       case "unknown":
@@ -126,24 +124,20 @@ class Topic extends React.Component {
     }
   }
 
-  _handleTopicChange() {
+  handleTopicChange() {
     const topic = TopicStore.getTopic(this.props.topicId);
     this.setState({ topic });
   }
 
-  _handleLinksChange() {
+  handleLinksChange() {
     this.setState({
       links: TopicLinksStore.getAllLinks(this.props.topicId),
     });
   }
 
-  _handleToggle() {
+  handleToggle() {
     this.setState({ summaryShown: !this.state.summaryShown });
   }
 }
 
-export default preFetchable(
-  Topic,
-  makePipe(TopicActions.fetchTopicsById, LinkActions.fetchTopicLinks),
-  preFetchableDestructor(Topic)
-);
+export default Topic;

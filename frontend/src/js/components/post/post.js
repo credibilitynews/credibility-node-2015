@@ -1,16 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import UserLogin from 'components/user/user-login';
-import LinkActions from 'actions/link-actions';
-import TopicActions from 'actions/topic-actions';
+import React from "react";
+import ReactDOM from "react-dom";
+import UserLogin from "components/user/user-login";
+import LinkActions from "actions/link-actions";
+import TopicActions from "actions/topic-actions";
 
-import Typeahead from 'components/base/typeahead';
+import Typeahead from "components/base/typeahead";
 
-import { create as createForm, formInputsSerialize } from 'react-form-layout';
-import FormField from 'components/base/form-field';
-import { environment } from 'react-router-component';
-import slug from 'slug';
-import cx from 'classnames';
+import { create as createForm, formInputsSerialize } from "react-form-layout";
+import FormField from "components/base/form-field";
+import { environment } from "react-router-component";
+import slug from "slug";
+import cx from "classnames";
 
 export default class Post extends React.Component {
   constructor(props, context) {
@@ -36,124 +36,117 @@ export default class Post extends React.Component {
     };
   }
 
-  getFullLayout(builder, props) {
-    const {
-      layout, section, col, hidden,
-    } = builder;
+  getFullLayout = (builder, props) => {
+    const { layout, section, col, hidden } = builder;
 
     if (this.state.meta.title) {
       return layout(
         props,
         section(
-          'Add New Article',
-          [col(12, 'url')],
-          [col(12, 'title')],
-          [col(12, 'hashtags')],
-          [col(4, 'author', 'publisher', 'published_date')],
+          "Add New Article",
+          [col(12, "url")],
+          [col(12, "title")],
+          [col(12, "hashtags")],
+          [col(4, "author", "publisher", "published_date")],
           [
-            hidden('image_url', this.state.meta.image),
-            hidden('text_summary', this.state.meta.article),
-          ],
+            hidden("image_url", this.state.meta.image),
+            hidden("text_summary", this.state.meta.article),
+          ]
         ),
-        section('Attach to Topic', [col(12, 'topic')]),
+        section("Attach to Topic", [col(12, "topic")])
       );
     }
 
-    return layout(props, section('Add New Article', [col(12, 'url')]));
-  }
+    return layout(props, section("Add New Article", [col(12, "url")]));
+  };
 
-  getShortLayout(builder, props) {
-    const {
-      layout, section, col, hidden,
-    } = builder;
+  getShortLayout = (builder, props) => {
+    const { layout, section, col, hidden } = builder;
 
     if (this.state.meta.title) {
       return layout(
         props,
         section(
-          'Add New Article',
-          [col(12, 'url')],
-          [col(12, 'title')],
-          [col(12, 'hashtags')],
+          "Add New Article",
+          [col(12, "url")],
+          [col(12, "title")],
+          [col(12, "hashtags")],
           [
             hidden(
-              'author',
-              this.state.defaultValues.author || this.state.meta.author,
+              "author",
+              this.state.defaultValues.author || this.state.meta.author
             ),
-            hidden('publisher'),
-            hidden('published_date'),
+            hidden("publisher"),
+            hidden("published_date"),
           ],
           [
-            hidden('image_url', this.state.meta.image),
-            hidden('text_summary', this.state.meta.article),
-          ],
+            hidden("image_url", this.state.meta.image),
+            hidden("text_summary", this.state.meta.article),
+          ]
         ),
-        section('Attach to Topic', [col(12, 'topic')]),
+        section("Attach to Topic", [col(12, "topic")])
       );
     }
 
     return this.getFullLayout(builder, props);
-  }
+  };
 
-  getFieldProps(name) {
+  getFieldProps = (name) => {
     let desc;
     if (this.state.meta.subjectivity) {
-      desc = ` - subjectivity: ${
-        this.state.meta.subjectivity
-      }, polarity: ${
-        this.state.meta.polarity}`;
+      desc = ` - subjectivity: ${this.state.meta.subjectivity}, polarity: ${this.state.meta.polarity}`;
     }
 
     return {
       url: {
-        type: 'text',
-        label: 'Article URL*',
+        type: "text",
+        label: "Article URL*",
         defaultValue: this.state.defaultValues.url || this.state.url,
       },
       title: {
-        type: 'text',
+        type: "text",
         label: `Article Title*${desc}`,
         defaultValue: this.state.defaultValues.title || this.state.meta.title,
       },
       author: {
-        type: 'text',
-        label: 'Article Author',
+        type: "text",
+        label: "Article Author",
         defaultValue: this.state.defaultValues.author || this.state.meta.author,
       },
       publisher: {
-        type: 'text',
-        label: 'Article Publisher',
+        type: "text",
+        label: "Article Publisher",
       },
       published_date: {
-        type: 'date',
-        label: 'Article Published Date',
+        type: "date",
+        label: "Article Published Date",
       },
       image_url: {
-        type: 'hidden',
+        type: "hidden",
         defaultValue: this.state.meta.image,
       },
       text_summary: {
-        type: 'hidden',
+        type: "hidden",
         defaultValue: this.state.meta.article,
       },
       topic: {
-        type: 'text',
+        type: "text",
         input: this.topicComponent(),
       },
       hashtags: {
-        type: 'text',
+        type: "text",
         defaultValue: this.state.meta.hashtags,
       },
     }[name];
-  }
+  };
 
   renderButtons() {
     return (
       <div className="form-group">
         {this.state.meta.title ? (
-          <div style={{ marginBottom: '20px' }}>
+          <div style={{ marginBottom: "20px" }}>
             <a onClick={this._toggleShowAll}>
-              {this.state.showAll ? 'hide details...' : 'more details...'}
+              {this.state.showAll ? "hide details..." : "more details..."}
             </a>
           </div>
         ) : (
@@ -186,7 +179,7 @@ export default class Post extends React.Component {
       // console.log(res);
       if (res.id) {
         environment.defaultEnvironment.navigate(
-          `/stories/${res.id}/${slug(values.title)}`,
+          `/stories/${res.id}/${slug(values.title)}`
         );
       } else {
         this.setState({ status: res.errors });
@@ -207,13 +200,14 @@ export default class Post extends React.Component {
   }
 
   render() {
-    if (typeof user === 'undefined' && !this.props.user) return <UserLogin info="Please sign in to submit a link" />;
+    if (typeof user === "undefined" && !this.props.user)
+      return <UserLogin info="Please sign in to submit a link" />;
 
-    const status = this.state.status || '';
+    const status = this.state.status || "";
 
     const statusClass = cx({
-      'alert-danger': status.indexOf('error') > -1,
-      'alert-info': status.indexOf('error') == -1,
+      "alert-danger": status.indexOf("error") > -1,
+      "alert-info": status.indexOf("error") === -1,
       alert: this.state.status,
     });
 
@@ -222,7 +216,7 @@ export default class Post extends React.Component {
       this.getFieldProps,
       this.getFullLayout,
       this.getShortLayout,
-      this.renderButtons(),
+      this.renderButtons()
     );
     return (
       <div className="post">
@@ -246,8 +240,8 @@ export default class Post extends React.Component {
     return class extends React.Component {
       constructor(props, context) {
         super(props, context);
-        this._handleChange = this._handleChange.bind(this);
-        this._handleEdit = this._handleEdit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleEdit = this.handleEdit.bind(this);
 
         this.state = {
           topic: parent._topic,
@@ -259,9 +253,7 @@ export default class Post extends React.Component {
           return (
             <div className="form-group">
               <label>
-                Related Topic*
-                {' '}
-                <a onClick={this._handleEdit}>edit</a>
+                Related Topic* <a onClick={this.handleEdit}>edit</a>
               </label>
               <input
                 type="hidden"
@@ -286,18 +278,18 @@ export default class Post extends React.Component {
               name="topic"
               className="form-control"
               fetchOptionsAction={parent._fetchOptions}
-              onChange={this._handleChange}
+              onChange={this.handleChange}
             />
           </div>
         );
       }
 
-      _handleEdit() {
+      handleEdit() {
         parent._topic = null;
         this.setState({ topic: null });
       }
 
-      _handleChange(topic) {
+      handleChange(topic) {
         parent._topic = topic;
         this.setState({ topic });
       }
@@ -312,7 +304,7 @@ export default class Post extends React.Component {
           id: item.id,
           label: item.title,
           value: `${item.id}`,
-        })) || [],
+        })) || []
       );
     });
   }
@@ -327,13 +319,13 @@ export default class Post extends React.Component {
 
     if (url && url.length > 10) {
       LinkActions.fetchUrlMeta(url, (meta) => {
-        this.setState({ status: '', meta: meta || { title: '' } });
+        this.setState({ status: "", meta: meta || { title: "" } });
       });
       this.setState({
         url,
         meta: {},
         defaultValues: { url },
-        status: 'Extracting information from article...',
+        status: "Extracting information from article...",
       });
     }
   }

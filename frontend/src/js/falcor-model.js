@@ -1,7 +1,7 @@
-import falcor from 'falcor';
-import Promise from 'promise';
-import AppDispatcher from 'dispatchers/app-dispatcher';
-import HttpDataSource from 'falcor-http-datasource';
+import falcor from "falcor";
+import Promise from "promise";
+import AppDispatcher from "dispatchers/app-dispatcher";
+import HttpDataSource from "falcor-http-datasource";
 
 let _promises = [];
 let _prepareForHydration = false;
@@ -16,27 +16,27 @@ function tap(context, fn, cb) {
 
 let _model;
 const FalcorModel = function () {
-  if (!_model && typeof window === 'undefined') {
-    const userDoc = typeof user === 'undefined' ? null : user;
+  if (!_model && typeof window === "undefined") {
+    const userDoc = typeof user === "undefined" ? null : user;
     _model = new falcor.Model({
-      source: require('../../../backend/router-factory')(userDoc),
+      source: require("../../../backend/router-factory")(userDoc),
     });
   } else if (!_model) {
-    _model = new falcor.Model({ source: new HttpDataSource('/model.json') });
+    _model = new falcor.Model({ source: new HttpDataSource("/model.json") });
   }
 
   if (_prepareForHydration) {
-    ['get', 'getValue', 'set', 'setValue', 'call'].forEach((method) => {
+    ["get", "getValue", "set", "setValue", "call"].forEach((method) => {
       _model[method] = tap(_model, _model[method], (promise) => {
         if (_prepareForHydration) _promises.push(promise);
 
         Promise.all([promise])
           .then(() => {
-          // console.log('done model#'+method);
+            // console.log('done model#'+method);
             _promises.splice(_promises.indexOf(promise), 1);
           })
           .catch((why) => {
-          // console.log('error model#'+method, why);
+            // console.log('error model#'+method, why);
             _promises.splice(_promises.indexOf(promise), 1);
           });
       });
@@ -70,13 +70,14 @@ FalcorModel.hydrate = function () {
     };
   };
 
-  return new Promise(((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     // console.log('hydrate', _promises.length);
-    if (_promises.length == 0) return resolve();
+    if (_promises.length === 0) return resolve();
 
-    if (!_prepareForHydration) reject('Please make sure you have called prepareForHydration()');
+    if (!_prepareForHydration)
+      reject("Please make sure you have called prepareForHydration()");
     else Promise.all(_promises).then(postHydrate(resolve));
-  }));
+  });
 };
 
 export default FalcorModel;

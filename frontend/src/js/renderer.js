@@ -6,7 +6,6 @@ import Promise from "promise";
 
 import UrlPattern from "url-pattern";
 
-import { preFetchDataAction, destructPreFetchable } from "pre-fetchable";
 import FalcorModel from "./falcor-model";
 import App from "./components/app";
 
@@ -31,7 +30,7 @@ export default class ReactComponentRenderer {
       FalcorModel.hydrate()
         .then(() => {
           // console.log('>>> hydrated');
-          destructPreFetchable(App);
+          // destructPreFetchable(App);
 
           const html = ""; // ReactDOMServer.renderToString(this.reactEl);
           cb(html);
@@ -54,7 +53,7 @@ export default class ReactComponentRenderer {
       FalcorModel.hydrate()
         .then(() => {
           // console.log('>>> hydrated');
-          destructPreFetchable(App);
+          // destructPreFetchable(App);
 
           ReactDOM.render(this.reactEl, container);
         })

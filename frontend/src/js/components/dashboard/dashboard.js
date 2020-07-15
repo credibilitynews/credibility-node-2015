@@ -14,19 +14,13 @@ import CategoryStore from "stores/category-store";
 
 import { Location, Locations, NotFound } from "react-router-component";
 
-import {
-  preFetchable,
-  preFetchDataAction,
-  preFetchableDestructor,
-} from "pre-fetchable";
-
-function getStatesFromStore() {
+const getStatesFromStore = () => {
   const state = {
     topics: TopicStore.getAllTopics(),
     categories: CategoryStore.getAllCategories(),
   };
   return state;
-}
+};
 
 class Dashboard extends React.Component {
   constructor(props, context) {
@@ -69,9 +63,4 @@ class Dashboard extends React.Component {
   }
 }
 
-const children = [TopMenu, SearchBar, RecentTopics, CategoryList, About];
-export default preFetchable(
-  Dashboard,
-  preFetchDataAction(...children),
-  preFetchableDestructor(ActivityList, TaggedList, Story, ...children)
-);
+export default Dashboard;

@@ -26,20 +26,20 @@ class CategoryStore extends ReduceStore {
     };
   }
 
-  getCategory(categoryId) {
+  getCategory = (categoryId) => {
     return this.getState().categories.get(categoryId.toString());
-  }
+  };
 
-  getAllCategories() {
+  getAllCategories = () => {
     return this.getState().categories.toArray();
-  }
+  };
 
-  getTopCategories() {
+  getTopCategories = () => {
     return this.getState().topCategories.toArray();
-  }
+  };
 
   reduce(state, payload) {
-    console.log("CategoryStore", state, payload);
+    // console.log("CategoryStore", state, payload);
     const { action } = payload;
 
     switch (action.actionType) {
@@ -51,10 +51,10 @@ class CategoryStore extends ReduceStore {
         };
 
       case ActionTypes.FETCH_TOP_TAGS:
-        console.log(
-          ActionTypes.FETCH_TOP_TAGS,
-          addCategories(state.topCategories, payload.action.topTags)
-        );
+        // console.log(
+        //   ActionTypes.FETCH_TOP_TAGS,
+        //   addCategories(state.topCategories, payload.action.topTags)
+        // );
 
         return {
           ...state,

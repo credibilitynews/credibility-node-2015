@@ -9,10 +9,10 @@ class LinkStore extends ReduceStore {
     return Immutable.OrderedMap();
   }
 
-  getLinkById(storyId) {
+  getLinkById = (storyId) => {
     // console.log('getLinkById', this.getState().get(parseInt(storyId)));
     return this.getState().get(parseInt(storyId));
-  }
+  };
 
   reduce(state, payload) {
     const { action } = payload;

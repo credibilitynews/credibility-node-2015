@@ -4,13 +4,11 @@ import Activity from "components/activity/activity";
 import LinkActions from "actions/link-actions";
 import LatestLinksStore from "stores/latest-links-store";
 
-import { preFetchable } from "pre-fetchable";
-
 class ActivityList extends React.Component {
   constructor(props, context) {
     super(props, context);
     this._listeners = [];
-    this._handleStoreChange = this._handleStoreChange.bind(this);
+    this.handleStoreChange = this.handleStoreChange.bind(this);
     this.renderArticles = this.renderArticles.bind(this);
 
     this.state = {
@@ -19,7 +17,7 @@ class ActivityList extends React.Component {
   }
 
   componentWillMount() {
-    this._listeners.push(LatestLinksStore.addListener(this._handleStoreChange));
+    this._listeners.push(LatestLinksStore.addListener(this.handleStoreChange));
   }
 
   componentWillUnMount() {
@@ -28,7 +26,7 @@ class ActivityList extends React.Component {
   }
 
   componentDidMount() {
-    if (this.state.articles.length == 0) LinkActions.fetchLatestLinks();
+    if (this.state.articles.length === 0) LinkActions.fetchLatestLinks();
   }
 
   render() {
@@ -61,11 +59,11 @@ class ActivityList extends React.Component {
       ));
   }
 
-  _handleStoreChange() {
+  handleStoreChange() {
     this.setState({
       articles: LatestLinksStore.getAllLinks(),
     });
   }
 }
 
-export default preFetchable(ActivityList, LinkActions.fetchLatestLinks);
+export default ActivityList;

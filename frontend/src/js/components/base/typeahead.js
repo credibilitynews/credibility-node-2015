@@ -1,17 +1,17 @@
-import ReactDOM from 'react-dom';
-import React from 'react';
+import ReactDOM from "react-dom";
+import React from "react";
 
-import humanize from 'utils/humanize';
-import assign from 'object-assign';
-import cx from 'classnames';
+import humanize from "utils/humanize";
+import assign from "object-assign";
+import cx from "classnames";
 
-import Autocomplete from 'react-autocomplete';
+import Autocomplete from "react-autocomplete";
 
 class Typeahead extends React.Component {
   constructor(props, context) {
     super(props, context);
-    this._handleInputChange = this._handleInputChange.bind(this);
-    this._handleOptionSelected = this._handleOptionSelected.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleOptionSelected = this.handleOptionSelected.bind(this);
     this.renderOption = this.renderOption.bind(this);
     this.searchRequest = null;
 
@@ -29,9 +29,9 @@ class Typeahead extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (
-      !this.state.searching
-      && nextProps.options
-      && nextProps.options.length > 0
+      !this.state.searching &&
+      nextProps.options &&
+      nextProps.options.length > 0
     ) {
       this.setState({ options: nextProps.options });
     }
@@ -39,8 +39,8 @@ class Typeahead extends React.Component {
 
   render() {
     const inputProps = {
-      className: 'autocomplete',
-      placeholder: this.props.placeholder || 'Search...',
+      className: "autocomplete",
+      placeholder: this.props.placeholder || "Search...",
       name: this.props.name,
       disabled: this.props.disabled,
     };
@@ -51,8 +51,8 @@ class Typeahead extends React.Component {
           ref="autocomplete"
           inputProps={inputProps}
           initialValue={this.props.defaultValue}
-          onSelect={this._handleOptionSelected}
-          onChange={this._handleInputChange}
+          onSelect={this.handleOptionSelected}
+          onChange={this.handleInputChange}
           items={this.state.options || []}
           getItemValue={(item) => item.value}
           renderItem={this.renderOption}
@@ -66,7 +66,7 @@ class Typeahead extends React.Component {
     return (
       <div
         className={
-          isHighlighted ? 'typeahead-option highlighted' : 'typeahead-option'
+          isHighlighted ? "typeahead-option highlighted" : "typeahead-option"
         }
         key={item.id}
         id={item.id}
@@ -82,16 +82,17 @@ class Typeahead extends React.Component {
     }
   }
 
-  getSelectedOption() {
+  getSelectedOption = () => {
     return this.state.selectedOption;
-  }
+  };
 
-  getValue() {
+  getValue = () => {
     return ReactDOM.findDOMNode(this.refs.autocomplete.refs.input).value;
-  }
+  };
 
-  _handleInputChange(e, input) {
-    if (this.searchRequest && this.searchRequest.abort) this.searchRequest.abort();
+  handleInputChange(e, input) {
+    if (this.searchRequest && this.searchRequest.abort)
+      this.searchRequest.abort();
 
     if (input != null && input.length > 2) {
       this.searchRequest = this.props.fetchOptionsAction(
@@ -100,7 +101,7 @@ class Typeahead extends React.Component {
           const options = result || [];
           this.setState({ options, searching: false });
         },
-        this.props.name,
+        this.props.name
       );
       this.setState({ searching: input });
     }
@@ -115,7 +116,7 @@ class Typeahead extends React.Component {
     }
   }
 
-  _handleOptionSelected(value, item) {
+  handleOptionSelected(value, item) {
     // console.log(value, item);
     this.setState({ selectedOption: item });
     if (this.props.onChange) this.props.onChange(item);
@@ -139,9 +140,9 @@ Typeahead.propTypes = {
 };
 
 Typeahead.TextField = class extends React.Component {
-  getValue() {
+  getValue = () => {
     return this.refs.field.getValue();
-  }
+  };
 
   render() {
     return (
@@ -156,11 +157,11 @@ Typeahead.TextField = class extends React.Component {
 };
 
 Typeahead.SelectField = class extends React.Component {
-  static get propTypes() {
+  static propTypes = () => {
     return {
       getLabelById: React.PropTypes.func.isRequired,
     };
-  }
+  };
 
   constructor(props, context) {
     super(props, context);
@@ -170,14 +171,14 @@ Typeahead.SelectField = class extends React.Component {
     };
   }
 
-  getValue() {
+  getValue = () => {
     return this.state.value;
-  }
+  };
 
   componentWillReceiveProps(nextProps) {
     if (
-      nextProps.defaultValue
-      && this.props.defaultValue !== nextProps.defaultValue
+      nextProps.defaultValue &&
+      this.props.defaultValue !== nextProps.defaultValue
     ) {
       this.setState({ value: this.props.defaultValue });
     }
@@ -200,7 +201,7 @@ Typeahead.SelectField = class extends React.Component {
     });
 
     const classNames = cx({
-      'input-group': this.props.button,
+      "input-group": this.props.button,
       controls: !this.props.button,
     });
 
@@ -212,7 +213,7 @@ Typeahead.SelectField = class extends React.Component {
           {this.props.button ? (
             <span className="input-group-btn">{this.props.button}</span>
           ) : (
-            ''
+            ""
           )}
           <input
             type="hidden"

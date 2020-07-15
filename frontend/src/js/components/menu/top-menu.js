@@ -3,20 +3,19 @@ import { TagLink } from "app-link";
 
 import { fetchTopTags } from "actions/tag-actions";
 import CategoryStore from "stores/category-store";
-import { preFetchable } from "pre-fetchable";
 
 class TopMenu extends React.Component {
   constructor(props, context) {
     super(props, context);
     this._listeners = [];
-    this._handleStoreChange = this._handleStoreChange.bind(this);
+    this.handleStoreChange = this.handleStoreChange.bind(this);
     this.state = {
       items: CategoryStore.getTopCategories(),
     };
   }
 
   componentWillMount() {
-    this._listeners.push(CategoryStore.addListener(this._handleStoreChange));
+    this._listeners.push(CategoryStore.addListener(this.handleStoreChange));
   }
 
   componentWillUnmount() {
@@ -24,7 +23,7 @@ class TopMenu extends React.Component {
   }
 
   componentDidMount() {
-    if (this.state.items.length == 0) fetchTopTags();
+    if (this.state.items.length === 0) fetchTopTags();
   }
 
   render() {
@@ -46,10 +45,10 @@ class TopMenu extends React.Component {
     ));
   }
 
-  _handleStoreChange() {
-    // console.log("_handleStoreChange", CategoryStore.getTopCategories());
+  handleStoreChange() {
+    // console.log("handleStoreChange", CategoryStore.getTopCategories());
     this.setState({ items: CategoryStore.getTopCategories() });
   }
 }
 
-export default preFetchable(TopMenu, fetchTopTags);
+export default TopMenu;

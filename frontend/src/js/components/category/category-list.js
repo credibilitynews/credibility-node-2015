@@ -5,12 +5,10 @@ import CategoryStore from "stores/category-store";
 
 import { fetchAllTags } from "actions/tag-actions";
 
-import { preFetchable } from "pre-fetchable";
-
 class CategoryList extends React.Component {
   constructor(props, context) {
     super(props, context);
-    this._handleStoreChange = this._handleStoreChange.bind(this);
+    this.handleStoreChange = this.handleStoreChange.bind(this);
 
     this.state = {
       categories: CategoryStore.getAllCategories(),
@@ -18,14 +16,13 @@ class CategoryList extends React.Component {
   }
 
   componentWillMount() {
-    CategoryStore.addListener(this._handleStoreChange);
+    CategoryStore.addListener(this.handleStoreChange);
   }
 
   componentWillUnmount() {}
 
   componentDidMount() {
-    // if(this.state.categories.length == 0)
-    //     TagActions.fetchAllTags();
+    if (this.state.categories.length === 0) fetchAllTags();
   }
 
   render() {
@@ -65,13 +62,13 @@ class CategoryList extends React.Component {
 
   _childrenOf(categories, parentId) {
     const children = categories.reduce((reduced, item) => {
-      if (item.parent_id == parentId) reduced.push(item);
+      if (item.parent_id === parentId) reduced.push(item);
       return reduced;
     }, []);
     return children;
   }
 
-  _handleStoreChange() {
+  handleStoreChange() {
     const categories = CategoryStore.getAllCategories();
     if (categories) {
       this.setState({ categories });
@@ -79,4 +76,4 @@ class CategoryList extends React.Component {
   }
 }
 
-export default preFetchable(CategoryList, fetchAllTags);
+export default CategoryList;

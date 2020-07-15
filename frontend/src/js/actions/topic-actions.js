@@ -43,7 +43,7 @@ const TopicActions = {
         ["id", "title", "hashtag", "created_at", "views", "user_id"],
       ])
       .then((response) => {
-        // console.log('result/fetchLatestTopics', response.json);
+        console.log("result/fetchLatestTopics", response.json);
         AppDispatcher.handleServerAction({
           actionType: ActionTypes.FETCH_RECENT_TOPICS,
           topics: response.json.latestTopics,

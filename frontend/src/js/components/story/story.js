@@ -5,14 +5,12 @@ import LinkStore from "stores/link-store";
 
 import StoryLink from "components/story/story-link";
 
-import { preFetchable, preFetchableDestructor } from "pre-fetchable";
-
 class Story extends React.Component {
   constructor(props, context) {
     super(props, context);
 
     this._listeners = [];
-    this._handleLinkChange = this._handleLinkChange.bind(this);
+    this.handleLinkChange = this.handleLinkChange.bind(this);
 
     this.state = {
       link: LinkStore.getLinkById(this.props.storyId),
@@ -20,7 +18,7 @@ class Story extends React.Component {
   }
 
   componentWillMount() {
-    this._listeners.push(LinkStore.addListener(this._handleLinkChange));
+    this._listeners.push(LinkStore.addListener(this.handleLinkChange));
   }
 
   componentWillUnmount() {
@@ -41,15 +39,11 @@ class Story extends React.Component {
     );
   }
 
-  _handleLinkChange() {
+  handleLinkChange() {
     this.setState({
       link: LinkStore.getLinkById(this.props.storyId),
     });
   }
 }
 
-export default preFetchable(
-  Story,
-  LinkActions.fetchLinks,
-  preFetchableDestructor(Story)
-);
+export default Story;

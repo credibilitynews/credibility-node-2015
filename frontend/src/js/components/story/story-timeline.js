@@ -1,6 +1,6 @@
-import React from 'react';
-import StoryLink from 'components/story/story-link';
-import { timeAgo, timeStamp as ts } from 'utils/time';
+import React from "react";
+import StoryLink from "components/story/story-link";
+import { timeAgo, timeStamp as ts } from "utils/time";
 
 class StoryTimeline extends React.Component {
   render() {
@@ -16,7 +16,7 @@ class StoryTimeline extends React.Component {
   }
 
   renderStories(items) {
-    if (items.length == 0) return <i>No stories yet.</i>;
+    if (items.length === 0) return <i>No stories yet.</i>;
 
     return items
       .sort((a, b) => {
@@ -50,7 +50,7 @@ class StoryTimeline extends React.Component {
           sets.groups[index][item.bias || 0].push(item);
           return sets;
         },
-        { keys: {}, groups: [] },
+        { keys: {}, groups: [] }
       )
       .groups.map((group, index) => {
         let time = null;
@@ -64,16 +64,13 @@ class StoryTimeline extends React.Component {
                   <StoryLink key={link.id} story={link} />
                 </div>
               );
-            }),
+            })
           );
         }
 
         return (
           <div key={`timeline${index}`}>
-            <div className="time">
-              ●
-              {time}
-            </div>
+            <div className="time">●{time}</div>
             <div>{timeline}</div>
           </div>
         );

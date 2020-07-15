@@ -22,18 +22,18 @@ class TopicStatsStore extends ReduceStore {
     };
   }
 
-  getTopicStat(categoryId) {
+  getTopicStat = (categoryId) => {
     return this.getState().topicStats.reduce((selected, item) => {
-      if (categoryId == item.id) {
+      if (categoryId === item.id) {
         return item;
       }
       return selected;
     }, null);
-  }
+  };
 
-  getAllTopicStats() {
+  getAllTopicStats = () => {
     return this.getState().topicStats;
-  }
+  };
 
   reduce(state, payload) {
     // console.log(state, payload);

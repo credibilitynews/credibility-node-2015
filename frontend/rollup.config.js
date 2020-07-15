@@ -27,6 +27,7 @@ export default {
     babel({
       babelHelpers: "bundled",
       presets: ["@babel/preset-react"],
+      plugins: ["@babel/proposal-class-properties"],
       exclude: /node_modules/,
     }),
     alias({

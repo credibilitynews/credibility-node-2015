@@ -8,8 +8,8 @@ import { TopicLink, StoryLink } from "app-link";
 class Activity extends React.Component {
   constructor(props, context) {
     super(props, context);
-    this._handleTopicStoreChange = this._handleTopicStoreChange.bind(this);
-    this._handleUserStoreChange = this._handleUserStoreChange.bind(this);
+    this.handleTopicStoreChange = this.handleTopicStoreChange.bind(this);
+    this.handleUserStoreChange = this.handleUserStoreChange.bind(this);
 
     this.state = {
       topic: {},
@@ -19,8 +19,8 @@ class Activity extends React.Component {
   }
 
   componentWillMount() {
-    UserStore.addListener(this._handleUserStoreChange);
-    TopicStore.addListener(this._handleTopicStoreChange);
+    UserStore.addListener(this.handleUserStoreChange);
+    TopicStore.addListener(this.handleTopicStoreChange);
   }
 
   componentWillUnmount() {}
@@ -57,12 +57,12 @@ class Activity extends React.Component {
     );
   }
 
-  _handleUserStoreChange() {
+  handleUserStoreChange() {
     const user = UserStore.getUser(this.props.article.user_id);
     if (user) this.setState({ user });
   }
 
-  _handleTopicStoreChange() {
+  handleTopicStoreChange() {
     const topic = TopicStore.getTopic(this.props.article.topic_id);
     // console.log(topic);
     if (topic) this.setState({ topic });

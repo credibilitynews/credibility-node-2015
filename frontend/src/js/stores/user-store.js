@@ -17,10 +17,10 @@ class UserStore extends ReduceStore {
     };
   }
 
-  getUser(id) {
+  getUser = (id) => {
     // var u = _users.get(id.toString());
     return this.getState().users.get(id.toString());
-  }
+  };
 
   reduce(state, payload) {
     const { action } = payload;

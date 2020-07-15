@@ -1,32 +1,27 @@
-import React from 'react';
+import React from "react";
 
-import { Locations, Location, NotFound } from 'react-router-component';
+import { Locations, Location, NotFound } from "react-router-component";
 
-import Dashboard from 'components/dashboard/dashboard';
-import Topic from 'components/topic/topic';
-import Story from 'components/story/story';
-import Template from 'components/app-template';
-import AppLogin from 'components/user/user-login';
-import Post from 'components/post/post';
-import AboutPage from 'components/about/about';
-import TermsPage from 'components/about/terms';
+import Dashboard from "components/dashboard/dashboard";
+import Topic from "components/topic/topic";
+import Story from "components/story/story";
+import Template from "components/app-template";
+import AppLogin from "components/user/user-login";
+import Post from "components/post/post";
+import AboutPage from "components/about/about";
+import TermsPage from "components/about/terms";
 
-import {
-  preFetchable,
-  preFetchDataAction,
-  preFetchableDestructor,
-} from 'pre-fetchable';
-
-const tap = (tapped, cb) => function (...args) {
-  const res = tapped(...args);
-  cb(...args);
-  return res;
-};
+const tap = (tapped, cb) =>
+  function (...args) {
+    const res = tapped(...args);
+    cb(...args);
+    return res;
+  };
 
 class App extends React.Component {
   constructor(props, context) {
     super(props, context);
-    this._handleUrlChange = this._handleUrlChange.bind(this);
+    this.handleUrlChange = this.handleUrlChange.bind(this);
 
     this.state = {
       url: props.url,
@@ -34,10 +29,10 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       window.history.pushState = tap(
         window.history.pushState.bind(window.history),
-        this._handleUrlChange,
+        this.handleUrlChange
       );
     }
   }
@@ -58,15 +53,9 @@ class App extends React.Component {
     );
   }
 
-  _handleUrlChange(...args) {
+  handleUrlChange(...args) {
     this.setState({ url: args[2] });
   }
 }
 
-const children = [AppLogin, Topic, Story, Dashboard];
-
-export default preFetchable(
-  App,
-  preFetchDataAction(...children),
-  preFetchableDestructor(App, ...children),
-);
+export default App;

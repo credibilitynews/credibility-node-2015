@@ -9,10 +9,10 @@ class LatestLinksStore extends ReduceStore {
     return Immutable.OrderedMap();
   }
 
-  getAllLinks(topicId) {
+  getAllLinks = (topicId) => {
     const links = this.getState().get(parseInt(topicId));
     return links ? links.toArray() : [];
-  }
+  };
 
   reduce(state, payload) {
     const { action } = payload;

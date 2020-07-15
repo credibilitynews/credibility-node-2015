@@ -24,17 +24,17 @@ class TopicStore extends ReduceStore {
     };
   }
 
-  getTopic(topicId) {
+  getTopic = (topicId) => {
     return this.getState().topics.get(topicId.toString());
-  }
+  };
 
-  getAllTopics() {
+  getAllTopics = () => {
     return this.getState().topics.toArray();
-  }
+  };
 
-  getLatestTopics() {
+  getLatestTopics = () => {
     return this.getState().recentTopics.toArray();
-  }
+  };
 
   reduce(state, payload) {
     // console.log(state, payload);
@@ -48,6 +48,7 @@ class TopicStore extends ReduceStore {
         };
 
       case ActionTypes.FETCH_RECENT_TOPICS:
+        console.log("called");
         return {
           ...state,
           recentTopics: addTopics(

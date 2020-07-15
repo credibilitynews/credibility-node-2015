@@ -4,13 +4,11 @@ import Activity from "components/activity/activity";
 import LinkActions from "actions/link-actions";
 import TagLinksStore from "stores/tag-links-store";
 
-import { preFetchable } from "pre-fetchable";
-
 class List extends React.Component {
   constructor(props, context) {
     super(props, context);
     this._listeners = [];
-    this._handleStoreChange = this._handleStoreChange.bind(this);
+    this.handleStoreChange = this.handleStoreChange.bind(this);
 
     this.state = {
       articles: TagLinksStore.getAllLinks(props.tagId),
@@ -18,7 +16,7 @@ class List extends React.Component {
   }
 
   componentWillMount() {
-    this._listeners.push(TagLinksStore.addListener(this._handleStoreChange));
+    this._listeners.push(TagLinksStore.addListener(this.handleStoreChange));
   }
 
   componentWillUnMount() {
@@ -27,7 +25,7 @@ class List extends React.Component {
   }
 
   componentDidMount() {
-    if (this.state.articles.length == 0)
+    if (this.state.articles.length === 0)
       LinkActions.fetchTagLinks(this.props.tagId);
   }
 
@@ -65,12 +63,12 @@ class List extends React.Component {
     ));
   }
 
-  _handleStoreChange() {
-    // console.log('_handleStoreChange')
+  handleStoreChange() {
+    // console.log('handleStoreChange')
     this.setState({
       articles: TagLinksStore.getAllLinks(this.props.tagId),
     });
   }
 }
 
-export default preFetchable(List, LinkActions.fetchTagLinks);
+export default List;
