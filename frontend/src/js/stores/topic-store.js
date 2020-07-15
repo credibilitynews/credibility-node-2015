@@ -1,64 +1,66 @@
-import AppDispatcher from 'dispatchers/app-dispatcher';
-import {ActionTypes as ActionTypes} from 'constants/app-constants';
+/* eslint-disable class-methods-use-this */
+import AppDispatcher from "dispatchers/app-dispatcher";
+import { ActionTypes } from "constants/app-constants";
 
-import assign from 'object-assign';
-import Store from 'stores/app-store';
-import Immutable from 'immutable';
+import { ReduceStore } from "flux/utils";
+import Immutable from "immutable";
 
-var CHANGE_EVENT = 'topics-change';
-
-var _topics = Immutable.OrderedMap(),
-    _recentTopics = Immutable.OrderedMap();
-
-var TopicStore = assign({}, Store, {
-    events: {
-        CHANGE_EVENT: CHANGE_EVENT
-    },
-    getTopic: function(topicId){
-        return _topics.get(topicId.toString());
-    },
-    getAllTopics: function(){
-        return _topics.toArray();
-    },
-    getLatestTopics: function(){
-        return _recentTopics.toArray();
-    },
-    dispatcherIndex: AppDispatcher.register(function(payload){
-        var action = payload.action;
-
-        switch(action.actionType){
-        case ActionTypes.FETCH_TOPICS_BY_ID:
-            _topics = _addTopics(_topics, parseTopics(action.topics));
-                //console.log(_topics.toArray())
-            TopicStore.emitChange();
-            break;
-
-        case ActionTypes.FETCH_RECENT_TOPICS:
-            _recentTopics = _addTopics(_recentTopics, parseTopics(action.topics));
-                //console.log(_recentTopics.toArray());
-            TopicStore.emitChange();
-            break;
-
-        default: break;
-        }
-        return true;
-    })
-});
-
-module.exports = TopicStore;
-
-function _addTopic(store, topic){
-    return store.set(topic.id.toString() ,topic);
+function addTopic(state, topic) {
+  return state.set(topic.id.toString(), topic);
 }
 
-function _addTopics(store, topics){
-    return topics.reduce(function(reduced, topic){
-        return _addTopic(reduced, topic);
-    }, store);
+function addTopics(state, topics) {
+  return topics.reduce((reduced, topic) => addTopic(reduced, topic), state);
 }
 
-function parseTopics(topics){
-    return Object.keys(topics).map(function(topic){
-        return topics[topic];
-    });
+function parseTopics(topics) {
+  return Object.keys(topics).map((topic) => topics[topic]);
 }
+class TopicStore extends ReduceStore {
+  getInitialState() {
+    return {
+      topics: Immutable.OrderedMap(),
+      recentTopics: Immutable.OrderedMap(),
+    };
+  }
+
+  getTopic(topicId) {
+    return this.getState().topics.get(topicId.toString());
+  }
+
+  getAllTopics() {
+    return this.getState().topics.toArray();
+  }
+
+  getLatestTopics() {
+    return this.getState().recentTopics.toArray();
+  }
+
+  reduce(state, payload) {
+    console.log(state, payload);
+    const { action } = payload;
+
+    switch (action.actionType) {
+      case ActionTypes.FETCH_TOPICS_BY_ID:
+        return {
+          ...state,
+          topics: addTopics(state.topics, parseTopics(action.topics)),
+        };
+
+      case ActionTypes.FETCH_RECENT_TOPICS:
+        return {
+          ...state,
+          recentTopics: addTopics(
+            state.recentTopics,
+            parseTopics(action.topics)
+          ),
+        };
+      default:
+      // do nothing
+    }
+    return true;
+  }
+}
+
+const instance = new TopicStore(AppDispatcher);
+export default instance;

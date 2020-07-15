@@ -1,53 +1,66 @@
-import AppDispatcher from '../dispatchers/app-dispatcher';
-import {ActionTypes as ActionTypes} from '../constants/app-constants';
+/* eslint-disable class-methods-use-this */
+import assign from "object-assign";
+import { ReduceStore } from "flux/utils";
+import Immutable from "immutable";
+import { ActionTypes } from "../constants/app-constants";
+import AppDispatcher from "../dispatchers/app-dispatcher";
 
-import assign from 'object-assign';
-import Store from 'stores/app-store';
-import Immutable from 'immutable';
-
-var CHANGE_EVENT = 'topicStats-change';
-
-var _topicStats = Immutable.List();
-
-function _addTopicStat(category){
-    _topicStats = _topicStats.push(category);
+function addTopicStat(state, topicStat) {
+  state = state.push(topicStat);
+  return state;
 }
 
-function _addTopicStats(topicStats){
-    _topicStats = _topicStats.concat(topicStats);
+function addTopicStats(state, topicStats) {
+  state = state.concat(topicStats);
+  return state;
 }
 
-var TopicStatsStore = assign({}, Store, {
-    events: {
-        CHANGE_EVENT: CHANGE_EVENT
-    },
-    getTopicStat: function(categoryId){
-        return _topicStats
-        .reduce(function(selected, item){
-            if(categoryId == item.id){
-                return item;
-            }else{
-                return selected;
-            }
-        }, null);
-    },
-    getAllTopicStats: function(){
-        return _topicStats;
-    },
-    dispatcherIndex: AppDispatcher.register(function(payload){
-        var action = payload.action;
-        switch(action.actionType){
-        case ActionTypes.RECEIVE_LAYOUT:
-            // console.log('store/topic-stats-store', payload.action.layout.latest_topics);
-            _addTopicStats(payload.action.layout.latest_topics);
-            break;
-        case ActionTypes.ADD_TOPIC:
-            _addTopicStat(payload.action.topic);
-            break;
-        }
-        TopicStatsStore.emitChange();
-        return true;
-    })
-});
+class TopicStatsStore extends ReduceStore {
+  getInitialState() {
+    return {
+      topicStats: Immutable.List(),
+    };
+  }
 
-module.exports = TopicStatsStore;
+  getTopicStat(categoryId) {
+    return this.getState().topicStats.reduce((selected, item) => {
+      if (categoryId == item.id) {
+        return item;
+      }
+      return selected;
+    }, null);
+  }
+
+  getAllTopicStats() {
+    return this.getState().topicStats;
+  }
+
+  reduce(state, payload) {
+    console.log(state, payload);
+    const { action } = payload;
+
+    switch (action.actionType) {
+      case ActionTypes.RECEIVE_LAYOUT:
+        // console.log('store/topic-stats-store', payload.action.layout.latest_topics);
+        return {
+          ...state,
+          topicStats: addTopicStats(
+            state.topicStats,
+            action.layout.latest_topics
+          ),
+        };
+
+      case ActionTypes.ADD_TOPIC:
+        return {
+          ...state,
+          topicStats: addTopicStat(state.topicStats, action.topic),
+        };
+      default:
+      // do nothing
+    }
+    return state;
+  }
+}
+
+const instance = new TopicStatsStore(AppDispatcher);
+export default instance;

@@ -1,9 +1,8 @@
-'use strict';
-import ReactComponentRenderer from 'renderer';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./components/app";
+// import "../sass/style.scss";
 
-if(typeof window !== 'undefined') {
-    new ReactComponentRenderer(document.location.pathname)
-        .render(
-            document.getElementById('credibility')
-        );
+if (typeof window !== "undefined") {
+  ReactDOM.render(<App />, document.getElementById("credibility"));
 }

@@ -1,16 +1,15 @@
-
-'use strict';
 import React from 'react';
 
 class Score extends React.Component {
-    render() {
-        var style= {marginRight: '5px'};
-        return (
-            <span className="label label-warning">
-                <span className="glyphicon glyphicon-certificate" style={style}></span>{this.props.score}
-            </span>
-        );
-    }
+  render() {
+    const style = { marginRight: '5px' };
+    return (
+      <span className="label label-warning">
+        <span className="glyphicon glyphicon-certificate" style={style} />
+        {this.props.score}
+      </span>
+    );
+  }
 }
 
-module.exports = Score;
+export default Score;

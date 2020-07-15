@@ -1,29 +1,30 @@
 import AppDispatcher from 'dispatchers/app-dispatcher';
-import {ActionTypes} from 'constants/app-constants';
+import { ActionTypes } from 'constants/app-constants';
 
 import Immutable from 'immutable';
-import {MapStore} from 'flux/utils';
+import { MapStore } from 'flux/utils';
 
 class LatestLinksStore extends MapStore {
-    getAllLinks (){
-        return this.getState().toArray();
-    }
-    reduce (state, payload){
-        var action = payload.action;
+  getAllLinks() {
+    return this.getState().toArray();
+  }
 
-        switch(action.actionType){
-        case ActionTypes.FETCH_LATEST_LINKS:
-            state = Immutable.OrderedMap();
-            // console.log('store/latest-links-store', action);
-            Object.keys(action.links).forEach(function(n){
-                var link = action.links[n];
-                state = state.set(link.id, link);
-            });
-            break;
-        }
-        return state;
+  reduce(state, payload) {
+    const { action } = payload;
+
+    switch (action.actionType) {
+      case ActionTypes.FETCH_LATEST_LINKS:
+        state = Immutable.OrderedMap();
+        // console.log('store/latest-links-store', action);
+        Object.keys(action.links).forEach((n) => {
+          const link = action.links[n];
+          state = state.set(link.id, link);
+        });
+        break;
     }
+    return state;
+  }
 }
 
 const instance = new LatestLinksStore(AppDispatcher);
-module.exports = instance;
+export default instance;

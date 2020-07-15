@@ -1,53 +1,51 @@
-import Store from './app-store';
-import assign from 'object-assign';
-import Immutable from 'immutable';
+/* eslint-disable class-methods-use-this */
+import Immutable from "immutable";
+import { ReduceStore } from "flux/utils";
 
-import {ActionTypes as ActionTypes} from 'constants/app-constants';
-import AppDispatcher from 'dispatchers/app-dispatcher';
+import { ActionTypes } from "constants/app-constants";
+import AppDispatcher from "dispatchers/app-dispatcher";
 
-var CHANGE_EVENT = 'user-store-change',
-    LOGIN_EVENT_SUCCESS = 'user-store-login-success',
-    LOGIN_EVENT_ERROR = 'user-store-login-error';
+function addUsers(state, users) {
+  Object.keys(users).forEach((key) => {
+    state = state.set(key.toString(), users[key]);
+  });
+}
+class UserStore extends ReduceStore {
+  getInitialState() {
+    return {
+      users: Immutable.Map(),
+    };
+  }
 
-var _users = Immutable.OrderedMap();
+  getUser(id) {
+    // var u = _users.get(id.toString());
+    return this.getState().users.get(id.toString());
+  }
 
-var UserStore = assign({}, Store, {
-    events: {
-        CHANGE_EVENT: CHANGE_EVENT,
-        LOGIN_EVENT_SUCCESS: LOGIN_EVENT_SUCCESS,
-        LOGIN_EVENT_ERROR: LOGIN_EVENT_ERROR
-    },
-    getUser: function(id){
-        //var u = _users.get(id.toString());
-        return _users.get(id.toString());
-    },
-    getDispatherToken: function(){
-        return UserStore._dispatchToken;
-    },
-    _dispatchToken: AppDispatcher.register(function(payload){
-        var action = payload.action;
-        switch(action.actionType){
-            // case ActionTypes.LOGIN:
-            //     console.log(payload)
-            //     if(data.token)
-            //         this.emit(LOGIN_EVENT_SUCCESS, data.token);
-            //     if(data.errors)
-            //         this.emit(LOGIN_EVENT_ERROR, data.error);
-            //     break;
-        case ActionTypes.FETCH_USERS_BY_ID:
-            _addUsers(action.users);
-                //console.log(_users.toArray());
-            UserStore.emitChange();
-            break;
-        default: break;
-        }
-    })
-});
+  reduce(state, payload) {
+    const { action } = payload;
 
-function _addUsers(users){
-    Object.keys(users).forEach(function(key){
-        _users = _users.set(key.toString(), users[key]);
-    });
+    switch (action.actionType) {
+      // case ActionTypes.LOGIN:
+      //     console.log(payload)
+      //     if(data.token)
+      //         this.emit(LOGIN_EVENT_SUCCESS, data.token);
+      //     if(data.errors)
+      //         this.emit(LOGIN_EVENT_ERROR, data.error);
+      //     break;
+      case ActionTypes.FETCH_USERS_BY_ID:
+        return {
+          ...state,
+          users: addUsers(state.users, action.users),
+        };
+
+      default:
+        break;
+    }
+
+    return state;
+  }
 }
 
-module.exports = UserStore;
+const instance = new UserStore(AppDispatcher);
+export default instance;

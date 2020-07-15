@@ -1,12 +1,11 @@
-'use strict';
 import React from 'react';
 // import Select from 'components/base/typeahead';
 
 class SearchBar extends React.Component {
-    render() {
-        return <div />;
-        // return (<Select fetchOptionsAction={()=>{ console.log(arguments); }} placeholder="Search" />);
-    }
+  render() {
+    return <div />;
+    // return (<Select fetchOptionsAction={()=>{ console.log(arguments); }} placeholder="Search" />);
+  }
 }
 
-module.exports = SearchBar;
+export default SearchBar;

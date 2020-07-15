@@ -1,31 +1,32 @@
-
-'use strict';
 import React from 'react';
 
 class Hashtag extends React.Component {
-    _link(hashtag) {
-        return 'https://twitter.com/hashtag/'+hashtag.slice(1);
-    }
+  _link(hashtag) {
+    return `https://twitter.com/hashtag/${hashtag.slice(1)}`;
+  }
 
-    _split(hashtags) {
-        return hashtags
-            .split(' ')
-            .map(function(tag){
-                return (<span key={tag}><a href={this._link(tag)}>{tag}</a>&nbsp;</span>);
-            }.bind(this));
-    }
+  _split(hashtags) {
+    return hashtags.split(' ').map(
+      (tag) => (
+        <span key={tag}>
+          <a href={this._link(tag)}>{tag}</a>
+&nbsp;
+        </span>
+      ),
+    );
+  }
 
-    render() {
-        return (
-            <div className="tag" href="#">
-                {this._split(this.props.tag)}
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div className="tag" href="#">
+        {this._split(this.props.tag)}
+      </div>
+    );
+  }
 }
 
 Hashtag.defaultProps = {
-    tag: ''
+  tag: '',
 };
 
-module.exports = Hashtag;
+export default Hashtag;
