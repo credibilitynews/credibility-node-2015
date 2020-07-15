@@ -8,7 +8,7 @@ class StoryTimeline extends React.Component {
     const { links } = this.props;
     return (
       <div className="story-timeline">
-        <div className="stories">
+        <div className="stories col-md-12">
           <div>{this.renderStories(links)}</div>
         </div>
       </div>

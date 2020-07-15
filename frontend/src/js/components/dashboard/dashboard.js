@@ -38,9 +38,9 @@ class Dashboard extends React.Component {
           <SearchBar />
         </div>
 
-        <div className="col-sm-12 col-md-8">
+        <div className="col-xs-12 col-md-8">
           <div className="row">
-            <div className="col-sm-12">
+            <div className="col-xs-12">
               <Locations path={this.props.url}>
                 <Location path="/tags/:tagId/:slug" handler={TaggedList} />
                 <Location path="/stories/:storyId/:slug" handler={Story} />

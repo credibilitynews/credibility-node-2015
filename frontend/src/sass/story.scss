@@ -25,27 +25,6 @@
   }
 }
 
-.story-group {
-  &.left {
-    background-color: $left-color-background;
-    padding: 15px;
-  }
-  &.fact {
-    @extend .panel !optional;
-    //@include fact-colored-panel;
-    div {
-      @extend .panel-body !optional;
-    }
-  }
-  &.right {
-    @extend .panel !optional;
-    //@include right-colored-panel;
-    div {
-      @extend .panel-body !optional;
-    }
-  }
-}
-
 .timeline {
   .nav-tabs {
     font-size: 12px;
@@ -109,7 +88,6 @@
   & > div.stories {
     padding-top: 10px;
     border-left: 1px solid #ddd;
-    @extend .col-md-12 !optional;
     /* @extend .col-md-offset-1 */
   }
   ul {

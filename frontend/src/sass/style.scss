@@ -131,11 +131,3 @@ strong {
 .text-right {
   text-align: right;
 }
-
-.columns {
-  @extend .row !optional;
-}
-
-.col-sm-12 {
-  @extend .col-xs-12 !optional;
-}

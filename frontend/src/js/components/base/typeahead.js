@@ -39,7 +39,7 @@ class Typeahead extends React.Component {
 
   render() {
     const inputProps = {
-      className: "autocomplete",
+      className: "autocomplete form-control",
       placeholder: this.props.placeholder || "Search...",
       name: this.props.name,
       disabled: this.props.disabled,
