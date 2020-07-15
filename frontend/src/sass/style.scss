@@ -3,7 +3,7 @@
 // @import url(https://fonts.googleapis.com/css?family=Source+Serif+Pro);
 $enable-flex: true;
 $icon-font-path: "/bootstrap/fonts/";
-@import "bootstrap";
+@import "../../../node_modules/bootstrap-scss/bootstrap";
 @import "bootstrap-mod";
 
 @import "mixins";
@@ -11,122 +11,131 @@ $icon-font-path: "/bootstrap/fonts/";
 @import "topic";
 @import "category";
 
-@import 'components';
+@import "components";
 
 html {
-    position: relative;
-    min-height: 100%;
+  position: relative;
+  min-height: 100%;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-    font-size: 14px;
-    line-height: 1.4;
-    color: #666;
-    margin-bottom: 60px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #666;
+  margin-bottom: 60px;
 }
 
-h1{
-    font-size: 1.75em;
+h1 {
+  font-size: 1.75em;
 }
 
-h2{
-    font-size: 1.3em;
+h2 {
+  font-size: 1.3em;
 }
 
 h3 {
-    font-size: 1.2em;
+  font-size: 1.2em;
 }
 
 h4 {
-    font-size: 1.15em;
+  font-size: 1.15em;
 }
 
-strong{
-    font-weight: 500;
+strong {
+  font-weight: 500;
 }
 
-.brand{
-    letter-spacing: 1px;
-    small{
-        margin-bottom: -10px;
-    }
+.brand {
+  letter-spacing: 1px;
+  small {
+    margin-bottom: -10px;
+  }
 }
 
-.content{
-    padding-top: 1em;
+.content {
+  padding-top: 1em;
 }
 
-.header{
-    a.login{
-        font-size: 12px;
-        line-height: 40px;
-    }
+.header {
+  a.login {
+    font-size: 12px;
+    line-height: 40px;
+  }
 }
 
 .footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    margin-top:30px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin-top: 30px;
 
-    background-color: #f8f8f8;
-    padding: 10px;
-    a {
-        font-size: 12px;
-    }
-    .copyright{
-        line-height: 40px;
-        font-size: 12px;
-    }
+  background-color: #f8f8f8;
+  padding: 10px;
+  a {
+    font-size: 12px;
+  }
+  .copyright {
+    line-height: 40px;
+    font-size: 12px;
+  }
 }
 
-.top-menu{
-    height: 2.5em;
-    .nav-item{
-        a, a:link, a:active{
-            padding-left: 5px;
-            padding: 5px;
-            background-color: #e8e8ee;
-            font-size: 12px;
-            color: #666;
-        }
+.top-menu {
+  height: 2.5em;
+  .nav-item {
+    a,
+    a:link,
+    a:active {
+      padding-left: 5px;
+      padding: 5px;
+      background-color: #e8e8ee;
+      font-size: 12px;
+      color: #666;
     }
+  }
 }
 
-.link-title{
-    font-weight: 400;
+.link-title {
+  font-weight: 400;
+  color: #545454;
+  a,
+  a:link,
+  a:active,
+  a:visited {
     color: #545454;
-    a, a:link, a:active, a:visited{
-        color: #545454;
-    }
+  }
 }
 
-.topic-title{
-    font-weight: 500;
-    a, a:link, a:active, a:visited{
-        color: #0275d8;
-    }
+.topic-title {
+  font-weight: 500;
+  a,
+  a:link,
+  a:active,
+  a:visited {
+    color: #0275d8;
+  }
 }
 
-.tag-title{
-    a{
-        font-size: 13px;
-    }
+.tag-title {
+  a {
+    font-size: 13px;
+  }
 }
 
-.line{
-    margin-top: 30px;
+.line {
+  margin-top: 30px;
 }
 
-.text-right{
-    text-align: right
+.text-right {
+  text-align: right;
 }
 
-.columns{
-    @extend .row;
+.columns {
+  @extend .row !optional;
 }
 
-.col-sm-12{
-    @extend .col-xs-12;
+.col-sm-12 {
+  @extend .col-xs-12 !optional;
 }

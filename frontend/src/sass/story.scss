@@ -1,156 +1,164 @@
-
-.panel{
-    padding: 10px;
+.panel {
+  padding: 10px;
 }
 
-.panel-body{
-    margin: 10px;
+.panel-body {
+  margin: 10px;
 }
 
-.story-list{
-    ul{
-        list-style: none;
-        padding-left: 0px;
+.story-list {
+  ul {
+    list-style: none;
+    padding-left: 0px;
+  }
+  .story-link {
+    > div {
+      border: 1px solid #eee;
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+      .domain_name {
+      }
+      .author {
+      }
+      .created_at {
+      }
     }
-    .story-link{
-        >div{
-            border: 1px solid #eee;
-            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
-            .domain_name{}
-            .author{}
-            .created_at{}
-        }
-    }
+  }
 }
 
-.story-group{
-    &.left{
-        background-color: $left-color-background;
-        padding: 15px;
+.story-group {
+  &.left {
+    background-color: $left-color-background;
+    padding: 15px;
+  }
+  &.fact {
+    @extend .panel !optional;
+    //@include fact-colored-panel;
+    div {
+      @extend .panel-body !optional;
     }
-    &.fact{
-        @extend .panel;
-        //@include fact-colored-panel;
-        div{
-            @extend .panel-body;
-        }
+  }
+  &.right {
+    @extend .panel !optional;
+    //@include right-colored-panel;
+    div {
+      @extend .panel-body !optional;
     }
-    &.right{
-        @extend .panel;
-        //@include right-colored-panel;
-        div{
-            @extend .panel-body;
-        }
-    }
+  }
 }
 
-.timeline{
-    .nav-tabs{
+.timeline {
+  .nav-tabs {
+    font-size: 12px;
+  }
+}
+
+.story-view {
+  margin-top: 20px;
+  .story-link {
+    border-left: 2px solid #ddd;
+    & > div.info {
+      width: auto;
+      white-space: normal;
+      overflow: visible;
+      text-overflow: inherit;
+    }
+  }
+}
+
+.story-link {
+  a {
+    color: #545454;
+  }
+  & > div.info {
+    width: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 15px;
+
+    .title {
+      font-size: 16px;
+    }
+    .domain_name {
+      color: #999;
+      font-size: 12px;
+      display: block;
+      width: auto;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .details {
+      margin-top: 4px;
+      .author {
         font-size: 12px;
-    }
-}
-
-.story-view{
-    margin-top: 20px;
-    .story-link{
-        border-left: 2px solid #ddd;
-        &>div.info{
-            width: auto;
-            white-space: normal;
-            overflow: visible;
-            text-overflow: inherit;
-        }
-    }
-}
-
-.story-link{
-
-    a{color: #545454;}
-    &>div.info{
-        width: auto;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        padding: 15px;
-
-        .title{
-            font-size: 16px;
-        }
-        .domain_name{
-            color: #999;
-            font-size: 12px;
-            display: block;
-            width: auto;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .details{
-            margin-top: 4px;
-            .author{
-                font-size: 12px;
-                font-style: italic;
-            }
-            .created_at{
-                color: #999;
-                font-size: 12px;
-                font-style: italic;
-            }
-        }
-    }
-}
-
-.story-timeline{
-    padding-bottom: 100px;
-
-    &>div.stories{
-        padding-top: 10px;
-        border-left: 1px solid #ddd;
-        @extend .col-md-12;
-        /* @extend .col-md-offset-1 */;
-    }
-    ul{
-        list-style: none;
-        padding-left: 10px;
-    }
-    .time{
-        padding-top: 20px;
-        background-color: transparent;
-        color: darken(#ddd, 50%);
-        margin-left: -20px;
+        font-style: italic;
+      }
+      .created_at {
+        color: #999;
         font-size: 12px;
-        line-height: 30px;
+        font-style: italic;
+      }
     }
+  }
+}
 
-    .type{
-        &-0{
-            text-align: center;
-            // @extend .col-md-4;
-            border-left: 2px solid $fact-color-background;
-            border-right: 2px solid $fact-color-background;
-            .story-link{
-                border-bottom: 1px solid darken($fact-color-background, 10%);
-            }
-            .story-link:last-child {border-bottom: none;}
-        }
-        &-1{
-            text-align: left;
-            // @extend .col-md-4;
-            border-left: 2px solid $left-color-background;
-            .story-link{
-                border-bottom: 1px solid darken($left-color-background, 10%);
-            }
-            .story-link:last-child {border-bottom: none;}
-        }
-        &-2{
-            text-align: right;
-            // @extend .col-md-4;
-            border-right: 2px solid $right-color-background;
-            .story-link{
-                border-bottom: 1px solid darken($right-color-background, 10%);
-            }
-            .story-link:last-child {border-bottom: none;}
-        }
+.story-timeline {
+  padding-bottom: 100px;
 
+  & > div.stories {
+    padding-top: 10px;
+    border-left: 1px solid #ddd;
+    @extend .col-md-12 !optional;
+    /* @extend .col-md-offset-1 */
+  }
+  ul {
+    list-style: none;
+    padding-left: 10px;
+  }
+  .time {
+    padding-top: 20px;
+    background-color: transparent;
+    color: darken(#ddd, 50%);
+    margin-left: -20px;
+    font-size: 12px;
+    line-height: 30px;
+  }
+
+  .type {
+    &-0 {
+      text-align: center;
+      // @extend .col-md-4 !optional;
+      border-left: 2px solid $fact-color-background;
+      border-right: 2px solid $fact-color-background;
+      .story-link {
+        border-bottom: 1px solid darken($fact-color-background, 10%);
+      }
+      .story-link:last-child {
+        border-bottom: none;
+      }
     }
+    &-1 {
+      text-align: left;
+      // @extend .col-md-4 !optional;
+      border-left: 2px solid $left-color-background;
+      .story-link {
+        border-bottom: 1px solid darken($left-color-background, 10%);
+      }
+      .story-link:last-child {
+        border-bottom: none;
+      }
+    }
+    &-2 {
+      text-align: right;
+      // @extend .col-md-4 !optional;
+      border-right: 2px solid $right-color-background;
+      .story-link {
+        border-bottom: 1px solid darken($right-color-background, 10%);
+      }
+      .story-link:last-child {
+        border-bottom: none;
+      }
+    }
+  }
 }
