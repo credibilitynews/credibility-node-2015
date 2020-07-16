@@ -10,14 +10,15 @@ There were a few new things (in 2015) added here:
 - Server side Rendering - with ReactDOMServer and Falcor 
 - [Passwordless](https://www.npmjs.com/package/passwordless): Password-free user authentication
 
-In midst of reviving it, some of these are no longer working:
-❌ Passwordless: passwordless-postgres caused package error.
-❌ Server side rendering: browserify API changes and babel-node.
+In midst of reviving it, some of these are no longer working:  
+❌ Passwordless: passwordless-postgres caused package error.  
+❌ Server side rendering: browserify API changes and babel-node.  
 
 Added some updates as well:
-- Replace gulp tasks to rollup 
-- Replace ruby sass to node-sass 
-- Remove bower, use npm bootstrap
-- Use yarn workspace
-- Use latest flux version
-- Use react 15
+- Replace gulp tasks to rollup   
+- Replace ruby sass to node-sass  
+- Remove bower, use npm bootstrap  
+- Use yarn workspace  
+- Use latest flux version  
+- Use react 15  
+ 
