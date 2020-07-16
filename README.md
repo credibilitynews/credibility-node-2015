@@ -11,8 +11,8 @@ There were a few new things (in 2015) added here:
 - [Passwordless](https://www.npmjs.com/package/passwordless): Password-free user authentication
 
 In midst of reviving it, some of these are no longer working:  
-❌ Passwordless: passwordless-postgres caused package error.  
-❌ Server side rendering: browserify API changes and babel-node.  
+- ❌ Passwordless: passwordless-postgres caused package error.  
+- ❌ Server side rendering: browserify API changes and babel-node.  
 
 Added some updates as well:
 - Replace gulp tasks to rollup   
